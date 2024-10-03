@@ -8,8 +8,8 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="container m-1">
-			<div className="text-center mt-5">
+		<div className="container m-auto">
+			<div className="text-center mt-auto">
 				<DestinationCards />
 				<AdventureSections />
 			</div>
