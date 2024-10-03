@@ -40,9 +40,15 @@
 }
 
 .imagen-adventure {
+    object-fit: cover;
+    width: 100%;
     height: 100%;
-    position: relative;
-    overflow: hidden;
     border-radius: 10px;
+}
+
+.task {
+    border-radius: 20px;
+    background-color: rgb(211, 211, 211);
     box-shadow: 0 4px 8px rgb(0, 0, 0, 0.1);
+    margin-bottom: 5px;
 }
