@@ -34,6 +34,20 @@ const DestinationCards = () => {
                     <p className="card-text text-white">Machu Picchu</p>
                 </div>
             </div>
+            <div className="card text-bg-dark">
+                <img src="https://media.staticontent.com/media/pictures/83239c0a-50e5-44c5-bbb2-bea8292543e4" className="card-img" alt="Machu Picchu" />
+                <div className="card-img-overlay">
+                    <h5 className="card-title text-white">República Dominicana</h5>
+                    <p className="card-text text-white">Punta Cana</p>
+                </div>
+            </div>
+            <div className="card text-bg-dark">
+                <img src="https://humanidades.com/wp-content/uploads/2019/02/Buenos-aires-2-e1585704113704-800x416.jpg" className="card-img" alt="Machu Picchu" />
+                <div className="card-img-overlay">
+                    <h5 className="card-title text-white">Argentina</h5>
+                    <p className="card-text text-white">Buenos Aires</p>
+                </div>
+            </div>
         </div>
     );
 }
