@@ -2,6 +2,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+
 //include your index.scss file into the bundle
 import "../styles/index.css";
 
