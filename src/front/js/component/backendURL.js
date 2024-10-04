@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import envFile from "../../../../docs/assets/env-file.png"
+import Sugerencias from "./destiantionCards";
 
 const Dark = ({children}) => <span className="bg-dark text-white px-1 rounded">{children}</span>;
 export const BackendURL = () => (
+
 	<div className="mt-5 pt-5 w-50 mx-auto">
 		<h2>Missing BACKEND_URL env variable</h2>
 		<p>Here's a video tutorial on <a target="_blank" href="https://www.awesomescreenshot.com/video/16498567?key=72dbf905fe4fa6d3224783d02a8b1b9c">how to update your backend URL environment variable.</a></p>
