@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom"
 
 // datos para llenar los componentes en la vista. Hay que modificarlos para sacarlos del back-end
 
@@ -81,8 +82,10 @@ const Viajes = () => {
             })}
             <div className="container d-flex justify-content-evenly rounded-pill my-5"  
             style={{backgroundColor: "lightgrey", width: '40%'}} >
-                <h1 className="align-items-center">+</h1>
-                <h3 className="align-items-center mt-2">Add a new trip</h3>
+                <Link to="/add-new-trip">
+                    <h1 className="align-items-center">+</h1>
+                    <h3 className="align-items-center mt-2">Add a new trip</h3>
+                </Link>
             </div>
             
         </>
