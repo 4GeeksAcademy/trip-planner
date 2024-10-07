@@ -11,6 +11,7 @@ import injectContext from "./store/appContext";
 import { Footer } from "./component/footer";
 import NewTrip from "./pages/addNewTrip";
 import IndividualTrip from "./pages/individualTrip";
+import Login from "./pages/login";
 
 
 //create your first component
@@ -32,6 +33,7 @@ const Layout = () => {
                         <Route element={<h1>Not found!</h1>} />
                         <Route element={<NewTrip />} path="/add-new-trip" />
                         <Route element={<IndividualTrip />} path="/individual-trip" />
+                        <Route element={<Login />} path="/login" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>
