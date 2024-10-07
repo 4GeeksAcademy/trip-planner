@@ -1,7 +1,12 @@
-import React, { useState } from "react"; // Importa useState
+import React, { useState, useContext } from "react"; // Importa useState
 import { Navbar } from "../component/navbar.js";
+import { Context } from "../store/appContext.js";
+
 
 const Login = () => {
+    const { store, actions } = useContext(Context);
+
+
     const [user, setUser] = useState({});
     const [showPassword, setShowPassword] = useState(false);
 
@@ -10,7 +15,7 @@ const Login = () => {
         <>
             <Navbar />
             <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-                <div className="rounded shadow-lg p-4 bg-dark" style={{ width: '300px' }}>
+                <div className="rounded shadow-lg p-4 bg-dark" style={{ width: '450px' }}>
                     <h1 className="text-center text-light">Login</h1>
                     <div className="mb-3">
                         <label className="form-label text-light">Email address</label>
@@ -42,7 +47,7 @@ const Login = () => {
                         <button className="btn btn-link">Forgot your password?  </button>
                     </div>
                     <button
-                        onClick={() => console.log(user)}
+                        onClick={() => actions.login(user.email, user.password)}
                         className="btn btn-primary w-100 mt-2"
                     >
                         Login

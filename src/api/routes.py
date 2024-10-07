@@ -16,18 +16,18 @@ CORS(api)
 #Endpoint for LOGIN
 @api.route("/login", methods=["POST"])
 def login():
-    username = request.json.get("username", None)
+    email = request.json.get("email", None)
     password = request.json.get("password", None)
-    if username == None or password == None:
-        return jsonify({"msg": "Missing keys username or password"}), 401
+    if email == None or password == None:
+        return jsonify({"msg": "Missing keys email or password"}), 401
 
-    user = User.query.filter_by(username=username).first()
+    user = User.query.filter_by(email=email).first()
     if user == None:
         return jsonify({"msg": "User not found!"}), 401
     if user.password != password:
         return jsonify({"msg": "Wrong password"}), 401
 
-    access_token = create_access_token(identity=username)
+    access_token = create_access_token(identity=email)
     
     return jsonify({"token": access_token,
                     "user": user.serialize()}), 200

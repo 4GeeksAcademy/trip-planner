@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
+import { Toaster } from 'react-hot-toast';
 
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
@@ -37,6 +38,7 @@ const Layout = () => {
                     </Routes>
                     <Footer />
                 </ScrollToTop>
+                <Toaster />
             </BrowserRouter>
         </div>
     );
