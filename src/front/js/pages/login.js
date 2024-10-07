@@ -16,7 +16,7 @@ const Login = () => {
             <Navbar />
             <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
                 <div className="rounded shadow-lg p-4 bg-dark" style={{ width: '450px' }}>
-                    <h1 className="text-center text-light">Login</h1>
+                    <h1 className="text-center text-light">Log in</h1>
                     <div className="mb-3">
                         <label className="form-label text-light">Email address</label>
                         <input
@@ -50,7 +50,7 @@ const Login = () => {
                         onClick={() => actions.login(user.email, user.password)}
                         className="btn btn-primary w-100 mt-2"
                     >
-                        Login
+                        Log in
                     </button>
                     <button className="btn btn-secondary w-100 mt-2">Register</button>
                 </div>
