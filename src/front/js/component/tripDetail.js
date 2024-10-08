@@ -63,8 +63,7 @@ const TripDetail = () => {
                 </div>
                 </div>
            
-           
-
+        
 
     );
 }

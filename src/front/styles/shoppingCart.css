@@ -1,3 +1,18 @@
+.btn-group{
+    display: flex;
+    width: 100px;
+    justify-content: end;
+    align-items: end;
+}
+
+.new-trip {
+    justify-content: space-between;
+}
+
+.dropdown-menu{
+    width: 300%;
+}
+
 .image {
     align-items: center;
     display: flex;
@@ -31,14 +46,27 @@
 }
 
 .costs{
-    text-align: right;
+    display: flex;
+    justify-content: space-between;
+}
+
+.total-costs-text{
+    margin-left: 15px;
+}
+
+.total-costs-price{
     margin-right: 15px;
 }
 
-.delete-trip{
+.delete {
+    justify-content: center;
     align-items: center;
-    margin: 15px;
+    margin-right: 10px;
+}
+
+.delete-trip{
     color: rgb(17, 29, 74);
+
 }
 
 .delete-trip:hover {

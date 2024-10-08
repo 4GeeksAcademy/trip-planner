@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom"
+import ShoppingCart from "../component/shoppingCart.js"
 
 // datos para llenar los componentes en la vista. Hay que modificarlos para sacarlos del back-end
 
@@ -65,7 +66,9 @@ const Viajes = () => {
             </div>
 
             {/* individual trips*/}
-
+            <div>
+                <ShoppingCart />
+            </div>
             {trips.map((item, index)=>{
                 return (<div key={index} className="container d-flex justify-content-around rounded-pill my-5"  style={{backgroundColor: "lightgrey", width: "60%"}}>
                     <img src={item.imgURL} className="rounded-circle" style={{objectFit: 'contain', height: "80px"}} />
