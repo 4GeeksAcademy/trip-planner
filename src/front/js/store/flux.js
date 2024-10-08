@@ -64,19 +64,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				const data = await resp.json();
 
-				localStorage.setItem("token", data.token); 
-
-				setStore({token: data.token}); //guarda el token
-				setStore({user: data.user});   // guarda el user
-				
-				setStore({})
-
 				if (resp.ok) {
+					localStorage.setItem("token", data.token);
+					setStore({ token: data.token, user: data.user }); //guarda el token y user
 					toast.success("Logged in!");
 				} else {
 					toast.error("Invalid credentials");
 				}
 			},
+			logout: () => {
+				localStorage.removeItem("token");
+				setStore({
+					token: null,
+					user: null
+				});
+				toast.success("Logged out!");
+			}
 		}
 	};
 };

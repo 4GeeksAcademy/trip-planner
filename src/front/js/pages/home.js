@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
-import {Navbar} from "../component/navbar.js";
+import { Navbar } from "../component/navbar.js";
 import FirstView from "../component/firstview.js";
 import DestinationCards from "../component/destiantionCards.js";
 import AdventureSections from "../component/adventureSection.js";
@@ -12,9 +12,9 @@ export const Home = () => {
 	return (
 		<div className="">
 			<div>
-				<div id="landing" className= "p-5 mb-5">
+				<div id="landing" className="p-5 mb-5">
 					<Navbar />
-					<FirstView />	
+					<FirstView />
 				</div>
 			</div>
 			<div className="text-center mt-5">
@@ -24,3 +24,5 @@ export const Home = () => {
 		</div>
 	);
 };
+
+export default Home;
