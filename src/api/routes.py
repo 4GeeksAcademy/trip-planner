@@ -6,7 +6,7 @@ from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from datetime import datetime
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 
 api = Blueprint('api', __name__)
 
@@ -31,6 +31,14 @@ def login():
     
     return jsonify({"token": access_token,
                     "user": user.serialize()}), 200
+
+
+@api.route("/user", methods=["GET"])
+@jwt_required()
+def get_user_logged():
+    current_user = get_jwt_identity()
+    user = User.query.filter_by(email=current_user).first()
+    return jsonify(user.serialize()),200
 
 
 @api.route('/hello', methods=['POST', 'GET'])

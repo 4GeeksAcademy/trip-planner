@@ -23,7 +23,7 @@ export const Navbar = () => {
 				</Link>}
 				{store.token && <button className="border border-0 bg-transparent mx-4 text-danger" onClick={() => actions.logout()}>SALIR</button>}
 				{
-					store.user && <p className="mx-2 mb-0 text-dark">{store.user.username.toUpperCase()}</p>
+					store.user && <p className="mx-2 mb-0 text-dark">{store.user?.username?.toUpperCase()}</p>
 				}
 				{
 					!store.token && <button className="border border-0 bg-transparent mx-2">REGISTRATE</button>

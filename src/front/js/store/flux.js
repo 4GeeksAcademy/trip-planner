@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			user: null,
+			user: {},
 			token: localStorage.getItem("token") || null,
 			message: null,
 			demo: [
@@ -76,10 +76,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				localStorage.removeItem("token");
 				setStore({
 					token: null,
-					user: null
+					user: {}
 				});
 				toast.success("Logged out!");
-			}
+			},
+			getUserLogged: async () => {
+				const resp = await fetch(process.env.BACKEND_URL + "/api/user", {
+					headers: {
+						Authorization: "Bearer " + getStore().token
+					}
+				});
+				if (resp.ok) {
+					toast.success("User Logged in!");
+				} else {
+					localStorage.removeItem("token");
+					setStore({ token: null, user: {} });
+				}
+				const data = await resp.json();
+				setStore({ user: data });
+			},
 		}
 	};
 };
