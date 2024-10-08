@@ -1,0 +1,24 @@
+.trip .img-viaje {
+    width: 80px;
+    margin-left: 5px;
+    margin-right: 5px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15%;
+    box-shadow: 0 4px 8px rgb(0, 0, 0, 0.3);
+}
+
+.group-name {
+    text-align: center;
+}
+
+.activity-name {
+    text-align: end;
+}
+
+.trip-cost {
+    text-align: end;
+    text-shadow: 3px;
+    background-color: orangered;
+    border-radius: 5px;    
+}
