@@ -12,18 +12,22 @@ const ShoppingCart = () => {
                 Tu viaje
             </button>
             <ul className="dropdown-menu">
-
                 <li className="group-name"><span className="dropdown-item" href="#">Nombre del grupo</span></li>
-
+                <li><hr class="dropdown-divider"/></li>
                 <li className="trip d-flex flex">
                     <div className="image">
                         <img src="https://blogskystorage.s3.amazonaws.com/2023/06/que-hacer-en-cancun.jpeg" className="img-viaje" alt="Cancún" />
                     </div>
-                    <div>
-                        <span className="activity-name dropdown-item">Nombre de la actividad</span>
+                    <div className="activity-text">
+                        <span className="activity-name item">Nombre de la actividad</span>
                         <span className="trip-cost dropdown-item">Total + numero</span>
                     </div>
+                    <div className="delete">
+                        <i className="delete-trip fa-solid fa-trash-can"></i>
+                    </div>
                 </li>
+                <li><hr class="dropdown-divider"/></li>
+                <li className="costs"><span className="total-costs">Total costos</span></li>
             </ul>
         </div>
     </div>

@@ -1,4 +1,9 @@
-.trip .img-viaje {
+.image {
+    align-items: center;
+    display: flex;
+}
+
+.img-viaje {
     width: 80px;
     margin-left: 5px;
     margin-right: 5px;
@@ -13,12 +18,30 @@
 }
 
 .activity-name {
-    text-align: end;
+    text-align: right;
+    font-size: 13px;
+    margin-right: 15px;
 }
 
 .trip-cost {
     text-align: end;
-    text-shadow: 3px;
-    background-color: orangered;
-    border-radius: 5px;    
+    background-color: rgb(34, 146, 164);
+    border-radius: 5px;
+    font-size: 13px;  
+}
+
+.costs{
+    text-align: right;
+    margin-right: 15px;
+}
+
+.delete-trip{
+    align-items: center;
+    margin: 15px;
+    color: rgb(17, 29, 74);
+}
+
+.delete-trip:hover {
+    color: rgb(247, 92, 3);
+    cursor: pointer;
 }
