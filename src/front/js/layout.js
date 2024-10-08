@@ -14,6 +14,8 @@ import NewTrip from "./pages/addNewTrip";
 import IndividualTrip from "./pages/individualTrip";
 import Login from "./pages/login";
 
+import Viajes from "./pages/viajes";
+import TripDetail from "./component/tripDetail";
 
 //create your first component
 const Layout = () => {
@@ -35,6 +37,8 @@ const Layout = () => {
                         <Route element={<NewTrip />} path="/add-new-trip" />
                         <Route element={<IndividualTrip />} path="/individual-trip" />
                         <Route element={<Login />} path="/login" />
+                        <Route element={<Viajes />} path="/viajes" />
+                        <Route element={<TripDetail />} path="/details" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>
