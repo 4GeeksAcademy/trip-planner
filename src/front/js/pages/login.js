@@ -1,4 +1,5 @@
-import React, { useState, useContext } from "react"; // Importa useState
+import React, { useState, useContext, useEffect } from "react"; // Importa useState
+import { useNavigate } from "react-router-dom";
 import { Navbar } from "../component/navbar.js";
 import { Context } from "../store/appContext.js";
 
@@ -9,7 +10,14 @@ const Login = () => {
 
     const [user, setUser] = useState({});
     const [showPassword, setShowPassword] = useState(false);
+    
+    const navigate = useNavigate();
 
+    useEffect(()=> {
+        if (store.token){
+            navigate("/");
+        }
+    }, [])
 
     return (
         <>
@@ -21,6 +29,7 @@ const Login = () => {
                         <label className="form-label text-light">Email address</label>
                         <input
                             type="email"
+                            placeholder="email@example.co"
                             className="form-control"
                             onChange={(event) => setUser({
                                 ...user,
