@@ -8,7 +8,9 @@ export const Navbar = () => {
 				<p>LOGO</p>
 			</div>
 			<div className="d-flex">
+				<Link to="/inicio">
 				<button className="border border-0 bg-transparent mx-2">INICIO</button>
+				</Link>
 				<button className="border border-0 bg-transparent mx-2">GRUPOS</button>
 				<button className="border border-0 bg-transparent mx-2">VIAJES</button>
 				<button className="border border-0 bg-transparent mx-2">EXPLORA</button>
