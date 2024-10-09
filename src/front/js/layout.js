@@ -8,11 +8,13 @@ import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
+import { Navbar } from "./component/navbar.js";
 
 import { Footer } from "./component/footer";
 import NewTrip from "./pages/addNewTrip";
 import IndividualTrip from "./pages/individualTrip";
 import Login from "./pages/login";
+import Mexico from "./component/mexico.js";
 
 import Viajes from "./pages/viajes";
 import TripDetail from "./component/tripDetail";
@@ -30,6 +32,7 @@ const Layout = () => {
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
+                    <Navbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Demo />} path="/demo" />
@@ -41,7 +44,7 @@ const Layout = () => {
                         <Route element={<Viajes />} path="/viajes" />
                         <Route element={<TripDetail />} path="/details" />
                         <Route element={<TripScore />} path="/score" />
-
+                        <Route element={<Mexico />} path="/mexico" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>

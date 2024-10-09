@@ -13,7 +13,6 @@ export const Home = () => {
 		<div className="">
 			<div>
 				<div id="landing" className="p-5 mb-5">
-					<Navbar />
 					<FirstView />
 				</div>
 			</div>

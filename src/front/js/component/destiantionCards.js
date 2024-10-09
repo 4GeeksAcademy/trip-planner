@@ -1,17 +1,19 @@
 import React from "react";
 import "../../styles/destinationCards.css";
+import { Link } from "react-router-dom";
 
 
 const DestinationCards = () => {
     
     return(
         <div className="container destination-grid">
-            <div className="card text-bg-dark">
+            <div className="card text-bg-dark border border-0 bg-transparent">
                 <img src="https://blogskystorage.s3.amazonaws.com/2023/06/que-hacer-en-cancun.jpeg" className="card-img" alt="Cancún" />
                 <div className="card-img-overlay">
                     <h5 className="card-title text-white">México</h5>
                     <p className="card-text text-white">Cancún</p>
                 </div>
+                <Link to="/mexico" className="stretched-link"></Link>
             </div>
             <div className="card text-bg-dark">
                 <img src="https://c4.wallpaperflare.com/wallpaper/43/779/691/sugar-loaf-mountain-botafogo-beach-rio-de-janeiro-sunrise-wallpaper-preview.jpg" className="card-img" alt="Rio de Janeiro" />

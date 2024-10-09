@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react"; // Importa useState
 import { useNavigate } from "react-router-dom";
-import { Navbar } from "../component/navbar.js";
 import { Context } from "../store/appContext.js";
 
 
@@ -21,7 +20,6 @@ const Login = () => {
 
     return (
         <>
-            <Navbar />
             <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
                 <div className="rounded shadow-lg p-4 bg-dark" style={{ width: '450px' }}>
                     <h1 className="text-center text-light">Log in</h1>
