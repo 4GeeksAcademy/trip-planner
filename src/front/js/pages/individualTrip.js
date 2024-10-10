@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar } from "../component/navbar.js";
 import {Link} from 'react-router-dom';
+import ShoppingCart from "../component/shoppingCart.js"
 
 const activities = [
     {
@@ -96,6 +97,9 @@ const IndividualTrip = () => {
                     
                 </div>
                 
+            </div>
+            <div>
+                <ShoppingCart />
             </div>
             <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 text-center g-6">
                 {activities.map((item, index)=>{
