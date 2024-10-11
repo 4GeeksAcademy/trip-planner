@@ -45,10 +45,10 @@ class Viaje(db.Model):
 
 class Grupo(db.Model):
     __tablename__ = 'grupo'
-    id = db.Column(db.Integer, primary_key=True),
+    id = db.Column(db.Integer, primary_key=True)
     integrantes = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship(User)
-    viaje_id = db.Column(db.Integer, db.ForeignKey('grupo.id'))
+    viaje_id = db.Column(db.Integer, db.ForeignKey('viajes.id'))
     viaje = db.relationship(Viaje)
 
     # tabla de asociacion
@@ -72,12 +72,12 @@ class Actividad(db.Model):
 class Comentarios(db.Model):
      __tablename__ = 'commentario'
      id = db.Column(db.Integer, primary_key=True)
-     activity_id = db.Column(db.Integer, db.ForeignKey('actividades.id'))
-     author_id = db.Column(db.Integer, db.ForeignKey('user.username'))
+     activity_id = db.Column(db.Integer, db.ForeignKey('actividad.id'))
+     author_id = db.Column(db.Integer, db.ForeignKey('user.username')) #VERIFICAR USER.ID
      comentario = db.Column(db.String(120), unique=False, nullable=True)
 
 class Likes(db.Model):
      __tablename__ = 'like'
      id = db.Column(db.Integer, primary_key=True)
-     activity_id = db.Column(db.Integer, db.ForeignKey('actividades.id'))
-     author_id = Column(Integer, ForeignKey('user.username'))
+     activity_id = db.Column(db.Integer, db.ForeignKey('actividad.id'))
+     author_id = Column(Integer, ForeignKey('user.username')) #VERIFICAR USER.ID

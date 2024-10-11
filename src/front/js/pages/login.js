@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react"; // Importa useState
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Context } from "../store/appContext.js";
 
 
@@ -9,11 +9,11 @@ const Login = () => {
 
     const [user, setUser] = useState({});
     const [showPassword, setShowPassword] = useState(false);
-    
+
     const navigate = useNavigate();
 
-    useEffect(()=> {
-        if (store.token){
+    useEffect(() => {
+        if (store.token) {
             navigate("/");
         }
     }, [])
@@ -36,7 +36,7 @@ const Login = () => {
                         />
                         <div className="form-text text-light">We'll never share your email with anyone else.</div>
                     </div>
-                    <div className="mb-3">
+                    <div className="mb-1">
                         <label className="form-label text-light">Password</label>
                         <div className="d-flex">
                             <input
@@ -49,17 +49,17 @@ const Login = () => {
                             />
                             <button className="btn btn-dark ms-1" style={{ width: '60px' }}
                                 onClick={() => setShowPassword(!showPassword)}
-                            >{showPassword ? (<i class="fa-solid fa-eye"></i>) : (<i className="fa-solid fa-eye-slash"></i>)}</button>
+                            >{showPassword ? (<i className="fa-solid fa-eye"></i>) : (<i className="fa-solid fa-eye-slash"></i>)}</button>
                         </div>
                         <button className="btn btn-link">Forgot your password?  </button>
                     </div>
                     <button
                         onClick={() => actions.login(user.email, user.password)}
-                        className="btn btn-primary w-100 mt-2"
+                        className="btn btn-primary w-100 mt-1"
                     >
                         Log in
                     </button>
-                    <button className="btn btn-secondary w-100 mt-2">Register</button>
+                    <Link to="/register" className="btn btn-link">Don't you have an account yet? Register here</Link>
                 </div>
             </div >
         </>

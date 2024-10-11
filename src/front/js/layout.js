@@ -14,6 +14,7 @@ import { Footer } from "./component/footer";
 import NewTrip from "./pages/addNewTrip";
 import IndividualTrip from "./pages/individualTrip";
 import Login from "./pages/login";
+import Register from "./pages/register.js";
 import Mexico from "./component/mexico.js";
 import Brasil from "./component/brasil.js";
 import Colombia from "./component/colombia.js";
@@ -46,6 +47,7 @@ const Layout = () => {
                         <Route element={<NewTrip />} path="/add-new-trip" />
                         <Route element={<IndividualTrip />} path="/individual-trip" />
                         <Route element={<Login />} path="/login" />
+                        <Route element={<Register />} path="/register" />
                         <Route element={<Viajes />} path="/viajes" />
                         <Route element={<TripDetail />} path="/details" />
                         <Route element={<TripScore />} path="/score" />
