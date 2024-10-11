@@ -1,6 +1,88 @@
 #pais {
-    height: 20%;
+    margin-top: 40px;
+    padding-right: 5%;
+    padding-left: 5%;
+    padding-bottom: 5%;
+    height: 650px;
 }
 #cancun {
-    height: auto;
+    height: 100%;
+    width: 100%;
+    transition: transform 0.3s;
+    object-fit: cover;
+    object-position: top;
 }
+
+#cancun:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s;
+}
+
+#borde {
+    width: 100%;
+    height: 18px;
+    padding: 3px;
+    padding-left: 65px;
+    padding-right: 65px;
+}
+
+#patron {
+    object-fit: cover;
+    width:100%;
+    height: 100%;
+    object-position: center;
+}
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 100px;
+  }
+  
+  /* Tarjeta de actividad */
+  .activity-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e3f2fd; /* Fondo de las tarjetas */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Imagen de la actividad */
+  .image-container img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  /* Descripción de la actividad */
+  .description {
+    flex: 1;
+    font-size: 16px;
+    color: #333;
+    padding-left: 50px;
+  }
+  
+  /* Botón agregar */
+  .add-btn {
+    background-color: transparent;
+    border: 2px solid #90caf9;
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-size: 14px;
+    color: #90caf9;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .add-btn:hover {
+    background-color: #90caf9;
+    color: white;
+  }
+

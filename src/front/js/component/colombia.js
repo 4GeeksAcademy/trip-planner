@@ -1,43 +1,42 @@
-import React from "react";
+import React from 'react';
 import "../../styles/expaises.css";
-
-export default function Mexico() {
+export default function Colombia(){
     return (
         <div>
             <div id="pais">
-                <img id="cancun" src="https://blogskystorage.s3.amazonaws.com/2023/06/que-hacer-en-cancun.jpeg" className="img-fluid rounded-pill" />
+                <img id="cancun" src="https://www.medellin.travel/wp-content/uploads/2021/02/Guatape3-1.png" className="img-fluid rounded-pill" />
             </div>
             <div>
-                <p className="text-center fs-1 fw-bold">Cancún, México</p>
+                <p className="text-center fs-1 fw-bold">Guatapé, Colombia</p>
             </div>
             <div id="borde" className="mt-5">
-                <img id="patron" src="https://static.vecteezy.com/system/resources/previews/007/816/364/non_2x/mayan-patchwork-seamless-pattern-bright-multicolor-background-vector.jpg" className="img-fluid rounded-pill" />
+                <img id="patron" src="https://www.shutterstock.com/image-vector/awesome-geometric-seamless-pattern-art-260nw-2353820725.jpg" className="img-fluid rounded-pill" />
             </div>
             <div className="activity-list">
                 <div className="activity-card">
                     <div className="image-container">
-                        <img src="https://www.hotelescancun.mx/wp-content/uploads/2017/04/actividades-en-cancun.jpg" alt="Fly board" />
+                        <img src="https://boatohotel.com/wp-content/uploads/2023/03/BOATO-16-5-activiades_blog.jpg" alt="kayak en guatape" />
                     </div>
                     <div className="description">
-                        <p>Flyboard en Cancún</p>
+                        <p>Kayak en Guatapé</p>
                     </div>
                     <button className="add-btn">❤️ agregar</button>
                 </div>
                 <div className="activity-card">
                     <div className="image-container">
-                        <img src="https://revistaiberica.com/wp-content/uploads/2020/08/cancun_activividades.jpg" alt="Kayak" />
+                        <img src="https://cdn.getyourguide.com/img/tour/fd506e23fd6fb66d.jpeg/97.jpg" alt="El peñon" />
                     </div>
                     <div className="description">
-                        <p>Kayak en Cancún</p>
+                        <p>El peñon</p>
                     </div>
                     <button className="add-btn">❤️ agregar</button>
                 </div>
                 <div className="activity-card">
                     <div className="image-container">
-                        <img src="https://excursionesenlarivieramaya.com/wp-content/uploads/2018/11/disfrutar-de-actividades-en-cancun-en-xcaret.jpg" alt="Xcaret" />
+                        <img src="https://imagenes.eltiempo.com/files/image_1200_600/uploads/2024/03/07/65e9dd6eb5e78.jpeg" alt="Antioquia" />
                     </div>
                     <div className="description">
-                        <p>Xcaret</p>
+                        <p>Antioquia</p>
                     </div>
                     <button className="add-btn">❤️ agregar</button>
                 </div>

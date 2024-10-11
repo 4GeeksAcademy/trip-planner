@@ -1,43 +1,42 @@
-import React from "react";
+import React from 'react';
 import "../../styles/expaises.css";
-
-export default function Mexico() {
+export default function RepublicaDominicana(){
     return (
         <div>
             <div id="pais">
-                <img id="cancun" src="https://blogskystorage.s3.amazonaws.com/2023/06/que-hacer-en-cancun.jpeg" className="img-fluid rounded-pill" />
+                <img id="cancun" src="https://media.staticontent.com/media/pictures/83239c0a-50e5-44c5-bbb2-bea8292543e4" className="img-fluid rounded-pill" />
             </div>
             <div>
-                <p className="text-center fs-1 fw-bold">Cancún, México</p>
+                <p className="text-center fs-1 fw-bold">Punta Cana, República Dominicana</p>
             </div>
             <div id="borde" className="mt-5">
-                <img id="patron" src="https://static.vecteezy.com/system/resources/previews/007/816/364/non_2x/mayan-patchwork-seamless-pattern-bright-multicolor-background-vector.jpg" className="img-fluid rounded-pill" />
+                <img id="patron" src="https://img.freepik.com/vector-gratis/patron-peruano-diseno-plano_23-2149666637.jpg" className="img-fluid rounded-pill" />
             </div>
             <div className="activity-list">
                 <div className="activity-card">
                     <div className="image-container">
-                        <img src="https://www.hotelescancun.mx/wp-content/uploads/2017/04/actividades-en-cancun.jpg" alt="Fly board" />
+                        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/27/2e/48/b6/caption.jpg?w=600&h=600&s=1" alt="Cueva del agua" />
                     </div>
                     <div className="description">
-                        <p>Flyboard en Cancún</p>
+                        <p>Excursion en buggy a la cueva del agua</p>
                     </div>
                     <button className="add-btn">❤️ agregar</button>
                 </div>
                 <div className="activity-card">
                     <div className="image-container">
-                        <img src="https://revistaiberica.com/wp-content/uploads/2020/08/cancun_activividades.jpg" alt="Kayak" />
+                        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/24/21/86/caption.jpg?w=600&h=600&s=1" alt="Excursion a isla Saona" />
                     </div>
                     <div className="description">
-                        <p>Kayak en Cancún</p>
+                        <p>Excursion en barco a la isla Saona</p>
                     </div>
                     <button className="add-btn">❤️ agregar</button>
                 </div>
                 <div className="activity-card">
                     <div className="image-container">
-                        <img src="https://excursionesenlarivieramaya.com/wp-content/uploads/2018/11/disfrutar-de-actividades-en-cancun-en-xcaret.jpg" alt="Xcaret" />
+                        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/3b/25/8c/caption.jpg?w=600&h=600&s=1" alt="Scape Park Cap Cana" />
                     </div>
                     <div className="description">
-                        <p>Xcaret</p>
+                        <p>Scape Park Cap Cana</p>
                     </div>
                     <button className="add-btn">❤️ agregar</button>
                 </div>
