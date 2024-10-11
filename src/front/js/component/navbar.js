@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom"
 import { Context } from "../store/appContext"
+import "../../styles/home.css";
 
 export const Navbar = () => {
 
 	const { store, actions } = useContext(Context);
 
 	return (
-		<nav className="d-flex px-5 mt-2 justify-content-center align-items-center">
+		<nav id="navbar" className="d-flex px-5 mt-2 justify-content-center align-items-center relative">
 			<div className="container ps-5 mt-1">
 				<p>LOGO</p>
 			</div>
