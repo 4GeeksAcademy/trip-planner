@@ -1,5 +1,4 @@
 import React from 'react';
-import { Navbar } from "../component/navbar.js";
 import {Link} from 'react-router-dom';
 import ShoppingCart from "../component/shoppingCart.js"
 
@@ -73,7 +72,6 @@ const miembros = [
 const IndividualTrip = () => {
     return (
         <>
-            <Navbar />
             <div className="d-flex m-3 p-1">
                 <div className="container rounded d-flex justify-content-around" style={{backgroundColor: "lightgrey"}}>
                     <div className="d-flex justify-content-between" style={{width: "50%"}} >

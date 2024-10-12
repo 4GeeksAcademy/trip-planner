@@ -4,6 +4,7 @@ import "../../styles/shoppingCart.css"
 
 const ShoppingCart = () => {
     
+    
 
     return (
     <div className = "container d-flex flex  justify-content-end">
