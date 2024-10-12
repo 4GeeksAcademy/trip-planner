@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom"
 import { Context } from "../store/appContext"
 import "../../styles/home.css";
+import logo from "../../img/logo-trippy.png"
+import "../../styles/footer.css"
 
 export const Navbar = () => {
 
@@ -10,7 +12,7 @@ export const Navbar = () => {
 	return (
 		<nav id="navbar" className="d-flex px-5 mt-2 justify-content-center align-items-center relative">
 			<div className="container ps-5 mt-1">
-				<p>LOGO</p>
+				<img src={logo} className="logo"/>
 			</div>
 			<div className="d-flex">
 				<Link to="/">
