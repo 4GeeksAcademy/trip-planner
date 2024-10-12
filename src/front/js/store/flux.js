@@ -17,7 +17,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			viaje: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -94,6 +95,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				const data = await resp.json();
 				setStore({ user: data });
+			},
+
+			addViajes: (viaje) => {
+				const store = getStore();
+				const actions = getActions();
+				const result = actions.isViaje(viaje)
+				if (result) {
+					actions.deleteViaje(viaje)
+				} else {
+					setStore({
+						viajes: [...store.viajes, viaje]
+					});
+				}
+					console.log(viajes);
+			},
+
+			deleteViaje: (viaje) => {
+				const store = getStore();
+				const updateViajes = store.viajes.filter(item => viaje.name !== item.name);
+				setStore({viajes: updateViajes});
+			},
+
+			isViaje: (viaje) => {
+				const store = getStore();
+				const result = store.viajes.some(item => viaje.id == item.id && viaje.type == item.type)
+				return result
 			},
 		}
 	};
