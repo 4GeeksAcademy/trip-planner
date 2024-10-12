@@ -68,7 +68,7 @@ const Register = () => {
                             />
                             <button className="btn btn-dark ms-1" style={{ width: '60px' }}
                                 onClick={() => setShowPassword(!showPassword)}
-                            >{showPassword ? (<i class="fa-solid fa-eye"></i>) : (<i className="fa-solid fa-eye-slash"></i>)}</button>
+                            >{showPassword ? (<i className="fa-solid fa-eye"></i>) : (<i className="fa-solid fa-eye-slash"></i>)}</button>
                         </div>
                     </div>
                     <div className="mb-3">
@@ -84,7 +84,7 @@ const Register = () => {
                             />
                             <button className="btn btn-dark ms-1" style={{ width: '60px' }}
                                 onClick={() => setShowPassword(!showPassword)}
-                            >{showPassword ? (<i class="fa-solid fa-eye"></i>) : (<i className="fa-solid fa-eye-slash"></i>)}</button>
+                            >{showPassword ? (<i className="fa-solid fa-eye"></i>) : (<i className="fa-solid fa-eye-slash"></i>)}</button>
                         </div>
                     </div>
                     <div className="mb-3">

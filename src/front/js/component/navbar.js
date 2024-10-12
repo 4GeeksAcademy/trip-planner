@@ -12,7 +12,7 @@ export const Navbar = () => {
 	return (
 		<nav id="navbar" className="d-flex px-5 mt-2 justify-content-center align-items-center relative">
 			<div className="container ps-5 mt-1">
-				<img src={logo} className="logo"/>
+				<img src={logo} className="logo" />
 			</div>
 			<div className="d-flex">
 				<Link to="/">
@@ -26,10 +26,10 @@ export const Navbar = () => {
 				{!store.token && <Link to="/login">
 					<button className="border border-0 bg-transparent mx-2">INGRESAR</button>
 				</Link>}
-				{store.token && <button className="border border-0 bg-transparent mx-4 text-danger" onClick={() => actions.logout()}>SALIR</button>}
 				{
-					store.user && <p className="mx-2 mb-0 text-dark">{store.user?.username?.toUpperCase()}</p>
+					store.user && store.token && <p className="mx-2 mb-0 text-secondary" style={{ padding: '1px 6px' }}>{store.user?.username?.toUpperCase()}</p>
 				}
+				{store.token && <button className="border border-0 bg-transparent mx-2 text-danger" onClick={() => actions.logout()}>SALIR</button>}
 				{
 					!store.token && <button className="border border-0 bg-transparent mx-2">REGISTRATE</button>
 				}
