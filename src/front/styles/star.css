@@ -1,0 +1,24 @@
+.star-rating {
+    display: flex;
+    justify-content: center;
+
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.on {
+    color: #ff9933;
+}
+
+.off {
+    color: #ccc;
+}
+
+.star {
+    font-size: xx-large;
+}
