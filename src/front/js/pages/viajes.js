@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 
 const trips = [
     {
-        destination: 'Caracas',
+        destination: 'Caracas, Venezuela',
         date: '22/12/2024',
         duration: "7 dias",
         people: 4,
@@ -15,7 +15,7 @@ const trips = [
         imgURL: "https://www.tripsavvy.com/thmb/j5_cp1Jg5lQqet7_Vl1v_7tbGqw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-501861673-03562637fcef434eb02e677cd87c8a17.jpg"
     },
     {
-        destination: 'Lisboa',
+        destination: 'Lisboa, Portugal',
         date: '13/02/2025',
         duration: "20 dias",
         people: 1,
@@ -53,20 +53,20 @@ const Viajes = () => {
 
             <div className="d-flex align-items-center">
 
-            <div className="container rounded d-flex bg-opacity-10 bg-dark p-4 shadow mx-auto me-3">
-                <div className="d-flex flex-column align-items-start flex-grow-1 mx-3" >
-                    <h5>@{usuario.username}</h5>
-                    <p>{usuario.name}</p>
-                </div>
-                <div className="mx-4 text-end">
-                    <p className="mb-1"><i class="fa-solid fa-map-location-dot me-2"></i>Proximos viajes: {usuario.viajes}</p>
-                    <p className="mb-3"><i class="fa-solid fa-user-group me-2"></i>Grupos: {countGroups()}</p>
-                </div>
+                <div className="container rounded d-flex bg-opacity-10 bg-dark p-4 shadow mx-auto me-3">
+                    <div className="d-flex flex-column align-items-start flex-grow-1 mx-3" >
+                        <h5>@{usuario.username}</h5>
+                        <p>{usuario.name}</p>
+                    </div>
+                    <div className="mx-4 text-end">
+                        <p className="mb-1"><i class="fa-solid fa-map-location-dot me-2"></i>Proximos viajes: {usuario.viajes}</p>
+                        <p className="mb-3"><i class="fa-solid fa-user-group me-2"></i>Grupos: {countGroups()}</p>
+                    </div>
 
-            </div>
+                </div>
 
                 <img src={usuario.imgURL} className="rounded-circle me-auto shadow" style={{ objectFit: 'cover', width: "120px", height: "120px" }} />
-                
+
             </div>
 
 
@@ -74,26 +74,33 @@ const Viajes = () => {
             {/* individual trips*/}
 
             {trips.map((item, index) => {
-                return (<div key={index} className="container d-flex rounded-5 my-5" style={{ backgroundColor: "lightgrey", width: "60%" }}>
-                    <img src={item.imgURL} className="rounded-circle shadow" style={{ objectFit: 'cover', width: "100px", height: "100px" }} />
+                return (<div key={index} className="container d-flex mb-3 my-5 rounded-pill border border-4 p-2" style={{ backgroundColor: "lightgrey", width: "60%" }}>
+                    <img src={item.imgURL} className="rounded-circle border shadow" style={{ objectFit: 'cover', width: "100px", height: "100px" }} />
                     <div className="mt-1">
-                        <h6>{item.destination} {item.date}</h6>
-                        <p>{item.duration}</p>
+                        <h6 className="mb-2">{item.destination}</h6>
+                        <p className="mb-0 mt-3">{item.date}</p>
+                        <p className="mb-0 mt-1">
+                            <i class="fa-solid fa-clock me-2"></i>
+                            {item.duration}
+                        </p>
                     </div>
-                    <div>
-                        <p className="mb-0 fw-lighter">Trip budget: {item.tripBudget}</p>
-                        <p className="mb-0 fw-lighter">Personal budget: {item.personalBudget}</p>
-                        <p className="mb-0 fw-lighter"># of people: {item.people}</p>
+                    <div className="d-flex flex-column justify-content-end ms-auto p-3">
+                        <p className="mb-0  fw-lighter">Presupuesto: {item.tripBudget}</p>
+                        <p className="mb-0 fw-lighter">Presupuesto personal: {item.personalBudget}</p>
+                        <p className="mb-0 fw-lighter">Número de personas: {item.people}</p>
                     </div>
                 </div>)
             })}
-            <div className="container d-flex justify-content-evenly rounded-pill my-5"
-                style={{ backgroundColor: "lightgrey", width: '40%' }} >
-                <Link to="/add-new-trip">
-                    <h1 className="align-items-center">+</h1>
-                    <h3 className="align-items-center mt-2">Add a new trip</h3>
-                </Link>
+
+            <div className="d-flex justify-content-evenly">
+                
+                <Link to="/add-new-trip" className="btn bg-opacity-10 bg-dark mt-5 p-3 mx-3 shadow w-50">
+                    <i class="fa-solid fa-circle-plus me-2"></i>
+                    Añadir un nuevo viaje
+                    </Link>
+                
             </div>
+
 
         </>
     )
