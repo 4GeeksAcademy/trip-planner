@@ -1,6 +1,6 @@
 import React from "react";
 import "../../styles/expaises.css";
-
+import { Link } from "react-router-dom";
 export default function Mexico() {
     return (
         <div>
@@ -21,7 +21,9 @@ export default function Mexico() {
                     <div className="description">
                         <p>Flyboard en Cancún</p>
                     </div>
-                    <button className="add-btn">❤️ agregar</button>
+                    <button className="add-btn ">
+                        <Link to="/login" className="link">❤️ agregar</Link>
+                    </button>
                 </div>
                 <div className="activity-card">
                     <div className="image-container">
@@ -30,7 +32,9 @@ export default function Mexico() {
                     <div className="description">
                         <p>Kayak en Cancún</p>
                     </div>
-                    <button className="add-btn">❤️ agregar</button>
+                    <button className="add-btn ">
+                        <Link to="/login" className="link">❤️ agregar</Link>
+                    </button>
                 </div>
                 <div className="activity-card">
                     <div className="image-container">
@@ -39,7 +43,9 @@ export default function Mexico() {
                     <div className="description">
                         <p>Xcaret</p>
                     </div>
-                    <button className="add-btn">❤️ agregar</button>
+                    <button className="add-btn ">
+                        <Link to="/login" className="link">❤️ agregar</Link>
+                    </button>
                 </div>
             </div>
         </div>

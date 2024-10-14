@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
-import { Navbar } from "../component/navbar.js";
 import FirstView from "../component/firstview.js";
 import DestinationCards from "../component/destiantionCards.js";
 import AdventureSections from "../component/adventureSection.js";

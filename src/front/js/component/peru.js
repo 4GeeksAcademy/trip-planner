@@ -1,5 +1,6 @@
 import React from 'react';
 import "../../styles/expaises.css";
+import { Link } from "react-router-dom";
 export default function Peru(){
     return (
         <div>
@@ -20,7 +21,9 @@ export default function Peru(){
                     <div className="description">
                         <p>Santuario de Macchu Picchu</p>
                     </div>
-                    <button className="add-btn">❤️ agregar</button>
+                    <button className="add-btn ">
+                        <Link to="/login" className="link">❤️ agregar</Link>
+                    </button>
                 </div>
             </div>
         </div>
