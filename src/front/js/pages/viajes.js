@@ -21,7 +21,7 @@ const trips = [
         people: 1,
         tripBudget: 6000,
         personalBudget: 6000,
-        imgURL:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfuD1Kk-Jdz_ic7L4JdUBvTne5hvJuM3y6zg&s"
+        imgURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfuD1Kk-Jdz_ic7L4JdUBvTne5hvJuM3y6zg&s"
     }
 ];
 
@@ -36,59 +36,65 @@ const usuario = {
 const Viajes = () => {
 
     // aqui contamos la cantidad de grupos basado en los viajes
-    const countGroups = ()=>{
+    const countGroups = () => {
         let groupNumber = 0;
-            trips.forEach((trip)=>{
-                if(trip.people>1){
-                    groupNumber += 1;
-                }
-            })
+        trips.forEach((trip) => {
+            if (trip.people > 1) {
+                groupNumber += 1;
+            }
+        })
         return groupNumber
     }
-        
-        
+
+
     return (
         <>
-             {/* User Banner */}
-            <div className="d-flex m-3 p-1">
-                <div className="container rounded d-flex justify-content-between me-1" style={{backgroundColor: "lightgrey"}}>
-                    <div className="mx-4">
-                        <h5>@{usuario.username}</h5>
-                        <p>{usuario.name}</p>
-                    </div>
-                    <div className="mx-4">
-                        <p>Proximos viajes {usuario.viajes}</p>
-                        <p>grupos {countGroups()}</p>
-                    </div>
-                    
+            {/* User Banner */}
+
+            <div className="d-flex align-items-center">
+
+            <div className="container rounded d-flex bg-opacity-10 bg-dark p-4 shadow mx-auto me-3">
+                <div className="d-flex flex-column align-items-start flex-grow-1 mx-3" >
+                    <h5>@{usuario.username}</h5>
+                    <p>{usuario.name}</p>
                 </div>
-                <img src={usuario.imgURL} className="rounded-circle" style={{objectFit: 'contain', height: "80px"}} />
+                <div className="mx-4 text-end">
+                    <p className="mb-1"><i class="fa-solid fa-map-location-dot me-2"></i>Proximos viajes: {usuario.viajes}</p>
+                    <p className="mb-3"><i class="fa-solid fa-user-group me-2"></i>Grupos: {countGroups()}</p>
+                </div>
+
             </div>
 
+                <img src={usuario.imgURL} className="rounded-circle me-auto shadow" style={{ objectFit: 'cover', width: "120px", height: "120px" }} />
+                
+            </div>
+
+
+
             {/* individual trips*/}
-            
-            {trips.map((item, index)=>{
-                return (<div key={index} className="container d-flex justify-content-around rounded-pill my-5"  style={{backgroundColor: "lightgrey", width: "60%"}}>
-                    <img src={item.imgURL} className="rounded-circle" style={{objectFit: 'contain', height: "80px"}} />
-                        <div className="mt-1">
-                            <h6>{item.destination} {item.date}</h6>
-                            <p>{item.duration}</p>
-                        </div>
-                        <div>
-                            <p className="mb-0 fw-lighter">Trip budget: {item.tripBudget}</p>
-                            <p className="mb-0 fw-lighter">Personal budget: {item.personalBudget}</p>
-                            <p className="mb-0 fw-lighter"># of people: {item.people}</p>
-                        </div>
-                    </div>)
+
+            {trips.map((item, index) => {
+                return (<div key={index} className="container d-flex rounded-5 my-5" style={{ backgroundColor: "lightgrey", width: "60%" }}>
+                    <img src={item.imgURL} className="rounded-circle shadow" style={{ objectFit: 'cover', width: "100px", height: "100px" }} />
+                    <div className="mt-1">
+                        <h6>{item.destination} {item.date}</h6>
+                        <p>{item.duration}</p>
+                    </div>
+                    <div>
+                        <p className="mb-0 fw-lighter">Trip budget: {item.tripBudget}</p>
+                        <p className="mb-0 fw-lighter">Personal budget: {item.personalBudget}</p>
+                        <p className="mb-0 fw-lighter"># of people: {item.people}</p>
+                    </div>
+                </div>)
             })}
-            <div className="container d-flex justify-content-evenly rounded-pill my-5"  
-            style={{backgroundColor: "lightgrey", width: '40%'}} >
+            <div className="container d-flex justify-content-evenly rounded-pill my-5"
+                style={{ backgroundColor: "lightgrey", width: '40%' }} >
                 <Link to="/add-new-trip">
                     <h1 className="align-items-center">+</h1>
                     <h3 className="align-items-center mt-2">Add a new trip</h3>
                 </Link>
             </div>
-            
+
         </>
     )
 }

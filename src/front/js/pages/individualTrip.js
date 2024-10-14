@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ShoppingCart from "../component/shoppingCart.js"
 
 const activities = [
@@ -102,7 +103,7 @@ const IndividualTrip = () => {
             <div className="container">
 
                 <div className=" rounded d-flex flex-column flex-md-row justify-content-between  bg-opacity-10 bg-dark p-4 shadow">
-                    <div className="d-flex flex-column flex-md-row justify-content-between" style={{ width: "50%" }} >
+                    <div className="d-flex flex-column flex-md-row justify-content-between" style={{ width: "80%" }} >
                         <h5 className="mb-1">Nombre de Viaje</h5>
                         <p className="mb-1">DD/MM/AAAA</p>
                         <p className="mb-1">Presupuesto</p>
