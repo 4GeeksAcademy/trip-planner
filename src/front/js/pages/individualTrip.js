@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import ShoppingCart from "../component/shoppingCart.js"
 
 const activities = [

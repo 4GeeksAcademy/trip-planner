@@ -31,7 +31,7 @@ export const Navbar = () => {
 				}
 				{store.token && <button className="border border-0 bg-transparent mx-2 text-danger" onClick={() => actions.logout()}>SALIR</button>}
 				{
-					!store.token && <button className="border border-0 bg-transparent mx-2">REGISTRATE</button>
+					!store.token && <Link to="/register"><button className="border border-0 bg-transparent mx-2">REGISTRATE</button></Link>
 				}
 			</div>
 		</nav>
