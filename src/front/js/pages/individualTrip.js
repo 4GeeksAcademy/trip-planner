@@ -1,9 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD
 import {Link} from 'react-router-dom';
-=======
-import { Link } from 'react-router-dom';
->>>>>>> 812781d (Diseño de indvidual trip)
 import ShoppingCart from "../component/shoppingCart.js"
 
 const activities = [

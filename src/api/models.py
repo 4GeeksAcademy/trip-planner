@@ -39,7 +39,11 @@ class User(db.Model):
             "email": self.email,
             "number": self.number,
             "more_info": self.more_info,
-            "is_active": self.is_active  
+            "is_active": self.is_active,
+            "grupos" : [grupo.serialize() for grupo in self.grupos],
+            "comentarios" : [comentario.serialize() for comentario in self.comentarios],
+            "likes" : [like.serialize() for like in self.likes]
+
         }
 
 class Viaje(db.Model):
@@ -55,7 +59,9 @@ class Viaje(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "destino": self.destino
+            "destino": self.destino,
+            "grupos": [grupo.serialize() for grupo in self.grupos],
+            "actividades": [actividad.serialize() for actividad in self.actividades]
         }
 
 class Grupo(db.Model):
@@ -75,7 +81,8 @@ class Grupo(db.Model):
         return {
             "id": self.id,
             "group_name": self.group_name,
-            "viaje_id": self.viaje_id
+            "viaje_id": self.viaje_id,
+            "integrantes": [integrante.serialize() for integrante in self.users]
         }
 
 # Tabla de asociación
@@ -90,7 +97,7 @@ class Actividad(db.Model):
     Actividad está asociada a un único Viaje, pero puede tener muchos Comentarios y likes"""
     __tablename__ = 'actividades'
     id = db.Column(db.Integer, primary_key=True)
-    activity_name = db.Column(db.String(120), unique=True, nullable=False)
+    nombre_actividad = db.Column(db.String(120), unique=True, nullable=False)
     precio = db.Column(db.Float, nullable=True)
     moneda = db.Column(db.String(120), nullable=True)
     imagenes = db.Column(db.String(360), nullable=False)
@@ -100,27 +107,27 @@ class Actividad(db.Model):
     descripcion = db.Column(db.String(360), nullable=True)
     comentarios = db.relationship("Comentarios", backref='actividad', lazy=True)  # Relación de Comentarios a Actividad
 
-    def __init__(self, activity_name, precio, moneda, imagenes, duracion, viaje_id, descripcion=None, likes=0):
-        self.activity_name = activity_name
+    def __init__(self, nombre_actividad, precio, moneda, imagenes, duracion, viaje_id, descripcion=None):
+        self.nombre_actividad = nombre_actividad
         self.precio = precio
         self.moneda = moneda
-        self.imagenes = imagenes
         self.duracion = duracion
+        self.imagenes = imagenes    #OJO VER DESPUES
         self.viaje_id = viaje_id
         self.descripcion = descripcion
-        self.likes = likes
 
     def serialize(self):
         return {
             "id": self.id,
-            "activity_name": self.activity_name,
+            "nombre_actividad": self.nombre_actividad,
             "precio": self.precio,
             "moneda": self.moneda,
             "imagenes": self.imagenes,
             "duracion": self.duracion,
             "viaje_id": self.viaje_id,
             "descripcion": self.descripcion,
-            "likes": self.likes
+            "comentarios": [comentario.serialize() for comentario in self.comentarios],
+            "likes" : [like.serialize() for like in self.likes]
         }
 
 class Comentarios(db.Model):
@@ -128,21 +135,22 @@ class Comentarios(db.Model):
     Muchos a 1 con Actividad, Muchos a 1 con User/ Comentarios está asociado a una única actividad y un único user"""
     __tablename__ = 'comentarios'
     id = db.Column(db.Integer, primary_key=True)
-    activity_id = db.Column(db.Integer, db.ForeignKey('actividades.id'), nullable=False)
+    actividades_id = db.Column(db.Integer, db.ForeignKey('actividades.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     user = db.relationship("User", backref='comentarios', lazy=True)  # Relación de User a Comentarios
     comentario = db.Column(db.String(500), nullable=True)
 
-    def __init__(self, activity_id, user_id, comentario):
-        self.activity_id = activity_id
+    def __init__(self, actividades_id, user_id, comentario):
+        self.actividades_id = actividades_id
         self.user_id = user_id
         self.comentario = comentario
 
     def serialize(self):
         return {
             "id": self.id,
-            "activity_id": self.activity_id,
+            "actividades_id": self.actividades_id,
             "user_id": self.user_id,
+            "usuario": self.user.serialize() if self.user else None, 
             "comentario": self.comentario
         }
 
@@ -156,13 +164,15 @@ class Likes(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     user = db.relationship("User", backref='likes', lazy=True, foreign_keys=[user_id])  # Relación de User a Likes
 
-    def __init__(self, activity_id, user_id):
-        self.activity_id = activity_id
+    def __init__(self, actividades_id, user_id):
+        self.actividades_id = actividades_id
         self.user_id = user_id
 
     def serialize(self):
         return {
             "id": self.id,
-            "activity_id": self.activity_id,
-            "user_id": self.user_id
+            "actividades_id": self.actividades_id,
+            "user_id": self.user_id,
+            "actividad" : self.actividad.serialize() if self.actividad else None,
+            "usuario": self.user.serialize() if self.user else None
         }
