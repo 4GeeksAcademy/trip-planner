@@ -96,10 +96,9 @@ class Actividad(db.Model):
     imagenes = db.Column(db.String(360), nullable=False)
     duracion = db.Column(db.Integer, nullable=True)
     viaje_id = db.Column(db.Integer, db.ForeignKey('viajes.id'), nullable=False)
-    viaje = db.relationship("Viaje", backref='actividades', lazy=True)  # Relación de Viaje a Actividad
+    viaje = db.relationship("Viaje", backref='actividades', lazy=True, foreign_keys=[viaje_id])  # Relación de Viaje a Actividad
     descripcion = db.Column(db.String(360), nullable=True)
-    likes = db.Column(db.Integer, default=0, nullable=False) 
-    comentarios = db.relationship("Comentarios", backref='actividad', lazy=True)  # Relación de Actividad a Comentarios
+    comentarios = db.relationship("Comentarios", backref='actividad', lazy=True)  # Relación de Comentarios a Actividad
 
     def __init__(self, activity_name, precio, moneda, imagenes, duracion, viaje_id, descripcion=None, likes=0):
         self.activity_name = activity_name
@@ -152,10 +151,10 @@ class Likes(db.Model):
     Muchos a 1 con Actividad, Muchos a 1 con User/ Likes está asociado a una única actividad y un único user"""
     __tablename__ = 'likes'
     id = db.Column(db.Integer, primary_key=True)
-    activity_id = db.Column(db.Integer, db.ForeignKey('actividades.id'), nullable=False)
-    actividad = db.relationship("Actividad", backref='likes', lazy=True)  # Relación de Actividad a Likes
+    actividades_id = db.Column(db.Integer, db.ForeignKey('actividades.id'), nullable=False)
+    actividad = db.relationship("Actividad", backref='likes', lazy=True, foreign_keys=[actividades_id])  # Relación de Actividad a Likes
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    user = db.relationship("User", backref='likes', lazy=True)  # Relación de User a Likes
+    user = db.relationship("User", backref='likes', lazy=True, foreign_keys=[user_id])  # Relación de User a Likes
 
     def __init__(self, activity_id, user_id):
         self.activity_id = activity_id
