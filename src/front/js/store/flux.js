@@ -18,8 +18,108 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-			individualTrip_viaje: []
+			totalCost: [],
+			selected_trip: [],
+			activities: [
+				{
+					id: 1,
+					name: "Cafecito",
+					cost: 20,
+					likes: 0,
+					author: "LuisR",
+					description: "Cafe oro. Horario de 9 am a 3 pm. tiene wifi",
+					duration: "",
+					imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOc7EaMLv5mZsW_kQ5PNCWvZjMDAP8kjwmVQ&s"
+				},
+				{
+					id: 2,
+					name: "Playa",
+					cost: 20,
+					likes: 0,
+					author: "LuisR",
+					description: "Cafe oro. Horario de 9 am a 3 pm. tiene wifi",
+					duration: "",
+					imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOc7EaMLv5mZsW_kQ5PNCWvZjMDAP8kjwmVQ&s"
+				},
+				{
+					id: 3,
+					name: "Parque",
+					cost: 0,
+					likes: 2,
+					author: "LuisR",
+					description: "Caminata en el parque. Horario de 6 am a 6 pm.",
+					duration: "",
+					imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1QMAB9axRPNNiyX37JpBDrL6VZmU7zTG9cA&s"
+				},
+				{
+					id: 4,
+					name: "CCS Meat Co",
+					cost: 180,
+					likes: 1000,
+					author: "LuisR",
+					description: "Cafe oro. Horario de 9 am a 10 pm. tiene wifi",
+					duration: "",
+					imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiuQNA-Q4I_Z68GX3XHx_CGKY7iBTYq4Z6hA&s"
+				},
+				{
+					id: 5,
+					name: "Restaurante",
+					cost: 0,
+					likes: 2,
+					author: "LuisR",
+					description: "Caminata en el parque. Horario de 6 am a 6 pm.",
+					duration: "",
+					imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1QMAB9axRPNNiyX37JpBDrL6VZmU7zTG9cA&s"
+				},
+				{
+					id: 6,
+					name: "Teatro",
+					cost: 0,
+					likes: 2,
+					author: "LuisR",
+					description: "Caminata en el parque. Horario de 6 am a 6 pm.",
+					duration: "",
+					imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1QMAB9axRPNNiyX37JpBDrL6VZmU7zTG9cA&s"
+				},
+				{
+					id: 7,
+					name: "Estadio",
+					cost: 180,
+					likes: 1000,
+					author: "LuisR",
+					description: "Cafe oro. Horario de 9 am a 10 pm. tiene wifi",
+					duration: "",
+					imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiuQNA-Q4I_Z68GX3XHx_CGKY7iBTYq4Z6hA&s"
+				},
+				{
+					id: 8,
+					name: "Museo",
+					cost: 180,
+					likes: 1000,
+					author: "LuisR",
+					description: "Cafe oro. Horario de 9 am a 10 pm. tiene wifi",
+					duration: "",
+					imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiuQNA-Q4I_Z68GX3XHx_CGKY7iBTYq4Z6hA&s"
+				}
+			],
+			miembros: [
+				{
+					name: "Cesar",
 			
+				},
+				{
+					name: "Adriana",
+			
+				},
+				{
+					name: "Carlos",
+			
+				},
+				{
+					name: "Kevin",
+			
+				}
+			]
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -100,31 +200,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ user: data });
 			},
 
-			addViajes: (individualTrip_viaje) => {
+			addViaje: (viaje) => {
 				const store = getStore();
 				const actions = getActions();
-				const result = actions.isViaje(individualTrip_viaje)
+				const result = actions.isViaje(viaje)
 				if (result) {
 					actions.deleteViaje(viaje)
 				} else {
 					setStore({
-						viajes: [...store.viajes, individualTrip_viaje]
+						selected_trip: [...store.selected_trip, viaje]
 					});
 				}
-					console.log(viajes);
+					console.log(viaje);
 			},
 
-			deleteViaje: (individualTrip_viaje) => {
+			deleteViaje: (viaje) => {
 				const store = getStore();
-				const updateViajes = store.viajes.filter(item => individualTrip_viaje.name !== item.name);
-				setStore({viajes: updateViajes});
+				const updateViajes = store.selected_trip.filter(item => viaje.name !== item.name);
+				setStore({selected_trip: updateViajes});
 			},
 
-			isViaje: (individualTrip_viaje) => {
+			isViaje: (viaje) => {
 				const store = getStore();
-				const result = store.viajes.some(item => individualTrip_viaje.id == item.id && individualTrip_viaje.type == item.type)
+				const result = store.selected_trip.some(item => viaje.id == item.id && viaje.type == item.type && viaje.cost == item.cost && viaje.imageUrl == item.imageUrl)
 				return result
 			},
+
+			
 		}
 
 	};
