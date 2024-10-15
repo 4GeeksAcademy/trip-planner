@@ -11,9 +11,9 @@ export const Navbar = () => {
 
 	return (
 		<nav id="navbar" className="d-flex px-5 mt-2 justify-content-center align-items-center relative">
-			<div className="container ps-5 mt-1">
+			<Link className="container ps-5 mt-1" to="/">
 				<img src={logo} className="logo" />
-			</div>
+			</Link>
 			<div className="d-flex">
 				<Link to="/">
 					<button className="border border-0 bg-transparent mx-2">INICIO</button>
@@ -31,7 +31,7 @@ export const Navbar = () => {
 				}
 				{store.token && <button className="border border-0 bg-transparent mx-2 text-danger" onClick={() => actions.logout()}>SALIR</button>}
 				{
-					!store.token && <button className="border border-0 bg-transparent mx-2">REGISTRATE</button>
+					!store.token && <Link to="/register"><button className="border border-0 bg-transparent mx-2">REGISTRATE</button></Link>
 				}
 			</div>
 		</nav>

@@ -60,6 +60,11 @@ const Login = () => {
                         Log in
                     </button>
                     <Link to="/register" className="btn btn-link">Don't you have an account yet? Register here</Link>
+                    <div className="d-flex justify-content-start opacity-50">
+                        <Link to="/" className="btn btn-secondary mt-2 d-flex align-items-center rounded-3">
+                            <i className="fa-solid fa-circle-chevron-left me-2"></i> Inicio
+                        </Link>
+                    </div>
                 </div>
             </div >
         </>

@@ -1,6 +1,8 @@
 import React, { useState, useContext, useEffect } from "react"; // Importa useState
 import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext.js";
+import { Link } from 'react-router-dom';
+import toast from "react-hot-toast";
 
 
 const Register = () => {
@@ -12,6 +14,15 @@ const Register = () => {
 
     const navigate = useNavigate();
 
+    const registerUser = (user)=>{
+        if (user.password !== user.passwordConfirm){
+            toast.console.error("Passwords do not match")
+            return;
+        }
+        actions.register(user.name, user.userName, user.email, user.password, user.number, user.more_Info)
+
+    }
+
     useEffect(() => {
         if (store.token) {
             navigate("/");
@@ -22,7 +33,7 @@ const Register = () => {
         <>
             <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
                 <div className="rounded shadow-lg p-4 bg-dark" style={{ width: '450px' }}>
-                    <h1 className="text-center text-light">Register</h1>
+                    <h1 className="text-center text-light">Crea una cuenta</h1>
                     <div className="mb-3">
                         <label className="form-label text-light">Full Name</label>
                         <input
@@ -109,11 +120,16 @@ const Register = () => {
                         ></textarea>
                     </div>
                     <button
-                        onClick={() => console.log(user)}
+                        onClick={() => registerUser(user)}
                         className="btn btn-primary w-100 mt-2"
                     >
-                        Register
+                        Registrar
                     </button>
+                    <div className="d-flex justify-content-start opacity-50 mt-2">
+                        <Link to="/" className="btn btn-secondary mt-2 d-flex align-items-center rounded-3">
+                            <i className="fa-solid fa-circle-chevron-left me-2"></i> Inicio
+                        </Link>
+                    </div>
                 </div>
             </div >
         </>

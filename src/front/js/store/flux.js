@@ -81,6 +81,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				toast.success("Logged out!");
 			},
+			// register : async(name, username, email, password, number, more_info) =>{
+			// },
 			getUserLogged: async () => {
 				const resp = await fetch(process.env.BACKEND_URL + "/api/user", {
 					headers: {
@@ -123,6 +125,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return result
 			},
 		}
+
 	};
 };
 
