@@ -14,7 +14,7 @@ const ShoppingCart = () => {
             <button type="button" className="btn btn-danger btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 Tu viaje
             </button>
-            <ul className="dropdown-menu border">
+            <ul className="dropdown-menu dropdown-menu-end">
                 <li className="group-name"><span className="dropdown-item" href="#">Nombre del grupo</span></li>
                 {store.selected_trip.length == 0 ? (
                     <p className="d-flex flex justify-content-center text-secundary mx-3">Selecciona algún viaje</p>
