@@ -1,5 +1,6 @@
+import '../../styles/prueba1.css';
 import React from 'react';
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 
 // datos para llenar los componentes en la vista. Hay que modificarlos para sacarlos del back-end
@@ -53,7 +54,7 @@ const Viajes = () => {
 
             <div className="d-flex align-items-center">
 
-                <div className="container rounded d-flex bg-opacity-10 bg-dark p-4 shadow mx-auto me-3">
+                <div className="container rounded d-flex bg-light p-4 shadow mx-auto me-3">
                     <div className="d-flex flex-column align-items-start flex-grow-1 mx-3" >
                         <h5>@{usuario.username}</h5>
                         <p>{usuario.name}</p>
@@ -74,8 +75,8 @@ const Viajes = () => {
             {/* individual trips*/}
 
             {trips.map((item, index) => {
-                return (<div key={index} className="container d-flex mb-3 my-5 rounded-pill border border-4 p-2" style={{ backgroundColor: "lightgrey", width: "60%" }}>
-                    <img src={item.imgURL} className="rounded-circle border shadow" style={{ objectFit: 'cover', width: "100px", height: "100px" }} />
+                return (<div key={index} className="viaje container d-flex mb-3 my-5 rounded-pill p-2 bg-light" style={{ width: "60%" }}>
+                    <img src={item.imgURL} className="ima rounded-circle shadow" style={{ objectFit: 'cover', width: "100px", height: "100px" }} />
                     <div className="mt-1">
                         <h6 className="mb-2">{item.destination}</h6>
                         <p className="mb-0 mt-3">{item.date}</p>
@@ -85,20 +86,24 @@ const Viajes = () => {
                         </p>
                     </div>
                     <div className="d-flex flex-column justify-content-end ms-auto p-3">
-                        <p className="mb-0  fw-lighter">Presupuesto: {item.tripBudget}</p>
-                        <p className="mb-0 fw-lighter">Presupuesto personal: {item.personalBudget}</p>
-                        <p className="mb-0 fw-lighter">Número de personas: {item.people}</p>
+                        <p className="mb-0 fw-medium">Presupuesto: {item.tripBudget}</p>
+                        <p className="mb-0 fw-medium">Presupuesto personal: {item.personalBudget}</p>
+                        <p className="mb-0 fw-medium">Número de personas: {item.people}</p>
+                    </div>
+
+                    <div className="d-flex align-items-center ms-3 me-3 fs-3">
+                        <i className="fa-solid fa-chevron-right opacity-50"></i>
                     </div>
                 </div>)
             })}
 
             <div className="d-flex justify-content-evenly">
-                
-                <Link to="/add-new-trip" className="btn bg-opacity-10 bg-dark mt-5 p-3 mx-3 shadow w-50">
+
+                <Link to="/add-new-trip" className="btn bg-light mt-5 p-3 mx-3 shadow w-50">
                     <i class="fa-solid fa-circle-plus me-2"></i>
                     Añadir un nuevo viaje
-                    </Link>
-                
+                </Link>
+
             </div>
 
 

@@ -1,5 +1,7 @@
 import React from "react";
 import "../../styles/firstview.css"
+
+
 export default function FirstView() {
     return (
         <div id="view" className="container-fluid p-5">

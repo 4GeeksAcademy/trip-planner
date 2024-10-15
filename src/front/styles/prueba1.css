@@ -1,0 +1,32 @@
+body {
+    background-color: #e6e6e6e1;
+    box-shadow: 3px -149px 299px -101px rgba(255,255,255,0.55) inset;
+    -webkit-box-shadow: 3px -149px 299px -101px rgba(255,255,255,0.55) inset;
+    -moz-box-shadow: 3px -149px 299px -101px rgba(255,255,255,0.55) inset;
+}
+
+.ima {
+    border: 3px solid #d96c06;
+}
+
+.viaje:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px #111d4a8c;
+}
+
+.viaje h6 {
+    color: #111d4a; 
+    font-weight: bold;
+}
+
+.container p {
+    color: #555;
+    margin: 0;
+}
+
+.viajes {
+    box-shadow: 0 2px 5px rgba(219, 128, 10, 0.877);
+}
+
+
+

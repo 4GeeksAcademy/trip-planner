@@ -6,7 +6,7 @@
     on that page only (the ones not reused in other pages).
 */
 #landing{
-    background-image: url("https://www.parquesnacionales.gov.co/wp-content/uploads/2023/04/cocuy.jpg");
+    background-image: url("https://www.parquesnacionales.gov.co/wp-content/uploads/2023/04/cocuy.jpg"); 
     background-size: cover;
     background-repeat: no-repeat;   
 }
