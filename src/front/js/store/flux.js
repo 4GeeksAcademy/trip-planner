@@ -18,7 +18,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-			viaje: []
+			individualTrip_viaje: []
+			
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -99,29 +100,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ user: data });
 			},
 
-			addViajes: (viaje) => {
+			addViajes: (individualTrip_viaje) => {
 				const store = getStore();
 				const actions = getActions();
-				const result = actions.isViaje(viaje)
+				const result = actions.isViaje(individualTrip_viaje)
 				if (result) {
 					actions.deleteViaje(viaje)
 				} else {
 					setStore({
-						viajes: [...store.viajes, viaje]
+						viajes: [...store.viajes, individualTrip_viaje]
 					});
 				}
 					console.log(viajes);
 			},
 
-			deleteViaje: (viaje) => {
+			deleteViaje: (individualTrip_viaje) => {
 				const store = getStore();
-				const updateViajes = store.viajes.filter(item => viaje.name !== item.name);
+				const updateViajes = store.viajes.filter(item => individualTrip_viaje.name !== item.name);
 				setStore({viajes: updateViajes});
 			},
 
-			isViaje: (viaje) => {
+			isViaje: (individualTrip_viaje) => {
 				const store = getStore();
-				const result = store.viajes.some(item => viaje.id == item.id && viaje.type == item.type)
+				const result = store.viajes.some(item => individualTrip_viaje.id == item.id && individualTrip_viaje.type == item.type)
 				return result
 			},
 		}
