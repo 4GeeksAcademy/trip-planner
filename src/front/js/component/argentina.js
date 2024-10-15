@@ -21,7 +21,9 @@ export default function Argentina(){
                     <div className="description">
                         <p>Teatro Colón</p>
                     </div>
-                    <button className="add-btn">❤️ agregar </button>
+                    <button className="add-btn ">
+                        <Link to="/login" className="link">❤️ agregar</Link>
+                    </button>
                 </div>
                 <div className="activity-card">
                     <div className="image-container">
@@ -30,7 +32,9 @@ export default function Argentina(){
                     <div className="description">
                         <p>Visitar el Obelisco</p>
                     </div>
-                    <button className="add-btn">❤️ agregar</button>
+                    <button className="add-btn ">
+                        <Link to="/login" className="link">❤️ agregar</Link>
+                    </button>
                 </div>
                 <div className="activity-card">
                     <div className="image-container">
@@ -39,7 +43,9 @@ export default function Argentina(){
                     <div className="description">
                         <p>Recorrer el caminito</p>
                     </div>
-                    <button className="add-btn">❤️ agregar</button>
+                    <button className="add-btn ">
+                        <Link to="/login" className="link">❤️ agregar</Link>
+                    </button>
                 </div>
             </div>
         </div>
