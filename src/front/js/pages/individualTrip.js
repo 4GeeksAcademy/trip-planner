@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Context } from "../store/appContext.js"
+import '../../styles/viajes.css';
 import {Link} from 'react-router-dom';
 import ShoppingCart from "../component/shoppingCart.js"
 
@@ -13,7 +14,7 @@ const IndividualTrip = () => {
         <>
             <div className="container">
 
-                <div className=" rounded d-flex flex-column flex-md-row justify-content-between  bg-opacity-10 bg-dark p-4 shadow">
+                <div className=" rounded d-flex flex-column flex-md-row justify-content-between bg-light p-4 shadow">
                     <div className="d-flex flex-column flex-md-row justify-content-between" style={{ width: "80%" }} >
                         <h5 className="mb-1">Nombre de Viaje</h5>
                         <p className="mb-1">DD/MM/AAAA</p>
@@ -61,14 +62,14 @@ const IndividualTrip = () => {
                                                 <span className="p-2 rounded">${item.cost}</span>
                                             </div>
                                         <div className="d-flex justify-content-between align-items-center mt-auto">
-                                            <Link to="/details" className="btn btn-primary btn-sm px-4">Detalles</Link>
+                                            <Link to="/details" className="detalles text-light btn-sm px-4">Ver más</Link>
                                             <div className="d-flex align-items-center">
-                                                <button className="bg-transparent border-0"><i className="fa-solid fa-heart me-2"></i>{item.likes}</button>
+                                                <button className="bg-transparent border-0"><i className="text-danger fa-solid fa-heart me-2"></i>{item.likes}</button>
                                             </div>
                                         </div>
                                     </div>
-                                        <div className="card-footer text-center bg-dark bg-opacity-10 text-light p-2">
-                                            <button className={`btn btn btn-light btn-sm px-4 shadow-sm ${actions.isViaje({name: item.name, id: item.id, type: "tripDetail"}) && "btn-danger"} `}
+                                        <div className="card-footer text-center bg-secondary text-light p-2">
+                                            <button className={`btn btn btn-light btn-sm px-4 shadow ${actions.isViaje({name: item.name, id: item.id, type: "tripDetail"}) && "btn-danger"} `}
                                             onClick={() => actions.addViaje( {name: item.name, id: item.id, type: "tripDetail", cost: item.cost, imageUrl: item.imageUrl} )}>
                                             {actions.isViaje( {name: item.name, id: item.id, type: "tripDetail", cost: item.cost, imageUrl: item.imageUrl}) ? 
                                                 <>

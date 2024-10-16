@@ -5,6 +5,7 @@ import "../../styles/firstview.css"
 export default function FirstView() {
     return (
         <div id="view" className="container-fluid p-5">
+            {/* <video src="..." class="object-fit-cover" autoplay></video> */}
             <div className="h-100 d-flex align-items-center pb-5">
                 <div className="ms-5 mt-2">
                     <p className="text-white fw-bold fs-2 mt-3">CREA RECUERDO QUE TE ACOMPAÑEN TODA TU VIDA...</p>
