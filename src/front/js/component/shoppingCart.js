@@ -11,7 +11,7 @@ const ShoppingCart = () => {
     return (
     <div className = "container d-flex flex  justify-content-end">
         <div className="btn-group">
-            <button type="button" className="btn btn-danger btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <button type="button" className="btn btn-danger btn-sm dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                 Tu viaje
             </button>
             <ul className="dropdown-menu dropdown-menu-end">
@@ -49,7 +49,7 @@ const ShoppingCart = () => {
                     <li><hr className="dropdown-divider"/></li>
                     <li className="costs d-flex flex">
                         <p className="total-costs-text p-2">Total costos</p>
-                        <p className="total-costs-price p-2">$0,0</p>
+                        <p className="total-costs-price p-2">$ {actions.sumCostosTotales()}</p>
                     </li>
             </ul>
         </div>

@@ -234,22 +234,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 						selected_trip: [...store.selected_trip, viaje]
 					});
 				}
-<<<<<<< HEAD
-				console.log(viajes);
-=======
 					console.log(viaje);
->>>>>>> 1dda373e203bb60e27c96c56a10e060a6510d573
 			},
 
 			deleteViaje: (viaje) => {
 				const store = getStore();
-<<<<<<< HEAD
-				const updateViajes = store.viajes.filter(item => viaje.name !== item.name);
-				setStore({ viajes: updateViajes });
-=======
 				const updateViajes = store.selected_trip.filter(item => viaje.name !== item.name);
 				setStore({selected_trip: updateViajes});
->>>>>>> 1dda373e203bb60e27c96c56a10e060a6510d573
 			},
 
 			isViaje: (viaje) => {
@@ -258,6 +249,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return result
 			},
 
+			sumCostosTotales: () => {
+				const store = getStore();
+				const total = store.selected_trip.reduce((acc, viaje) => acc + viaje.cost, 0);
+				return total;
+			},
 			
 		}
 
