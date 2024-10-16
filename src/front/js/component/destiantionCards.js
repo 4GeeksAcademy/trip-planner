@@ -55,6 +55,22 @@ const DestinationCards = () => {
                     <Link to="/argentina" className="stretched-link"></Link>
                 </div>
             </div>
+            <div className="card text-bg-dark">
+                <img src="https://lh3.googleusercontent.com/p/AF1QipNhZk2DRsQ4ifw1eybIT0X95HoNcqNdvaQc3Lbj=s680-w680-h510-rw" className="card-img" alt="Machu Picchu" />
+                <div className="card-img-overlay">
+                    <h5 className="card-title text-white">Aruba</h5>
+                    <p className="card-text text-white">Natural Pool</p>
+                    <Link to="/argentina" className="stretched-link"></Link>
+                </div>
+            </div>
+            <div className="card text-bg-dark">
+                <img src="https://images.ctfassets.net/m868ks80jg7q/3HmxNZZtEjGFyW6MxX5DAf/8b1c8c30574b7f720f4838e2c186030f/grote_knip.jpg?w=600&h=415&fm=webp&fit=fill&q=75" className="card-img" alt="Machu Picchu" />
+                <div className="card-img-overlay">
+                    <h5 className="card-title text-white">Curazao</h5>
+                    <p className="card-text text-white">Grote Knip (Kenepa Grandi)</p>
+                    <Link to="/argentina" className="stretched-link"></Link>
+                </div>
+            </div>
         </div>
     );
 }

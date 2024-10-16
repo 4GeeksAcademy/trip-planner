@@ -1,0 +1,39 @@
+body {
+
+}
+
+.ima {
+    border: 3px solid #d96c06;
+}
+
+.viaje:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px #111d4a8c;
+}
+
+.viaje h6 {
+    color: #111d4a;
+    font-weight: bold;
+}
+
+.container p {
+    color: #555;
+    margin: 0;
+}
+
+.viajes {
+    box-shadow: 0 2px 5px rgba(219, 128, 10, 0.877);
+}
+
+.iconos {
+    color:#111d4a;
+}
+
+.detalles {
+    background-color: #111d4a;
+    text-decoration: none;
+}
+
+.colorAzul {
+    color:#111d4a;
+}

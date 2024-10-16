@@ -38,26 +38,6 @@
     margin-right: 15px;
 }
 
-.trip-cost {
-    text-align: end;
-    background-color: rgb(34, 146, 164);
-    border-radius: 5px;
-    font-size: 13px;  
-}
-
-.costs{
-    display: flex;
-    justify-content: space-between;
-}
-
-.total-costs-text{
-    margin-left: 15px;
-}
-
-.total-costs-price{
-    margin-right: 15px;
-}
-
 .delete {
     justify-content: center;
     align-items: center;
@@ -66,10 +46,30 @@
 
 .delete-trip{
     color: rgb(17, 29, 74);
-
+    
 }
 
 .delete-trip:hover {
     color: rgb(247, 92, 3);
     cursor: pointer;
+}
+
+.costs{
+    display: flex;
+    justify-content: space-between;
+}
+
+.trip-cost {
+    text-align: end;
+    background-color: rgb(34, 146, 164);
+    border-radius: 5px;
+    font-size: 13px;  
+}
+
+.total-costs-text{
+    margin-left: 15px;
+}
+
+.total-costs-price{
+    margin-right: 15px;
 }

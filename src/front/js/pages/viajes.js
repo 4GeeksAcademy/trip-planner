@@ -1,4 +1,4 @@
-import '../../styles/prueba1.css';
+import '../../styles/viajes.css';
 import React from 'react';
 import { Link } from "react-router-dom";
 
@@ -60,8 +60,8 @@ const Viajes = () => {
                         <p>{usuario.name}</p>
                     </div>
                     <div className="mx-4 text-end">
-                        <p className="mb-1"><i class="fa-solid fa-map-location-dot me-2"></i>Proximos viajes: {usuario.viajes}</p>
-                        <p className="mb-3"><i class="fa-solid fa-user-group me-2"></i>Grupos: {countGroups()}</p>
+                        <p className="mb-1"><i class="iconos fa-solid fa-map-location-dot me-2"></i>Proximos viajes: {usuario.viajes}</p>
+                        <p className="mb-3"><i class="iconos fa-solid fa-user-group me-2"></i>Grupos: {countGroups()}</p>
                     </div>
 
                 </div>
@@ -81,18 +81,20 @@ const Viajes = () => {
                         <h6 className="mb-2">{item.destination}</h6>
                         <p className="mb-0 mt-3">{item.date}</p>
                         <p className="mb-0 mt-1">
-                            <i class="fa-solid fa-clock me-2"></i>
+                            <i class="iconos fa-solid fa-clock me-2"></i>
                             {item.duration}
                         </p>
                     </div>
                     <div className="d-flex flex-column justify-content-end ms-auto p-3">
-                        <p className="mb-0 fw-medium">Presupuesto: {item.tripBudget}</p>
-                        <p className="mb-0 fw-medium">Presupuesto personal: {item.personalBudget}</p>
-                        <p className="mb-0 fw-medium">Número de personas: {item.people}</p>
+                        <p className="mb-0 fw-normal">Presupuesto: <span className="colorAzul fw-bold">{item.tripBudget}</span></p>
+                        <p className="mb-0 fw-normal">Presupuesto personal: <span className="colorAzul fw-bold">{item.personalBudget}</span></p>
+                        <p className="mb-0 fw-normal">Número de personas: <span className="colorAzul fw-bold">{item.people}</span></p>
                     </div>
 
                     <div className="d-flex align-items-center ms-3 me-3 fs-3">
+                        <Link to="/details" style={{ textDecoration: 'none', color: 'inherit' }}>
                         <i className="fa-solid fa-chevron-right opacity-50"></i>
+                        </Link>
                     </div>
                 </div>)
             })}
@@ -100,7 +102,7 @@ const Viajes = () => {
             <div className="d-flex justify-content-evenly">
 
                 <Link to="/add-new-trip" className="btn bg-light mt-5 p-3 mx-3 shadow w-50">
-                    <i class="fa-solid fa-circle-plus me-2"></i>
+                    <i class="fa-solid fa-circle-plus me-2 text-success"></i>
                     Añadir un nuevo viaje
                 </Link>
 
