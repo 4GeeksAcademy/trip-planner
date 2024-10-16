@@ -19,7 +19,7 @@ class User(db.Model):
     # Relación muchos a muchos con Grupo
     grupos = db.relationship('Grupo', secondary='group_association', backref='users', lazy=True)
 
-    def __init__(self, name, username, email, password, number, more_info=None, is_active=True):
+    def __init__(self, name, username, email, password, number, more_info=None, is_active=False):
         self.name = name
         self.username = username
         self.email = email

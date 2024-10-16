@@ -81,8 +81,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				toast.success("Logged out!");
 			},
-			// register : async(name, username, email, password, number, more_info) =>{
-			// },
+			register: async (name, userName, email, password, number, more_info) => {
+				const resp = await fetch(process.env.BACKEND_URL + "/api/register", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						name: name,
+						username: userName,
+						email: email,
+						password: password,
+						number: number,
+						more_info: more_info
+					})
+				});
+				const data = await resp.json()
+				console.log("Response Data:", data); // Agrega esta línea
+
+				if (resp.ok) {
+					toast.success("Usuario registrado!");
+				}
+				else {
+					toast.error("Error al registrar el usuario");
+				}
+			},
 			getUserLogged: async () => {
 				const resp = await fetch(process.env.BACKEND_URL + "/api/user", {
 					headers: {
@@ -110,13 +133,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 						viajes: [...store.viajes, viaje]
 					});
 				}
-					console.log(viajes);
+				console.log(viajes);
 			},
 
 			deleteViaje: (viaje) => {
 				const store = getStore();
 				const updateViajes = store.viajes.filter(item => viaje.name !== item.name);
-				setStore({viajes: updateViajes});
+				setStore({ viajes: updateViajes });
 			},
 
 			isViaje: (viaje) => {

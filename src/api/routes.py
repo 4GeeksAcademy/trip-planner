@@ -44,11 +44,11 @@ def register():
     if name ==None:
         return jsonify({"msg": "Missing name"}), 401
     if username ==None:
-        return jsonify({"msg": "Missing name"}), 401
+        return jsonify({"msg": "Missing username"}), 401
     if email ==None:
-        return jsonify({"msg": "Missing name"}), 401
+        return jsonify({"msg": "Missing email"}), 401
     if password ==None:
-        return jsonify({"msg": "Missing name"}), 401
+        return jsonify({"msg": "Missing password"}), 401
     
     user = User.query.filter_by(email=email).first()
 

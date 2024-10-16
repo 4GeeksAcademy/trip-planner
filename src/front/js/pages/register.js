@@ -14,9 +14,9 @@ const Register = () => {
 
     const navigate = useNavigate();
 
-    const registerUser = (user)=>{
-        if (user.password !== user.passwordConfirm){
-            toast.console.error("Passwords do not match")
+    const registerUser = (user) => {
+        if (user.password !== user.passwordConfirm) {
+            toast.error("Passwords do not match")
             return;
         }
         actions.register(user.name, user.userName, user.email, user.password, user.number, user.more_Info)
