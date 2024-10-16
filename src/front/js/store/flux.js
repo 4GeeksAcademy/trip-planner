@@ -105,19 +105,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 			miembros: [
 				{
 					name: "Cesar",
-			
+
 				},
 				{
 					name: "Adriana",
-			
+
 				},
 				{
 					name: "Carlos",
-			
+
 				},
 				{
 					name: "Kevin",
-			
+
 				}
 			]
 		},
@@ -198,7 +198,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 				});
 				const data = await resp.json()
-				console.log("Response Data:", data); // Agrega esta línea
+
+				localStorage.setItem("token", data.token)
+
+				setStore({ user: data.user });
+				setStore({ token: data.token });
+
 
 				if (resp.ok) {
 					toast.success("Usuario registrado!");
@@ -234,13 +239,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 						selected_trip: [...store.selected_trip, viaje]
 					});
 				}
-					console.log(viaje);
+				console.log(viaje);
 			},
 
 			deleteViaje: (viaje) => {
 				const store = getStore();
 				const updateViajes = store.selected_trip.filter(item => viaje.name !== item.name);
-				setStore({selected_trip: updateViajes});
+				setStore({ selected_trip: updateViajes });
 			},
 
 			isViaje: (viaje) => {
@@ -254,7 +259,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const total = store.selected_trip.reduce((acc, viaje) => acc + viaje.cost, 0);
 				return total;
 			},
-			
+
 		}
 
 	};

@@ -58,7 +58,9 @@ def register():
     db.session.add(new_user)
     db.session.commit()
 
-    return jsonify(new_user.serialize()),200
+    return jsonify({"user": new_user.serialize(),
+                    "token": create_access_token(identity=email)
+                    }),200
 
 @api.route("/user", methods=["GET"])
 @jwt_required()
