@@ -16,7 +16,7 @@ const Login = () => {
         if (store.token) {
             navigate("/");
         }
-    }, [])
+    }, [store.token])
 
     return (
         <>
