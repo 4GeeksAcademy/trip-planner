@@ -25,6 +25,7 @@ import Argentina from "./component/argentina.js";
 import Viajes from "./pages/viajes";
 import TripDetail from "./component/tripDetail";
 import TripScore from "./component/score";
+import NewActivity from "./pages/addNewActivity.js";
 
 //create your first component
 const Layout = () => {
@@ -57,6 +58,7 @@ const Layout = () => {
                         <Route element={<Peru/>} path="/peru" />
                         <Route element={<RepublicaDominicana/>} path="/republica-dominicana" />
                         <Route element={<Argentina/>} path="/argentina" />
+                        <Route element={<NewActivity/>} path="/add-activity" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>

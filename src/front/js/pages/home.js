@@ -11,11 +11,11 @@ export const Home = () => {
 	return (
 		<div className="">
 			<div>
-				<div id="landing" className="p-5 mb-5">
+				<div id="landing" className="p-5 mt-0 mb-5">
 					<FirstView />
 				</div>
 			</div>
-			<div className="text-center mt-5">
+			<div className="text-center pt-5 mt-5">
 				<DestinationCards />
 				<AdventureSections />
 			</div>
