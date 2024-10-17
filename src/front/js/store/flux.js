@@ -1,8 +1,11 @@
 import toast from "react-hot-toast";
+import suggestions from "./suggestions"
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			//add the suggestions
+			recommendations: suggestions,
 			user: {},
 			token: localStorage.getItem("token") || null,
 			message: null,
