@@ -17,7 +17,7 @@ const DestinationCards = () => {
                             <h5 className="card-title text-white">{item.country}</h5>
                             <p className="card-text text-white">{item.city}</p>
                         </div>
-                        <Link to="/mexico" state={item} className="stretched-link"></Link>
+                        <Link to="/destination" state={item} className="stretched-link"></Link>
                     </div>
                 )
                 

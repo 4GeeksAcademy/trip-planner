@@ -15,7 +15,7 @@ import NewTrip from "./pages/addNewTrip";
 import IndividualTrip from "./pages/individualTrip";
 import Login from "./pages/login";
 import Register from "./pages/register.js";
-import Mexico from "./component/mexico.js";
+import Destination from "./component/destination.js";
 import Brasil from "./component/brasil.js";
 import Colombia from "./component/colombia.js";
 import Peru from "./component/peru.js";
@@ -52,7 +52,7 @@ const Layout = () => {
                         <Route element={<Viajes />} path="/viajes" />
                         <Route element={<TripDetail />} path="/details" />
                         <Route element={<TripScore />} path="/score" />
-                        <Route element={<Mexico />} path="/mexico" />
+                        <Route element={<Destination />} path="/destination" />
                         <Route element={<Brasil/>} path="/brasil" />
                         <Route element={<Colombia/>} path="/colombia" />
                         <Route element={<Peru/>} path="/peru" />
