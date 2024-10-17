@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useContext} from "react";
 import "../../styles/expaises.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom'
+
 
 export default function Mexico() {
     let { state } = useLocation();
