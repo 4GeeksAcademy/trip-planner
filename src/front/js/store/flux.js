@@ -21,7 +21,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-			totalCost: [],
 			selected_trip: [],
 			activities: [
 				{
@@ -107,22 +106,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			],
 			miembros: [
 				{
-					name: "Cesar",
-
-				},
-				{
-					name: "Adriana",
-
-				},
-				{
 					name: "Carlos",
-
 				},
 				{
-					name: "Kevin",
-
-				}
-			]
+					name: "David",
+				},
+			],
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -262,6 +251,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const total = store.selected_trip.reduce((acc, viaje) => acc + viaje.cost, 0);
 				return total;
 			},
+
+			addMember: (miembro) => {
+				const store = getStore();
+				const actions = getActions();
+				const result = actions.isMember(miembro)
+				if (result) {
+					actions.deleteMember();
+				} else {
+					setStore({
+						miembros: [...store.miembros, miembro]
+					})
+				}
+			},
+
+			isMember: (miembro) => {
+				const store = getStore();
+				const result = store.miembros.some(item => miembro.id == item.id && miembro.name == item.name && miembro.mail == item.email)
+				return result
+			},
+
+			deleteMember : (miembro) => {
+				const store = getStore();
+				const updateMember = store.miembros.filter(item => miembro.name !== item.name)
+				setStore({ miembros: updateMember});
+			}
 
 		}
 

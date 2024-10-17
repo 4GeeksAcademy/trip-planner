@@ -75,3 +75,19 @@
 .total-costs-price{
     margin-right: 15px;
 }
+
+.personal-costs {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(17, 29, 74);
+}
+
+.personal-costs-text {
+    color: rgb(255, 238, 214);
+    background-color: rgb(17, 29, 74);
+}
+
+.personal-costs-price {
+    color: rgb(255, 238, 214);
+    background-color: rgb(17, 29, 74);
+}

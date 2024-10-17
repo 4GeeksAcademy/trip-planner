@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Context } from "../store/appContext.js"
 import '../../styles/viajes.css';
 import {Link} from 'react-router-dom';
@@ -9,7 +9,21 @@ const IndividualTrip = () => {
 
     const { store, actions } = useContext(Context);
 
+    const [newMember, setNewMember] = useState({ name: "", email: "" });
 
+    const handleInputChange = (e) => {
+        setNewMember({ ...newMember, [e.target.name] : e.target.value });
+    }
+    
+    console.log(newMember);
+    
+    const handleAddMemeber = () => {
+        if(newMember.name && newMember.email) {
+            actions.addMember(newMember)
+        } else {
+            alert("Por favor, completa todos los campos")
+        }
+    }
     return (
         <>
             <div className="container">
@@ -28,15 +42,54 @@ const IndividualTrip = () => {
                                 Miembros
                             </button>
                             <ul className="dropdown-menu dropdown-menu-dark p-1" aria-labelledby="dropdownMenuButton2">
-                                {store.miembros.map((item, index) => {
-                                    return (<li key={index}><p className="dropdown-item d-flex justify-content-between align-items-center" href="#">{item.name}<i className="fa-solid fa-circle-info fs-5"></i></p></li>)
-                                })}
-                                <li><hr className="dropdown-divider" /></li>
-                                <li>
-                                    <p className="dropdown-item" href="#"> <i className="fa-solid fa-user-plus me-2"></i>Agregar miembro</p>
+                                {store.miembros.length == 0 ? (
+                                <span className="d-flex flex justify-content-center text-secundary m-3">Ni tienes ningún miembre en tu grupo</span>
+                                ) : (
+                                    store.miembros.map((item, index) => (
+                                        <React.Fragment key={index}>
+                                            <li className="d-flex flex">
+                                                <p className="dropdown-item d-flex flex justify-content-between align-items-center" href="#">{item.name}</p>
+                                                <i className="d-flex flex fa-solid justify-content-end fa-circle-info fs-5 m-1"></i>
+                                                <i className="d-flex flex delete-trip align-item-center fa-solid fa-trash-can m-1" role="button"></i>
+                                            </li>
+                                            <li><hr className="dropdown-divider" /></li>
+                                        </React.Fragment>
+                                    ))
+                                )}
+                                <li className="add-member text">
+                                    <span className="dropdown-item"><i className="fa-solid fa-user-plus me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
+                                    </i>Agregar miembro</span>                                        
                                 </li>
-
                             </ul>
+                            {/* modal */}
+                                <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div className="modal-dialog">
+                                        <div className="modal-content">
+                                            <div className="modal-header">
+                                                <h1 className="modal-title fs-5" id="exampleModalLabel">Invita a un amigo</h1>
+                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div className="modal-body">
+                                                <form>
+                                                    <div className="mb-3">
+                                                        <label htmlFor="recipient-name" className="col-form-label">Email:</label>
+                                                        <input type="email" className="email form-control" id="recipient-email" name="email" value={newMember.email} onChange={handleInputChange} />
+                                                    </div>
+                                                    <div className="mb-3">
+                                                        <label htmlFor="message-text" className="col-form-label">Nombre:</label>
+                                                        <input type="text" className="name form-control" id="recipient-name" name="name" value={newMember.name} onChange={handleInputChange} />
+                                                    </div>
+                                                </form>
+                                            </div>
+                        
+                                            <div className="modal-footer">
+                                                <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                                <button type="button" className="btn btn-success" data-bs-dismiss="modal" onClick={handleAddMemeber}>Agregar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        
                         </div>
                     </div>
                 </div>
@@ -74,12 +127,12 @@ const IndividualTrip = () => {
                                             {actions.isViaje( {name: item.name, id: item.id, type: "tripDetail", cost: item.cost, imageUrl: item.imageUrl}) ? 
                                                 <>
                                                     <i className="text-danger delete-trip fa-solid fa-trash-can p-1"></i>
-                                                    <span className="text-danger">Quitar viaje</span> 
+                                                    <span className="text-danger">Quitar</span> 
                                                 </>
                                                 : 
                                                 <>
                                                     <i className="text-success fa-solid fa-circle-plus p-1"></i>
-                                                    <span>Agregar Viaje</span>
+                                                    <span>Agregar</span>
                                                 </>
                                             }
                                             </button>

@@ -17,7 +17,7 @@ const ShoppingCart = () => {
             <ul className="dropdown-menu dropdown-menu-end">
                 <li className="group-name"><span className="dropdown-item" href="#">Nombre del grupo</span></li>
                 {store.selected_trip.length == 0 ? (
-                    <p className="d-flex flex justify-content-center text-secundary mx-3">Selecciona algún viaje</p>
+                    <p className="d-flex flex justify-content-center text-secundary mx-3">Agrega una actividad a tu viaje</p>
                 ) : (
                     store.selected_trip.map((item, index) => (
                         <React.Fragment key={index}>
@@ -34,7 +34,6 @@ const ShoppingCart = () => {
                                         <div className="delete d-flex flex">
                                             <i className="delete-trip fa-solid fa-trash-can" role="button"
                                                 onClick={(e) => {
-                                                    e.preventDefault()
                                                     e.stopPropagation()
                                                     console.log("Click on delete");
                                                     actions.deleteViaje({name: item.name})
@@ -50,6 +49,11 @@ const ShoppingCart = () => {
                     <li className="costs d-flex flex">
                         <p className="total-costs-text p-2">Total costos</p>
                         <p className="total-costs-price p-2">$ {actions.sumCostosTotales()}</p>
+                    </li>
+                    <li><hr className="dropdown-divider"/></li>
+                    <li className="personal-costs d-flex flex">
+                        <span className="personal-costs-text p-2">Gastos personales</span>
+                        <span className="personal-costs-price p-2">$ </span>
                     </li>
             </ul>
         </div>
