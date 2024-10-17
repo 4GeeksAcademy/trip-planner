@@ -1,6 +1,4 @@
-body {
-
-}
+body {}
 
 .ima {
     border: 3px solid #d96c06;
@@ -26,7 +24,7 @@ body {
 }
 
 .iconos {
-    color:#111d4a;
+    color: #111d4a;
 }
 
 .detalles {
@@ -35,5 +33,13 @@ body {
 }
 
 .colorAzul {
-    color:#111d4a;
+    color: #111d4a;
+}
+
+.colorNaranja {
+    color: rgb(228, 134, 12)
+}
+
+.fondoNaranja {
+    background-color: rgb(228, 134, 12);
 }

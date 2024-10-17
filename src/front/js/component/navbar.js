@@ -12,7 +12,7 @@ export const Navbar = () => {
 	return (
 		<nav id="navbar" className="d-flex px-5 mt-2 justify-content-center align-items-center relative">
 			<Link className="container ps-5 mt-1" to="/">
-				<img src={logo} className="logo" style={{ width: 200 }}/>
+				<img src={logo} className="logo" style={{ width: '120px' }}/>
 			</Link>
 			<div className="d-flex">
 				<Link to="/">

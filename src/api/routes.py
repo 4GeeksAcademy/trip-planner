@@ -8,10 +8,68 @@ from flask_cors import CORS
 from datetime import datetime
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 
+import os
+
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+sender_email = os.getenv("SMTP_USERNAME")
+sender_password = os.getenv("SMTP_PASSWORD")
+smtp_host = os.getenv("SMTP_HOST")
+smtp_port = os.getenv("SMTP_PORT")
+reciever_email = os.getenv("RECIEVERS_EMAIL")
+
 api = Blueprint('api', __name__)
 
 # Allow CORS requests to this API
 CORS(api)
+
+
+# ENVIAR EMAIL (PRUEBA)
+@api.route('/send-email', methods=['POST'])
+def send_email():
+
+    message = MIMEMultipart("alternative")
+    message["Subject"] = "Te inivito a Trippy - ¡Haremos un viaje juntos!"
+    message["From"] = sender_email
+    message["To"] = reciever_email
+
+    print(sender_email, sender_password, smtp_host, smtp_port)
+    
+    # message["To"] = ", ".join(recipients)
+
+    text = "Prueba1"
+
+    html_content = """
+        <html>
+            <body>
+                <h1 style="color:blue;">Estoy probando estooo!</h1>
+                <p>This email is sent using <b>Trippy Backend</b> and Gmail's SMTP server.</p>
+            </body>
+        </html>
+    """
+
+    part1 = MIMEText(text, "plain")
+
+    part2 = MIMEText(html_content, "html")
+
+    message.attach(part1)
+
+    message.attach(part2)
+
+    smtp_connection = smtplib.SMTP(smtp_host, smtp_port)
+
+    smtp_connection.starttls() # Secure the connection
+
+    smtp_connection.login(sender_email, sender_password)
+
+    smtp_connection.sendmail(sender_email, reciever_email, message.as_string())
+
+    smtp_connection.quit()
+
+    return jsonify({"msg": "Email sent"}), 200
+
 
 #Endpoint for LOGIN
 @api.route("/login", methods=["POST"])
@@ -58,7 +116,9 @@ def register():
     db.session.add(new_user)
     db.session.commit()
 
-    return jsonify(new_user.serialize()),200
+    return jsonify({"user": new_user.serialize(),
+                    "token": create_access_token(identity=email)
+                    }),200
 
 @api.route("/user", methods=["GET"])
 @jwt_required()

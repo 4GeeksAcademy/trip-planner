@@ -31,7 +31,7 @@ const usuario = {
     name: "Luis Rene Silva",
     username: "LuisRe",
     viajes: trips.length,
-    imgURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlsMtYnZNq08cwaY79-mFE2seVyYZ77atE5vyFUkhpLiuoKuOM"
+    imgURL: "https://img.freepik.com/foto-gratis/cerrar-hombre-sonriente-tomando-selfie_23-2149155156.jpg"
 }
 
 const Viajes = () => {
@@ -52,21 +52,21 @@ const Viajes = () => {
         <>
             {/* User Banner */}
 
-            <div className="d-flex align-items-center">
+            <div className="d-flex flex-column flex-md-row align-items-center justify-content-center">
 
-                <div className="container rounded d-flex bg-light p-4 shadow mx-auto me-3">
+                <div className="container rounded d-flex bg-light p-4 shadow ms-5 me-3 mb-3 mb-md-0" style={{ maxWidth: "80%", width: "100%" }}>
                     <div className="d-flex flex-column align-items-start flex-grow-1 mx-3" >
-                        <h5>@{usuario.username}</h5>
+                        <h5 className="colorNaranja">@{usuario.username}</h5>
                         <p>{usuario.name}</p>
                     </div>
                     <div className="mx-4 text-end">
-                        <p className="mb-1"><i class="iconos fa-solid fa-map-location-dot me-2"></i>Proximos viajes: {usuario.viajes}</p>
-                        <p className="mb-3"><i class="iconos fa-solid fa-user-group me-2"></i>Grupos: {countGroups()}</p>
+                        <p className="mb-1"><i class="iconos fa-solid fa-map-location-dot me-2"></i>Proximos viajes: <span className="colorAzul fw-bold">{usuario.viajes}</span></p>
+                        <p className="mb-3"><i class="iconos fa-solid fa-user-group me-2"></i>Grupos: <span className="colorAzul fw-bold">{countGroups()}</span></p>
                     </div>
 
                 </div>
 
-                <img src={usuario.imgURL} className="rounded-circle me-auto shadow" style={{ objectFit: 'cover', width: "120px", height: "120px" }} />
+                <img src={usuario.imgURL} className="rounded-circle ms-0 me-5 shadow" style={{ objectFit: 'cover', width: "120px", height: "120px" }} />
 
             </div>
 
@@ -75,9 +75,9 @@ const Viajes = () => {
             {/* individual trips*/}
 
             {trips.map((item, index) => {
-                return (<div key={index} className="viaje container d-flex mb-3 my-5 rounded-pill p-2 bg-light" style={{ width: "60%" }}>
+                return (<div key={index} className="viaje container d-flex mb-3 my-5 rounded-pill p-2 bg-light " style={{ width: "100%", maxWidth: "65%" }}>
                     <img src={item.imgURL} className="ima rounded-circle shadow" style={{ objectFit: 'cover', width: "100px", height: "100px" }} />
-                    <div className="mt-1">
+                    <div className="mt-1 flex-grow-1">
                         <h6 className="mb-2">{item.destination}</h6>
                         <p className="mb-0 mt-3">{item.date}</p>
                         <p className="mb-0 mt-1">
@@ -92,7 +92,7 @@ const Viajes = () => {
                     </div>
 
                     <div className="d-flex align-items-center ms-3 me-3 fs-3">
-                        <Link to="/details" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <Link to="/individual-trip" style={{ textDecoration: 'none', color: 'inherit' }}>
                         <i className="fa-solid fa-chevron-right opacity-50"></i>
                         </Link>
                     </div>
