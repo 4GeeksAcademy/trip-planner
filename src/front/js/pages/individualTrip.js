@@ -47,7 +47,7 @@ const IndividualTrip = () => {
                             </button>
                             <ul className="dropdown-menu dropdown-menu-dark p-1 " aria-labelledby="dropdownMenuButton2">
                                 {store.miembros.length == 0 ? (
-                                <span className="d-flex flex justify-content-center text-secundary m-3">Ni tienes ningún miembre en tu grupo</span>
+                                <span className="d-flex flex justify-content-center text-secundary m-3">No tienes ningún miembro en tu grupo</span>
                                 ) : (
                                     store.miembros.map((item, index) => (
                                         <React.Fragment key={index}>
