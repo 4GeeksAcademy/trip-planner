@@ -3,6 +3,7 @@ import { Context } from "../store/appContext.js"
 import '../../styles/viajes.css';
 import {Link} from 'react-router-dom';
 import ShoppingCart from "../component/shoppingCart.js"
+import toast from "react-hot-toast";
 
 
 const IndividualTrip = () => {
@@ -15,15 +16,18 @@ const IndividualTrip = () => {
         setNewMember({ ...newMember, [e.target.name] : e.target.value });
     }
     
-    console.log(newMember);
-    
     const handleAddMemeber = () => {
         if(newMember.name && newMember.email) {
-            actions.addMember(newMember)
+            actions.addMember(newMember);
+            setNewMember({ name: "", email: "" });
+            toast.success("Miembro agregado correctamente")
         } else {
             alert("Por favor, completa todos los campos")
         }
     }
+
+    const [selectedMember, setSelectedMember] = useState("null");
+    
     return (
         <>
             <div className="container">
@@ -37,11 +41,11 @@ const IndividualTrip = () => {
                     </div>
                     <div className="mx-4 mt-3 mt-md-0">
                         <div className="dropdown">
-                            <button className="btn btn-secondary dropdown-toggle shadow" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button className="btn btn-secondary dropdown-toggle shadow" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                                 <i className="fa-solid fa-user-group me-2"></i>
                                 Miembros
                             </button>
-                            <ul className="dropdown-menu dropdown-menu-dark p-1" aria-labelledby="dropdownMenuButton2">
+                            <ul className="dropdown-menu dropdown-menu-dark p-1 " aria-labelledby="dropdownMenuButton2">
                                 {store.miembros.length == 0 ? (
                                 <span className="d-flex flex justify-content-center text-secundary m-3">Ni tienes ningún miembre en tu grupo</span>
                                 ) : (
@@ -50,18 +54,51 @@ const IndividualTrip = () => {
                                             <li className="d-flex flex">
                                                 <p className="dropdown-item d-flex flex justify-content-between align-items-center" href="#">{item.name}</p>
                                                 <i className="d-flex flex fa-solid justify-content-end fa-circle-info fs-5 m-1"></i>
-                                                <i className="d-flex flex delete-trip align-item-center fa-solid fa-trash-can m-1" role="button"></i>
+                                                <i className="d-flex flex delete-trip align-item-center fa-solid fa-trash-can m-1 " role="button" 
+                                                    data-bs-toggle="modal" 
+                                                    data-bs-target="#deleteModal"
+                                                    onClick={()=>setSelectedMember(item)}
+                                                    ></i>
                                             </li>
                                             <li><hr className="dropdown-divider" /></li>
                                         </React.Fragment>
                                     ))
                                 )}
+                            
                                 <li className="add-member text">
                                     <span className="dropdown-item"><i className="fa-solid fa-user-plus me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
                                     </i>Agregar miembro</span>                                        
                                 </li>
                             </ul>
-                            {/* modal */}
+                            
+                            {/* modal para eliminar miembro */}
+                                <div className="modal fade" id="deleteModal" tabIndex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                    <div className="modal-dialog">
+                                        <div className="modal-content">
+                                            <React.Fragment>
+                                                <div className="modal-header">
+                                                    <h1 className="modal-title d-flex flex justify-content-center align-center fs-5" id="deleteModalLabel">Eliminar miembro</h1>
+                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div className="modal-body">
+                                                    {selectedMember ? `¿Estás seguro de eliminar a ${selectedMember.name} de tu grupo?` : "...Cargando"}
+                                                </div>
+                                                <div className="modal-footer">
+                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="button" className="btn btn-success" data-bs-dismiss="modal"
+                                                        onClick={() => {
+                                                            actions.deleteMember(selectedMember)
+                                                            setSelectedMember(null)
+                                                            toast.success("Miembro borrado correctamente")
+                                                        }}
+                                                    >Eliminar</button>
+                                                </div>
+                                            </React.Fragment>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {/* modal para agregar miembro */}
                                 <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div className="modal-dialog">
                                         <div className="modal-content">
@@ -84,7 +121,10 @@ const IndividualTrip = () => {
                         
                                             <div className="modal-footer">
                                                 <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                                <button type="button" className="btn btn-success" data-bs-dismiss="modal" onClick={handleAddMemeber}>Agregar</button>
+                                                <button type="button" className="btn btn-success" 
+                                                    data-bs-dismiss="modal" 
+                                                    onClick={handleAddMemeber}
+                                                    >Agregar</button>
                                             </div>
                                         </div>
                                     </div>

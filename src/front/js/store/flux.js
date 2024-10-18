@@ -104,14 +104,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiuQNA-Q4I_Z68GX3XHx_CGKY7iBTYq4Z6hA&s"
 				}
 			],
-			miembros: [
-				{
-					name: "Carlos",
-				},
-				{
-					name: "David",
-				},
-			],
+			miembros: [],
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
