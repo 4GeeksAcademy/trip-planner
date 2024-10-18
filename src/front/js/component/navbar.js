@@ -16,22 +16,22 @@ export const Navbar = ({ isLandingPage }) => {
 			</Link>
 			<div className="d-flex white">
 				<Link to="/">
-					<button className="border border-0 bg-transparent mx-3 text-light fw-bold">INICIO</button>
+					<button className="border border-0 bg-transparent mx-3  fw-bold">INICIO</button>
 				</Link>
-				<button className="border border-0 bg-transparent mx-3 text-light fw-bold">GRUPOS</button>
+				<button className="border border-0 bg-transparent mx-3  fw-bold">GRUPOS</button>
 				<Link to="/viajes">
-					<button className="border border-0 bg-transparent mx-3 text-light fw-bold">VIAJES</button>
+					<button className="border border-0 bg-transparent mx-3  fw-bold">VIAJES</button>
 				</Link>
-				<button className="border border-0 bg-transparent mx-3 text-light fw-bold">EXPLORA</button>
+				<button className="border border-0 bg-transparent mx-3  fw-bold">EXPLORA</button>
 				{!store.token && <Link to="/login">
-					<button className="border border-0 bg-transparent mx-3 text-light fw-bold">INGRESAR</button>
+					<button className="border border-0 bg-transparent mx-3  fw-bold">INGRESAR</button>
 				</Link>}
 				{
 					store.user && store.token && <p className="mx-2 mb-0 text-secondary" style={{ padding: '1px 6px' }}>{store.user?.username?.toUpperCase()}</p>
 				}
 				{store.token && <button className="border border-0 bg-transparent mx-2 text-danger" onClick={() => actions.logout()}>SALIR</button>}
 				{
-					!store.token && <Link to="/register"><button className="border border-0 bg-transparent mx-3 text-light fw-bold">REGISTRATE</button></Link>
+					!store.token && <Link to="/register"><button className="border border-0 bg-transparent mx-3  fw-bold">REGISTRATE</button></Link>
 				}
 			</div>
 		</nav>
