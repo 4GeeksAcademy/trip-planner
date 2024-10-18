@@ -7,9 +7,8 @@ import suggestions from "../store/suggestions";
 const DestinationCards = () => {
    
     return(
-        <div className="container destination-grid">
-            {suggestions.map((item, index) => {
-                
+        <div className="container">
+            {suggestions.slice(-4).map((item, index) => {
                 return (
                     <div className="card text-bg-dark border border-0 bg-transparent">
                         <img src={item.imagenCentral} className="card-img" alt="Cancún" />

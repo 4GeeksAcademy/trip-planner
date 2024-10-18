@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../../styles/expaises.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Context } from "../store/appContext";
 import { useLocation } from 'react-router-dom'
 
 export default function Destination() {
     let { state } = useLocation();
     const { country, city, imagenCentral, data } = state
+    const { isLoggedIn } = useContext(Context);
+    const navigate = useNavigate();
+
+    const handleAddActivity = (item) => {
+        if (isLoggedIn) {
+            navigate('/viajes', { state: item })
+        } else {
+            navigate("/login")
+        }
+    };
     return (
         <div>
             <div className="container-fluid mx-auto p-2">
@@ -32,7 +43,7 @@ export default function Destination() {
                                 <p>{item.shortDescription}</p>
                             </div>
                            
-                                <button className="btn bg-secondary">
+                                <button className="btn bg-secondary" onClick={() => handleAddActivity({name: 'Flyboard en Cancun'})}>
                                     <Link to="/login" className="link"><i class="fa-solid fa-heart me-2 text-danger"></i> agregar</Link>
                                 </button>
                                 </div>
