@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Viaje
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from datetime import datetime
@@ -24,6 +24,32 @@ api = Blueprint('api', __name__)
 
 # Allow CORS requests to this API
 CORS(api)
+
+# AGREGAR VIAJE
+
+@api.route('/add-trip', methods=['POST'])
+def add_trip():
+    destino = request.json.get("destino", None)
+    fecha_inicio = request.json.get("fecha_inicio", None)
+    fecha_fin = request.json.get("fecha_fin", None)
+    presupuesto_grupo = request.json.get("presupuesto_grupo", None)
+    motivo = request.json.get("motivo", None)
+    nota = request.json.get("nota", None)
+
+    viaje = Viaje(
+        destino = destino,
+        fecha_inicio=fecha_inicio,
+        fecha_fin=fecha_fin,
+        presupuesto_grupo=presupuesto_grupo,
+        motivo=motivo,
+        nota=nota,
+    )
+    db.session.add(viaje)
+    db.session.commit()
+
+    return jsonify(viaje.serialize()), 201
+
+
 
 
 # ENVIAR EMAIL (PRUEBA)

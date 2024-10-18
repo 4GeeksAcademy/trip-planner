@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, ForeignKey, Integer, String, Float, Boolean
+
 
 db = SQLAlchemy()
 
@@ -52,16 +52,30 @@ class Viaje(db.Model):
     __tablename__ = 'viajes'
     id = db.Column(db.Integer, primary_key=True)
     destino = db.Column(db.String(120), nullable=False)
+    fecha_inicio= db.Column(db.DateTime, nullable=False)
+    fecha_fin= db.Column(db.DateTime, nullable=False)
+    presupuesto_grupo = db.Column(db.Integer, nullable=True)
+    motivo = db.Column(db.String(120), nullable=True)
+    nota = db.Column(db.String(120), nullable=True)
 
-    def __init__(self, destino):
+
+    def __init__(self, destino, fecha_inicio, fecha_fin, presupuesto_grupo, motivo, nota):
         self.destino = destino
-
+        self.fecha_inicio = fecha_inicio
+        self.fecha_fin = fecha_fin
+        self.presupuesto_grupo = presupuesto_grupo
+        self.motivo = motivo
+        self.nota = nota
+        
     def serialize(self):
         return {
             "id": self.id,
             "destino": self.destino,
-            "grupos": [grupo.serialize() for grupo in self.grupos],
-            "actividades": [actividad.serialize() for actividad in self.actividades]
+            "fecha_inicio": self.fecha_inicio,
+            "fecha_fin": self.fecha_fin,
+            "presupuesto": self.presupuesto_grupo
+            # "grupos": [grupo.serialize() for grupo in self.grupos],
+            # "actividades": [actividad.serialize() for actividad in self.actividades]
         }
 
 class Grupo(db.Model):
