@@ -76,6 +76,7 @@
 		"bootstrap": "^5.3.3",
 		"prop-types": "^15.6.1",
 		"react": "^16.8.4",
+		"react-bootstrap": "^2.10.5",
 		"react-dom": "^16.8.4",
 		"react-hot-toast": "^2.4.1",
 		"react-polyfills": "0.0.1",

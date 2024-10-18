@@ -1,3 +1,75 @@
+/* Estilos del carousel */
+.carousel-container {
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding-top: 150px;
+    padding-left: 180px;
+}
+
+.carousel {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+}
+
+/* Estilos generales de la tarjeta */
 .card {
-    width: 15rem;
+    width: 250px;
+    background-color: #333;
+    color: white;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    scroll-snap-align: start;
+    transition: transform 0.3s ease;
+}
+
+.card-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10px;
+    opacity: 0;
+    transition: height 0.3s ease, opacity 0.3s ease;
+}
+
+/* Efecto hover en la tarjeta */
+.card:hover .card-img {
+    transform: scale(1.1); /* Zoom en la imagen */
+}
+
+.card:hover .card-overlay {
+    height: 100%;
+    opacity: 1;
+}
+
+.card-overlay h5,
+.card-overlay p {
+    margin: 0;
+    opacity: 0;
+    transform: translateY(10px); /* Inicialmente movido hacia abajo */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover .card-overlay h5,
+.card:hover .card-overlay p {
+    opacity: 1;
+    transform: translateY(0); /* Mover el texto hacia su posición original */
 }
