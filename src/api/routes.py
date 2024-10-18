@@ -26,7 +26,6 @@ api = Blueprint('api', __name__)
 CORS(api)
 
 # AGREGAR VIAJE
-
 @api.route('/add-trip', methods=['POST'])
 def add_trip():
     destino = request.json.get("destino", None)
