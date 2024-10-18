@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 const Register = () => {
     const { store, actions } = useContext(Context);
-
+    const {image, setImage} =useState(null);
 
     const [user, setUser] = useState({});
     const [showPassword, setShowPassword] = useState(false);
@@ -37,7 +37,7 @@ const Register = () => {
                 <div className="rounded shadow-lg p-4 bg-dark" style={{ width: '450px' }}>
                     <h1 className="text-center text-light">Crea una cuenta</h1>
                     <div className="mb-3">
-                        <label className="form-label text-light">Full Name</label>
+                        <label className="form-label text-light">Nombre completo</label>
                         <input
                             className="form-control"
                             onChange={(event) => setUser({
@@ -47,7 +47,7 @@ const Register = () => {
                         />
                     </div>
                     <div className="mb-3">
-                        <label className="form-label text-light">Username</label>
+                        <label className="form-label text-light">Nombre de usuario</label>
                         <input
                             className="form-control"
                             onChange={(event) => setUser({
@@ -57,7 +57,7 @@ const Register = () => {
                         />
                     </div>
                     <div className="mb-3">
-                        <label className="form-label text-light">Email address</label>
+                        <label className="form-label text-light">Correo electrónico</label>
                         <input
                             type="email"
                             placeholder="email@example.co"
@@ -69,7 +69,7 @@ const Register = () => {
                         />
                     </div>
                     <div className="mb-3">
-                        <label className="form-label text-light">Password</label>
+                        <label className="form-label text-light">Contraseña</label>
                         <div className="d-flex">
                             <input
                                 type={showPassword ? "text" : "password"}
@@ -85,7 +85,7 @@ const Register = () => {
                         </div>
                     </div>
                     <div className="mb-3">
-                        <label className="form-label text-light">Confirm Password</label>
+                        <label className="form-label text-light">Confirma la contraseña</label>
                         <div className="d-flex">
                             <input
                                 type={showPassword ? "text" : "password"}
@@ -101,7 +101,7 @@ const Register = () => {
                         </div>
                     </div>
                     <div className="mb-3">
-                        <label className="form-label text-light">Phone Number</label>
+                        <label className="form-label text-light">Número de movil</label>
                         <input
                             className="form-control"
                             onChange={(event) => setUser({
@@ -110,7 +110,7 @@ const Register = () => {
                             })}
                         />
                     </div>
-                    <label className="form-label text-light">More information about you</label>
+                    <label className="form-label text-light">Más información acerca de ti</label>
                     <div className="form-floating mb-3">
                         <textarea
                             className="form-control"
