@@ -4,6 +4,7 @@ import '../../styles/viajes.css';
 import {Link} from 'react-router-dom';
 import ShoppingCart from "../component/shoppingCart.js"
 import toast from "react-hot-toast";
+import AddActivity from "../component/AddActivity.js"
 
 
 const IndividualTrip = () => {
@@ -140,6 +141,7 @@ const IndividualTrip = () => {
             </div>
             <div className="container">
                 <div className="row justify-content-center g-4">
+                    <AddActivity />
                     {store.activities.map((item, index) => {
                         return (
                             // <Card className="col" key={index} actividad={item.name} costo={item.cost} autor={item.author} likes={item.likes} image={item.imageUrl} />
@@ -190,13 +192,3 @@ const IndividualTrip = () => {
 }
 export default IndividualTrip
 
-{/* <div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col">
-    <div class="card">
-      <img src="..." class="card-img-top" alt="...">
-      <div className="card-body">
-        <h5 className="card-title">Card title</h5>
-        <p className="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div> */}
