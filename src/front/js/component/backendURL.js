@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import envFile from "../../../../docs/assets/env-file.png"
-import Sugerencias from "./destiantionCards";
+import envFile from "../../../../docs/assets/env-file.png";
+
 
 const Dark = ({children}) => <span className="bg-dark text-white px-1 rounded">{children}</span>;
 export const BackendURL = () => (

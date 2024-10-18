@@ -1,0 +1,11 @@
+.landing-navbar {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    color: white;
+}
+
+.default-navbar {
+    position: relative;
+    background: #fff;
+}
