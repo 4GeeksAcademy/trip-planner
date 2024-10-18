@@ -66,8 +66,10 @@ const IndividualTrip = () => {
                                 )}
                             
                                 <li className="add-member text">
-                                    <span className="dropdown-item"><i className="fa-solid fa-user-plus me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
-                                    </i>Agregar miembro</span>                                        
+                                    <span className="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
+                                        <i className="fa-solid fa-user-plus me-2">
+                                        </i>Agregar miembro
+                                    </span>                                        
                                 </li>
                             </ul>
                             
