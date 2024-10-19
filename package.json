@@ -74,6 +74,7 @@
 	},
 	"dependencies": {
 		"bootstrap": "^5.3.3",
+		"jsonwebtoken": "^9.0.2",
 		"prop-types": "^15.6.1",
 		"react": "^16.8.4",
 		"react-bootstrap": "^2.10.5",

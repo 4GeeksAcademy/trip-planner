@@ -11,16 +11,17 @@ const IndividualTrip = () => {
 
     const { store, actions } = useContext(Context);
 
-    const [newMember, setNewMember] = useState({ name: "", email: "" });
+    const [newMember, setNewMember] = useState({ email: "" });
 
     const handleInputChange = (e) => {
         setNewMember({ ...newMember, [e.target.name] : e.target.value });
     }
     
     const handleAddMemeber = () => {
-        if(newMember.name && newMember.email) {
-            actions.addMember(newMember);
-            setNewMember({ name: "", email: "" });
+        const usuario = store.user.find(usuario => usuario.email === newMember.email)
+        if(usuario) {
+            actions.addMember(usuario);
+            setNewMember({ email: "" });
             toast.success("Miembro agregado correctamente")
         } else {
             alert("Por favor, completa todos los campos")
@@ -40,6 +41,8 @@ const IndividualTrip = () => {
                         <p className="mb-1">Presupuesto</p>
 
                     </div>
+
+                    {/* Dropdown de MIEMBROS */}
                     <div className="mx-4 mt-3 mt-md-0">
                         <div className="dropdown">
                             <button className="btn btn-secondary dropdown-toggle shadow" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
@@ -54,7 +57,11 @@ const IndividualTrip = () => {
                                         <React.Fragment key={index}>
                                             <li className="d-flex flex">
                                                 <p className="dropdown-item d-flex flex justify-content-between align-items-center" href="#">{item.name}</p>
-                                                <i className="d-flex flex fa-solid justify-content-end fa-circle-info fs-5 m-1"></i>
+                                                <i className="d-flex flex fa-solid justify-content-end fa-circle-info fs-5 m-1" type="button"
+                                                    data-bs-toggle="popover" 
+                                                    title={item.more_info} 
+                                                    data-bs-content="pedro"
+                                                    ></i>
                                                 <i className="d-flex flex delete-trip align-item-center fa-solid fa-trash-can m-1 " role="button" 
                                                     data-bs-toggle="modal" 
                                                     data-bs-target="#deleteModal"
@@ -114,10 +121,10 @@ const IndividualTrip = () => {
                                                         <label htmlFor="recipient-name" className="col-form-label">Email:</label>
                                                         <input type="email" className="email form-control" id="recipient-email" name="email" value={newMember.email} onChange={handleInputChange} />
                                                     </div>
-                                                    <div className="mb-3">
+                                                    {/* <div className="mb-3">
                                                         <label htmlFor="message-text" className="col-form-label">Nombre:</label>
                                                         <input type="text" className="name form-control" id="recipient-name" name="name" value={newMember.name} onChange={handleInputChange} />
-                                                    </div>
+                                                    </div> */}
                                                 </form>
                                             </div>
                         
@@ -142,9 +149,11 @@ const IndividualTrip = () => {
             <div className="container">
                 <div className="row justify-content-center g-4">
                     <AddActivity />
+
+                    {/* CARDS */}
                     {store.activities.map((item, index) => {
                         return (
-                            // <Card className="col" key={index} actividad={item.name} costo={item.cost} autor={item.author} likes={item.likes} image={item.imageUrl} />
+                            
                             <div key={index} className="col-md-3">
                                 <div className="card rounded shadow h-100 bg-light text-black" style={{ width: '100%' }}>
                                     <img src={item.imageUrl} className="card-img-top" alt="..." style={{ height: '280px', objectFit: 'cover' }} />

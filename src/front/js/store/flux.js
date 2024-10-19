@@ -6,7 +6,47 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			//add the suggestions
 			recommendations: suggestions,
-			user: {},
+			user: [
+				{
+					id: 1,
+					name: "Luis Rene Silva",
+					username: "LuisRe1",
+					email: "uncorreo@bonito.si",
+					password: "12345678",
+					number: 1234567890,
+					more_info: "No me gusta la adrenalina, bueno un poquito",
+					is_active_this_trip: [
+						{
+							tripId: "firsttrip",
+							creator: true
+						},
+						{
+							tripId: "secondtrip",
+							creator: false
+						}
+					]
+				},
+				{
+					id: 2,
+					name: "Adriana Isea",
+					username: "adrisea",
+					email: "uncorreo@bonito.no",
+					password: "12345678",
+					number: 1234567098,
+					more_info: "odio la playa",
+					is_active_this_trip: [
+						{
+							tripId: "firsttrip",
+							creator: false
+						},
+						{
+							tripId: "secondtrip",
+							creator: true
+						}
+				
+			]
+		}
+			],
 			token: localStorage.getItem("token") || null,
 			message: null,
 			demo: [
