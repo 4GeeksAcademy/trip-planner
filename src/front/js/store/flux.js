@@ -107,7 +107,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 			miembros: [],
 		},
 		actions: {
+			addLike: (index)=>{
+				const store = getStore()
+				let likesAdded = store.activities[index].likes;
+				likesAdded++;
+				const likeUpdate = store.activities.map((elm, i) => {
+					if (i === index) elm.likes = likesAdded;
+					return elm;
+				});
+				setStore({activities: likeUpdate})
 
+			},
 			addActivity: (activity)=>{
 				const store = getStore()
 				const activityAdded = store.activities
