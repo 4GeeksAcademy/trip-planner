@@ -54,7 +54,7 @@ const Viajes = () => {
 
             <div className="d-flex flex-column flex-md-row align-items-center justify-content-center">
 
-                <div className="container rounded d-flex bg-light p-4 shadow ms-5 me-3 mb-3 mb-md-0" style={{ maxWidth: "80%", width: "100%" }}>
+                <div className="container rounded d-flex bg-light p-4 shadow ms-5 me-3 mb-3 mb-md-0" style={{ maxWidth: "80%", width: "100%", marginTop: "20px" }}>
                     <div className="d-flex flex-column align-items-start flex-grow-1 mx-3" >
                         <h5 className="colorNaranja">@{usuario.username}</h5>
                         <p>{usuario.name}</p>
