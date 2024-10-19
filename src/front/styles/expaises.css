@@ -1,61 +1,71 @@
-
-
-#patron {
-    object-fit: cover;
-    width:100%;
-    height: 100%;
-    object-position: center;
-}
 .activity-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    border-radius: 15px;
-    width: 100%;
-    max-width: 80%;
-    margin: 0 auto;
-    margin-top: 100px;
-  }
-  
-  /* Tarjeta de actividad */
-  .activity-card {
-    display: flex;
-    align-items: center;
-    background-color: #fdfdfd; /* Fondo de las tarjetas */
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Imagen de la actividad */
-  .image-container img {
-    width: 300px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-  }
-  
-  /* Descripción de la actividad */
-  .description {
-    flex: 1;
-    font-size: 16px;
-    color: #333;
-    padding-left: 50px;
-  }
-  
-  
-  .add-btn:hover {
-    background-color: #90caf9;
-    color: white;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 80%;
+  margin: 0 auto;
+  margin-top: 100px;
+}
+
+/* Tarjeta de actividad */
+.activity-card {
+  display: flex;
+  align-items: stretch;
+  background-color: #fdfdfd;
+  /* Fondo de las tarjetas */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Imagen de la actividad */
+.image-container img {
+  width: 250px;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Descripción de la actividad */
+.description {
+  flex: 1;
+  font-size: 16px;
+  color: #333;
+  padding-left: 50px;
+}
+
+
+.add-btn:hover {
+  background-color: #90caf9;
+  color: white;
+}
 
 .link {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
-.divider {
-  border-top: 15px solid rgb(228, 134, 12);;
-  width: 85%;
-  margin: 20px auto;
+.position-relative {
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  background-color: rgba(0, 0, 0, 0.76);
+  z-index: 1;
+}
+
+.destinationDetail {
+  position: relative;
+  z-index: 2;
+}
+
+.fondoAzul {
+  background-color: #111d4a;
 }
 
