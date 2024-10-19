@@ -71,5 +71,13 @@
 .card:hover .card-overlay h5,
 .card:hover .card-overlay p {
     opacity: 1;
-    transform: translateY(0); /* Mover el texto hacia su posición original */
+    transform: translateY(0); 
+}
+.carousel-container::-webkit-scrollbar {
+    display: none; 
+}
+
+.carousel-container {
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
 }
