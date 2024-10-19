@@ -107,6 +107,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 			miembros: [],
 		},
 		actions: {
+
+			addActivity: (activity)=>{
+				const store = getStore()
+				const activityAdded = store.activities
+				activityAdded.push(activity)
+				console.log(activityAdded)
+				// console.log("Segundo "+store.activities)
+				setStore({activities: activityAdded})
+				
+			},
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
