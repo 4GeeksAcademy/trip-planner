@@ -8,7 +8,8 @@ const AddActivity = (props) => {
         author: "",
         costo: 0,
         description: "",
-        imageURL: ""
+        imageURL: "",
+        likes: 0
         
     })
     const { actions } = useContext(Context);
