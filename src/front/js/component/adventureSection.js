@@ -5,7 +5,7 @@ import "../../styles/adventureSection.css"
 
 const AdventureSections = () => {
     return(
-        <div className="container">
+        <div className="container1 container">
             <div className="text-card">
                 <div className="title-adventure">
                     <h1 className="title-text">Atrévete a vivir una nueva Aventura</h1>

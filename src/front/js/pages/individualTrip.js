@@ -144,7 +144,7 @@ const IndividualTrip = () => {
                         return (
                             // <Card className="col" key={index} actividad={item.name} costo={item.cost} autor={item.author} likes={item.likes} image={item.imageUrl} />
                             <div key={index} className="col-md-3">
-                                <div className="card rounded shadow h-100" style={{ width: '100%' }}>
+                                <div className="card rounded shadow h-100 bg-light text-black" style={{ width: '100%' }}>
                                     <img src={item.imageUrl} className="card-img-top" alt="..." style={{ height: '280px', objectFit: 'cover' }} />
                                     <div className="card-body d-flex flex-column">
                                         <div className="d-flex justify-content-between align-items-center mb-2">
