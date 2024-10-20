@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			//add the suggestions
 			recommendations: suggestions,
+			recomendacionPorLugar: [],
 			user: [
 				{
 					id: 1,
@@ -166,6 +167,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 				// console.log("Segundo "+store.activities)
 				setStore({activities: activityAdded})
 				
+			},
+
+			// Recomendaciones por lugar
+			loadRecommendations: async(location) => {
+				console.log("recomendaciones activadas")
+				const response = await fetch(`https://test.api.amadeus.com/v1/shopping/activities?latitude=${location.latitude}&longitude=${location.longitude}&radius=20`, {
+					method: 'GET',
+					headers: {
+						"authorization": "Bearer HuTqV9peWYQ2maKxjKbc6gAdRAGD"
+					}
+				});
+				const data = await response.json();
+				console.log(data.data)
+				setStore({recomendacionPorLugar: data.data})
 			},
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
