@@ -148,6 +148,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			miembros: [],
 		},
 		actions: {
+
+			get_users: () => {
+				const store = getStore()
+			},
+
 			addLike: (index)=>{
 				const store = getStore()
 				let likesAdded = store.activities[index].likes;
@@ -175,7 +180,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const response = await fetch(`https://test.api.amadeus.com/v1/shopping/activities?latitude=${location.latitude}&longitude=${location.longitude}&radius=20`, {
 					method: 'GET',
 					headers: {
-						"authorization": "Bearer HuTqV9peWYQ2maKxjKbc6gAdRAGD"
+						"authorization": "Bearer hw8RRGJ2E8INW5plpMgQ7v9V9bLJ"
 					}
 				});
 				const data = await response.json();

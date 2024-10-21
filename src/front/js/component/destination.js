@@ -46,7 +46,7 @@ export default function Destination() {
                           
                                 <button className="btn fondoAzul shadow rounded-0 rounded-end" style={{ width: "7%" }} onClick={() => handleAddActivity({ name: 'Flyboard en Cancun' })}>
                                     <Link to="/login" className="link" style={{ height: "100%" }}>
-                                    <i class="fa-solid fa-circle-plus me-2 fs-2 text-light"></i></Link>
+                                    <i className="fa-solid fa-circle-plus me-2 fs-2 text-light"></i></Link>
                                 </button>
                           
                         </div>

@@ -57,15 +57,17 @@ class Viaje(db.Model):
     presupuesto_grupo = db.Column(db.Integer, nullable=True)
     motivo = db.Column(db.String(120), nullable=True)
     nota = db.Column(db.String(120), nullable=True)
+    presupuesto_personal = db.Column(db.Integer, nullable=True)
 
 
-    def __init__(self, destino, fecha_inicio, fecha_fin, presupuesto_grupo, motivo, nota):
+    def __init__(self, destino, fecha_inicio, fecha_fin, presupuesto_grupo, motivo, nota, presupuesto_personal):
         self.destino = destino
         self.fecha_inicio = fecha_inicio
         self.fecha_fin = fecha_fin
         self.presupuesto_grupo = presupuesto_grupo
         self.motivo = motivo
         self.nota = nota
+        self.presupuesto_personal = presupuesto_personal
         
     def serialize(self):
         return {
@@ -73,7 +75,8 @@ class Viaje(db.Model):
             "destino": self.destino,
             "fecha_inicio": self.fecha_inicio,
             "fecha_fin": self.fecha_fin,
-            "presupuesto": self.presupuesto_grupo
+            "presupuesto": self.presupuesto_grupo,
+            "presupuesto_personal": self.presupuesto_personal
             # "grupos": [grupo.serialize() for grupo in self.grupos],
             # "actividades": [actividad.serialize() for actividad in self.actividades]
         }

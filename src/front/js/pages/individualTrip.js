@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Context } from "../store/appContext.js"
 import '../../styles/viajes.css';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ShoppingCart from "../component/shoppingCart.js"
 import toast from "react-hot-toast";
 import AddActivity from "../component/AddActivity.js"
@@ -22,6 +22,7 @@ const IndividualTrip = () => {
     }
     
     const handleAddMemeber = () => {
+        console.log("Esto es una prueba" + store.user)
         const usuario = store.user.find(usuario => usuario.email === newMember.email)
         if(usuario) {
             actions.addMember(usuario);
