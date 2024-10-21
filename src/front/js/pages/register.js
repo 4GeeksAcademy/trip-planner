@@ -76,6 +76,29 @@ const Register = () => {
             <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
                 <div className="rounded shadow-lg p-4 bg-dark" style={{ width: '450px' }}>
                     <h1 className="text-center text-light">Crea una cuenta</h1>
+                    <div className="mb-3 d-flex flex-column justify-content-center">
+                        <label className="form-label text-light">Imagen de perfil</label>
+                        <img
+                            src={user.image ? URL.createObjectURL(user.image) : user.profileImageUrl || 'https://i.pinimg.com/550x/a8/0e/36/a80e3690318c08114011145fdcfa3ddb.jpg'}
+                            className="rounded-3 mx-auto"
+                            style={{ width: '150px', cursor: 'pointer' }}
+                            onClick={() => document.getElementById('imagenPerfil').click()} // Activa el input de archivo
+                        />
+                    </div>
+                    <div className="mb-3 d-flex flex-column">
+                        <input
+                            id="imagenPerfil"
+                            type="file"
+                            accept="image/*"
+                            className="form-control"
+                            style={{ display: 'none' }}
+                            onChange={(event) => setUser({
+                                ...user,
+                                image: event.target.files[0]
+                            })}
+                        />
+                    </div>
+
                     <div className="mb-3">
                         <label className="form-label text-light">Nombre completo</label>
                         <input
@@ -105,33 +128,6 @@ const Register = () => {
                             onChange={(event) => setUser({
                                 ...user,
                                 email: event.target.value
-                            })}
-                        />
-                    </div>
-                    <div className="mb-3 d-flex flex-column">
-                        <label className="form-label text-light">Imagen de perfil</label>
-                        {
-                            user.image && <img src={URL.createObjectURL(user.image)} width="100" height="100" className="img-fluid mx-auto" />
-                        }
-                        {/* {
-                            user.image && (
-                                <button className="btn btn-success"
-                                    onClick={() => uploadImage(user.image)}
-                                >
-                                    Cargar imagen
-                                </button>)
-                        } */}
-                        {
-                            user.profileImageUrl && <img src={user.profileImageUrl} width="100" height="100" className="img-fluid mx-auto" />
-                        }
-                        <input
-                            type="file"
-                            accept="image/*"
-                            multiple
-                            className="form-control"
-                            onChange={(event) => setUser({
-                                ...user,
-                                image: event.target.files[0]
                             })}
                         />
                     </div>
