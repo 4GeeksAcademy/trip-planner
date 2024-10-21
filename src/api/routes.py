@@ -152,6 +152,13 @@ def get_user_logged():
     user = User.query.filter_by(email=current_user).first()
     return jsonify(user.serialize()),200
 
+@api.route('/users', methods=['GET'])
+def all_users():
+
+    users = User.query.all()
+    usuarios_serializados = [persona.serialize() for persona in users]
+    return jsonify(usuarios_serializados), 200
+
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():

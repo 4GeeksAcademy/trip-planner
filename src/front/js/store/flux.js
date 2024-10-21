@@ -7,47 +7,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//add the suggestions
 			recommendations: suggestions,
 			recomendacionPorLugar: [],
-			user: [
-				{
-					id: 1,
-					name: "Luis Rene Silva",
-					username: "LuisRe1",
-					email: "uncorreo@bonito.si",
-					password: "12345678",
-					number: 1234567890,
-					more_info: "No me gusta la adrenalina, bueno un poquito",
-					is_active_this_trip: [
-						{
-							tripId: "firsttrip",
-							creator: true
-						},
-						{
-							tripId: "secondtrip",
-							creator: false
-						}
-					]
-				},
-				{
-					id: 2,
-					name: "Adriana Isea",
-					username: "adrisea",
-					email: "uncorreo@bonito.no",
-					password: "12345678",
-					number: 1234567098,
-					more_info: "odio la playa",
-					is_active_this_trip: [
-						{
-							tripId: "firsttrip",
-							creator: false
-						},
-						{
-							tripId: "secondtrip",
-							creator: true
-						}
-				
-			]
-		}
+			user: [{}
 			],
+		
 			token: localStorage.getItem("token") || null,
 			message: null,
 			demo: [
@@ -149,8 +111,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 
-			get_users: () => {
+			get_users: async () => {
 				const store = getStore()
+				const response = await fetch(`https://friendly-broccoli-5g4qr7xrrqj63vpqp-3001.app.github.dev/api/users`, {
+					method: 'GET'})
+				const data = await response.json()
+				console.log(data)
+				setStore({user: data})
+				return data;
 			},
 
 			addLike: (index)=>{
