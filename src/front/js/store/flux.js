@@ -43,9 +43,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 							tripId: "secondtrip",
 							creator: true
 						}
-				
-			]
-		}
+
+					]
+				}
 			],
 			token: localStorage.getItem("token") || null,
 			message: null,
@@ -147,7 +147,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			miembros: [],
 		},
 		actions: {
-			addLike: (index)=>{
+			addLike: (index) => {
 				const store = getStore()
 				let likesAdded = store.activities[index].likes;
 				likesAdded++;
@@ -155,17 +155,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (i === index) elm.likes = likesAdded;
 					return elm;
 				});
-				setStore({activities: likeUpdate})
+				setStore({ activities: likeUpdate })
 
 			},
-			addActivity: (activity)=>{
+			addActivity: (activity) => {
 				const store = getStore()
 				const activityAdded = store.activities
 				activityAdded.push(activity)
 				console.log(activityAdded)
 				// console.log("Segundo "+store.activities)
-				setStore({activities: activityAdded})
-				
+				setStore({ activities: activityAdded })
+
 			},
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
@@ -227,7 +227,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				toast.success("Logged out!");
 			},
-			register: async (name, userName, email, password, number, more_info) => {
+			register: async (name, userName, email, password, number, more_info, profileImageUrl) => {
 				const resp = await fetch(process.env.BACKEND_URL + "/api/register", {
 					method: "POST",
 					headers: {
@@ -239,7 +239,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						email: email,
 						password: password,
 						number: number,
-						more_info: more_info
+						more_info: more_info,
+						profile_image_url: profileImageUrl
 					})
 				});
 				const data = await resp.json()
@@ -324,10 +325,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return result
 			},
 
-			deleteMember : (miembro) => {
+			deleteMember: (miembro) => {
 				const store = getStore();
 				const updateMember = store.miembros.filter(item => miembro.name !== item.name)
-				setStore({ miembros: updateMember});
+				setStore({ miembros: updateMember });
 			}
 
 		}

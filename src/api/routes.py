@@ -25,6 +25,7 @@ api = Blueprint('api', __name__)
 # Allow CORS requests to this API
 CORS(api)
 
+
 # AGREGAR VIAJE
 @api.route('/add-trip', methods=['POST'])
 def add_trip():
@@ -123,7 +124,8 @@ def register():
     password = request.json.get("password", None)
     number = request.json.get("number", None)
     more_info = request.json.get("more_info", None)
-
+    profile_image = request.json.get("profile_image_url", None)
+    
     if name ==None:
         return jsonify({"msg": "Missing name"}), 401
     if username ==None:
@@ -137,7 +139,7 @@ def register():
 
     if user != None:
         return jsonify({"msg": "User already exists!"}), 401
-    new_user = User(name, username, email, password, number, more_info)
+    new_user = User(name=name, username=username, email=email, password=password, number=number, more_info=more_info, profile_image_url=profile_image)
     db.session.add(new_user)
     db.session.commit()
 
