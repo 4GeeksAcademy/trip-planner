@@ -121,7 +121,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore()
 			},
 
-			get_trip: async (viaje) => {
+			post_trip: async (viaje) => {
 				const response = await fetch(`https://friendly-broccoli-5g4qr7xrrqj63vpqp-3001.app.github.dev/api/add-trip`, {
 					method: 'POST',
 					headers: {
@@ -130,6 +130,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(viaje)
 				});
 				const data = await response.json();
+				console.log(data)
 				setStore({ trip: data.trip });
 				toast.success("Se ha creado tu viaje!");
 			},
@@ -161,7 +162,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const response = await fetch(`https://test.api.amadeus.com/v1/shopping/activities?latitude=${location.latitude}&longitude=${location.longitude}&radius=20`, {
 					method: 'GET',
 					headers: {
-						"authorization": "Bearer hw8RRGJ2E8INW5plpMgQ7v9V9bLJ"
+						"authorization": "Bearer fBerfFkVs6mm398mtGm6pfBunbjp"
 					}
 				});
 				const data = await response.json();

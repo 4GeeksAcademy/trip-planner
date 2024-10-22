@@ -7,7 +7,7 @@ const NewTrip = () => {
 
     const [image, setImage] = useState(null);
 
-    const { store, actions } = useContext(Context);
+    const { actions } = useContext(Context);
 
     const [viaje, setViaje] = useState({
         destino:"",
@@ -22,7 +22,7 @@ const NewTrip = () => {
 
     return (
         <div className="container">
-            <form className="p-4 bg-dark  rounded shadow-lg w-50 mx-auto">
+            <div className="p-4 bg-dark  rounded shadow-lg w-50 mx-auto">
 
                 <div className="mb-3">
                     <label htmlFor="destino" className="form-label text-light">Destino</label>
@@ -140,14 +140,14 @@ const NewTrip = () => {
                 </div>
 
                 <div className="mb-3">
-                    <button type="submit" className="btn btn-primary w-100 mb-5 rounded-3">¡Listo!</button>
+                    <button type="" className="btn btn-primary w-100 mb-5 rounded-3" onClick={()=>{actions.post_trip(viaje)}}>¡Listo!</button>
                     <div className="d-flex justify-content-start">
                         <Link to="/" className="btn btn-secondary mt-2 d-flex align-items-center rounded-3">
                             <i className="fa-solid fa-circle-chevron-left me-2"></i> Inicio
                         </Link>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     );
 
