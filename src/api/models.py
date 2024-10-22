@@ -20,14 +20,14 @@ class User(db.Model):
     # Relación muchos a muchos con Grupo
     grupos = db.relationship('Grupo', secondary='group_association', backref='users', lazy=True)
 
-    def __init__(self, name, username, email, password, more_info=None, is_active=False, profile_image_url=None ):
+    def __init__(self, name, username, email, password, profile_image_url, more_info=None, is_active=False):
         self.name = name
         self.username = username
         self.email = email
         self.password = password
+        self.profile_image_url = profile_image_url
         self.more_info = more_info
         self.is_active = is_active
-        self.profile_image_url = profile_image_url
 
     def __repr__(self):
         return f'<User {self.email}>'

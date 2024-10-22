@@ -147,7 +147,7 @@ def register():
 
     if user != None:
         return jsonify({"msg": "User already exists!"}), 401
-    new_user = User(name=name, username=username, email=email, password=password, more_info=more_info, profile_image_url=profile_image)
+    new_user = User(name=name, username=username, email=email, password=password, profile_image_url=profile_image, more_info=more_info)
     db.session.add(new_user)
     db.session.commit()
 

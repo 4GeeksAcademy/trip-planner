@@ -12,9 +12,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			],
 			user: [{}
 			],
-			recomendacionPorLugar : [],
-			viajes : [],
-			user : [],
+			recomendacionPorLugar: [],
+			viajes: [],
+			user: [],
 
 			token: localStorage.getItem("token") || null,
 			message: null,
@@ -168,7 +168,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(data.data)
 				setStore({ recomendacionPorLugar: data.data })
 			},
-			
+
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
@@ -229,7 +229,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				toast.success("Logged out!");
 			},
-			register: async (name, userName, email, password, number, more_info, profileImageUrl) => {
+			register: async (name, userName, email, password, more_info, profileImageUrl) => {
 				const resp = await fetch(process.env.BACKEND_URL + "/api/register", {
 					method: "POST",
 					headers: {
@@ -240,9 +240,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						username: userName,
 						email: email,
 						password: password,
-						number: number,
-						more_info: more_info,
-						profile_image_url: profileImageUrl
+						profile_image_url: profileImageUrl,
+						more_info: more_info
 					})
 				});
 				const data = await resp.json()

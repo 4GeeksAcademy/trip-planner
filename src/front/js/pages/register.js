@@ -33,7 +33,7 @@ const Register = () => {
             toast.error("Las contraseñas no coinciden")
             return;
         }
-        const profileImageUrl = await uploadImage(user.image);
+        const profileImageUrl = user.image ? await uploadImage(user.image) : null;
         await actions.register(user.name, user.userName, user.email, user.password, user.more_Info, profileImageUrl);
         navigate("/")
 
@@ -51,11 +51,6 @@ const Register = () => {
             const fileData = await uploadBytesResumable(storageRef, image, metadata);
             const downloadURL = await getDownloadURL(fileData.ref);
             console.log("Disponible en: ", downloadURL);
-            setUser({
-                ...user,
-                profileImageUrl: downloadURL,
-                image: null
-            });
 
             return downloadURL;
         } catch (error) {
