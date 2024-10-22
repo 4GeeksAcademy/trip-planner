@@ -12,7 +12,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			],
 			user: [{}
 			],
-		
+
 			token: localStorage.getItem("token") || null,
 			message: null,
 			demo: [
@@ -117,14 +117,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 			get_users: async () => {
 				const store = getStore()
 				const response = await fetch(`https://friendly-broccoli-5g4qr7xrrqj63vpqp-3001.app.github.dev/api/users`, {
-					method: 'GET'})
+					method: 'GET'
+				})
 				const data = await response.json()
 				console.log(data)
-				setStore({user: data})
+				setStore({ user: data })
 				return data;
 			},
 
-			get_trip: async(viaje) => {
+			get_trip: async (viaje) => {
 				const response = await fetch(`https://friendly-broccoli-5g4qr7xrrqj63vpqp-3001.app.github.dev/api/add-trip`, {
 					method: 'POST',
 					headers: {
@@ -132,9 +133,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					body: JSON.stringify(viaje)
 				});
+				const data = await response.json();
+				setStore({ trip: data.trip });
+				toast.success("Se ha creado tu viaje!");
 			},
 
-			addLike: (index)=>{
+			addLike: (index) => {
 				const store = getStore()
 				let likesAdded = store.activities[index].likes;
 				likesAdded++;
@@ -142,21 +146,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (i === index) elm.likes = likesAdded;
 					return elm;
 				});
-				setStore({activities: likeUpdate})
+				setStore({ activities: likeUpdate })
 
 			},
-			addActivity: (activity)=>{
+			addActivity: (activity) => {
 				const store = getStore()
 				const activityAdded = store.activities
 				activityAdded.push(activity)
 				console.log(activityAdded)
 				// console.log("Segundo "+store.activities)
-				setStore({activities: activityAdded})
-				
+				setStore({ activities: activityAdded })
+
 			},
 
 			// Recomendaciones por lugar
-			loadRecommendations: async(location) => {
+			loadRecommendations: async (location) => {
 				console.log("recomendaciones activadas")
 				const response = await fetch(`https://test.api.amadeus.com/v1/shopping/activities?latitude=${location.latitude}&longitude=${location.longitude}&radius=20`, {
 					method: 'GET',
@@ -166,7 +170,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				const data = await response.json();
 				console.log(data.data)
-				setStore({recomendacionPorLugar: data.data})
+				setStore({ recomendacionPorLugar: data.data })
 			},
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
@@ -325,10 +329,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return result
 			},
 
-			deleteMember : (miembro) => {
+			deleteMember: (miembro) => {
 				const store = getStore();
 				const updateMember = store.miembros.filter(item => miembro.name !== item.name)
-				setStore({ miembros: updateMember});
+				setStore({ miembros: updateMember });
 			}
 
 		}
