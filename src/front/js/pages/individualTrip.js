@@ -22,7 +22,6 @@ const IndividualTrip = () => {
     }
     
     const handleAddMemeber = () => {
-        console.log("Esto es una prueba" + store.user)
         const usuario = store.user.find(usuario => usuario.email === newMember.email)
         if(usuario) {
             actions.addMember(usuario);
@@ -121,7 +120,7 @@ const IndividualTrip = () => {
                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div className="modal-body">
-                                                <form>
+                                                <div className="">
                                                     <div className="mb-3">
                                                         <label htmlFor="recipient-name" className="col-form-label">Email:</label>
                                                         <input type="email" className="email form-control" id="recipient-email" name="email" value={newMember.email} onChange={handleInputChange} />
@@ -130,7 +129,7 @@ const IndividualTrip = () => {
                                                         <label htmlFor="message-text" className="col-form-label">Nombre:</label>
                                                         <input type="text" className="name form-control" id="recipient-name" name="name" value={newMember.name} onChange={handleInputChange} />
                                                     </div> */}
-                                                </form>
+                                                </div>
                                             </div>
                         
                                             <div className="modal-footer">

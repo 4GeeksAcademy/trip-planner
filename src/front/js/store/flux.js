@@ -7,12 +7,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//add the suggestions
 			recommendations: suggestions,
 			recomendacionPorLugar: [],
-			viajes: [
-
-			],
-			user: [{}
-			],
-			recomendacionPorLugar: [],
 			viajes: [],
 			user: [],
 

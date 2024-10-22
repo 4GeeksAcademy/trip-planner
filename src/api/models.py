@@ -18,7 +18,8 @@ class User(db.Model):
     profile_image_url = db.Column(db.String(360), nullable=True)
 
     # Relación muchos a muchos con Grupo
-    grupos = db.relationship('Grupo', secondary='group_association', backref='users', lazy=True)
+    grupos = db.relationship('Grupo', back_populates='user', lazy=True)
+    viajes = db.relationship('Viaje', back_populates='user', lazy=True)
 
     def __init__(self, name, username, email, password, profile_image_url, more_info=None, is_active=False):
         self.name = name
@@ -41,10 +42,9 @@ class User(db.Model):
             "more_info": self.more_info,
             "is_active": self.is_active,
             "grupos" : [grupo.serialize() for grupo in self.grupos],
-            "comentarios" : [comentario.serialize() for comentario in self.comentarios],
-            "likes" : [like.serialize() for like in self.likes],
+            # "comentarios" : [comentario.serialize() for comentario in self.comentarios],
+            # "likes" : [like.serialize() for like in self.likes],
             "profile_image_url": self.profile_image_url
-
         }
 
 class Viaje(db.Model):
@@ -56,11 +56,11 @@ class Viaje(db.Model):
     fecha_inicio= db.Column(db.DateTime, nullable=False)
     fecha_fin= db.Column(db.DateTime, nullable=False)
     presupuesto_grupo = db.Column(db.Integer, nullable=True)
-    motivo = db.Column(db.String(120), nullable=True)
-    nota = db.Column(db.String(120), nullable=True)
-    presupuesto_personal = db.Column(db.Integer, nullable=True)
+    motivo= db.Column(db.String(120), nullable=True)
+    presupuesto_personal = db.Column(db.String(120), nullable=True)
+    nota = db.Column(db.Integer, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    user = db.relationship("User", backref='viajes', lazy=True)
+    user = db.relationship(User)
 
 
     def __init__(self, destino, fecha_inicio, fecha_fin, presupuesto_grupo, motivo, nota, presupuesto_personal, user_id):
@@ -81,7 +81,7 @@ class Viaje(db.Model):
             "fecha_fin": self.fecha_fin,
             "presupuesto": self.presupuesto_grupo,
             "presupuesto_personal": self.presupuesto_personal,
-            "user": self.user_id
+            "user": self.user.serialize()
             # "grupos": [grupo.serialize() for grupo in self.grupos],
             # "actividades": [actividad.serialize() for actividad in self.actividades]
         }
@@ -111,19 +111,19 @@ class Grupo(db.Model):
     __tablename__ = 'grupos'
     id = db.Column(db.Integer, primary_key=True)
     group_name = db.Column(db.String(120), nullable=False)
-    viaje_id = db.Column(db.Integer, db.ForeignKey('viajes.id'), nullable=False)
-    viaje = db.relationship("Viaje", backref='grupos', lazy=True)  # Relación de Viaje a Grupo
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user = db.relationship(User)  # Relación de Usuario a Grupo
 
-    def __init__(self, group_name, viaje_id):
+    def __init__(self, group_name, user_id):
         self.group_name = group_name
-        self.viaje_id = viaje_id
+        self.user_id = user_id
 
     def serialize(self):
         return {
             "id": self.id,
             "group_name": self.group_name,
-            "viaje_id": self.viaje_id,
-            "integrantes": [integrante.serialize() for integrante in self.users]
+            "user_id": self.user_id,
+            "user": self.user.serialize()
         }
 
 # Tabla de asociación
