@@ -149,10 +149,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 
-			get_users: () => {
-				const store = getStore()
-			},
-
 			addLike: (index)=>{
 				const store = getStore()
 				let likesAdded = store.activities[index].likes;
@@ -187,6 +183,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(data.data)
 				setStore({recomendacionPorLugar: data.data})
 			},
+			
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
