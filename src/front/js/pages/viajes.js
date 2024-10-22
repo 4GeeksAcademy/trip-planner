@@ -1,48 +1,28 @@
 import '../../styles/viajes.css';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Context } from "../store/appContext.js"
 import { Link } from "react-router-dom";
 
+const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    return date.toLocaleDateString('es-ES', options); // Cambia 'es-ES' según tu preferencia de idioma
+};
 
-// datos para llenar los componentes en la vista. Hay que modificarlos para sacarlos del back-end
-
-const trips = [
-    {
-        destination: 'Caracas, Venezuela',
-        date: '22/12/2024',
-        duration: "7 dias",
-        people: 4,
-        tripBudget: 5000,
-        personalBudget: 1250,
-        imgURL: "https://www.tripsavvy.com/thmb/j5_cp1Jg5lQqet7_Vl1v_7tbGqw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-501861673-03562637fcef434eb02e677cd87c8a17.jpg"
-    },
-    {
-        destination: 'Lisboa, Portugal',
-        date: '13/02/2025',
-        duration: "20 dias",
-        people: 1,
-        tripBudget: 6000,
-        personalBudget: 6000,
-        imgURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfuD1Kk-Jdz_ic7L4JdUBvTne5hvJuM3y6zg&s"
-    }
-];
-
-
-//  const usuario = {
-//      name: "Luis Rene Silva",
-//      username: "LuisRe",
-//      viajes: trips.length,
-//     imgURL: "https://img.freepik.com/foto-gratis/cerrar-hombre-sonriente-tomando-selfie_23-2149155156.jpg"
-// }
 
 const Viajes = () => {
 
     const { store, actions } = useContext(Context);
 
-    const [usuario, setUsuario] = useState(store.user[0]);
-    console.log(usuario)
+    // const [usuario, setUsuario] = useState(store.user[0]);
 
-    // aqui contamos la cantidad de grupos basado en los viajes
+    useEffect(() => {
+        actions.get_trips();
+    }, []);
+
+    const trips = store.viajes || [];
+
+
     const countGroups = () => {
         let groupNumber = 0;
         trips.forEach((trip) => {
@@ -64,17 +44,17 @@ const Viajes = () => {
 
                 <div className="container rounded d-flex bg-light p-4 shadow ms-5 me-3 mb-3 mb-md-0" style={{ maxWidth: "80%", width: "100%", marginTop: "20px" }}>
                     <div className="d-flex flex-column align-items-start flex-grow-1 mx-3" >
-                    <h5>{}</h5>
-                        <p>{}</p>
+                        <h5>{ }</h5>
+                        <p>{ }</p>
                     </div>
                     <div className="mx-4 text-end">
-                        <p className="mb-1"><i className="iconos fa-solid fa-map-location-dot me-2"></i>Proximos viajes: <span className="colorAzul fw-bold">{usuario.viajes}</span></p>
-                        <p className="mb-3"><i className="iconos fa-solid fa-user-group me-2"></i>Grupos: <span className="colorAzul fw-bold">{countGroups()}</span></p>
+                        <p className="mb-1"><i className="iconos fa-solid fa-map-location-dot me-2"></i>Proximos viajes: <span className="colorAzul fw-bold">{ }</span></p>
+                        <p className="mb-3"><i className="iconos fa-solid fa-user-group me-2"></i>Grupos: <span className="colorAzul fw-bold">{ }</span></p>
                     </div>
 
                 </div>
 
-                <img src={usuario.imgURL} className="rounded-circle ms-0 me-5 shadow" style={{ objectFit: 'cover', width: "120px", height: "120px" }} />
+                <img src="" className="rounded-circle ms-0 me-5 shadow" style={{ objectFit: 'cover', width: "120px", height: "120px" }} />
 
             </div>
 
@@ -84,24 +64,24 @@ const Viajes = () => {
 
             {trips.map((item, index) => {
                 return (<div key={index} className="viaje container d-flex mb-3 my-5 rounded-pill p-2 bg-light " style={{ width: "100%", maxWidth: "65%" }}>
-                    <img src={item.imgURL} className="ima rounded-circle shadow" style={{ objectFit: 'cover', width: "100px", height: "100px" }} />
+                    <img src="" className="ima rounded-circle shadow" style={{ objectFit: 'cover', width: "100px", height: "100px" }} />
                     <div className="mt-1 flex-grow-1">
-                        <h6 className="mb-2">{item.destination}</h6>
-                        <p className="mb-0 mt-3">{item.date}</p>
+                        <h6 className="mb-2">{item.destino}</h6>
+                        <p className="mb-0 mt-3">{formatDate(item.fecha_inicio)}</p>
                         <p className="mb-0 mt-1">
                             <i className="iconos fa-solid fa-clock me-2"></i>
-                            {item.duration}
+                            0
                         </p>
                     </div>
                     <div className="d-flex flex-column justify-content-end ms-auto p-3">
-                        <p className="mb-0 fw-normal">Presupuesto: <span className="colorAzul fw-bold">{item.tripBudget}</span></p>
-                        <p className="mb-0 fw-normal">Presupuesto personal: <span className="colorAzul fw-bold">{item.personalBudget}</span></p>
-                        <p className="mb-0 fw-normal">Número de personas: <span className="colorAzul fw-bold">{item.people}</span></p>
+                        <p className="mb-0 fw-normal">Presupuesto: <span className="colorAzul fw-bold">{item.presupuesto || "No disponible"}</span></p>
+                        <p className="mb-0 fw-normal">Presupuesto personal: <span className="colorAzul fw-bold">{item.presupuesto_personal}</span></p>
+                        <p className="mb-0 fw-normal">Número de personas: <span className="colorAzul fw-bold">0</span></p>
                     </div>
 
                     <div className="d-flex align-items-center ms-3 me-3 fs-3">
                         <Link to="/individual-trip" style={{ textDecoration: 'none', color: 'inherit' }}>
-                        <i className="fa-solid fa-chevron-right opacity-50"></i>
+                            <i className="fa-solid fa-chevron-right opacity-50"></i>
                         </Link>
                     </div>
                 </div>)

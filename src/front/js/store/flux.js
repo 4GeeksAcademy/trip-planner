@@ -7,8 +7,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//add the suggestions
 			recommendations: suggestions,
 			recomendacionPorLugar: [],
+<<<<<<< HEAD
 			viajes: [],
 			user: [],
+=======
+			viajes: [
+
+			],
+
+			user: [{}
+			],
+
+			recomendacionPorLugar: [],
+>>>>>>> 82a002f (Se agregan los viajes asociados al usuario)
 
 			token: localStorage.getItem("token") || null,
 			message: null,
@@ -111,22 +122,44 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 
-			get_users: () => {
-				const store = getStore()
-			},
+			// get_users: () => {
+			// 	const store = getStore()
+			// },
+
 
 			post_trip: async (viaje) => {
+				const store = getStore()
 				const response = await fetch(`https://friendly-broccoli-5g4qr7xrrqj63vpqp-3001.app.github.dev/api/add-trip`, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
 					},
-					body: JSON.stringify(viaje)
+					body: JSON.stringify({ ...viaje, user_id: store.user.id })
 				});
 				const data = await response.json();
 				console.log(data)
 				setStore({ trip: data.trip });
 				toast.success("Se ha creado tu viaje!");
+			},
+
+			get_trips: async () => {
+				const store = getStore();
+				const response = await fetch(`https://friendly-broccoli-5g4qr7xrrqj63vpqp-3001.app.github.dev/api/all-trip`, {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+						'Authorization': `Bearer ${store.token}`
+					}
+				});
+
+				if (!response.ok) {
+					const errorData = await response.json();
+					console.error("Error", errorData);
+					return;
+				}
+				const data = await response.json();
+				console.log(data);
+				setStore({ viajes: data }); 
 			},
 
 			addLike: (index) => {

@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext.js"
 import { Link } from "react-router-dom";
 
@@ -10,15 +10,15 @@ const NewTrip = () => {
     const { actions } = useContext(Context);
 
     const [viaje, setViaje] = useState({
-        destino:"",
-        fecha_inicio:"",
-        fecha_fin:"",
-        presupuesto_grupo:"",
-        motivo:"",
-        nota:"",
-        presupuesto_personal:"",
-        user_id:"",
+        destino: "",
+        fecha_inicio: "",
+        fecha_fin: "",
+        presupuesto_grupo: "",
+        motivo: "",
+        nota: "",
+        presupuesto_personal: "",
     })
+
 
     return (
         <div className="container">
@@ -32,13 +32,13 @@ const NewTrip = () => {
                         id="destino"
                         placeholder="Ingresa el destino"
                         required
-                        value={viaje.destino} 
-                            onChange={
-                                (event) => setViaje({
-                                    ...viaje,
-                                    destino: event.target.value
-                                })
-                            }
+                        value={viaje.destino}
+                        onChange={
+                            (event) => setViaje({
+                                ...viaje,
+                                destino: event.target.value
+                            })
+                        }
                     />
                 </div>
 
@@ -50,7 +50,7 @@ const NewTrip = () => {
                             className="form-control opacity-50 bg-light  border-0 rounded-3"
                             id="fechaInicio"
                             required
-                            value={viaje.fecha_inicio} 
+                            value={viaje.fecha_inicio}
                             onChange={
                                 (event) => setViaje({
                                     ...viaje,
@@ -66,7 +66,7 @@ const NewTrip = () => {
                             className="form-control opacity-50 bg-light  border-0 rounded-3"
                             id="fechaFin"
                             required
-                            value={viaje.fecha_fin} 
+                            value={viaje.fecha_fin}
                             onChange={
                                 (event) => setViaje({
                                     ...viaje,
@@ -78,13 +78,13 @@ const NewTrip = () => {
                 </div>
 
                 <div className="mb-3">
-                    <label htmlFor="presupuesto" className="form-label text-light">Presupuesto</label>
+                    <label htmlFor="presupuesto_grupo" className="form-label text-light">Presupuesto</label>
                     <input
                         type="number"
                         className="form-control opacity-50 bg-light  border-0 rounded-3"
                         id="presupuesto"
                         placeholder="Ingresa el monto estimado para tu viaje"
-                        value={viaje.presupuesto_grupo} 
+                        value={viaje.presupuesto_grupo}
                         onChange={
                             (event) => setViaje({
                                 ...viaje,
@@ -95,6 +95,23 @@ const NewTrip = () => {
                 </div>
 
                 <div className="mb-3">
+                    <label htmlFor="presupuesto" className="form-label text-light">Presupuesto personal</label>
+                    <input
+                        type="number"
+                        className="form-control opacity-50 bg-light  border-0 rounded-3"
+                        id="presupuesto"
+                        placeholder="Ingresa el monto estimado para tu viaje"
+                        value={viaje.presupuesto_personal}
+                        onChange={
+                            (event) => setViaje({
+                                ...viaje,
+                                presupuesto_personal: event.target.value
+                            })
+                        }
+                    />
+                </div>
+                {/* 
+                <div className="mb-3">
                     <label className="form-label text-light">Imagen ref</label>
                     <input
                         type="file"
@@ -103,7 +120,7 @@ const NewTrip = () => {
                         id="img-destino"
                         placeholder="Sube una imagen de tu destino"
                     />
-                </div>
+                </div> */}
 
                 <div className="mb-3">
                     <label htmlFor="motivo" className="form-label text-light">Motivo de Viaje</label>
@@ -112,7 +129,7 @@ const NewTrip = () => {
                         id="motivo"
                         rows="1"
                         placeholder="Ingresa el motivo del viaje (opcional)"
-                        value={viaje.motivo} 
+                        value={viaje.motivo}
                         onChange={
                             (event) => setViaje({
                                 ...viaje,
@@ -129,7 +146,7 @@ const NewTrip = () => {
                         id="nota"
                         rows="2"
                         placeholder="Información importante para tu viaje (opcional)"
-                        value={viaje.nota} 
+                        value={viaje.nota}
                         onChange={
                             (event) => setViaje({
                                 ...viaje,
@@ -140,7 +157,7 @@ const NewTrip = () => {
                 </div>
 
                 <div className="mb-3">
-                    <button type="" className="btn btn-primary w-100 mb-5 rounded-3" onClick={()=>{actions.post_trip(viaje)}}>¡Listo!</button>
+                    <button type="button" className="btn btn-primary w-100 mb-5 rounded-3" onClick={()=>actions.post_trip(viaje)}>¡Listo!</button>
                     <div className="d-flex justify-content-start">
                         <Link to="/" className="btn btn-secondary mt-2 d-flex align-items-center rounded-3">
                             <i className="fa-solid fa-circle-chevron-left me-2"></i> Inicio

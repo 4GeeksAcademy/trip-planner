@@ -25,9 +25,21 @@ api = Blueprint('api', __name__)
 # Allow CORS requests to this API
 CORS(api)
 
-# # TRAER DATOS DE FORM VIAJE
-# @api.route('/trip', methods=['GET'])
-# def trip(): 
+# TRAER DATOS DE FORM VIAJE
+@api.route('/all-trip', methods=['GET'])
+@jwt_required()
+def all_trip(): 
+    user_email = get_jwt_identity()
+    user = User.query.filter_by(email=user_email).first()
+    
+    if user is None:
+        return jsonify({"error": "User not found"}), 404
+    
+    # Filtra usando user.id
+    viajes = Viaje.query.filter_by(user_id=user.id).all()
+    
+    return jsonify([viaje.serialize() for viaje in viajes]), 200
+
 
 
 # AGREGAR VIAJE
@@ -41,6 +53,7 @@ def add_trip():
     nota = request.json.get("nota", None)
     presupuesto_personal = request.json.get("presupuesto_personal", None)
     user_id = request.json.get("user_id", None)
+    user = User.query.get(user_id)
 
 
     viaje = Viaje(
@@ -51,7 +64,7 @@ def add_trip():
         motivo=motivo,
         nota=nota,
         presupuesto_personal=presupuesto_personal,
-        user_id=user_id,
+        user=user
     )
     db.session.add(viaje)
     db.session.commit()

@@ -42,9 +42,17 @@ class User(db.Model):
             "more_info": self.more_info,
             "is_active": self.is_active,
             "grupos" : [grupo.serialize() for grupo in self.grupos],
+<<<<<<< HEAD
             # "comentarios" : [comentario.serialize() for comentario in self.comentarios],
             # "likes" : [like.serialize() for like in self.likes],
             "profile_image_url": self.profile_image_url
+=======
+            "comentarios" : [comentario.serialize() for comentario in self.comentarios],
+            "likes" : [like.serialize() for like in self.likes],
+            "profile_image_url": self.profile_image_url,
+            "viajes" : [viaje.serialize() for viaje in self.viajes],
+
+>>>>>>> 82a002f (Se agregan los viajes asociados al usuario)
         }
 
 class Viaje(db.Model):
@@ -53,8 +61,8 @@ class Viaje(db.Model):
     __tablename__ = 'viajes'
     id = db.Column(db.Integer, primary_key=True)
     destino = db.Column(db.String(120), nullable=False)
-    fecha_inicio= db.Column(db.DateTime, nullable=False)
-    fecha_fin= db.Column(db.DateTime, nullable=False)
+    fecha_inicio= db.Column(db.Date, nullable=False)
+    fecha_fin= db.Column(db.Date, nullable=False)
     presupuesto_grupo = db.Column(db.Integer, nullable=True)
     motivo= db.Column(db.String(120), nullable=True)
     presupuesto_personal = db.Column(db.String(120), nullable=True)
@@ -63,7 +71,7 @@ class Viaje(db.Model):
     user = db.relationship(User)
 
 
-    def __init__(self, destino, fecha_inicio, fecha_fin, presupuesto_grupo, motivo, nota, presupuesto_personal, user_id):
+    def __init__(self, destino, fecha_inicio, fecha_fin, presupuesto_grupo, motivo, nota, presupuesto_personal, user):
         self.destino = destino
         self.fecha_inicio = fecha_inicio
         self.fecha_fin = fecha_fin
@@ -71,7 +79,7 @@ class Viaje(db.Model):
         self.motivo = motivo
         self.nota = nota
         self.presupuesto_personal = presupuesto_personal
-        self.user_id = user_id
+        self.user = user
         
     def serialize(self):
         return {
@@ -81,7 +89,11 @@ class Viaje(db.Model):
             "fecha_fin": self.fecha_fin,
             "presupuesto": self.presupuesto_grupo,
             "presupuesto_personal": self.presupuesto_personal,
+<<<<<<< HEAD
             "user": self.user.serialize()
+=======
+            "usuario": self.user.id if self.user else None, 
+>>>>>>> 82a002f (Se agregan los viajes asociados al usuario)
             # "grupos": [grupo.serialize() for grupo in self.grupos],
             # "actividades": [actividad.serialize() for actividad in self.actividades]
         }
