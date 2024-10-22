@@ -6,7 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			//add the suggestions
 			recommendations: suggestions,
-			recomendacionPorLugar: [],
+<<<<<<< HEAD
 			user: [
 				{
 					id: 1,
@@ -44,10 +44,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 							tripId: "secondtrip",
 							creator: true
 						}
-				
-			]
-		}
+
+					]
+				}
+=======
+			recomendacionPorLugar: [],
+			viajes: [
+
+>>>>>>> d8f1072170ff272e6ba0b5ad7cda9f963b5b6840
 			],
+			user: [{}
+			],
+
 			token: localStorage.getItem("token") || null,
 			message: null,
 			demo: [
@@ -149,6 +157,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 
+			get_users: () => {
+				const store = getStore()
+			},
+
 			addLike: (index)=>{
 				const store = getStore()
 				let likesAdded = store.activities[index].likes;
@@ -157,21 +169,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (i === index) elm.likes = likesAdded;
 					return elm;
 				});
-				setStore({activities: likeUpdate})
+				setStore({ activities: likeUpdate })
 
 			},
-			addActivity: (activity)=>{
+			addActivity: (activity) => {
 				const store = getStore()
 				const activityAdded = store.activities
 				activityAdded.push(activity)
 				console.log(activityAdded)
 				// console.log("Segundo "+store.activities)
-				setStore({activities: activityAdded})
-				
+				setStore({ activities: activityAdded })
+
+<<<<<<< HEAD
+=======
 			},
 
 			// Recomendaciones por lugar
-			loadRecommendations: async(location) => {
+			loadRecommendations: async (location) => {
 				console.log("recomendaciones activadas")
 				const response = await fetch(`https://test.api.amadeus.com/v1/shopping/activities?latitude=${location.latitude}&longitude=${location.longitude}&radius=20`, {
 					method: 'GET',
@@ -181,7 +195,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				const data = await response.json();
 				console.log(data.data)
-				setStore({recomendacionPorLugar: data.data})
+				setStore({ recomendacionPorLugar: data.data })
+>>>>>>> d8f1072170ff272e6ba0b5ad7cda9f963b5b6840
 			},
 			
 			// Use getActions to call a function within a fuction
@@ -244,7 +259,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				toast.success("Logged out!");
 			},
-			register: async (name, userName, email, password, number, more_info) => {
+			register: async (name, userName, email, password, number, more_info, profileImageUrl) => {
 				const resp = await fetch(process.env.BACKEND_URL + "/api/register", {
 					method: "POST",
 					headers: {
@@ -256,7 +271,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						email: email,
 						password: password,
 						number: number,
-						more_info: more_info
+						more_info: more_info,
+						profile_image_url: profileImageUrl
 					})
 				});
 				const data = await resp.json()
@@ -341,10 +357,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return result
 			},
 
-			deleteMember : (miembro) => {
+			deleteMember: (miembro) => {
 				const store = getStore();
 				const updateMember = store.miembros.filter(item => miembro.name !== item.name)
-				setStore({ miembros: updateMember});
+				setStore({ miembros: updateMember });
 			}
 
 		}
