@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			//add the suggestions
 			recommendations: suggestions,
+<<<<<<< HEAD
 			user: [
 				{
 					id: 1,
@@ -46,6 +47,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					]
 				}
+=======
+			recomendacionPorLugar: [],
+			viajes: [
+
+			],
+			user: [{}
+>>>>>>> d41b15549abb5c1c40c6ace0ab32edd1f98c40b3
 			],
 			recomendacionPorLugar : [],
 			viajes : [],
