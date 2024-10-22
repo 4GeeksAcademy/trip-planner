@@ -4,10 +4,24 @@ import { Context } from "../store/appContext.js";
 import { Link } from 'react-router-dom';
 import toast from "react-hot-toast";
 
+import { initializeApp } from "firebase/app";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+
+//Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID,
+    appId: process.env.APP_ID
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
 
 const Register = () => {
     const { store, actions } = useContext(Context);
-    const {image, setImage} =useState(null);
+    const { image, setImage } = useState(null);
 
     const [user, setUser] = useState({});
     const [showPassword, setShowPassword] = useState(false);
@@ -16,12 +30,38 @@ const Register = () => {
 
     const registerUser = async (user) => {
         if (user.password !== user.passwordConfirm) {
-            toast.error("Passwords do not match")
+            toast.error("Las contraseñas no coinciden")
             return;
         }
-        await actions.register(user.name, user.userName, user.email, user.password, user.number, user.more_Info);
+        const profileImageUrl = await uploadImage(user.image);
+        await actions.register(user.name, user.userName, user.email, user.password, user.more_Info, profileImageUrl);
         navigate("/")
 
+
+    }
+
+    const uploadImage = async (image) => {
+        const storage = getStorage();
+        const storageRef = ref(storage, `imagenes_perfil/${image.name}`);
+
+        const metadata = {
+            contentType: image.type
+        };
+        try {
+            const fileData = await uploadBytesResumable(storageRef, image, metadata);
+            const downloadURL = await getDownloadURL(fileData.ref);
+            console.log("Disponible en: ", downloadURL);
+            setUser({
+                ...user,
+                profileImageUrl: downloadURL,
+                image: null
+            });
+
+            return downloadURL;
+        } catch (error) {
+            toast.error("Error al cargar la imagen");
+            return null;
+        }
 
     }
 
@@ -36,6 +76,29 @@ const Register = () => {
             <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
                 <div className="rounded shadow-lg p-4 bg-dark" style={{ width: '450px' }}>
                     <h1 className="text-center text-light">Crea una cuenta</h1>
+                    <div className="mb-3 d-flex flex-column justify-content-center">
+                        <label className="form-label text-light">Imagen de perfil</label>
+                        <img
+                            src={user.image ? URL.createObjectURL(user.image) : user.profileImageUrl || 'https://i.pinimg.com/550x/a8/0e/36/a80e3690318c08114011145fdcfa3ddb.jpg'}
+                            className="rounded-3 mx-auto"
+                            style={{ width: '150px', cursor: 'pointer' }}
+                            onClick={() => document.getElementById('imagenPerfil').click()} // Activa el input de archivo
+                        />
+                    </div>
+                    <div className="mb-3 d-flex flex-column">
+                        <input
+                            id="imagenPerfil"
+                            type="file"
+                            accept="image/*"
+                            className="form-control"
+                            style={{ display: 'none' }}
+                            onChange={(event) => setUser({
+                                ...user,
+                                image: event.target.files[0]
+                            })}
+                        />
+                    </div>
+
                     <div className="mb-3">
                         <label className="form-label text-light">Nombre completo</label>
                         <input
@@ -99,16 +162,6 @@ const Register = () => {
                                 onClick={() => setShowPassword(!showPassword)}
                             >{showPassword ? (<i className="fa-solid fa-eye"></i>) : (<i className="fa-solid fa-eye-slash"></i>)}</button>
                         </div>
-                    </div>
-                    <div className="mb-3">
-                        <label className="form-label text-light">Número de movil</label>
-                        <input
-                            className="form-control"
-                            onChange={(event) => setUser({
-                                ...user,
-                                number: event.target.value
-                            })}
-                        />
                     </div>
                     <label className="form-label text-light">Más información acerca de ti</label>
                     <div className="form-floating mb-3">

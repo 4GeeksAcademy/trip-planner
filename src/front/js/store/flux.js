@@ -6,10 +6,59 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			//add the suggestions
 			recommendations: suggestions,
+<<<<<<< HEAD
+			user: [
+				{
+					id: 1,
+					name: "Luis Rene Silva",
+					username: "LuisRe1",
+					email: "uncorreo@bonito.si",
+					password: "12345678",
+					number: 1234567890,
+					more_info: "No me gusta la adrenalina, bueno un poquito",
+					is_active_this_trip: [
+						{
+							tripId: "firsttrip",
+							creator: true
+						},
+						{
+							tripId: "secondtrip",
+							creator: false
+						}
+					]
+				},
+				{
+					id: 2,
+					name: "Adriana Isea",
+					username: "adrisea",
+					email: "uncorreo@bonito.no",
+					password: "12345678",
+					number: 1234567098,
+					more_info: "odio la playa",
+					is_active_this_trip: [
+						{
+							tripId: "firsttrip",
+							creator: false
+						},
+						{
+							tripId: "secondtrip",
+							creator: true
+						}
+
+					]
+				}
+=======
 			recomendacionPorLugar: [],
-			user: [{}
+			viajes: [
+
 			],
-		
+			user: [{}
+>>>>>>> d41b15549abb5c1c40c6ace0ab32edd1f98c40b3
+			],
+			recomendacionPorLugar : [],
+			viajes : [],
+			user : [],
+
 			token: localStorage.getItem("token") || null,
 			message: null,
 			demo: [
@@ -114,14 +163,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 			get_users: async () => {
 				const store = getStore()
 				const response = await fetch(`https://friendly-broccoli-5g4qr7xrrqj63vpqp-3001.app.github.dev/api/users`, {
-					method: 'GET'})
+					method: 'GET'
+				})
 				const data = await response.json()
 				console.log(data)
-				setStore({user: data})
+				setStore({ user: data })
 				return data;
 			},
 
-			addLike: (index)=>{
+			get_trip: async (viaje) => {
+				const response = await fetch(`https://friendly-broccoli-5g4qr7xrrqj63vpqp-3001.app.github.dev/api/add-trip`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(viaje)
+				});
+				const data = await response.json();
+				setStore({ trip: data.trip });
+				toast.success("Se ha creado tu viaje!");
+			},
+
+			addLike: (index) => {
 				const store = getStore()
 				let likesAdded = store.activities[index].likes;
 				likesAdded++;
@@ -129,21 +192,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (i === index) elm.likes = likesAdded;
 					return elm;
 				});
-				setStore({activities: likeUpdate})
+				setStore({ activities: likeUpdate })
 
 			},
-			addActivity: (activity)=>{
+			addActivity: (activity) => {
 				const store = getStore()
 				const activityAdded = store.activities
 				activityAdded.push(activity)
 				console.log(activityAdded)
 				// console.log("Segundo "+store.activities)
-				setStore({activities: activityAdded})
-				
+				setStore({ activities: activityAdded })
+
 			},
 
 			// Recomendaciones por lugar
-			loadRecommendations: async(location) => {
+			loadRecommendations: async (location) => {
 				console.log("recomendaciones activadas")
 				const response = await fetch(`https://test.api.amadeus.com/v1/shopping/activities?latitude=${location.latitude}&longitude=${location.longitude}&radius=20`, {
 					method: 'GET',
@@ -153,7 +216,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				const data = await response.json();
 				console.log(data.data)
-				setStore({recomendacionPorLugar: data.data})
+				setStore({ recomendacionPorLugar: data.data })
 			},
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
@@ -215,7 +278,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				toast.success("Logged out!");
 			},
-			register: async (name, userName, email, password, number, more_info) => {
+			register: async (name, userName, email, password, number, more_info, profileImageUrl) => {
 				const resp = await fetch(process.env.BACKEND_URL + "/api/register", {
 					method: "POST",
 					headers: {
@@ -227,7 +290,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						email: email,
 						password: password,
 						number: number,
-						more_info: more_info
+						more_info: more_info,
+						profile_image_url: profileImageUrl
 					})
 				});
 				const data = await resp.json()
@@ -312,10 +376,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return result
 			},
 
-			deleteMember : (miembro) => {
+			deleteMember: (miembro) => {
 				const store = getStore();
 				const updateMember = store.miembros.filter(item => miembro.name !== item.name)
-				setStore({ miembros: updateMember});
+				setStore({ miembros: updateMember });
 			}
 
 		}

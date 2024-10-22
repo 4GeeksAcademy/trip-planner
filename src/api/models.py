@@ -12,21 +12,22 @@ class User(db.Model):
     username = db.Column(db.String(120), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
-    number = db.Column(db.String(120), nullable=False)
     more_info = db.Column(db.String(200), nullable=True)
     is_active = db.Column(db.Boolean, default=True, nullable=False)
+
+    profile_image_url = db.Column(db.String(360), nullable=True)
 
     # Relación muchos a muchos con Grupo
     grupos = db.relationship('Grupo', secondary='group_association', backref='users', lazy=True)
 
-    def __init__(self, name, username, email, password, number, more_info=None, is_active=False):
+    def __init__(self, name, username, email, password, more_info=None, is_active=False, profile_image_url=None ):
         self.name = name
         self.username = username
         self.email = email
         self.password = password
-        self.number = number
         self.more_info = more_info
         self.is_active = is_active
+        self.profile_image_url = profile_image_url
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -37,12 +38,12 @@ class User(db.Model):
             "name": self.name,
             "username": self.username,
             "email": self.email,
-            "number": self.number,
             "more_info": self.more_info,
             "is_active": self.is_active,
             "grupos" : [grupo.serialize() for grupo in self.grupos],
             "comentarios" : [comentario.serialize() for comentario in self.comentarios],
-            "likes" : [like.serialize() for like in self.likes]
+            "likes" : [like.serialize() for like in self.likes],
+            "profile_image_url": self.profile_image_url
 
         }
 
@@ -58,9 +59,11 @@ class Viaje(db.Model):
     motivo = db.Column(db.String(120), nullable=True)
     nota = db.Column(db.String(120), nullable=True)
     presupuesto_personal = db.Column(db.Integer, nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user = db.relationship("User", backref='viajes', lazy=True)
 
 
-    def __init__(self, destino, fecha_inicio, fecha_fin, presupuesto_grupo, motivo, nota, presupuesto_personal):
+    def __init__(self, destino, fecha_inicio, fecha_fin, presupuesto_grupo, motivo, nota, presupuesto_personal, user_id):
         self.destino = destino
         self.fecha_inicio = fecha_inicio
         self.fecha_fin = fecha_fin
@@ -68,6 +71,7 @@ class Viaje(db.Model):
         self.motivo = motivo
         self.nota = nota
         self.presupuesto_personal = presupuesto_personal
+        self.user_id = user_id
         
     def serialize(self):
         return {
@@ -76,11 +80,31 @@ class Viaje(db.Model):
             "fecha_inicio": self.fecha_inicio,
             "fecha_fin": self.fecha_fin,
             "presupuesto": self.presupuesto_grupo,
-            "presupuesto_personal": self.presupuesto_personal
+            "presupuesto_personal": self.presupuesto_personal,
+            "user": self.user_id
             # "grupos": [grupo.serialize() for grupo in self.grupos],
             # "actividades": [actividad.serialize() for actividad in self.actividades]
         }
+    
+# class ViajeUser(db.Model):
+#     __tablename__ = 'viajeUser'
+#     id = db.Column(db.Integer, primary_key=True)
+#     viaje_id = db.Column(db.Integer, db.ForeignKey('viajes.id'), nullable=False)
+#     viaje = db.relationship("Viaje", backref='viajeUser', lazy=True)
+#     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+#     user = db.relationship("User", backref='viajeUser', lazy=True)
 
+#     def __init__(self, viaje_id, user_id):
+#         self.viaje_id = viaje_id
+#         self.user_id = user_id
+
+#     def serialize(self):
+#         return {
+#             "id": self.id,
+#             "viaje_id": self.viaje_id,
+#             "users": [integrante.serialize() for integrante in self.user]
+#         }
+    
 class Grupo(db.Model):
     """Almacena información sobre los grupos que se formaron para el viaje, las relaciones
     son de: Muchos a 1 con User, Muchos a 1 con Viaje/ Grupo está asociado a un único User y un único Viaje"""
