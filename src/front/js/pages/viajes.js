@@ -28,12 +28,12 @@ const trips = [
 ];
 
 
- const usuario = {
-     name: "Luis Rene Silva",
-     username: "LuisRe",
-     viajes: trips.length,
-    imgURL: "https://img.freepik.com/foto-gratis/cerrar-hombre-sonriente-tomando-selfie_23-2149155156.jpg"
-}
+//  const usuario = {
+//      name: "Luis Rene Silva",
+//      username: "LuisRe",
+//      viajes: trips.length,
+//     imgURL: "https://img.freepik.com/foto-gratis/cerrar-hombre-sonriente-tomando-selfie_23-2149155156.jpg"
+// }
 
 const Viajes = () => {
 
