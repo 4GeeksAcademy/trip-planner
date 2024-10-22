@@ -25,6 +25,10 @@ api = Blueprint('api', __name__)
 # Allow CORS requests to this API
 CORS(api)
 
+# # TRAER DATOS DE FORM VIAJE
+# @api.route('/trip', methods=['GET'])
+# def trip(): 
+
 # AGREGAR VIAJE
 @api.route('/add-trip', methods=['POST'])
 def add_trip():
@@ -34,6 +38,9 @@ def add_trip():
     presupuesto_grupo = request.json.get("presupuesto_grupo", None)
     motivo = request.json.get("motivo", None)
     nota = request.json.get("nota", None)
+    presupuesto_personal = request.json.get("presupuesto_personal", None)
+    user_id = request.json.get("user_id", None)
+
 
     viaje = Viaje(
         destino = destino,
@@ -42,6 +49,8 @@ def add_trip():
         presupuesto_grupo=presupuesto_grupo,
         motivo=motivo,
         nota=nota,
+        presupuesto_personal=presupuesto_personal,
+        user_id=user_id,
     )
     db.session.add(viaje)
     db.session.commit()

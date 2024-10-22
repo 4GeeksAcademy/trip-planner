@@ -7,6 +7,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//add the suggestions
 			recommendations: suggestions,
 			recomendacionPorLugar: [],
+			viajes: [
+
+			],
 			user: [{}
 			],
 		
@@ -119,6 +122,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(data)
 				setStore({user: data})
 				return data;
+			},
+
+			get_trip: async(viaje) => {
+				const response = await fetch(`https://friendly-broccoli-5g4qr7xrrqj63vpqp-3001.app.github.dev/api/add-trip`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(viaje)
+				});
 			},
 
 			addLike: (index)=>{
