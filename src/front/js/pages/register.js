@@ -34,7 +34,7 @@ const Register = () => {
             return;
         }
         const profileImageUrl = await uploadImage(user.image);
-        await actions.register(user.name, user.userName, user.email, user.password, user.number, user.more_Info, profileImageUrl);
+        await actions.register(user.name, user.userName, user.email, user.password, user.more_Info, profileImageUrl);
         navigate("/")
 
 
@@ -162,16 +162,6 @@ const Register = () => {
                                 onClick={() => setShowPassword(!showPassword)}
                             >{showPassword ? (<i className="fa-solid fa-eye"></i>) : (<i className="fa-solid fa-eye-slash"></i>)}</button>
                         </div>
-                    </div>
-                    <div className="mb-3">
-                        <label className="form-label text-light">Número de movil</label>
-                        <input
-                            className="form-control"
-                            onChange={(event) => setUser({
-                                ...user,
-                                number: event.target.value
-                            })}
-                        />
                     </div>
                     <label className="form-label text-light">Más información acerca de ti</label>
                     <div className="form-floating mb-3">

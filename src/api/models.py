@@ -12,7 +12,6 @@ class User(db.Model):
     username = db.Column(db.String(120), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
-    number = db.Column(db.String(120), nullable=False)
     more_info = db.Column(db.String(200), nullable=True)
     is_active = db.Column(db.Boolean, default=True, nullable=False)
 
@@ -21,12 +20,11 @@ class User(db.Model):
     # Relación muchos a muchos con Grupo
     grupos = db.relationship('Grupo', secondary='group_association', backref='users', lazy=True)
 
-    def __init__(self, name, username, email, password, number, more_info=None, is_active=False, profile_image_url=None ):
+    def __init__(self, name, username, email, password, more_info=None, is_active=False, profile_image_url=None ):
         self.name = name
         self.username = username
         self.email = email
         self.password = password
-        self.number = number
         self.more_info = more_info
         self.is_active = is_active
         self.profile_image_url = profile_image_url
@@ -40,7 +38,6 @@ class User(db.Model):
             "name": self.name,
             "username": self.username,
             "email": self.email,
-            "number": self.number,
             "more_info": self.more_info,
             "is_active": self.is_active,
             "grupos" : [grupo.serialize() for grupo in self.grupos],

@@ -122,7 +122,6 @@ def register():
     username = request.json.get("username", None)
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    number = request.json.get("number", None)
     more_info = request.json.get("more_info", None)
     profile_image = request.json.get("profile_image_url", None)
     
@@ -139,7 +138,7 @@ def register():
 
     if user != None:
         return jsonify({"msg": "User already exists!"}), 401
-    new_user = User(name=name, username=username, email=email, password=password, number=number, more_info=more_info, profile_image_url=profile_image)
+    new_user = User(name=name, username=username, email=email, password=password, more_info=more_info, profile_image_url=profile_image)
     db.session.add(new_user)
     db.session.commit()
 
