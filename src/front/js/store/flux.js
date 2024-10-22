@@ -6,52 +6,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			//add the suggestions
 			recommendations: suggestions,
-<<<<<<< HEAD
-			user: [
-				{
-					id: 1,
-					name: "Luis Rene Silva",
-					username: "LuisRe1",
-					email: "uncorreo@bonito.si",
-					password: "12345678",
-					number: 1234567890,
-					more_info: "No me gusta la adrenalina, bueno un poquito",
-					is_active_this_trip: [
-						{
-							tripId: "firsttrip",
-							creator: true
-						},
-						{
-							tripId: "secondtrip",
-							creator: false
-						}
-					]
-				},
-				{
-					id: 2,
-					name: "Adriana Isea",
-					username: "adrisea",
-					email: "uncorreo@bonito.no",
-					password: "12345678",
-					number: 1234567098,
-					more_info: "odio la playa",
-					is_active_this_trip: [
-						{
-							tripId: "firsttrip",
-							creator: false
-						},
-						{
-							tripId: "secondtrip",
-							creator: true
-						}
-
-					]
-				}
-=======
 			recomendacionPorLugar: [],
 			viajes: [
 
->>>>>>> d8f1072170ff272e6ba0b5ad7cda9f963b5b6840
 			],
 			user: [{}
 			],
@@ -156,8 +113,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			miembros: [],
 		},
 		actions: {
-<<<<<<< HEAD
-=======
 
 			get_users: async () => {
 				const store = getStore()
@@ -183,7 +138,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				toast.success("Se ha creado tu viaje!");
 			},
 
->>>>>>> d8f1072170ff272e6ba0b5ad7cda9f963b5b6840
 			addLike: (index) => {
 				const store = getStore()
 				let likesAdded = store.activities[index].likes;
@@ -203,8 +157,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				// console.log("Segundo "+store.activities)
 				setStore({ activities: activityAdded })
 
-<<<<<<< HEAD
-=======
 			},
 
 			// Recomendaciones por lugar
@@ -219,7 +171,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const data = await response.json();
 				console.log(data.data)
 				setStore({ recomendacionPorLugar: data.data })
->>>>>>> d8f1072170ff272e6ba0b5ad7cda9f963b5b6840
 			},
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
