@@ -1,5 +1,6 @@
 import '../../styles/viajes.css';
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { Context } from "../store/appContext.js"
 import { Link } from "react-router-dom";
 
 
@@ -27,14 +28,19 @@ const trips = [
 ];
 
 
-const usuario = {
-    name: "Luis Rene Silva",
-    username: "LuisRe",
-    viajes: trips.length,
+ const usuario = {
+     name: "Luis Rene Silva",
+     username: "LuisRe",
+     viajes: trips.length,
     imgURL: "https://img.freepik.com/foto-gratis/cerrar-hombre-sonriente-tomando-selfie_23-2149155156.jpg"
 }
 
 const Viajes = () => {
+
+    const { store, actions } = useContext(Context);
+
+    const [usuario, setUsuario] = useState(store.user[0]);
+    console.log(usuario)
 
     // aqui contamos la cantidad de grupos basado en los viajes
     const countGroups = () => {
@@ -48,6 +54,8 @@ const Viajes = () => {
     }
 
 
+
+
     return (
         <>
             {/* User Banner */}
@@ -56,12 +64,12 @@ const Viajes = () => {
 
                 <div className="container rounded d-flex bg-light p-4 shadow ms-5 me-3 mb-3 mb-md-0" style={{ maxWidth: "80%", width: "100%", marginTop: "20px" }}>
                     <div className="d-flex flex-column align-items-start flex-grow-1 mx-3" >
-                        <h5 className="colorNaranja">@{usuario.username}</h5>
-                        <p>{usuario.name}</p>
+                    <h5>{}</h5>
+                        <p>{}</p>
                     </div>
                     <div className="mx-4 text-end">
-                        <p className="mb-1"><i class="iconos fa-solid fa-map-location-dot me-2"></i>Proximos viajes: <span className="colorAzul fw-bold">{usuario.viajes}</span></p>
-                        <p className="mb-3"><i class="iconos fa-solid fa-user-group me-2"></i>Grupos: <span className="colorAzul fw-bold">{countGroups()}</span></p>
+                        <p className="mb-1"><i className="iconos fa-solid fa-map-location-dot me-2"></i>Proximos viajes: <span className="colorAzul fw-bold">{usuario.viajes}</span></p>
+                        <p className="mb-3"><i className="iconos fa-solid fa-user-group me-2"></i>Grupos: <span className="colorAzul fw-bold">{countGroups()}</span></p>
                     </div>
 
                 </div>
@@ -81,7 +89,7 @@ const Viajes = () => {
                         <h6 className="mb-2">{item.destination}</h6>
                         <p className="mb-0 mt-3">{item.date}</p>
                         <p className="mb-0 mt-1">
-                            <i class="iconos fa-solid fa-clock me-2"></i>
+                            <i className="iconos fa-solid fa-clock me-2"></i>
                             {item.duration}
                         </p>
                     </div>
@@ -102,7 +110,7 @@ const Viajes = () => {
             <div className="d-flex justify-content-evenly">
 
                 <Link to="/add-new-trip" className="btn bg-light mt-5 p-3 mx-3 shadow w-50">
-                    <i class="fa-solid fa-circle-plus me-2 text-success"></i>
+                    <i className="fa-solid fa-circle-plus me-2 text-success"></i>
                     Añadir un nuevo viaje
                 </Link>
 

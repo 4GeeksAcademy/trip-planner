@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			//add the suggestions
 			recommendations: suggestions,
+<<<<<<< HEAD
 			user: [
 				{
 					id: 1,
@@ -46,7 +47,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					]
 				}
+=======
+			recomendacionPorLugar: [],
+			viajes: [
+
+>>>>>>> d8f1072170ff272e6ba0b5ad7cda9f963b5b6840
 			],
+			user: [{}
+			],
+
 			token: localStorage.getItem("token") || null,
 			message: null,
 			demo: [
@@ -147,6 +156,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 			miembros: [],
 		},
 		actions: {
+<<<<<<< HEAD
+=======
+
+			get_users: async () => {
+				const store = getStore()
+				const response = await fetch(`https://friendly-broccoli-5g4qr7xrrqj63vpqp-3001.app.github.dev/api/users`, {
+					method: 'GET'
+				})
+				const data = await response.json()
+				console.log(data)
+				setStore({ user: data })
+				return data;
+			},
+
+			get_trip: async (viaje) => {
+				const response = await fetch(`https://friendly-broccoli-5g4qr7xrrqj63vpqp-3001.app.github.dev/api/add-trip`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(viaje)
+				});
+				const data = await response.json();
+				setStore({ trip: data.trip });
+				toast.success("Se ha creado tu viaje!");
+			},
+
+>>>>>>> d8f1072170ff272e6ba0b5ad7cda9f963b5b6840
 			addLike: (index) => {
 				const store = getStore()
 				let likesAdded = store.activities[index].likes;
@@ -166,6 +203,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				// console.log("Segundo "+store.activities)
 				setStore({ activities: activityAdded })
 
+<<<<<<< HEAD
+=======
+			},
+
+			// Recomendaciones por lugar
+			loadRecommendations: async (location) => {
+				console.log("recomendaciones activadas")
+				const response = await fetch(`https://test.api.amadeus.com/v1/shopping/activities?latitude=${location.latitude}&longitude=${location.longitude}&radius=20`, {
+					method: 'GET',
+					headers: {
+						"authorization": "Bearer hw8RRGJ2E8INW5plpMgQ7v9V9bLJ"
+					}
+				});
+				const data = await response.json();
+				console.log(data.data)
+				setStore({ recomendacionPorLugar: data.data })
+>>>>>>> d8f1072170ff272e6ba0b5ad7cda9f963b5b6840
 			},
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
