@@ -7,6 +7,7 @@ from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from datetime import datetime
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
+import bcrypt 
 
 import os
 
@@ -130,13 +131,16 @@ def login():
     user = User.query.filter_by(email=email).first()
     if user == None:
         return jsonify({"msg": "User not found!"}), 401
-    if user.password != password:
-        return jsonify({"msg": "Wrong password"}), 401
-
-    access_token = create_access_token(identity=email)
     
-    return jsonify({"token": access_token,
-                    "user": user.serialize()}), 200
+    password_bytes = bytes(password, 'utf-8')
+    if bcrypt.checkpw(password_bytes, user.password.encode('utf-8')):
+
+        access_token = create_access_token(identity=email)
+        
+        return jsonify({"token": access_token,
+                        "user": user.serialize()}), 200
+    
+    return jsonify({"msg": "Contraseña inválida"})
 
 @api.route("/register", methods =["POST"])
 def register():
@@ -160,7 +164,15 @@ def register():
 
     if user != None:
         return jsonify({"msg": "User already exists!"}), 401
-    new_user = User(name=name, username=username, email=email, password=password, profile_image_url=profile_image, more_info=more_info)
+
+    bpassword = bytes(password, 'utf-8')
+    salt = bcrypt.gensalt(14)
+
+    hashed_password = bcrypt.hashpw(password=bpassword, salt=salt)
+    
+    print(hashed_password.decode('utf-8'))
+
+    new_user = User(name=name, username=username, email=email, password=hashed_password.decode('utf-8'), salt=salt, profile_image_url=profile_image, more_info=more_info)
     db.session.add(new_user)
     db.session.commit()
 

@@ -12,6 +12,7 @@ class User(db.Model):
     username = db.Column(db.String(120), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
+    salt = db.Column(db.String(80), unique=False, nullable=False)
     more_info = db.Column(db.String(200), nullable=True)
     is_active = db.Column(db.Boolean, default=True, nullable=False)
 
@@ -21,11 +22,12 @@ class User(db.Model):
     grupos = db.relationship('Grupo', back_populates='user', lazy=True)
     viajes = db.relationship('Viaje', back_populates='user', lazy=True)
 
-    def __init__(self, name, username, email, password, profile_image_url, more_info=None, is_active=False):
+    def __init__(self, name, username, email, password, salt, profile_image_url, more_info=None, is_active=False):
         self.name = name
         self.username = username
         self.email = email
         self.password = password
+        self.salt= salt
         self.profile_image_url = profile_image_url
         self.more_info = more_info
         self.is_active = is_active
