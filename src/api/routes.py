@@ -64,7 +64,7 @@ def add_trip():
         motivo=motivo,
         nota=nota,
         presupuesto_personal=presupuesto_personal,
-        user=user
+        user_id=user_id
     )
     db.session.add(viaje)
     db.session.commit()
