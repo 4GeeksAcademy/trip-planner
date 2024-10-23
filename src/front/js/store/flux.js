@@ -7,19 +7,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//add the suggestions
 			recommendations: suggestions,
 			recomendacionPorLugar: [],
-<<<<<<< HEAD
 			viajes: [],
 			user: [],
-=======
-			viajes: [
-
-			],
-
-			user: [{}
-			],
-
-			recomendacionPorLugar: [],
->>>>>>> 82a002f (Se agregan los viajes asociados al usuario)
 
 			token: localStorage.getItem("token") || null,
 			message: null,
