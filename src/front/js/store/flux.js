@@ -118,7 +118,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			post_trip: async (viaje) => {
 				const store = getStore()
-				const response = await fetch(`https://friendly-broccoli-5g4qr7xrrqj63vpqp-3001.app.github.dev/api/add-trip`, {
+				const response = await fetch(process.env.BACKEND_URL + "/api/add-trip", {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
@@ -133,7 +133,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			get_trips: async () => {
 				const store = getStore();
-				const response = await fetch(`https://friendly-broccoli-5g4qr7xrrqj63vpqp-3001.app.github.dev/api/all-trip`, {
+				const response = await fetch(process.env.BACKEND_URL + "/api/all-trip", {
 					method: 'GET',
 					headers: {
 						'Content-Type': 'application/json',
