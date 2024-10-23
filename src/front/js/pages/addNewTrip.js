@@ -1,14 +1,33 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext.js"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+
+import { initializeApp } from "firebase/app";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+
+
+const firebaseConfig = {
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID,
+    appId: process.env.APP_ID
+};
+
+const _firebaseApp = initializeApp(firebaseConfig);
 
 
 const NewTrip = () => {
 
+    const { store, actions } = useContext(Context);
+    const navigate = useNavigate();
     const [image, setImage] = useState(null);
+    const [tripImageUrl, setTripImageUrl] = useState("");
 
-    const { actions } = useContext(Context);
 
+    // Carga datos ingresados en el form
     const [viaje, setViaje] = useState({
         destino: "",
         fecha_inicio: "",
@@ -20,6 +39,40 @@ const NewTrip = () => {
     })
 
 
+    // Carga imagen de destino
+
+    const uploadImage = async (image) => {
+        const storage = getStorage(_firebaseApp);
+        const storageRef = ref(storage, `trip_images/${image.name}`);
+        const metadata = { contentType: image.type };
+
+        try {
+            const fileData = await uploadBytesResumable(storageRef, image, metadata);
+            const downloadURL = await getDownloadURL(fileData.ref);
+            console.log("Disponible en:", downloadURL);
+            return downloadURL;
+        } catch (error) {
+            toast.error("Error al cargar la imagen");
+            return null;
+        }
+    };
+
+    const ImageChange = async (event) => {
+        const selectedImage = event.target.files[0];
+        if (selectedImage) {
+            setImage(selectedImage);
+            const downloadURL = await uploadImage(selectedImage);
+            if (downloadURL) {
+                setTripImageUrl(downloadURL);
+            }
+        }
+    };
+
+    const upload = () => {
+        actions.post_trip({ ...viaje, trip_image_url: tripImageUrl });
+        navigate("/viajes"); // Navega después de guardar
+    };
+
     return (
         <div className="container">
             <div className="p-4 bg-dark  rounded shadow-lg w-50 mx-auto">
@@ -30,7 +83,7 @@ const NewTrip = () => {
                         type="text"
                         className="form-control opacity-50 bg-light border-0 rounded-3"
                         id="destino"
-                        placeholder="Ingresa el destino"
+                        placeholder="Ciudad, País"
                         required
                         value={viaje.destino}
                         onChange={
@@ -41,6 +94,27 @@ const NewTrip = () => {
                         }
                     />
                 </div>
+
+                <div className="mb-3">
+                    <div className="mb-3 d-flex flex-column justify-content-center">
+                        <label className="form-label text-light">Imagen referencial de tu viaje</label>
+                        <img
+                            src={image ? URL.createObjectURL(image) : 'https://firebasestorage.googleapis.com/v0/b/trippy-proyecto.appspot.com/o/fondoDestino.png?alt=media&token=c65fa4ed-494d-410b-bd9a-68e74ef3e456'}
+                            className="rounded-3 mx-auto"
+                            style={{ width: '150px', cursor: 'pointer' }}
+                            onClick={() => document.getElementById('tripImage').click()} 
+                        />
+                    </div>
+                    <input
+                        id="tripImage"
+                        type="file"
+                        accept="image/*"
+                        className="form-control"
+                        style={{ display: 'none' }}
+                        onChange={ImageChange} // Función para manejar el cambio de imagen
+                    />
+                </div>
+
 
                 <div className="mb-3 row">
                     <div className="col">
@@ -83,7 +157,7 @@ const NewTrip = () => {
                         type="number"
                         className="form-control opacity-50 bg-light  border-0 rounded-3"
                         id="presupuesto"
-                        placeholder="Ingresa el monto estimado para tu viaje"
+                        placeholder="Ingresa el monto estimado para tu viaje (Opcional)"
                         value={viaje.presupuesto_grupo}
                         onChange={
                             (event) => setViaje({
@@ -92,6 +166,7 @@ const NewTrip = () => {
                             })
                         }
                     />
+                    <small className="form-text text-light">Por favor, ingresa el monto en dólares -  USD $</small>
                 </div>
 
                 <div className="mb-3">
@@ -100,7 +175,7 @@ const NewTrip = () => {
                         type="number"
                         className="form-control opacity-50 bg-light  border-0 rounded-3"
                         id="presupuesto"
-                        placeholder="Ingresa el monto estimado para tu viaje"
+                        placeholder="Opcional"
                         value={viaje.presupuesto_personal}
                         onChange={
                             (event) => setViaje({
@@ -110,17 +185,7 @@ const NewTrip = () => {
                         }
                     />
                 </div>
-                {/* 
-                <div className="mb-3">
-                    <label className="form-label text-light">Imagen ref</label>
-                    <input
-                        type="file"
-                        accept="image/*"
-                        className="form-control opacity-50 bg-light border-0 rounded-3"
-                        id="img-destino"
-                        placeholder="Sube una imagen de tu destino"
-                    />
-                </div> */}
+
 
                 <div className="mb-3">
                     <label htmlFor="motivo" className="form-label text-light">Motivo de Viaje</label>
@@ -157,7 +222,12 @@ const NewTrip = () => {
                 </div>
 
                 <div className="mb-3">
-                    <button type="button" className="btn btn-primary w-100 mb-5 rounded-3" onClick={()=>actions.post_trip(viaje)}>¡Listo!</button>
+                    <Link
+                        to="/viajes"
+                        className="btn btn-primary w-100 mb-5 rounded-3"
+                        onClick={upload}>
+                        ¡Listo!
+                    </Link>
                     <div className="d-flex justify-content-start">
                         <Link to="/" className="btn btn-secondary mt-2 d-flex align-items-center rounded-3">
                             <i className="fa-solid fa-circle-chevron-left me-2"></i> Inicio

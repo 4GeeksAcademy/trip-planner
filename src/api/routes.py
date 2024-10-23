@@ -54,6 +54,7 @@ def add_trip():
     presupuesto_personal = request.json.get("presupuesto_personal", None)
     user_id = request.json.get("user_id", None)
     user = User.query.get(user_id)
+    trip_image_url = request.json.get("trip_image_url", None)
 
 
     viaje = Viaje(
@@ -64,7 +65,8 @@ def add_trip():
         motivo=motivo,
         nota=nota,
         presupuesto_personal=presupuesto_personal,
-        user_id=user_id
+        user_id=user_id,
+        trip_image_url = trip_image_url
     )
     db.session.add(viaje)
     db.session.commit()
