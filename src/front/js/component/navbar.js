@@ -12,26 +12,34 @@ export const Navbar = ({ isLandingPage }) => {
 	return (
 		<nav id="navbar" className="d-flex px-5 justify-content-center align-items-center relative">
 			<Link className="container ps-5 mt-1" to="/">
-				<img src={logo} className="logo" style={{ width: '120px' }}/>
+				<img src={logo} className="logo" style={{ width: '120px' }} />
 			</Link>
-			<div className="d-flex white">
+			<div className="d-flex">
 				<Link to="/">
-					<button className="border border-0 bg-transparent mx-3  fw-bold">INICIO</button>
+					<button className="border border-0 bg-transparent mx-3  fw-bold text-white">INICIO</button>
 				</Link>
-				<button className="border border-0 bg-transparent mx-3  fw-bold">GRUPOS</button>
+				<button className="border border-0 bg-transparent mx-3  fw-bold text-white">GRUPOS</button>
 				<Link to="/viajes">
-					<button className="border border-0 bg-transparent mx-3  fw-bold">VIAJES</button>
+					<button className="border border-0 bg-transparent mx-3  fw-bold text-white">VIAJES</button>
 				</Link>
-				<button className="border border-0 bg-transparent mx-3  fw-bold">EXPLORA</button>
+				<button className="border border-0 bg-transparent mx-3  fw-bold text-white">EXPLORA</button>
 				{!store.token && <Link to="/login">
-					<button className="border border-0 bg-transparent mx-3  fw-bold">INGRESAR</button>
+					<button className="border border-0 bg-transparent mx-3  fw-bold text-white">INGRESAR</button>
 				</Link>}
+
+				{store.user && store.token && (
+					<div className="dropdown">
+						<button className="border border-0 bg-transparent mx-3  fw-bold dropdown-toggle text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							{store.user?.username?.toUpperCase()}
+						</button>
+						<ul className="dropdown-menu dropdown-menu-dark">
+							<li><Link to="/configPerfil"><a className="dropdown-item ">Configuración de perfil</a></Link></li>
+							<li><hr className="dropdown-divider" /></li>
+							<li><a className="dropdown-item text-danger" onClick={() => actions.logout()}>SALIR</a></li>
+						</ul>
+					</div>)}
 				{
-					store.user && store.token && <p className="mx-2 mb-0 text-secondary" style={{ padding: '1px 6px' }}>{store.user?.username?.toUpperCase()}</p>
-				}
-				{store.token && <button className="border border-0 bg-transparent mx-2 text-danger" onClick={() => actions.logout()}>SALIR</button>}
-				{
-					!store.token && <Link to="/register"><button className="border border-0 bg-transparent mx-3  fw-bold">REGISTRATE</button></Link>
+					!store.token && <Link to="/register"><button className="border border-0 bg-transparent mx-3  fw-bold text-white">REGISTRATE</button></Link>
 				}
 			</div>
 		</nav>
