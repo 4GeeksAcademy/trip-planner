@@ -33,7 +33,6 @@ export const Navbar = ({ isLandingPage }) => {
 							{store.user?.username?.toUpperCase()}
 						</button>
 						<ul className="dropdown-menu dropdown-menu-dark">
-							<li><Link to="/configPerfil"><a className="dropdown-item ">Configuración de perfil</a></Link></li>
 							<li><hr className="dropdown-divider" /></li>
 							<li><a className="dropdown-item text-danger" onClick={() => actions.logout()}>SALIR</a></li>
 						</ul>
