@@ -83,11 +83,7 @@ class Viaje(db.Model):
             "fecha_fin": self.fecha_fin,
             "presupuesto": self.presupuesto_grupo,
             "presupuesto_personal": self.presupuesto_personal,
-<<<<<<< HEAD
-            "user": self.user.serialize()
-=======
             "usuario": self.user.id if self.user else None, 
->>>>>>> 82a002f (Se agregan los viajes asociados al usuario)
             # "grupos": [grupo.serialize() for grupo in self.grupos],
             # "actividades": [actividad.serialize() for actividad in self.actividades]
         }
