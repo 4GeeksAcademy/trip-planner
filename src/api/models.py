@@ -65,7 +65,7 @@ class Viaje(db.Model):
     user = db.relationship(User)
 
 
-    def __init__(self, destino, fecha_inicio, fecha_fin, presupuesto_grupo, motivo, nota, presupuesto_personal, user):
+    def __init__(self, destino, fecha_inicio, fecha_fin, presupuesto_grupo, motivo, nota, presupuesto_personal, user_id):
         self.destino = destino
         self.fecha_inicio = fecha_inicio
         self.fecha_fin = fecha_fin
@@ -73,7 +73,7 @@ class Viaje(db.Model):
         self.motivo = motivo
         self.nota = nota
         self.presupuesto_personal = presupuesto_personal
-        self.user = user
+        self.user_id = user_id
         
     def serialize(self):
         return {
