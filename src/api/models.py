@@ -42,17 +42,11 @@ class User(db.Model):
             "more_info": self.more_info,
             "is_active": self.is_active,
             "grupos" : [grupo.serialize() for grupo in self.grupos],
-<<<<<<< HEAD
-            # "comentarios" : [comentario.serialize() for comentario in self.comentarios],
-            # "likes" : [like.serialize() for like in self.likes],
-            "profile_image_url": self.profile_image_url
-=======
             "comentarios" : [comentario.serialize() for comentario in self.comentarios],
             "likes" : [like.serialize() for like in self.likes],
             "profile_image_url": self.profile_image_url,
             "viajes" : [viaje.serialize() for viaje in self.viajes],
 
->>>>>>> 82a002f (Se agregan los viajes asociados al usuario)
         }
 
 class Viaje(db.Model):
