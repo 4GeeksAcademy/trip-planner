@@ -62,12 +62,13 @@ class Viaje(db.Model):
     presupuesto_grupo = db.Column(db.Integer, nullable=True)
     motivo= db.Column(db.String(120), nullable=True)
     presupuesto_personal = db.Column(db.String(120), nullable=True)
-    nota = db.Column(db.Integer, nullable=True)
+    nota = db.Column(db.String(100), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     user = db.relationship(User)
+    trip_image_url = db.Column(db.String(360), nullable=True)
 
 
-    def __init__(self, destino, fecha_inicio, fecha_fin, presupuesto_grupo, motivo, nota, presupuesto_personal, user_id):
+    def __init__(self, destino, fecha_inicio, fecha_fin, presupuesto_grupo, motivo, nota, presupuesto_personal, user_id, trip_image_url):
         self.destino = destino
         self.fecha_inicio = fecha_inicio
         self.fecha_fin = fecha_fin
@@ -76,6 +77,7 @@ class Viaje(db.Model):
         self.nota = nota
         self.presupuesto_personal = presupuesto_personal
         self.user_id = user_id
+        self.trip_image_url = trip_image_url
         
     def serialize(self):
         return {
@@ -86,28 +88,11 @@ class Viaje(db.Model):
             "presupuesto": self.presupuesto_grupo,
             "presupuesto_personal": self.presupuesto_personal,
             "usuario": self.user.id if self.user else None, 
+            "trip_image_url": self.trip_image_url,
             # "grupos": [grupo.serialize() for grupo in self.grupos],
             # "actividades": [actividad.serialize() for actividad in self.actividades]
         }
     
-# class ViajeUser(db.Model):
-#     __tablename__ = 'viajeUser'
-#     id = db.Column(db.Integer, primary_key=True)
-#     viaje_id = db.Column(db.Integer, db.ForeignKey('viajes.id'), nullable=False)
-#     viaje = db.relationship("Viaje", backref='viajeUser', lazy=True)
-#     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-#     user = db.relationship("User", backref='viajeUser', lazy=True)
-
-#     def __init__(self, viaje_id, user_id):
-#         self.viaje_id = viaje_id
-#         self.user_id = user_id
-
-#     def serialize(self):
-#         return {
-#             "id": self.id,
-#             "viaje_id": self.viaje_id,
-#             "users": [integrante.serialize() for integrante in self.user]
-#         }
     
 class Grupo(db.Model):
     """Almacena información sobre los grupos que se formaron para el viaje, las relaciones
