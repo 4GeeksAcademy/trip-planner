@@ -39,22 +39,22 @@ const Viajes = () => {
     return (
         <>
             {/* User Banner */}
-
+            {console.log(store.user)}
             <div className="d-flex flex-column flex-md-row align-items-center justify-content-center">
 
                 <div className="container rounded d-flex bg-light p-4 shadow ms-5 me-3 mb-3 mb-md-0" style={{ maxWidth: "80%", width: "100%", marginTop: "20px" }}>
                     <div className="d-flex flex-column align-items-start flex-grow-1 mx-3" >
-                        <h5>{ }</h5>
-                        <p>{ }</p>
+                        <h5>@{store.user.username}</h5>
+                        <p>{store.user.username}</p>
                     </div>
                     <div className="mx-4 text-end">
-                        <p className="mb-1"><i className="iconos fa-solid fa-map-location-dot me-2"></i>Proximos viajes: <span className="colorAzul fw-bold">{ }</span></p>
+                        <p className="mb-1"><i className="iconos fa-solid fa-map-location-dot me-2"></i>Proximos viajes: <span className="colorAzul fw-bold">{store.viajes.length}</span></p>
                         <p className="mb-3"><i className="iconos fa-solid fa-user-group me-2"></i>Grupos: <span className="colorAzul fw-bold">{ }</span></p>
                     </div>
 
                 </div>
 
-                <img src="" className="rounded-circle ms-0 me-5 shadow" style={{ objectFit: 'cover', width: "120px", height: "120px" }} />
+                <img src={store.user.profile_image_url} className="rounded-circle ms-0 me-5 shadow" style={{ objectFit: 'cover', width: "120px", height: "120px" }} />
 
             </div>
 

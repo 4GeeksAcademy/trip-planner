@@ -9,6 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			recomendacionPorLugar: [],
 			viajes: [],
 			user: [],
+			
 
 			token: localStorage.getItem("token") || null,
 			message: null,
@@ -117,8 +118,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			post_trip: async (viaje) => {
-				const store = getStore();
-				const response = await fetch(process.env.BACKEND_URL + "/api/add-trip", {
+				const store = getStore()
+				const response = await fetch(process.env.BACKEND_URL + "/api/all-trip", {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
@@ -126,15 +127,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify({ ...viaje, user_id: store.user.id })
 				});
 				const data = await response.json();
-				if (response.ok) {
-					setStore(prevStore => ({
-						...prevStore,
-						viajes: [...prevStore.viajes, data]
-					}));
-					toast.success("Se ha creado tu viaje!");
-				} else {
-					toast.error("Error al crear el viaje.");
-				}
+				console.log(data)
+				setStore({ trip: data.trip });
+				toast.success("Se ha creado tu viaje!");
 			},
 
 			get_trips: async () => {
