@@ -2,7 +2,10 @@ import '../../styles/viajes.css';
 import { Link } from "react-router-dom";
 import React from 'react';
 
+
 const NewActivity = () => {
+
+    
     return (
         <div className="container">
             <form className="p-4 bg-dark  rounded shadow-lg w-50 mx-auto">
@@ -16,6 +19,18 @@ const NewActivity = () => {
                         placeholder="Heladería"
                         required
                     />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="Foto" className="form-label text-light"> <i class="colorNaranja fa-solid fa-image me-2"></i>Sube una foto de referencia</label>
+                    <div className = "d-flex justify-content-center">
+                        <img
+                            src={'https://i.pinimg.com/550x/a8/0e/36/a80e3690318c08114011145fdcfa3ddb.jpg'}
+                            // user.image ? URL.createObjectURL(user.image) : user.profileImageUrl || 
+                            className="rounded-3 mx-auto"
+                            style={{ width: '150px', cursor: 'pointer' }}
+                            // onClick={() => document.getElementById('imagenPerfil').click()} // Activa el input de archivo
+                            />
+                    </div>
                 </div>
 
                 <div className="mb-3">
@@ -39,8 +54,9 @@ const NewActivity = () => {
                     ></textarea>
                 </div>
 
+
                 <div className="mb-3">
-                    <label htmlFor="Foto" className="form-label text-light"> <i class="colorNaranja fa-solid fa-image me-2"></i>Sube una foto de referencia</label>
+                    <label htmlFor="Foto" className="form-label text-light"> <i class="colorNaranja fa-solid fa-clock me-2"></i>Duración de la actividad</label>
                     <textarea
                         className="form-control opacity-50 bg-light border-0 rounded-3"
                         id="motivo"
@@ -48,6 +64,7 @@ const NewActivity = () => {
                         placeholder="(opcional)"
                     ></textarea>
                 </div>
+                
 
                 <button type="submit" className="mb-3 btn btn-success w-100">Guardar</button>
 

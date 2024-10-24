@@ -100,19 +100,22 @@ class Grupo(db.Model):
     __tablename__ = 'grupos'
     id = db.Column(db.Integer, primary_key=True)
     group_name = db.Column(db.String(120), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    viaje_id = db.Column(db.Integer, db.ForeignKey('viajes.id'), nullable=False)
+    viaje = db.relationship("Viaje", lazy=True)
+    user_email = db.Column(db.String(120), db.ForeignKey('users.email'), nullable=False)
     user = db.relationship(User)  # Relación de Usuario a Grupo
 
-    def __init__(self, group_name, user_id):
+    def __init__(self, group_name, viaje_id, user_email):
         self.group_name = group_name
-        self.user_id = user_id
+        self.viaje_id = viaje_id
+        self.user_email = user_email
 
     def serialize(self):
         return {
             "id": self.id,
             "group_name": self.group_name,
-            "user_id": self.user_id,
-            "user": self.user.serialize()
+            "viaje_id": self.viaje_id,
+            "user_email": self.user_email,
         }
 
 # Tabla de asociación

@@ -36,8 +36,6 @@ const Register = () => {
         const profileImageUrl = user.image ? await uploadImage(user.image) : null;
         await actions.register(user.name, user.userName, user.email, user.password, user.more_Info, profileImageUrl);
         navigate("/")
-
-
     }
 
     const uploadImage = async (image) => {

@@ -119,7 +119,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			post_trip: async (viaje) => {
 				const store = getStore()
-				const response = await fetch(process.env.BACKEND_URL + "/api/all-trip", {
+				const response = await fetch(process.env.BACKEND_URL + "api/add-trip", {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
@@ -128,13 +128,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				const data = await response.json();
 				console.log(data)
-				setStore({ trip: data.trip });
+				setStore({ viajes: data.trip });
 				toast.success("Se ha creado tu viaje!");
 			},
 
 			get_trips: async () => {
 				const store = getStore();
-				const response = await fetch(process.env.BACKEND_URL + "/api/all-trip", {
+				const response = await fetch(process.env.BACKEND_URL + "api/all-trip", {
 					method: 'GET',
 					headers: {
 						'Content-Type': 'application/json',

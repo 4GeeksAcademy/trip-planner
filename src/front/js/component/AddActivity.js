@@ -1,6 +1,7 @@
 import React, {useState, useContext, useSyncExternalStore} from 'react';
 import "../../styles/addActivityCard.css"
 import { Context } from "../store/appContext.js"
+import { useNavigate } from "react-router-dom";
 
 const AddActivity = (props) => {
     const [activity, setActivity] = useState({
@@ -12,13 +13,22 @@ const AddActivity = (props) => {
         likes: 0
         
     })
+
+    const navigate = useNavigate();
+
+    const handleImageClick = () => {
+        navigate("/add-activity")
+    }
+
     const { actions } = useContext(Context);
     
     return (
         <div className="col-md-3">
             <div className="card rounded shadow h-100" style={{ width: '100%' }}>
-                <img src="https://www.shutterstock.com/image-vector/add-icon-new-item-plus-600nw-1315566653.jpg" className="card-img-top" alt="..." style={{ height: '230px', objectFit: 'cover' }} />
-                <div className="card-body d-flex flex-column">
+                <img src="https://www.shutterstock.com/image-vector/add-icon-new-item-plus-600nw-1315566653.jpg" className="card-img-top" alt="..." style={{ height: '230px', objectFit: 'cover', cursor: 'pointer' }}
+                    onClick={handleImageClick} 
+                />
+                {/* <div className="card-body d-flex flex-column">
                     <div className="d-flex justify-content-between align-items-center mb-2">
                         <h5 className="card-title mb-0">
                             <input type="text" className="form-control add-form" placeholder="Nombre de la Actividad" 
@@ -59,7 +69,7 @@ const AddActivity = (props) => {
                 </div>
                     <div className="card-footer text-center bg-secondary text-light p-2">
                     <p> A viajar! </p>                  
-                    </div>
+                    </div> */}
             </div>
         </div>
             
