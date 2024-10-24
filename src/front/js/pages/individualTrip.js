@@ -22,7 +22,7 @@ const IndividualTrip = () => {
     }
     
     const handleAddMemeber = () => {
-        const usuario = store.user.find(usuario => usuario.email === newMember.email)
+        const usuario = store.miembros.find(usuario => usuario.email === newMember.email)
         if(usuario) {
             actions.addMember(usuario);
             setNewMember({ email: "" });

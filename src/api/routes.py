@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Viaje
+from api.models import db, User, Viaje, Grupo
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from datetime import datetime
@@ -25,6 +25,24 @@ api = Blueprint('api', __name__)
 
 # Allow CORS requests to this API
 CORS(api)
+
+# AGREGAR MIEMBROS AL GRUPO
+@api.route('/add-member/<int:id_viaje>', methods= ['POST'])
+def add_member(id_viaje):
+    group_name = request.json.get("group_name", None)
+    viaje_id = Viaje.query.filter_by(id = id_viaje).one_or_none()
+    user_email = request.json.get("user_email", None)
+
+    member = Grupo(
+        group_name = group_name,
+        viaje_id = viaje_id,
+        user_email = user_email,
+    )
+    db.session.add(member)
+    db.session.commit()
+
+    return jsonify(member.serialize()), 201
+
 
 # TRAER DATOS DE FORM VIAJE
 @api.route('/all-trip', methods=['GET'])
