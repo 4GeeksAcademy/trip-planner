@@ -2,7 +2,10 @@ import '../../styles/viajes.css';
 import { Link } from "react-router-dom";
 import React from 'react';
 
+
 const NewActivity = () => {
+
+    
     return (
         <div className="container">
             <form className="p-4 bg-dark  rounded shadow-lg w-50 mx-auto">
