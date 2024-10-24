@@ -6,7 +6,6 @@ import AdventureSections from "../component/adventureSection.js";
 
 
 export const Home = () => {
-	const { store, actions } = useContext(Context);
 
 	return (
 		<div className="">

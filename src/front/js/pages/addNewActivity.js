@@ -20,6 +20,18 @@ const NewActivity = () => {
                         required
                     />
                 </div>
+                <div className="mb-3">
+                    <label htmlFor="Foto" className="form-label text-light"> <i class="colorNaranja fa-solid fa-image me-2"></i>Sube una foto de referencia</label>
+                    <div className = "d-flex justify-content-center">
+                        <img
+                            src={'https://i.pinimg.com/550x/a8/0e/36/a80e3690318c08114011145fdcfa3ddb.jpg'}
+                            // user.image ? URL.createObjectURL(user.image) : user.profileImageUrl || 
+                            className="rounded-3 mx-auto"
+                            style={{ width: '150px', cursor: 'pointer' }}
+                            // onClick={() => document.getElementById('imagenPerfil').click()} // Activa el input de archivo
+                            />
+                    </div>
+                </div>
 
                 <div className="mb-3">
                     <label htmlFor="descripción" className="form-label text-light"> <i class="colorNaranja fa-solid fa-comment-dots me-2"></i>Descripción</label>
@@ -42,15 +54,6 @@ const NewActivity = () => {
                     ></textarea>
                 </div>
 
-                <div className="mb-3">
-                    <label htmlFor="Foto" className="form-label text-light"> <i class="colorNaranja fa-solid fa-image me-2"></i>Sube una foto de referencia</label>
-                    <textarea
-                        className="form-control opacity-50 bg-light border-0 rounded-3"
-                        id="motivo"
-                        rows="1"
-                        placeholder="Foto del destino"
-                    ></textarea>
-                </div>
 
                 <div className="mb-3">
                     <label htmlFor="Foto" className="form-label text-light"> <i class="colorNaranja fa-solid fa-clock me-2"></i>Duración de la actividad</label>
