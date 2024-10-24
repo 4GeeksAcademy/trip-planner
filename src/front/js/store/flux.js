@@ -234,9 +234,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (resp.ok) {
 					localStorage.setItem("token", data.token);
 					setStore({ token: data.token, user: data.user }); //guarda el token y user
-					toast.success("Logged in!");
+					toast.success("Iniciando Sesión");
 				} else {
-					toast.error("Invalid credentials");
+					toast.error("Credenciales inválidas");
 				}
 			},
 			logout: () => {
@@ -245,7 +245,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					token: null,
 					user: {}
 				});
-				toast.success("Logged out!");
+				toast.success("Cerrando Sesión!");
 			},
 			register: async (name, userName, email, password, more_info, profileImageUrl) => {
 				const resp = await fetch(process.env.BACKEND_URL + "/api/register", {
@@ -284,7 +284,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				});
 				if (resp.ok) {
-					toast.success("User Logged in!");
+					toast.success("Usuario loggeado!");
 				} else {
 					localStorage.removeItem("token");
 					setStore({ token: null, user: {} });

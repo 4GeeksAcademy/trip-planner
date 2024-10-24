@@ -71,7 +71,7 @@ const Register = () => {
             <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
                 <div className="rounded shadow-lg p-4 bg-dark" style={{ width: '450px' }}>
                     <h1 className="text-center text-light">Crea una cuenta</h1>
-                    <div className="mb-3 d-flex flex-column justify-content-center">
+                    <div className="mb-1 d-flex flex-column justify-content-center">
                         <label className="form-label text-light">Imagen de perfil</label>
                         <img
                             src={user.image ? URL.createObjectURL(user.image) : user.profileImageUrl || 'https://i.pinimg.com/550x/a8/0e/36/a80e3690318c08114011145fdcfa3ddb.jpg'}

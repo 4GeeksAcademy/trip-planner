@@ -128,11 +128,11 @@ def login():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
     if email == None or password == None:
-        return jsonify({"msg": "Missing keys email or password"}), 401
+        return jsonify({"msg": "Falta el correo o contraseña"}), 401
 
     user = User.query.filter_by(email=email).first()
     if user == None:
-        return jsonify({"msg": "User not found!"}), 401
+        return jsonify({"msg": "Usuario no encontrado!"}), 401
     
     password_bytes = bytes(password, 'utf-8')
     if bcrypt.checkpw(password_bytes, user.password.encode('utf-8')):
@@ -154,18 +154,18 @@ def register():
     profile_image = request.json.get("profile_image_url", None)
     
     if name ==None:
-        return jsonify({"msg": "Missing name"}), 401
+        return jsonify({"msg": "Falta el nombre"}), 401
     if username ==None:
-        return jsonify({"msg": "Missing username"}), 401
+        return jsonify({"msg": "Falta el nombre de usuario"}), 401
     if email ==None:
-        return jsonify({"msg": "Missing email"}), 401
+        return jsonify({"msg": "Falta el correo"}), 401
     if password ==None:
-        return jsonify({"msg": "Missing password"}), 401
+        return jsonify({"msg": "Falta la contraseña"}), 401
     
     user = User.query.filter_by(email=email).first()
 
     if user != None:
-        return jsonify({"msg": "User already exists!"}), 401
+        return jsonify({"msg": "El usuario ya existe!"}), 401
 
     bpassword = bytes(password, 'utf-8')
     salt = bcrypt.gensalt(14)
