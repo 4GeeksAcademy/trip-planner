@@ -33,7 +33,7 @@ const Viajes = () => {
           }
       }
       fetchData()
-      }, []);
+    }, []);
 
     const trips = store.viajes || [];
 
@@ -105,7 +105,7 @@ const Viajes = () => {
                     </div>
 
                     <div className="d-flex align-items-center ms-3 me-3 fs-3">
-                        <Link to="/trip" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <Link to={`/trip/${item.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                             <i className="fa-solid fa-chevron-right opacity-50"></i>
                         </Link>
                     </div>

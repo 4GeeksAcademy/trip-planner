@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Context } from "../store/appContext.js"
 import '../../styles/viajes.css';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ShoppingCart from "../component/shoppingCart.js"
 import toast from "react-hot-toast";
 import AddActivity from "../component/AddActivity.js"
@@ -11,9 +11,15 @@ const IndividualTrip = () => {
     const location = {
         latitude: 10.48801,
         longitude: -66.87919
-    }
+    };
 
     const { store, actions } = useContext(Context);
+    const { id } = useParams();
+
+    const viaje = store.viajes.find (v => v.id === parseInt(id));
+    if(!viaje) {
+        return <p>Viaje no encontrado</p>
+    }
 
     const [newMember, setNewMember] = useState({ email: "" });
 
@@ -39,12 +45,15 @@ const IndividualTrip = () => {
             <div className="container">
 
                 <div className=" rounded d-flex flex-column flex-md-row justify-content-between bg-light p-4 shadow">
-                    <div className="d-flex flex-column flex-md-row justify-content-between" style={{ width: "80%" }} >
-                        <h5 className="mb-1">Nombre de Viaje</h5>
-                        <p className="mb-1">DD/MM/AAAA</p>
-                        <p className="mb-1">Presupuesto</p>
-
-                    </div>
+                    {/* {store.viajes.map((item) => {
+                        return( */}
+                        <div className="d-flex flex-column flex-md-row justify-content-between" style={{ width: "80%" }} >
+                            <h5 className="mb-1">Destino: {viaje.destino}</h5>
+                            <p className="mb-1">Fecha de salid: {viaje.fecha_inicio}</p>
+                            <p className="mb-1">Presupuesto: {viaje.presupuesto}</p>
+                        </div>
+                    {/* )})} */}
+                    
 
                     {/* Dropdown de MIEMBROS */}
                     <div className="mx-4 mt-3 mt-md-0">
