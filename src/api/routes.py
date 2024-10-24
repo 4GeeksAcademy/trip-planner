@@ -92,8 +92,6 @@ def add_trip():
     return jsonify(viaje.serialize()), 201
 
 
-
-
 # ENVIAR EMAIL (PRUEBA)
 @api.route('/send-email', methods=['POST'])
 def send_email():

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Context } from "../store/appContext.js"
 import '../../styles/viajes.css';
 import { Link, useParams } from 'react-router-dom';
@@ -15,13 +15,27 @@ const IndividualTrip = () => {
 
     const { store, actions } = useContext(Context);
     const { id } = useParams();
+    const [ loading, setLoading ] = useState(true);
+    const [ newMember, setNewMember ] = useState({ email: "" });
+    const [ selectedMember, setSelectedMember ] = useState("null");
 
+    
+    useEffect(() => {
+        if(store.viajes.length > 0) {
+            setLoading(false);
+        }
+    }, [store.viajes]);
+    
     const viaje = store.viajes.find (v => v.id === parseInt(id));
-    if(!viaje) {
-        return <p>Viaje no encontrado</p>
+    
+    if(loading) {
+        return <p>Cargando...</p>;
     }
 
-    const [newMember, setNewMember] = useState({ email: "" });
+    if(!viaje) {
+        return <p>Viaje no encontrado</p>;
+    }
+    
 
     const handleInputChange = (e) => {
         setNewMember({ ...newMember, [e.target.name] : e.target.value });
@@ -38,21 +52,16 @@ const IndividualTrip = () => {
         }
     }
 
-    const [selectedMember, setSelectedMember] = useState("null");
-    
     return (
         <>
             <div className="container">
 
                 <div className=" rounded d-flex flex-column flex-md-row justify-content-between bg-light p-4 shadow">
-                    {/* {store.viajes.map((item) => {
-                        return( */}
-                        <div className="d-flex flex-column flex-md-row justify-content-between" style={{ width: "80%" }} >
-                            <h5 className="mb-1">Destino: {viaje.destino}</h5>
-                            <p className="mb-1">Fecha de salid: {viaje.fecha_inicio}</p>
+                    <div className="d-flex flex-column flex-md-row justify-content-between" style={{ width: "80%" }} >
+                        <h5 className="mb-1">Destino: {viaje.destino}</h5>
+                        <p className="mb-1">Fecha de salida: {viaje.fecha_inicio}</p>
                             <p className="mb-1">Presupuesto: {viaje.presupuesto}</p>
-                        </div>
-                    {/* )})} */}
+                    </div>
                     
 
                     {/* Dropdown de MIEMBROS */}
