@@ -53,7 +53,7 @@ const Layout = () => {
                     </Routes>
                     <Footer />
                 </ScrollToTop>
-                <Toaster />
+                <Toaster />npm 
             </BrowserRouter>
         </div>
     );

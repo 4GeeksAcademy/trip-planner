@@ -18,11 +18,9 @@ export const Navbar = ({ isLandingPage }) => {
 				<Link to="/">
 					<button className="border border-0 bg-transparent mx-3  fw-bold text-white">INICIO</button>
 				</Link>
-				<button className="border border-0 bg-transparent mx-3  fw-bold text-white">GRUPOS</button>
 				<Link to="/viajes">
 					<button className="border border-0 bg-transparent mx-3  fw-bold text-white">VIAJES</button>
 				</Link>
-				<button className="border border-0 bg-transparent mx-3  fw-bold text-white">EXPLORA</button>
 				{!store.token && <Link to="/login">
 					<button className="border border-0 bg-transparent mx-3  fw-bold text-white">INGRESAR</button>
 				</Link>}
