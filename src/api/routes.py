@@ -26,6 +26,11 @@ api = Blueprint('api', __name__)
 # Allow CORS requests to this API
 CORS(api)
 
+
+# AGREGAR ACTIVIDADES AL VIAJE
+
+
+
 # AGREGAR MIEMBROS AL GRUPO
 @api.route('/add-member/<int:id_viaje>', methods= ['POST'])
 def add_member(id_viaje):

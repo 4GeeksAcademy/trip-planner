@@ -48,9 +48,20 @@ const NewActivity = () => {
                         className="form-control opacity-50 bg-light border-0 rounded-3"
                         id="motivo"
                         rows="1"
+                        placeholder="Foto del destino"
+                    ></textarea>
+                </div>
+
+                <div className="mb-3">
+                    <label htmlFor="Foto" className="form-label text-light"> <i class="colorNaranja fa-solid fa-clock me-2"></i>Duración de la actividad</label>
+                    <textarea
+                        className="form-control opacity-50 bg-light border-0 rounded-3"
+                        id="motivo"
+                        rows="1"
                         placeholder="(opcional)"
                     ></textarea>
                 </div>
+                
 
                 <button type="submit" className="mb-3 btn btn-success w-100">Guardar</button>
 
