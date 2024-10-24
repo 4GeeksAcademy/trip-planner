@@ -57,7 +57,6 @@ def add_trip():
     user = User.query.get(user_id)
     trip_image_url = request.json.get("trip_image_url", None)
 
-
     viaje = Viaje(
         destino = destino,
         fecha_inicio=fecha_inicio,
