@@ -202,6 +202,8 @@ def register():
                     "token": create_access_token(identity=email)
                     }),200
 
+#CRUD PARA LA TABLA USER
+#TRAER POR ID A UN USER
 @api.route("/user", methods=["GET"])
 @jwt_required()
 def get_user_logged():
