@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Viaje, Grupo
+from api.models import db, User, Viaje, Grupo, Actividad
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from datetime import datetime
@@ -96,6 +96,47 @@ def add_trip():
 
     return jsonify(viaje.serialize()), 201
 
+# AGREGAR ACTIVIDAD
+@api.route('/add-activity', methods=['POST'])
+def add_activity():
+    nombre_actividad = request.json.get("nombre_actividad", None)
+    precio = request.json.get("precio", None)
+    moneda = request.json.get("moneda", None)
+    imagenes = request.json.get("imagenes", None)
+    duracion = request.json.get("destino", None)
+    viaje_id = request.json.get("viaje_id", None)
+    viaje = Viaje.query.get(viaje_id)
+    descripcion = request.json.get("descripcion", None)
+    comentarios = request.json.get("comentarios", None)
+
+    activity = Actividad(
+        nombre_actividad = nombre_actividad,
+        precio = precio,
+        moneda = moneda,
+        imagenes = imagenes,
+        duracion = duracion,
+        viaje_id = viaje_id,
+        descripcion = descripcion,
+        comentarios = comentarios
+    )
+    db.session.add(activity)
+    db.session.commit()
+
+    return jsonify(activity.serialize()), 201
+
+# VeR LA LISTA DE ACTIVIDADES/OPCIONES
+@api.route('/all-activities', methods=['GET'])
+def all_activities(): 
+    viaje_id = Viaje.query.get(viaje_id)
+    viaje = Viaje.query.filter_by(id=viaje_id).first()
+    
+    if viaje is None:
+        return jsonify({"error": "Trip not found"}), 404
+    
+    # Filtra usando user.id
+    activities = Actividad.query.filter_by(viaje_id=viaje.id).all()
+    
+    return jsonify([activity.serialize() for activity in activities]), 200
 
 # ENVIAR EMAIL (PRUEBA)
 @api.route('/send-email', methods=['POST'])

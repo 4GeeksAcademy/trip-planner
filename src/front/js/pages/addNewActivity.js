@@ -1,27 +1,52 @@
 import '../../styles/viajes.css';
-import { Link } from "react-router-dom";
-import React from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import { Context } from "../store/appContext.js"
+import React, {useState, useContext} from 'react';
 
 
 const NewActivity = () => {
+    const { store, actions } = useContext(Context);
+    const navigate = useNavigate();
+ 
+    const [activity, setActivity] = useState({
+        name: "",
+        // author: store.user.username,
+        costo: 0,
+        descripcion: "",
+        imageURL: "",
+        likes: 0,
+        comentarios: ""
+        
+    })
+    const upload = () => {
+        actions.addActivity({ ...activity});
+       console.log(activity)
+        // navigate("/trip/1"); // Navega después de guardar
+    };
 
-    
     return (
         <div className="container">
-            <form className="p-4 bg-dark  rounded shadow-lg w-50 mx-auto">
+            <div className="p-4 bg-dark  rounded shadow-lg w-50 mx-auto">
 
                 <div className="mb-3">
-                    <label htmlFor="Actividad" className="form-label text-light fs-3">Nombre de la actividad</label>
+                    <label htmlFor="Actividad" className="form-label text-light fs-3">Nombre de la actividad </label>
                     <input
                         type="text"
                         className="form-control opacity-50 bg-light border-0 rounded-3"
-                        id="destino"
+                        id="name"
                         placeholder="Heladería"
                         required
+                        value={activity.name}
+                        onChange={
+                            (event) => setActivity({
+                                ...activity,
+                                name: event.target.value
+                            })
+                        }
                     />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="Foto" className="form-label text-light"> <i class="colorNaranja fa-solid fa-image me-2"></i>Sube una foto de referencia</label>
+                    <label htmlFor="Foto" className="form-label text-light"> <i className="colorNaranja fa-solid fa-image me-2"></i>Sube una foto de referencia</label>
                     <div className = "d-flex justify-content-center">
                         <img
                             src={'https://i.pinimg.com/550x/a8/0e/36/a80e3690318c08114011145fdcfa3ddb.jpg'}
@@ -34,47 +59,70 @@ const NewActivity = () => {
                 </div>
 
                 <div className="mb-3">
-                    <label htmlFor="descripción" className="form-label text-light"> <i class="colorNaranja fa-solid fa-comment-dots me-2"></i>Descripción</label>
+                    <label htmlFor="descripción" className="form-label text-light"> <i className="colorNaranja fa-solid fa-comment-dots me-2"></i>Descripción</label>
                     <textarea
                         className="form-control opacity-50 bg-light border-0 rounded-3"
-                        id="nota"
+                        id="descripcion"
                         rows="2"
                         placeholder="Describe la actividad, horarios, datos importantes, entre otros..."
+                        value={activity.descripcion}
+                        onChange={
+                            (event) => setActivity({
+                                ...activity,
+                                descripcion: event.target.value
+                            })
+                        }
                     ></textarea>
 
                 </div>
 
                 <div className="mb-3">
-                    <label htmlFor="Monto" className="form-label text-light"> <i class="colorNaranja fa-solid fa-sack-dollar me-2"></i>Costo apróximado</label>
+                    <label htmlFor="Monto" className="form-label text-light"> <i className="colorNaranja fa-solid fa-sack-dollar me-2"></i>Costo apróximado</label>
                     <textarea
                         className="form-control opacity-50 bg-light border-0 rounded-3"
-                        id="motivo"
+                        id="costo"
                         rows="1"
                         placeholder="Ingresa el monto total que estimas para la actividad (opcional)"
+                        value={activity.costo}
+                        onChange={
+                            (event) => setActivity({
+                                ...activity,
+                                costo: event.target.value
+                            })
+                        }
                     ></textarea>
                 </div>
 
 
                 <div className="mb-3">
-                    <label htmlFor="Foto" className="form-label text-light"> <i class="colorNaranja fa-solid fa-clock me-2"></i>Duración de la actividad</label>
+                    <label htmlFor="Foto" className="form-label text-light"> <i className="colorNaranja fa-solid fa-clock me-2"></i>Duración de la actividad</label>
                     <textarea
                         className="form-control opacity-50 bg-light border-0 rounded-3"
-                        id="motivo"
+                        id="duracion"
                         rows="1"
                         placeholder="(opcional)"
+                        value={activity.duracion}
+                        onChange={
+                            (event) => setActivity({
+                                ...activity,
+                                duracion: event.target.value
+                            })
+                        }
                     ></textarea>
                 </div>
                 
 
-                <button type="submit" className="mb-3 btn btn-success w-100">Guardar</button>
+                <button onClick={upload} className="mb-3 btn btn-success w-100">Guardar</button>
 
                 <div className="d-flex justify-content-start">
-                    <Link to="/" className="btn btn-secondary mt-2 d-flex align-items-center rounded-3">
+                    <Link to="/" 
+                    className="btn btn-secondary mt-2 d-flex align-items-center rounded-3"
+                    >
                         <i className="fa-solid fa-circle-chevron-left me-2"></i> Inicio
                     </Link>
                 </div>
 
-            </form>
+            </div>
         </div>
 
     )
