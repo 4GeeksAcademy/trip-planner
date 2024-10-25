@@ -15,12 +15,22 @@ const NewActivity = () => {
         descripcion: "",
         imageURL: "",
         likes: 0,
-        comentarios: ""
-        
+        comentarios: "",
+        duracion: ""
     })
+
     const upload = () => {
         actions.addActivity({ ...activity});
-       console.log(activity)
+        console.log(activity);
+        setActivity({
+            name: "",
+            costo: 0,
+            descripcion: "",
+            imageURL: "",
+            likes: 0,
+            comentarios: "",
+            duracion: ""
+        })
         // navigate("/trip/1"); // Navega después de guardar
     };
 

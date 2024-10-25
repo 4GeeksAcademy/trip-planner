@@ -42,13 +42,19 @@ const IndividualTrip = () => {
     }
     
     const handleAddMemeber = () => {
-        const usuario = store.miembros.find(usuario => usuario.email === newMember.email)
+        console.log("Estos son los user" + store.miembros)
+        if(!newMember.email) {
+            alert("Por favor, ingresa un correo electrónico válido.");
+            return;
+        }
+
+        const usuario = store.user.find(usuario => usuario.email === newMember.email)
         if(usuario) {
             actions.addMember(usuario);
             setNewMember({ email: "" });
-            toast.success("Miembro agregado correctamente")
+            toast.success("Miembro agregado correctamente!")
         } else {
-            alert("Por favor, completa todos los campos")
+            alert("No se encontró un usuario con ese correo.")
         }
     }
 

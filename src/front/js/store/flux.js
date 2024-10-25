@@ -163,6 +163,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ activities: likeUpdate })
 
 			},
+
 			addActivity: async(activity) => {
 				const store = getStore()
 				const response = await fetch(process.env.BACKEND_URL + "api/add-activity", {
@@ -170,18 +171,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 					headers: {
 						'Content-Type': 'application/json',
 						'Access-Control-Allow-Origin': process.env.BACKEND_URL
-
 					},
-					body: JSON.stringify({ ...activity, viaje_id: 1 })
+					body: JSON.stringify({ ...activity, viaje_id: store.viajes.id })
 				});
 				const data = await response.json();
-				console.log("data")
+				console.log(data)
+				setStore({ activities: data.activity });
+				toast.success("Se ha creado tu viaje!");
+
 				// const activityAdded = store.activities
 				// activityAdded.push(activity)
 				// console.log(activityAdded)
 				// // console.log("Segundo "+store.activities)
 				// setStore({ activities:  })
-
 			},
 
 			// Recomendaciones por lugar
