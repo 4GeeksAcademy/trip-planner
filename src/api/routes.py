@@ -306,6 +306,19 @@ def update_user(email):
     else:
         return jsonify({"error": f"El usuario con email: {email} no fue encontrado"})
 
+#ELIMINAR A UN USUARIO
+@api.route('/user/<string:email>', methods=['DELETE'])
+def remove_user(email):
+    searched_user=User.query.filter_by(email=email).one_or_none()
+    if searched_user is not None:
+        db.session.delete(searched_user)
+        db.session.commit()
+        return jsonify(searched_user.serialize()), 202
+    else:
+        return jsonify({"error": f"El usuario con email: {email} no fue encontrado"}), 404
+
+
+
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
