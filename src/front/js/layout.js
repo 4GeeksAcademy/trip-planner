@@ -21,7 +21,7 @@ import Destination from "./component/destination.js";
 import Viajes from "./pages/viajes";
 import TripDetail from "./component/tripDetail";
 import TripScore from "./component/score";
-import NewActivity from "./pages/addNewActivity.js";
+import NewActivity from "./pages/NewActivity.js";
 
 //create your first component
 const Layout = () => {

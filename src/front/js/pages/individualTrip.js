@@ -27,6 +27,7 @@ const IndividualTrip = () => {
     }, [store.viajes]);
     
     const viaje = store.viajes.find (v => v.id === parseInt(id));
+    console.log("Este es el viaje", viaje)
     
     if(loading) {
         return <p>Cargando...</p>;

@@ -79,9 +79,15 @@ const NewTrip = () => {
             return;
         }
 
-        actions.post_trip({ ...viaje, trip_image_url: tripImageUrl });
-        navigate("/viajes"); // Navega después de guardar
+        let resultado = actions.post_trip({ ...viaje, trip_image_url: tripImageUrl });
+        if (resultado) {
+            navigate("/viajes"); // Navega después de guardar
+        } else {
+            alert("Algo salió mal agregando el nuevo viaje")
+        }
     };
+
+
 
     return (
         <div className="container">

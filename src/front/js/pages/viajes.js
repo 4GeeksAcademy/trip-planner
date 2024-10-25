@@ -19,6 +19,8 @@ const Viajes = () => {
     const [isLoading, setIsLoading] = useState(false);
 
 
+
+
     useEffect(() => {
         
         const fetchData = async() =>{
@@ -33,7 +35,7 @@ const Viajes = () => {
           }
       }
       fetchData()
-    }, []);
+    }, [store.upDate]);
 
     const trips = store.viajes || [];
 

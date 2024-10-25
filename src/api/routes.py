@@ -69,6 +69,7 @@ def all_trip():
 # AGREGAR VIAJE
 @api.route('/add-trip', methods=['POST'])
 def add_trip():
+    print(f"Este es el contenido entrante {request.json}")
     
     #Campos obliagtorios
     destino = request.json.get("destino")
@@ -79,19 +80,14 @@ def add_trip():
         return jsonify({"msg": "Faltan campos por completar."}), 400
     
     #Convertir las fechas desde el formato "día-mes-año"
-    try:
-        fecha_inicio_dt = datetime.strptime(fecha_inicio, "%d-%m-%Y")
-        fecha_fin_dt = datetime.strptime(fecha_fin, "%d-%m-%Y")
-    except ValueError:
-        return jsonify({"msg": "Formato de fecha no válido. Usa 'DD-MM-YYYY'."}), 400
     
     #Verificar que la fecha de inicio no sea en el pasado
-    if fecha_inicio_dt < datetime.now():
-        return jsonify({"msg": "Error en la fecha de inicio de tu viaje."}), 400
+    # if fecha_inicio_dt < datetime.now():
+    #     return jsonify({"msg": "Error en la fecha de inicio de tu viaje."}), 400
 
     #Verificar que la fecha de fin sea mayor o igual a la fecha de inicio
-    if fecha_fin_dt < fecha_inicio_dt:
-        return jsonify({"msg": "La fecha de fin debe ser mayor o igual a la fecha de inicio."}), 400
+    # if fecha_fin_dt < fecha_inicio_dt:
+    #     return jsonify({"msg": "La fecha de fin debe ser mayor o igual a la fecha de inicio."}), 400
 
     destino = request.json.get("destino", None)
     fecha_inicio = request.json.get("fecha_inicio", None)
@@ -101,8 +97,9 @@ def add_trip():
     nota = request.json.get("nota", None)
     presupuesto_personal = request.json.get("presupuesto_personal", None)
     user_id = request.json.get("user_id", None)
-    user = User.query.get(user_id)
+    # user = User.query.get(user_id)
     trip_image_url = request.json.get("trip_image_url", None)
+    print("Hasta acá llegamos bien")
 
     viaje = Viaje(
         destino = destino,
@@ -129,7 +126,7 @@ def add_activity():
     imagenes = request.json.get("imagenes", None)
     duracion = request.json.get("destino", None)
     viaje_id = request.json.get("viaje_id", None)
-    viaje = Viaje.query.get(viaje_id)
+    # viaje = Viaje.query.get(viaje_id)
     descripcion = request.json.get("descripcion", None)
     comentarios = request.json.get("comentarios", None)
 

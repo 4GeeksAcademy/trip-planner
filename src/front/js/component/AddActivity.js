@@ -3,24 +3,17 @@ import "../../styles/addActivityCard.css"
 import { Context } from "../store/appContext.js"
 import { useNavigate } from "react-router-dom";
 
-const AddActivity = (props) => {
-    const [activity, setActivity] = useState({
-        name: "",
-        author: "",
-        costo: 0,
-        description: "",
-        imageURL: "",
-        likes: 0
-        
-    })
-
+const AddActivity = ({viajeId}) => {
+    const { actions } = useContext(Context);
+    const [idViaje, setIdViaje] = useState(viajeId)
+    
     const navigate = useNavigate();
 
     const handleImageClick = () => {
+        actions.guardarId(idViaje)
         navigate("/add-activity")
     }
 
-    const { actions } = useContext(Context);
     
     return (
         <div className="col-md-3">

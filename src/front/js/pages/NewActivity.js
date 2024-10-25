@@ -16,11 +16,12 @@ const NewActivity = () => {
         imageURL: "",
         likes: 0,
         comentarios: "",
-        duracion: ""
+        duracion: "",
+        viaje_id: store.currentId
     })
 
     const upload = () => {
-        actions.addActivity({ ...activity});
+        actions.addActivity(activity);
         console.log(activity);
         setActivity({
             name: "",
@@ -31,7 +32,7 @@ const NewActivity = () => {
             comentarios: "",
             duracion: ""
         })
-        // navigate("/trip/1"); // Navega después de guardar
+        navigate(`/trip/${store.currentId}`); // Navega después de guardar
     };
 
     return (
