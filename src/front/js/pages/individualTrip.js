@@ -172,7 +172,7 @@ const IndividualTrip = () => {
             </div>
             <div className="container">
                 <div className="row justify-content-center g-4">
-                    <AddActivity />
+                    <AddActivity viajeId= {viaje.id} />
 
                     {/* CARDS */}
                     {store.activities.map((item, index) => {

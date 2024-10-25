@@ -163,13 +163,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ activities: likeUpdate })
 
 			},
-			addActivity: (activity) => {
+			addActivity: async(activity) => {
 				const store = getStore()
-				const activityAdded = store.activities
-				activityAdded.push(activity)
-				console.log(activityAdded)
-				// console.log("Segundo "+store.activities)
-				setStore({ activities: activityAdded })
+				const response = await fetch(process.env.BACKEND_URL + "api/add-activity", {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'Access-Control-Allow-Origin': process.env.BACKEND_URL
+
+					},
+					body: JSON.stringify({ ...activity, viaje_id: 1 })
+				});
+				const data = await response.json();
+				console.log("data")
+				// const activityAdded = store.activities
+				// activityAdded.push(activity)
+				// console.log(activityAdded)
+				// // console.log("Segundo "+store.activities)
+				// setStore({ activities:  })
 
 			},
 
