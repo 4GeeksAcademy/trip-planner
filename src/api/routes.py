@@ -243,19 +243,81 @@ def register():
                     "token": create_access_token(identity=email)
                     }),200
 
+#CRUD PARA LA TABLA USER
+
+#MANTENER USUARIO LOGEADO
 @api.route("/user", methods=["GET"])
 @jwt_required()
 def get_user_logged():
     current_user = get_jwt_identity()
     user = User.query.filter_by(email=current_user).first()
     return jsonify(user.serialize()),200
-
+#TRAER A TODOS LOS USERS
 @api.route('/users', methods=['GET'])
 def all_users():
-
     users = User.query.all()
     usuarios_serializados = [persona.serialize() for persona in users]
     return jsonify(usuarios_serializados), 200
+#TRAER A UN SOLO USER POR ID
+@api.route('/user/<int:id>', methods=['GET'])
+def get_user(id):
+
+    searched_user= User.query.filter_by(id=id).one_or_none()
+    usuario_serializado = searched_user.serialize()
+    return jsonify(usuario_serializado), 200
+
+#ACTUALIZAR USUARIO
+@api.route('/user/<string:email>', methods=['PUT'])
+def update_user(email):
+    searched_user = User.query.filter_by(email=email).one_or_none()
+    
+    body = request.json
+    if not body:
+        return jsonify({"error": "Los datos no fueron provistos"}), 400
+    
+    new_name = body.get('name', None)
+    new_username= body.get('username', None)
+    new_email = body.get('email', None)
+    new_password = body.get('password', None)
+    new_more_info = body.get('more_info', None)
+    new_profile_image_url = body.get('profile_image_url', None)
+
+    if searched_user!=None:
+        if new_name!=None:
+            searched_user.name=new_name
+        if new_username!=None:
+            searched_user.username=new_username
+        if new_email!=None:
+            searched_user.email=new_email
+        if new_password!=None:
+            bpassword = bytes(new_password, 'utf-8')
+            new_salt = bcrypt.gensalt(14)
+            new_hashed_password = bcrypt.hashpw(password=bpassword, salt=new_salt)
+            searched_user.password = new_hashed_password.decode('utf-8')
+            searched_user.salt = new_salt
+        if new_more_info!=None:
+            searched_user.more_info = new_more_info
+        if new_profile_image_url!=None:
+            searched_user.profile_image_url = new_profile_image_url
+
+        db.session.commit()
+
+        return jsonify(searched_user.serialize()), 202
+    else:
+        return jsonify({"error": f"El usuario con email: {email} no fue encontrado"})
+
+#ELIMINAR A UN USUARIO
+@api.route('/user/<string:email>', methods=['DELETE'])
+def remove_user(email):
+    searched_user=User.query.filter_by(email=email).one_or_none()
+    if searched_user is not None:
+        db.session.delete(searched_user)
+        db.session.commit()
+        return jsonify(searched_user.serialize()), 202
+    else:
+        return jsonify({"error": f"El usuario con email: {email} no fue encontrado"}), 404
+
+
 
 
 @api.route('/hello', methods=['POST', 'GET'])
