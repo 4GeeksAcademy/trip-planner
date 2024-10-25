@@ -69,6 +69,30 @@ def all_trip():
 # AGREGAR VIAJE
 @api.route('/add-trip', methods=['POST'])
 def add_trip():
+    
+    #Campos obliagtorios
+    destino = request.json.get("destino")
+    fecha_inicio = request.json.get("fecha_inicio")
+    fecha_fin = request.json.get("fecha_fin")
+
+    if not destino or not fecha_inicio or not fecha_fin:
+        return jsonify({"msg": "Faltan campos por completar."}), 400
+    
+    #Convertir las fechas desde el formato "día-mes-año"
+    try:
+        fecha_inicio_dt = datetime.strptime(fecha_inicio, "%d-%m-%Y")
+        fecha_fin_dt = datetime.strptime(fecha_fin, "%d-%m-%Y")
+    except ValueError:
+        return jsonify({"msg": "Formato de fecha no válido. Usa 'DD-MM-YYYY'."}), 400
+    
+    #Verificar que la fecha de inicio no sea en el pasado
+    if fecha_inicio_dt < datetime.now():
+        return jsonify({"msg": "Error en la fecha de inicio de tu viaje."}), 400
+
+    #Verificar que la fecha de fin sea mayor o igual a la fecha de inicio
+    if fecha_fin_dt < fecha_inicio_dt:
+        return jsonify({"msg": "La fecha de fin debe ser mayor o igual a la fecha de inicio."}), 400
+
     destino = request.json.get("destino", None)
     fecha_inicio = request.json.get("fecha_inicio", None)
     fecha_fin = request.json.get("fecha_fin", None)

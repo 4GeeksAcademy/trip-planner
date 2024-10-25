@@ -68,7 +68,17 @@ const NewTrip = () => {
         }
     };
 
+    const isFormValid = () => {
+        return viaje.destino && viaje.fecha_inicio && viaje.fecha_fin;
+    };
+
+
     const upload = () => {
+        if (!isFormValid()) {
+            toast.error("Faltan campos por completar.");
+            return;
+        }
+
         actions.post_trip({ ...viaje, trip_image_url: tripImageUrl });
         navigate("/viajes"); // Navega después de guardar
     };
@@ -102,7 +112,7 @@ const NewTrip = () => {
                             src={image ? URL.createObjectURL(image) : 'https://firebasestorage.googleapis.com/v0/b/trippy-proyecto.appspot.com/o/fondoDestino.png?alt=media&token=c65fa4ed-494d-410b-bd9a-68e74ef3e456'}
                             className="rounded-3 mx-auto"
                             style={{ width: '150px', cursor: 'pointer' }}
-                            onClick={() => document.getElementById('tripImage').click()} 
+                            onClick={() => document.getElementById('tripImage').click()}
                         />
                     </div>
                     <input
@@ -222,12 +232,13 @@ const NewTrip = () => {
                 </div>
 
                 <div className="mb-3">
-                    <Link
-                        to="/viajes"
+                    <button
                         className="btn btn-primary w-100 mb-5 rounded-3"
-                        onClick={upload}>
+                        onClick={upload} // Llama a la función upload
+                        disabled={!isFormValid()} // Deshabilitar el botón si el formulario no es válido
+                    >
                         ¡Listo!
-                    </Link>
+                    </button>
                     <div className="d-flex justify-content-start">
                         <Link to="/" className="btn btn-secondary mt-2 d-flex align-items-center rounded-3">
                             <i className="fa-solid fa-circle-chevron-left me-2"></i> Inicio
