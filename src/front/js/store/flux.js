@@ -119,6 +119,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			post_trip: async (viaje) => {
 				const store = getStore()
+
+				    // Validación de campos obligatorios
+					if (!viaje.destino || !viaje.fecha_inicio || !viaje.fecha_fin) {
+						toast.error("Faltan campos obligatorios");
+						return; 
+					}
+
 				const response = await fetch(process.env.BACKEND_URL + "api/add-trip", {
 					method: 'POST',
 					headers: {
@@ -127,9 +134,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify({ ...viaje, user_id: store.user.id })
 				});
 				const data = await response.json();
-				console.log(data)
-				setStore({ viajes: data.trip });
-				toast.success("Se ha creado tu viaje!");
+				console.log(data);
+
+				if (response.ok) {
+					setStore({ viajes: data.trip });
+					toast.success("Se ha creado tu viaje!");
+				} else {
+					toast.error(data.error || "Ocurrió un error inesperado.");
+				}
 			},
 
 			get_trips: async () => {
