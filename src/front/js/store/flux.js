@@ -11,7 +11,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			recomendacionPorLugar: [],
 			viajes: [],
 			user: [],
-			
+
 
 			token: localStorage.getItem("token") || null,
 			message: null,
@@ -120,18 +120,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			guardarId: (idViaje) => {
 				let store = getStore()
-				setStore({...store, currentId: idViaje})
+				setStore({ ...store, currentId: idViaje })
 			},
 
 
 			post_trip: async (viaje) => {
 				const store = getStore()
 
-				    // Validación de campos obligatorios
-					if (!viaje.destino || !viaje.fecha_inicio || !viaje.fecha_fin ) {
-						toast.error("Faltan campos obligatorios");
-						return false;
-					}
+				// Validación de campos obligatorios
+				if (!viaje.destino || !viaje.fecha_inicio || !viaje.fecha_fin) {
+					toast.error("Faltan campos por completar");
+					return false;
+				}
+
+				const datosEnviar = { ...viaje, user_id: store.user.id };
+				console.log("Datos a enviar:", datosEnviar);
 
 				const response = await fetch(process.env.BACKEND_URL + "api/add-trip", {
 					method: 'POST',
@@ -171,7 +174,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				const data = await response.json();
 				console.log(data);
-				setStore({ viajes: data }); 
+				setStore({ viajes: data });
 			},
 
 			addLike: (index) => {
@@ -186,7 +189,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			},
 
-			addActivity: async(activity) => {
+			addActivity: async (activity) => {
 				const store = getStore()
 				const response = await fetch(process.env.BACKEND_URL + "api/add-activity", {
 					method: 'POST',
