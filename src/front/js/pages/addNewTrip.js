@@ -68,25 +68,40 @@ const NewTrip = () => {
         }
     };
 
+    //Validación de campos obligatorios
     const isFormValid = () => {
         return viaje.destino && viaje.fecha_inicio && viaje.fecha_fin;
     };
 
-
-    const upload = () => {
+    const upload = async () => {
         if (!isFormValid()) {
             toast.error("Faltan campos por completar.");
             return;
         }
 
-        let resultado = actions.post_trip({ ...viaje, trip_image_url: tripImageUrl });
+        const fechaInicio = new Date(viaje.fecha_inicio);
+        const fechaFin = new Date(viaje.fecha_fin);
+        const fechaActual = new Date().toISOString().split('T')[0];
+
+        // Validar que la fecha de inicio no sea anterior a la fecha actual
+        if (fechaInicio <= fechaActual) {
+            toast.error("La fecha de inicio no puede ser anterior a la fecha actual.");
+            return;
+        }
+
+        // Validar que la fecha de fin sea mayor que la fecha de inicio
+        if (fechaFin <= fechaInicio) {
+            toast.error("La fecha de fin debe ser posterior a la fecha de inicio.");
+            return;
+        }
+
+        let resultado = await actions.post_trip({ ...viaje, trip_image_url: tripImageUrl });
         if (resultado) {
             navigate("/viajes"); // Navega después de guardar
         } else {
-            alert("Algo salió mal agregando el nuevo viaje")
+            alert("Algo salió mal agregando el nuevo viaje");
         }
     };
-
 
 
     return (
