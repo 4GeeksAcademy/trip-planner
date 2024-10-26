@@ -28,88 +28,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 			selected_trip: [],
-			activities: [
-				{
-					id: 1,
-					name: "Cafecito",
-					cost: 20,
-					likes: 0,
-					author: "LuisR",
-					description: "Cafe oro. Horario de 9 am a 3 pm. tiene wifi",
-					duration: "",
-					imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOc7EaMLv5mZsW_kQ5PNCWvZjMDAP8kjwmVQ&s"
-				},
-				{
-					id: 2,
-					name: "Playa",
-					cost: 20,
-					likes: 0,
-					author: "LuisR",
-					description: "Cafe oro. Horario de 9 am a 3 pm. tiene wifi",
-					duration: "",
-					imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOc7EaMLv5mZsW_kQ5PNCWvZjMDAP8kjwmVQ&s"
-				},
-				{
-					id: 3,
-					name: "Parque",
-					cost: 0,
-					likes: 2,
-					author: "LuisR",
-					description: "Caminata en el parque. Horario de 6 am a 6 pm.",
-					duration: "",
-					imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1QMAB9axRPNNiyX37JpBDrL6VZmU7zTG9cA&s"
-				},
-				{
-					id: 4,
-					name: "CCS Meat Co",
-					cost: 180,
-					likes: 1000,
-					author: "LuisR",
-					description: "Cafe oro. Horario de 9 am a 10 pm. tiene wifi",
-					duration: "",
-					imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiuQNA-Q4I_Z68GX3XHx_CGKY7iBTYq4Z6hA&s"
-				},
-				{
-					id: 5,
-					name: "Restaurante",
-					cost: 0,
-					likes: 2,
-					author: "LuisR",
-					description: "Caminata en el parque. Horario de 6 am a 6 pm.",
-					duration: "",
-					imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1QMAB9axRPNNiyX37JpBDrL6VZmU7zTG9cA&s"
-				},
-				{
-					id: 6,
-					name: "Teatro",
-					cost: 0,
-					likes: 2,
-					author: "LuisR",
-					description: "Caminata en el parque. Horario de 6 am a 6 pm.",
-					duration: "",
-					imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1QMAB9axRPNNiyX37JpBDrL6VZmU7zTG9cA&s"
-				},
-				{
-					id: 7,
-					name: "Estadio",
-					cost: 180,
-					likes: 1000,
-					author: "LuisR",
-					description: "Cafe oro. Horario de 9 am a 10 pm. tiene wifi",
-					duration: "",
-					imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiuQNA-Q4I_Z68GX3XHx_CGKY7iBTYq4Z6hA&s"
-				},
-				{
-					id: 8,
-					name: "Museo",
-					cost: 180,
-					likes: 1000,
-					author: "LuisR",
-					description: "Cafe oro. Horario de 9 am a 10 pm. tiene wifi",
-					duration: "",
-					imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiuQNA-Q4I_Z68GX3XHx_CGKY7iBTYq4Z6hA&s"
-				}
-			],
+			activities: [],
 			miembros: [],
 		},
 		actions: {
@@ -198,7 +117,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				const data = await response.json();
 				console.log(data)
-				setStore({ activities: data.activity });
+				setStore({ activities: [data, ...store.activities] });
 				toast.success("Se ha creado tu viaje!");
 
 				// const activityAdded = store.activities
@@ -206,6 +125,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 				// console.log(activityAdded)
 				// // console.log("Segundo "+store.activities)
 				// setStore({ activities:  })
+			},
+
+			getActivities: async () => {
+				const store = getStore()
+				const response = await fetch(process.env.BACKEND_URL + "api/all-activities/" + store.currentId, {
+					method: 'GET'
+				})
+				const data = await response.json()
+				console.log("Este es getActivities", data)
+				// setStore(activities)
 			},
 
 			// Recomendaciones por lugar

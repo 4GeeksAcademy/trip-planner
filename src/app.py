@@ -22,6 +22,7 @@ static_file_dir = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../public/')
 app = Flask(__name__)
 CORS(app)
+# CORS(app, resources={r"/api/*": {"origins": "https://refactored-space-meme-x55jwj9j96g72pgjp-3000.app.github.dev/"}})
 app.url_map.strict_slashes = False
 
 #JWT configuration

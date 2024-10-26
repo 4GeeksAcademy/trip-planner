@@ -19,6 +19,7 @@ const IndividualTrip = () => {
     const [ newMember, setNewMember ] = useState({ email: "" });
     const [ selectedMember, setSelectedMember ] = useState("null");
 
+    actions.getActivities();
     
     useEffect(() => {
         if(store.viajes.length > 0) {
@@ -179,7 +180,7 @@ const IndividualTrip = () => {
             </div>
             <div className="container">
                 <div className="row justify-content-center g-4">
-                    <AddActivity viajeId= {viaje.id} />
+                    <AddActivity viajeId = {viaje.id} />
 
                     {/* CARDS */}
                     {store.activities.map((item, index) => {

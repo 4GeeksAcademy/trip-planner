@@ -120,7 +120,7 @@ def add_trip():
 # AGREGAR ACTIVIDAD
 @api.route('/add-activity', methods=['POST'])
 def add_activity():
-    nombre_actividad = request.json.get("nombre_actividad", None)
+    nombre_actividad = request.json.get("name", None)
     precio = request.json.get("precio", None)
     moneda = request.json.get("moneda", None)
     imagenes = request.json.get("imagenes", None)
@@ -128,7 +128,6 @@ def add_activity():
     viaje_id = request.json.get("viaje_id", None)
     # viaje = Viaje.query.get(viaje_id)
     descripcion = request.json.get("descripcion", None)
-    comentarios = request.json.get("comentarios", None)
 
     activity = Actividad(
         nombre_actividad = nombre_actividad,
@@ -137,8 +136,7 @@ def add_activity():
         imagenes = imagenes,
         duracion = duracion,
         viaje_id = viaje_id,
-        descripcion = descripcion,
-        comentarios = comentarios
+        descripcion = descripcion
     )
     db.session.add(activity)
     db.session.commit()
@@ -146,18 +144,17 @@ def add_activity():
     return jsonify(activity.serialize()), 201
 
 # VeR LA LISTA DE ACTIVIDADES/OPCIONES
-@api.route('/all-activities', methods=['GET'])
-def all_activities(): 
-    viaje_id = Viaje.query.get(viaje_id)
+@api.route('/all-activities/<int:viaje_id>', methods=['GET'])
+def all_activities(viaje_id):
+
     viaje = Viaje.query.filter_by(id=viaje_id).first()
+    if not viaje: 
+        return jsonify({ "msg" : "Viaje no encontrado" }), 404
+
+    actividades = viaje.actividades
+    actividades_serializadas = [actividad.serialize() for actividad in actividades]
+    return jsonify(actividades_serializadas), 200
     
-    if viaje is None:
-        return jsonify({"error": "Trip not found"}), 404
-    
-    # Filtra usando user.id
-    activities = Actividad.query.filter_by(viaje_id=viaje.id).all()
-    
-    return jsonify([activity.serialize() for activity in activities]), 200
 
 # ENVIAR EMAIL (PRUEBA)
 @api.route('/send-email', methods=['POST'])

@@ -72,7 +72,7 @@ class Viaje(db.Model):
     # Relaciones
     user = db.relationship('User', back_populates='viajes')
     grupos = db.relationship('Grupo', back_populates='viaje', cascade="all, delete-orphan", lazy=True)
-    actividades = db.relationship('Actividad', back_populates='viaje', cascade="all, delete-orphan", lazy=True)
+    # actividades = db.relationship('Actividad', back_populates='viaje', cascade="all, delete-orphan", lazy=True)
 
     def __init__(self, destino, fecha_inicio, fecha_fin, presupuesto_grupo, motivo, nota, presupuesto_personal, user_id, trip_image_url):
         self.destino = destino
@@ -105,7 +105,6 @@ class Grupo(db.Model):
     son de: Muchos a 1 con User, Muchos a 1 con Viaje/ Grupo está asociado a un único User y un único Viaje"""
     __tablename__ = 'grupos'
     id = db.Column(db.Integer, primary_key=True)
-    group_name = db.Column(db.String(120), nullable=False)
     viaje_id = db.Column(db.Integer, db.ForeignKey('viajes.id'), nullable=False)
     user_email = db.Column(db.String(120), db.ForeignKey('users.email'), nullable=False)
 
@@ -138,17 +137,16 @@ class Actividad(db.Model):
     Actividad está asociada a un único Viaje, pero puede tener muchos Comentarios y likes"""
     __tablename__ = 'actividades'
     id = db.Column(db.Integer, primary_key=True)
-    nombre_actividad = db.Column(db.String(120), unique=True, nullable=False)
+    nombre_actividad = db.Column(db.String(120), unique=False, nullable=False)
     precio = db.Column(db.Float, nullable=True)
     moneda = db.Column(db.String(120), nullable=True)
-    imagenes = db.Column(db.String(360), nullable=False)
+    imagenes = db.Column(db.String(360), nullable=True)
     duracion = db.Column(db.Integer, nullable=True)
     viaje_id = db.Column(db.Integer, db.ForeignKey('viajes.id'), nullable=False)
     viaje = db.relationship("Viaje", backref='actividades', lazy=True, foreign_keys=[viaje_id])  # Relación de Viaje a Actividad
     descripcion = db.Column(db.String(360), nullable=True)
     comentarios = db.relationship("Comentarios", back_populates='actividad', cascade="all, delete-orphan", lazy=True)  # Relación de Comentarios a Actividad
     likes = db.relationship('Likes', back_populates='actividad', cascade="all, delete-orphan", lazy=True)
-    viaje = db.relationship('Viaje', back_populates='actividades')
 
     def __init__(self, nombre_actividad, precio, moneda, imagenes, duracion, viaje_id, descripcion=None):
         self.nombre_actividad = nombre_actividad
@@ -158,6 +156,7 @@ class Actividad(db.Model):
         self.imagenes = imagenes    #OJO VER DESPUES
         self.viaje_id = viaje_id
         self.descripcion = descripcion
+        
 
     def serialize(self):
         return {
