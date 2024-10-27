@@ -72,7 +72,7 @@ const Viajes = () => {
 
                 </div>
 
-                <img src={store.user.profile_image_url} className="rounded-circle ms-0 me-5 shadow" style={{ objectFit: 'cover', width: "120px", height: "120px" }} />
+                <img src={store.user.profile_image_url || 'https://i.pinimg.com/550x/a8/0e/36/a80e3690318c08114011145fdcfa3ddb.jpg'} className="rounded-circle ms-0 me-5 shadow" style={{ objectFit: 'cover', width: "120px", height: "120px" }} />
             
             </div>
 

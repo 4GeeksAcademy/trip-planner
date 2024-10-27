@@ -1,4 +1,4 @@
-import toast from "react-hot-toast";
+import {Toaster, toast} from "react-hot-toast";
 import suggestions from "./suggestions"
 
 const getState = ({ getStore, getActions, setStore }) => {
@@ -238,7 +238,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 				if (resp.ok) {
-					toast.success("Usuario registrado!");
+					toast.success("¡Tu usuario ha sido registrado!");
+					toast("Hemos iniciado sesión por ti😎 ¡Comienza a explorar!",
+						{ 
+							icono : '👏' , 
+							duration: 5000,
+						  }
+					);
 				}
 				else {
 					toast.error("Error al registrar el usuario");
