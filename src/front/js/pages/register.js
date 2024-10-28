@@ -73,7 +73,7 @@ const Register = () => {
                         <label className="form-label text-light">Imagen de perfil</label>
                         <img
                             src={user.image ? URL.createObjectURL(user.image) : user.profileImageUrl || 'https://i.pinimg.com/550x/a8/0e/36/a80e3690318c08114011145fdcfa3ddb.jpg'}
-                            className="rounded-3 mx-auto"
+                            className="rounded-circle shadow mx-auto"
                             style={{ width: '150px', cursor: 'pointer' }}
                             onClick={() => document.getElementById('imagenPerfil').click()} // Activa el input de archivo
                         />

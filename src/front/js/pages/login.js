@@ -14,7 +14,7 @@ const Login = () => {
 
     useEffect(() => {
         if (store.token) {
-            navigate("/");
+            navigate("/viajes");
         }
     }, [store.token])
 
@@ -34,10 +34,10 @@ const Login = () => {
                                 email: event.target.value
                             })}
                         />
-                        <div className="form-text text-light">No compartiremos tu contraseña</div>
+                        <div className="form-text text-secondary opacity-75">No compartiremos tu contraseña</div>
                     </div>
                     <div className="mb-1">
-                        <label className="form-label text-light">Contraseña</label>
+                        <label className="form-label text-light ">Contraseña</label>
                         <div className="d-flex">
                             <input
                                 type={showPassword ? "text" : "password"}
@@ -51,7 +51,6 @@ const Login = () => {
                                 onClick={() => setShowPassword(!showPassword)}
                             >{showPassword ? (<i className="fa-solid fa-eye"></i>) : (<i className="fa-solid fa-eye-slash"></i>)}</button>
                         </div>
-                        <button className="btn btn-link">¿Olvidaste tu contraseña?</button>
                     </div>
                     <button
                         onClick={() => actions.login(user.email, user.password)}
@@ -60,7 +59,7 @@ const Login = () => {
                         Ingresar
                     </button>
                     <Link to="/register" className="btn btn-link">¿No tienes una cuenta aún? Registrate aquí</Link>
-                    <div className="d-flex justify-content-start opacity-50">
+                    <div className="d-flex justify-content-start">
                         <Link to="/" className="btn btn-secondary mt-2 d-flex align-items-center rounded-3">
                             <i className="fa-solid fa-circle-chevron-left me-2"></i> Inicio
                         </Link>

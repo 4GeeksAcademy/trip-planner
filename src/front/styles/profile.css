@@ -1,0 +1,49 @@
+body {
+    margin-top: 20px;
+}
+
+.account-settings .user-profile {
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.account-settings .user-profile .user-avatar {
+    margin: 0 0 1rem 0;
+}
+
+.account-settings .user-profile .user-avatar img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+}
+
+.account-settings .user-profile h5.user-name {
+    margin: 0 0 0.5rem 0;
+}
+
+.account-settings .user-profile h6.user-email {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+.account-settings .about {
+    margin: 10px 0 10px 0;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.card {
+    background: #000000;
+    border-radius: 5px;
+    border: 0;
+    margin-bottom: 1rem;
+}
+
+.form-control {
+    border: 1px solid #596280;
+    border-radius: 2px;
+    font-size: .825rem;
+    background: #1A233A;
+    color: #bcd0f7;
+}
