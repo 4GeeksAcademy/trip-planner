@@ -5,7 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			//add the suggestions
-			currentId: 2,
+			currentId: 1,
 			upDate: false,
 			recommendations: suggestions,
 			recomendacionPorLugar: [],
@@ -129,6 +129,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				const data = await response.json()
 				console.log("Este es getActivities", data)
+				console.log("current Id:", store.currentId)
 				// setStore(activities)
 				setStore({ activities: data });
 			},

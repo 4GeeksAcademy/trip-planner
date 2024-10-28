@@ -22,7 +22,7 @@ const IndividualTrip = () => {
 
     useEffect(() => {
         actions.setCurrentId(parseInt(id));
-        actions.getActivities();
+        actions.getActivities(id);
     }, [id]);
 
     
@@ -221,7 +221,7 @@ const IndividualTrip = () => {
                                                 <p className="p-2 rounded">${item.precio}</p>
                                             </div>
                                         <div className="d-flex justify-content-between align-items-center mt-auto">
-                                            <Link to="/details" className="detalles text-light btn-sm px-4">Ver más</Link>
+                                            <Link to="/details" state={item} className="detalles text-light btn-sm px-4">Ver más</Link>
                                             <div className="d-flex align-items-center">
                                                 <button className="bg-transparent border-0" onClick={() => { actions.addLike(index) }}><i className="text-danger fa-solid fa-heart me-2"></i>{item.likes}</button>
                                             </div>
