@@ -11,8 +11,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			recomendacionPorLugar: [],
 			viajes: [],
 			user: [],
-
-
+			apiToken: "",
 			token: localStorage.getItem("token") || null,
 			message: null,
 			demo: [
@@ -34,7 +33,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 
 			setCurrentId: (id) => setStore({ currentId: id }),
-
+			setApiToken: async() =>{
+				const store = getStore()
+				const response = await fetch("https://test.api.amadeus.com/v1/security/oauth2/token", {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					},
+					body: new URLSearchParams({
+						'grant_type': 'client_credentials',
+						'client_id': 'cVGjE5EZm9Cg1kTlWttlrW2GkIoscIN6',
+						'client_secret': 'sORLAMKbmjvJWhsd'
+					})
+				})
+				const data = await response.json()
+				setStore({apiToken: data.access_token})
+				// console.log(data)
+				return data.access_token
+			},
 			guardarId: (idViaje) => {
 				let store = getStore()
 				setStore({ ...store, currentId: idViaje })
@@ -136,15 +152,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			// Recomendaciones por lugar
 			loadRecommendations: async (location) => {
+				const apiToken = await getActions().setApiToken()
 				console.log("recomendaciones activadas")
 				const response = await fetch(`https://test.api.amadeus.com/v1/shopping/activities?latitude=${location.latitude}&longitude=${location.longitude}&radius=20`, {
 					method: 'GET',
 					headers: {
-						"authorization": "Bearer fBerfFkVs6mm398mtGm6pfBunbjp"
+						"authorization": "Bearer "+ apiToken
 					}
 				});
 				const data = await response.json();
-				console.log(data.data)
+				// console.log("recomendaciones "+data.data)
 				setStore({ recomendacionPorLugar: data.data })
 			},
 
