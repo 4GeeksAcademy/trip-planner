@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 const Recomendaciones = (props)=> {
     const { store, actions } = useContext(Context);
     return (<>
-        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalRecmendaciones" onClick={()=>{actions.loadRecommendations(props.location)}}>
-        Launch demo modal
+        <button type="button" className="btn w-auto" data-bs-toggle="modal" data-bs-target="#modalRecmendaciones" onClick={()=>{actions.loadRecommendations(props.location)}}>
+        Explora nuevas actividades
         </button>
 
         <div className="modal fade" id="modalRecmendaciones" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

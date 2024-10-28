@@ -1,13 +1,10 @@
 .container1 {
-    gap: 20px;
     padding: 20px;
     margin-top: 400px;
-    display: flex;
 }
 
 .text-activity {
-    justify-content: start;
-    align-items: baseline;
+    align-items: center;
 }
 
 .title-activity {
@@ -40,22 +37,22 @@
 }
 
 .image-card img {
-    max-width: 100%;
-    height: auto;
+    max-width: 130%;
+    max-height: 130%;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.438);
 }
 
 .imagen-adventure {
     border-radius: 20px;
     background-color: rgb(211, 211, 211);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.137);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     padding: 10px;
 }
 
 .task {
-    border-radius: 20px;
+    border-radius: 10px;
     background-color: rgb(211, 211, 211);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.137);
     margin-bottom: 8px;

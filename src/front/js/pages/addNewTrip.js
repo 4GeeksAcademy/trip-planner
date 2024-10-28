@@ -188,7 +188,7 @@ const NewTrip = () => {
                         type="number"
                         className="form-control opacity-50 bg-light  border-0 rounded-3"
                         id="presupuesto"
-                        placeholder="Ingresa el monto estimado para tu viaje (Opcional)"
+                        placeholder="Ingresa el monto estimado para tu viaje"
                         value={viaje.presupuesto_grupo}
                         onChange={
                             (event) => setViaje({

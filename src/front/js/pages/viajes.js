@@ -97,7 +97,7 @@ const Viajes = () => {
                         return (<div key={index} className="viaje container d-flex mb-3 my-5 rounded-pill p-2 bg-light " style={{ width: "100%", maxWidth: "65%" }}>
                             <img src={item.trip_image_url || "https://firebasestorage.googleapis.com/v0/b/trippy-proyecto.appspot.com/o/fondoDestino.png?alt=media&token=c65fa4ed-494d-410b-bd9a-68e74ef3e456"} className="ima rounded-circle shadow" style={{ objectFit: 'cover', width: "100px", height: "100px" }} />
                             <div className="mt-1 flex-grow-1">
-                                <h6 className="mb-2">{item.destino}</h6>
+                                <h6 className="mb-2">{item.destino}</h6> 
                                 <p className="mb-0 mt-3">{formatDate(item.fecha_inicio)} - {formatDate(item.fecha_fin)}</p>
                                 <p className="mb-0 mt-1">
                                     <i className="iconos fa-solid fa-clock me-2"></i>
