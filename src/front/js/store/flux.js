@@ -5,7 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			//add the suggestions
-			currentId: 1,
+			currentId: 2,
 			upDate: false,
 			recommendations: suggestions,
 			recomendacionPorLugar: [],
@@ -32,6 +32,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			miembros: [],
 		},
 		actions: {
+
+			setCurrentId: (id) => setStore({ currentId: id }),
 
 			guardarId: (idViaje) => {
 				let store = getStore()
@@ -115,15 +117,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(activity)
 				});
 				const data = await response.json();
-				console.log(data)
+				console.log("Una actividad más", data);
 				setStore({ activities: [data, ...store.activities] });
-				toast.success("Se ha creado tu viaje!");
-
-				// const activityAdded = store.activities
-				// activityAdded.push(activity)
-				// console.log(activityAdded)
-				// // console.log("Segundo "+store.activities)
-				// setStore({ activities:  })
+				toast.success("Se ha creado tu actividad!");
 			},
 
 			getActivities: async () => {
@@ -134,6 +130,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const data = await response.json()
 				console.log("Este es getActivities", data)
 				// setStore(activities)
+				setStore({ activities: data });
 			},
 
 			// Recomendaciones por lugar
@@ -202,6 +199,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					toast.error("Credenciales inválidas");
 				}
 			},
+
 			logout: () => {
 				localStorage.removeItem("token");
 				setStore({
@@ -210,6 +208,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				toast("👋🏼 Hasta luego, esperamos verte pronto...");
 			},
+			
 			register: async (name, userName, email, password, more_info, profileImageUrl) => {
 				const resp = await fetch(process.env.BACKEND_URL + "/api/register", {
 					method: "POST",
@@ -245,6 +244,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					toast.error("Error al registrar el usuario");
 				}
 			},
+
 			getUserLogged: async () => {
 				const resp = await fetch(process.env.BACKEND_URL + "/api/user", {
 					headers: {
@@ -272,7 +272,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						selected_trip: [...store.selected_trip, viaje]
 					});
 				}
-				console.log(viaje);
+				console.log("Actividad en selected_trip", viaje);
 			},
 
 			deleteViaje: (viaje) => {

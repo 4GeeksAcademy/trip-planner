@@ -19,7 +19,12 @@ const IndividualTrip = () => {
     const [ newMember, setNewMember ] = useState({ email: "" });
     const [ selectedMember, setSelectedMember ] = useState("null");
 
-    actions.getActivities();
+
+    useEffect(() => {
+        actions.setCurrentId(parseInt(id));
+        actions.getActivities();
+    }, [id]);
+
     
     useEffect(() => {
         if(store.viajes.length > 0) {
@@ -191,20 +196,21 @@ const IndividualTrip = () => {
                     <AddActivity viajeId = {viaje.id} />
 
                     {/* CARDS */}
+                    
                     {store.activities.map((item, index) => {
                         return (
                             
                             <div key={index} className="col-md-3">
                                 <div className="card rounded shadow h-100 bg-light text-black" style={{ width: '100%' }}>
-                                    <img src={item.imageUrl} className="card-img-top" alt="..." style={{ height: '280px', objectFit: 'cover' }} />
+                                    <img src={item.imagenes} className="card-img-top" alt="..." style={{ height: '280px', objectFit: 'cover' }} />
                                     <div className="card-body d-flex flex-column">
                                         <div className="d-flex justify-content-between align-items-center mb-2">
-                                            <h5 className="card-title mb-0">{item.name}</h5>
+                                            <h5 className="card-title mb-0">{item.nombre_actividad}</h5>
                                             <p className="mb-0 text-muted small"><i className="fa-solid fa-user me-2"></i>{item.author}</p>
                                         </div>
-                                        <p className="card-text">{item.description}</p>
+                                        <p className="card-text">{item.descripcion}</p>
                                             <div className="d-flex justify-content-end align-items-center border-black border-bottom border-3  my-2">
-                                                <span className="p-2 rounded">${item.cost}</span>
+                                                <p className="p-2 rounded">${item.precio}</p>
                                             </div>
                                         <div className="d-flex justify-content-between align-items-center mt-auto">
                                             <Link to="/details" className="detalles text-light btn-sm px-4">Ver más</Link>
@@ -215,8 +221,8 @@ const IndividualTrip = () => {
                                     </div>
                                         <div className="card-footer text-center bg-secondary text-light p-2">
                                             <button className={`btn btn btn-light btn-sm px-4 shadow ${actions.isViaje({name: item.name, id: item.id, type: "tripDetail"}) && "btn-danger"} `}
-                                            onClick={() => actions.addViaje( {name: item.name, id: item.id, type: "tripDetail", cost: item.cost, imageUrl: item.imageUrl} )}>
-                                            {actions.isViaje( {name: item.name, id: item.id, type: "tripDetail", cost: item.cost, imageUrl: item.imageUrl}) ? 
+                                            onClick={() => actions.addViaje( {name: item.nombre_actividad, id: item.id, type: "tripDetail", cost: item.precio, imageUrl: item.imagenes} )}>
+                                            {actions.isViaje( {name: item.nombre_actividad, id: item.id, type: "tripDetail", cost: item.precio, imageUrl: item.imagenes}) ? 
                                                 <>
                                                     <i className="text-danger delete-trip fa-solid fa-trash-can p-1"></i>
                                                     <span className="text-danger">Quitar</span> 
@@ -233,11 +239,13 @@ const IndividualTrip = () => {
                             </div>
                         )
                     })}
-
                 </div>
+               
             </div>
         </>
     )
 }
 export default IndividualTrip
+
+
 

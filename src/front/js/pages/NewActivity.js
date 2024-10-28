@@ -3,6 +3,19 @@ import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext.js"
 import React, {useState, useContext} from 'react';
 
+import { initializeApp } from "firebase/app";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+
+const firebaseConfig = {
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID,
+    appId: process.env.APP_ID
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
 
 const NewActivity = () => {
     const { store, actions } = useContext(Context);
@@ -11,29 +24,51 @@ const NewActivity = () => {
     const [activity, setActivity] = useState({
         name: "",
         // author: store.user.username,
-        costo: 0,
+        precio: 0,
         descripcion: "",
         imageURL: "",
         likes: 0,
         comentarios: "",
         duracion: "",
-        viaje_id: store.currentId
+        viaje_id: store.currentId,
     })
 
-    const upload = () => {
-        actions.addActivity(activity);
+    const upload = async () => {
+        const activityImageUrl = activity.imageURL ? await uploadImage(activity.imageURL) : null;
+        await actions.addActivity(activity, activityImageUrl);
         console.log(activity);
         setActivity({
             name: "",
-            costo: 0,
+            precio: 0,
             descripcion: "",
             imageURL: "",
             likes: 0,
             comentarios: "",
-            duracion: ""
+            duracion: "",
         })
         navigate(`/trip/${store.currentId}`); // Navega después de guardar
     };
+
+
+    const uploadImage = async (image) => {
+        const storage = getStorage();
+        const storageRef = ref(storage, `imagenes_actividades/${image.name}`);
+
+        const metadata = {
+            contentType: image.type
+        };
+        try {
+            const fileData = await uploadBytesResumable(storageRef, image, metadata);
+            const downloadURL = await getDownloadURL(fileData.ref);
+            console.log("Disponible en: ", downloadURL);
+
+            return downloadURL;
+        } catch (error) {
+            toast.error("Error al cargar la imagen");
+            return null;
+        }
+
+    }
 
     return (
         <div className="container">
@@ -57,15 +92,27 @@ const NewActivity = () => {
                     />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="Foto" className="form-label text-light"> <i className="colorNaranja fa-solid fa-image me-2"></i>Sube una foto de referencia</label>
+                    <label className="form-label text-light"> <i className="colorNaranja fa-solid fa-image me-2"></i>Sube una foto de referencia</label>
                     <div className = "d-flex justify-content-center">
                         <img
-                            src={'https://i.pinimg.com/550x/a8/0e/36/a80e3690318c08114011145fdcfa3ddb.jpg'}
-                            // user.image ? URL.createObjectURL(user.image) : user.profileImageUrl || 
+                            src={activity.imageURL ? URL.createObjectURL(activity.imageURL) : activity.activityImageUrl || 'https://i.pinimg.com/550x/a8/0e/36/a80e3690318c08114011145fdcfa3ddb.jpg'}
                             className="rounded-3 mx-auto"
                             style={{ width: '150px', cursor: 'pointer' }}
-                            // onClick={() => document.getElementById('imagenPerfil').click()} // Activa el input de archivo
+                            onClick={() => document.getElementById('imagenActividad').click()} // Activa el input de archivo
                             />
+                    </div>
+                    <div className="mb-3 d-flex flex-column">
+                        <input
+                            id="imagenActividad"
+                            type="file"
+                            accept="imageURL/*"
+                            className="form-control"
+                            style={{ display: 'none' }}
+                            onChange={(event) => setActivity({
+                                ...activity,
+                                imageURL: event.target.files[0]
+                            })}
+                        />
                     </div>
                 </div>
 
@@ -91,14 +138,14 @@ const NewActivity = () => {
                     <label htmlFor="Monto" className="form-label text-light"> <i className="colorNaranja fa-solid fa-sack-dollar me-2"></i>Costo apróximado</label>
                     <textarea
                         className="form-control opacity-50 bg-light border-0 rounded-3"
-                        id="costo"
+                        id="precio"
                         rows="1"
                         placeholder="Ingresa el monto total que estimas para la actividad (opcional)"
-                        value={activity.costo}
+                        value={activity.precio}
                         onChange={
                             (event) => setActivity({
                                 ...activity,
-                                costo: event.target.value
+                                precio: event.target.value
                             })
                         }
                     ></textarea>
@@ -106,7 +153,7 @@ const NewActivity = () => {
 
 
                 <div className="mb-3">
-                    <label htmlFor="Foto" className="form-label text-light"> <i className="colorNaranja fa-solid fa-clock me-2"></i>Duración de la actividad</label>
+                    <label htmlFor="duracion" className="form-label text-light"> <i className="colorNaranja fa-solid fa-clock me-2"></i>Duración de la actividad</label>
                     <textarea
                         className="form-control opacity-50 bg-light border-0 rounded-3"
                         id="duracion"
@@ -114,11 +161,14 @@ const NewActivity = () => {
                         placeholder="(opcional)"
                         value={activity.duracion}
                         onChange={
-                            (event) => setActivity({
-                                ...activity,
-                                duracion: event.target.value
-                            })
-                        }
+                            (event) => {
+                                const newDuration = event.target.value;
+                                console.log("Duración actualizada", newDuration);
+                                setActivity(prevActivity => ({
+                                ...prevActivity,
+                                duracion: newDuration
+                            }));
+                        }}
                     ></textarea>
                 </div>
                 

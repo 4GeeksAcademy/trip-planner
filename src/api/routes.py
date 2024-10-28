@@ -113,7 +113,7 @@ def add_activity():
     precio = request.json.get("precio", None)
     moneda = request.json.get("moneda", None)
     imagenes = request.json.get("imagenes", None)
-    duracion = request.json.get("destino", None)
+    duracion = request.json.get("duracion", None)
     viaje_id = request.json.get("viaje_id", None)
     # viaje = Viaje.query.get(viaje_id)
     descripcion = request.json.get("descripcion", None)
