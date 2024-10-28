@@ -1,11 +1,11 @@
-import {Toaster, toast} from "react-hot-toast";
+import {toast} from "react-hot-toast";
 import suggestions from "./suggestions"
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			//add the suggestions
-			currentId: 0,
+			currentId: 1,
 			upDate: false,
 			recommendations: suggestions,
 			recomendacionPorLugar: [],
@@ -32,10 +32,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			miembros: [],
 		},
 		actions: {
-
-			// get_users: () => {
-			// 	const store = getStore()
-			// },
 
 			guardarId: (idViaje) => {
 				let store = getStore()
@@ -212,7 +208,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					token: null,
 					user: {}
 				});
-				toast.success("Cerrando Sesión!");
+				toast("👋🏼 Hasta luego, esperamos verte pronto...");
 			},
 			register: async (name, userName, email, password, more_info, profileImageUrl) => {
 				const resp = await fetch(process.env.BACKEND_URL + "/api/register", {
@@ -240,8 +236,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (resp.ok) {
 					toast.success("¡Tu usuario ha sido registrado!");
 					toast("Hemos iniciado sesión por ti😎 ¡Comienza a explorar!",
-						{ 
-							icono : '👏' , 
+						{  
 							duration: 5000,
 						  }
 					);

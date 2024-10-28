@@ -11,7 +11,7 @@ const ShoppingCart = () => {
     return (
     <div className = "container d-flex flex  justify-content-end">
         <div className="btn-group">
-            <button type="button" className="btn btn-danger btn-sm dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+            <button type="button" className="fondoNaranja btn btn-sm dropdown-toggle me-2" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                 Tu viaje
             </button>
             <ul className="dropdown-menu dropdown-menu-end">

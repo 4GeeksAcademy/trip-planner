@@ -60,6 +60,14 @@ const IndividualTrip = () => {
         }
     }
 
+    //Formato de fecha sin horas
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const options = { year: 'numeric', month: 'numeric', day: 'numeric', timeZone: 'UTC' };
+        return date.toLocaleDateString('es-ES', options);
+    };
+    
+
     return (
         <>
             <div className="container">
@@ -67,8 +75,8 @@ const IndividualTrip = () => {
                 <div className=" rounded d-flex flex-column flex-md-row justify-content-between bg-light p-4 shadow">
                     <div className="d-flex flex-column flex-md-row justify-content-between" style={{ width: "80%" }} >
                         <h5 className="mb-1">Destino: {viaje.destino}</h5>
-                        <p className="mb-1">Fecha de salida: {viaje.fecha_inicio}</p>
-                            <p className="mb-1">Presupuesto: {viaje.presupuesto}</p>
+                        <p className="mb-1">Fecha de salida: {formatDate(viaje.fecha_inicio)}</p>
+                            <p className="mb-1">Presupuesto: $ {viaje.presupuesto}</p>
                     </div>
                     
 

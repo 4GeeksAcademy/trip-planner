@@ -2,6 +2,7 @@
     gap: 20px;
     padding: 20px;
     margin-top: 400px;
+    display: flex;
 }
 
 .text-activity {
@@ -11,10 +12,11 @@
 
 .title-activity {
     justify-content: start;
+    color: rgb(228, 134, 12)
 }
 
 .icon {
-    width: 100;
+    width: 100px;
     height: 100px;
 }
 
@@ -22,8 +24,6 @@
     margin: 10px;
     width: 50px;
     height: 50px;
-    justify-content: center;
-    align-items: start;
 }
 
 .text-card {
@@ -31,20 +31,27 @@
     max-width: 500px;
 }
 
-.imagen-card{
+.image-card {
     flex: 1;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.image-card img {
+    max-width: 100%;
+    height: auto;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgb(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .imagen-adventure {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
+    border-radius: 20px;
+    background-color: rgb(211, 211, 211);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.137);
+    margin-bottom: 8px;
+    padding: 10px;
 }
 
 .task {
@@ -54,7 +61,3 @@
     margin-bottom: 8px;
 }
 
-.description-activity, .title-activity {
-    padding: 5px;
-    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.171);
-}

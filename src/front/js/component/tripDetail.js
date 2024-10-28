@@ -84,7 +84,7 @@ const TripDetail = () => {
                                         setComentarios([...comentarios, { id: 1, usuario: '@maria', mensaje: nuevoComentario }]);
                                         setNuevoComentario('');
                                     }}
-                                    ><i class="fa-solid fa-circle-arrow-up fs-4 colorNaranja"></i></button>
+                                    ><i className="fa-solid fa-circle-arrow-up fs-4 colorNaranja"></i></button>
                                 </div>
                             </div>
                         </div>

@@ -1,23 +1,31 @@
 import React, { useContext } from "react";
-import { Link , useLocation} from "react-router-dom"
+import { Link , useLocation, useNavigate} from "react-router-dom"
 import { Context } from "../store/appContext"
 import "../../styles/home.css";
-import logo from "../../img/logo-trippy.png"
+import logoDefault from "../../img/logo-trippy.png"
+import logoLanding from "../../img/logo-landing.png"
 import "../../styles/footer.css"
 
 export const Navbar = ({ isLandingPage }) => {
 
 	const { store, actions } = useContext(Context);
 	const location = useLocation();
+	const navigate = useNavigate();
 
 	const islanding = location.pathname === "/";
 
+	const handleLogout = () => {
+		actions.logout();
+		navigate('/'); // Redirige a la página principal
+	};
+
 	const textColorClass = islanding ? "text-white" : "text-dark";
+	const logo = islanding ? logoLanding : logoDefault;
 
 	return (
 		<nav id="navbar" className="d-flex px-5 justify-content-center align-items-center relative">
 			<Link className="container ps-5 mt-1" to="/">
-				<img src={logo} className="logo" style={{ width: '120px' }} />
+				<img src={logo} className="logo" style={{ width: '140px' }} />
 			</Link>
 			<div className="d-flex">
 				<Link to="/">
@@ -32,11 +40,11 @@ export const Navbar = ({ isLandingPage }) => {
 
 				{store.user && store.token && (
 					<div className="dropdown">
-						<button className="border border-0 bg-transparent mx-3  fw-bold dropdown-toggle text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+						<button className={`border border-0 bg-transparent mx-3 fw-bold dropdown-toggle ${textColorClass}`} type="button" data-bs-toggle="dropdown" aria-expanded="false">
 							{store.user?.username?.toUpperCase()}
 						</button>
-						<ul className="dropdown-menu dropdown-menu-dark">
-							<li><a className={`dropdown-item text-danger ${textColorClass}`} onClick={() => actions.logout()}>SALIR</a></li>
+						<ul className="dropdown-menu dropdown-menu-dark w-auto p-1">
+							<li><a className={`dropdown-item text-danger`} onClick={handleLogout}>SALIR</a></li>
 						</ul>
 					</div>)}
 				{
