@@ -81,7 +81,7 @@ const NewTrip = () => {
 
         const fechaInicio = new Date(viaje.fecha_inicio);
         const fechaFin = new Date(viaje.fecha_fin);
-        const fechaActual = new Date().toISOString().split('T')[0];
+        const fechaActual = new Date();
 
         // Validar que la fecha de inicio no sea anterior a la fecha actual
         if (fechaInicio <= fechaActual) {

@@ -3,6 +3,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Context } from "../store/appContext.js"
 import { Link } from "react-router-dom";
 
+
 const formatDate = (dateString) => {
     const date = new Date(dateString);
     const options = { year: 'numeric', month: 'numeric', day: 'numeric', timeZone: 'UTC' };
@@ -128,6 +129,8 @@ const Viajes = () => {
                 </Link>
 
             </div>
+
+
 
 
         </>
