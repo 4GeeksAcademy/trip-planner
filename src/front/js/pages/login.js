@@ -14,7 +14,7 @@ const Login = () => {
 
     useEffect(() => {
         if (store.token) {
-            navigate("/");
+            navigate("/viajes");
         }
     }, [store.token])
 

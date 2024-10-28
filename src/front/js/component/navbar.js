@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link , useLocation, useNavigate} from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { Context } from "../store/appContext"
 import "../../styles/home.css";
 import logoDefault from "../../img/logo-trippy.png"
@@ -44,6 +44,12 @@ export const Navbar = ({ isLandingPage }) => {
 							{store.user?.username?.toUpperCase()}
 						</button>
 						<ul className="dropdown-menu dropdown-menu-dark w-auto p-1">
+							<li>
+								<Link to="/profile" className="dropdown-item" style={{ textDecoration: 'none', color: 'inherit' }}>
+									Configuración de perfil
+								</Link>
+							</li>
+							<li><hr className="dropdown-divider" /></li>
 							<li><a className={`dropdown-item text-danger`} onClick={handleLogout}>SALIR</a></li>
 						</ul>
 					</div>)}
@@ -51,6 +57,6 @@ export const Navbar = ({ isLandingPage }) => {
 					!store.token && <Link to="/register"><button className={`border border-0 bg-transparent mx-3 fw-bold ${textColorClass}`}>REGISTRATE</button></Link>
 				}
 			</div>
-		</nav>
+		</nav >
 	);
 };

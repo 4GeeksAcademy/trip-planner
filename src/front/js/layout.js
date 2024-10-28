@@ -15,6 +15,7 @@ import NewTrip from "./pages/addNewTrip";
 import IndividualTrip from "./pages/individualTrip";
 import Login from "./pages/login";
 import Register from "./pages/register.js";
+import Profile from "./pages/profile.js";
 import Destination from "./component/destination.js";
 
 
@@ -45,15 +46,16 @@ const Layout = () => {
                         <Route element={<IndividualTrip />} path="/trip/:id" />
                         <Route element={<Login />} path="/login" />
                         <Route element={<Register />} path="/register" />
+                        <Route element={<Profile />} path="/profile" />
                         <Route element={<Viajes />} path="/viajes" />
                         <Route element={<TripDetail />} path="/details" />
                         <Route element={<TripScore />} path="/score" />
                         <Route element={<Destination />} path="/destination" />
-                        <Route element={<NewActivity/>} path="/add-activity" />
+                        <Route element={<NewActivity />} path="/add-activity" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>
-                <Toaster /> 
+                <Toaster />
             </BrowserRouter>
         </div>
     );
