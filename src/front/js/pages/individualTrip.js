@@ -28,19 +28,20 @@ const IndividualTrip = () => {
         actions.getActivities(id);
     }, [id]);
 
-    
-    useEffect(() => {git 
-    if (loading) {
-        return <div className="text-center">
-            <div className="spinner-border m-5" role="status">
-                <span className="visually-hidden">Loading...</span>
-            </div>
-        </div>;
-    }
 
-    if (!viaje) {
-        return <p>Viaje no encontrado</p>;
-    }
+    useEffect(() => {
+        if (loading) {
+            return <div className="text-center">
+                <div className="spinner-border m-5" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>;
+        }
+
+        if (!viaje) {
+            return <p>Viaje no encontrado</p>;
+        }
+    });
 
 
     const handleInputChange = (e) => {
@@ -199,7 +200,7 @@ const IndividualTrip = () => {
                     <AddActivity viajeId={viaje.id} />
 
                     {/* CARDS */}
-                    
+
                     {store.activities.map((item, index) => {
                         return (
 
@@ -211,20 +212,20 @@ const IndividualTrip = () => {
                                             <h5 className="card-title mb-0">{item.nombre_actividad}</h5>
                                         </div>
                                         <p className="card-text">{item.descripcion}</p>
-                                            <div className="d-flex justify-content-end align-items-center border-black border-bottom border-3  my-2">
-                                                <p className="p-2 rounded">${item.precio}</p>
-                                            </div>
+                                        <div className="d-flex justify-content-end align-items-center border-black border-bottom border-3  my-2">
+                                            <p className="p-2 rounded">${item.precio}</p>
+                                        </div>
                                         <div className="d-flex justify-content-between align-items-center mt-auto">
                                             <Link to="/details" state={item} className="detalles text-light btn-sm px-4">Ver más</Link>
                                             <div className="d-flex align-items-center">
-                                                <button className="bg-transparent border-0" onClick={() => { actions.addLike(index) }}><i className={`text-danger ${actions.isViaje({name: item.name, id: item.id, type: "tripDetail"}) ? "fa-solid" : "fa-regular" } fa-heart me-2`}></i>{item.likes}</button>
+                                                <button className="bg-transparent border-0" onClick={() => { actions.addLike(index) }}><i className={`text-danger ${actions.isViaje({ name: item.name, id: item.id, type: "tripDetail" }) ? "fa-solid" : "fa-regular"} fa-heart me-2`}></i>{item.likes}</button>
                                             </div>
                                         </div>
                                     </div>
-                                        <div className="card-footer text-center bg-secondary text-light p-2">
-                                            <button className={`btn btn btn-light btn-sm px-4 shadow ${actions.isViaje({name: item.name, id: item.id, type: "tripDetail"}) && "btn-danger"} `}
-                                            onClick={() => actions.addViaje( {name: item.nombre_actividad, id: item.id, type: "tripDetail", cost: item.precio, imagenes: item.imagenes} )}>
-                                            {actions.isViaje( {name: item.nombre_actividad, id: item.id, type: "tripDetail", cost: item.precio, imagenes: item.imagenes}) ? 
+                                    <div className="card-footer text-center bg-secondary text-light p-2">
+                                        <button className={`btn btn btn-light btn-sm px-4 shadow ${actions.isViaje({ name: item.name, id: item.id, type: "tripDetail" }) && "btn-danger"} `}
+                                            onClick={() => actions.addViaje({ name: item.nombre_actividad, id: item.id, type: "tripDetail", cost: item.precio, imagenes: item.imagenes })}>
+                                            {actions.isViaje({ name: item.nombre_actividad, id: item.id, type: "tripDetail", cost: item.precio, imagenes: item.imagenes }) ?
                                                 <>
                                                     <i className="text-danger delete-trip fa-solid fa-trash-can p-1"></i>
                                                     <span className="text-danger">Quitar</span>
@@ -242,12 +243,15 @@ const IndividualTrip = () => {
                         )
                     })}
                 </div>
-               
+
             </div>
         </div>
     )
-}
-export default IndividualTrip
+
+};
+
+
+export default IndividualTrip;
 
 
 
