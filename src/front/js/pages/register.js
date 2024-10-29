@@ -75,7 +75,7 @@ const Register = () => {
                             src={user.image ? URL.createObjectURL(user.image) : user.profileImageUrl || 'https://i.pinimg.com/550x/a8/0e/36/a80e3690318c08114011145fdcfa3ddb.jpg'}
                             className="rounded-circle shadow mx-auto"
                             style={{ width: '150px', cursor: 'pointer' }}
-                            onClick={() => document.getElementById('imagenPerfil').click()} // Activa el input de archivo
+                            onClick={() => document.getElementById('imagenPerfil').click()} 
                         />
                     </div>
                     <div className="mb-3 d-flex flex-column">

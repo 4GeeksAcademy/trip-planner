@@ -1,4 +1,4 @@
-import {toast} from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import suggestions from "./suggestions"
 
 const getState = ({ getStore, getActions, setStore }) => {
@@ -210,6 +210,77 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				toast("👋🏼 Hasta luego, esperamos verte pronto...");
 			},
+
+			getUserData: async (userEmail) => {
+				const store = getStore();
+				const email = userEmail || store.user.email;
+
+				if (email) {
+					try {
+						const response = await fetch(`${process.env.BACKEND_URL}/api/user/${email}`);
+						if (!response.ok) {
+							const errorText = await response.text();
+							console.error("Error en la respuesta:", errorText);
+							console.error("Código de estado:", response.status);
+							throw new Error("Error al obtener los datos del usuario");
+						}
+
+						const data = await response.json();
+						if (data.email) {
+							setStore({ user: data });
+						} else {
+							console.warn("El email no se recibió en los datos del servidor");
+						}
+					} catch (error) {
+						console.error("Error al hacer la solicitud:", error);
+						toast.error("Error al obtener los datos del usuario");
+					}
+				} else {
+					console.warn("No se encontró el email del usuario en el store");
+				}
+			},
+			updateUserProfile: async (name, userName, email, password, more_info, profileImageUrl) => {
+				const actions = getActions();
+				const store = getStore();
+				const currentEmail = store.user.email;
+				const resp = await fetch(`${process.env.BACKEND_URL}/api/user/${currentEmail}`, {
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json",
+						"Authorization": `Bearer ${store.user.token}`
+					},
+					body: JSON.stringify({
+						name: name || store.user.name,
+						username: userName || store.user.username,
+						email: email || currentEmail,
+						password: password,
+						more_info: more_info || store.user.more_info,
+						profile_image_url: profileImageUrl || store.user.profile_image_url
+					})
+				});
+				const data = await resp.json()
+				if (resp.ok) {
+					toast.success("¡Tu usuario ha sido actualizado!");
+					setStore({
+						user: {
+							...store.user,
+							name: name || store.user.name,
+							username: userName || store.user.username,
+							email: email || currentEmail,
+							more_info: more_info || store.user.more_info,
+							profile_image_url: profileImageUrl || store.user.profile_image_url
+						}
+					});
+
+					console.log(store.user.email)
+					await actions.getUserData(email || currentEmail);
+					return data;
+				}
+				else {
+					toast.error("Error al actualizar el usuario");
+				}
+			}
+			,
 			register: async (name, userName, email, password, more_info, profileImageUrl) => {
 				const resp = await fetch(process.env.BACKEND_URL + "/api/register", {
 					method: "POST",
@@ -236,9 +307,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (resp.ok) {
 					toast.success("¡Tu usuario ha sido registrado!");
 					toast("Hemos iniciado sesión por ti😎 ¡Comienza a explorar!",
-						{  
+						{
 							duration: 5000,
-						  }
+						}
 					);
 				}
 				else {

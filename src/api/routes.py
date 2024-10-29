@@ -257,6 +257,7 @@ def register():
 @jwt_required()
 def get_user_logged():
     current_user = get_jwt_identity()
+    print(f"Usuario actual: {current_user}")
     user = User.query.filter_by(email=current_user).first()
     return jsonify(user.serialize()),200
 #TRAER A TODOS LOS USERS
@@ -265,12 +266,15 @@ def all_users():
     users = User.query.all()
     usuarios_serializados = [persona.serialize() for persona in users]
     return jsonify(usuarios_serializados), 200
-#TRAER A UN SOLO USER POR ID
-@api.route('/user/<int:id>', methods=['GET'])
-def get_user(id):
+#TRAER A UN SOLO USER POR EMAIL
+@api.route("/user/<string:email>", methods=["GET"])
+def get_user(email):
+    searched_user = User.query.filter_by(email=email).one_or_none() 
 
-    searched_user= User.query.filter_by(id=id).one_or_none()
-    usuario_serializado = searched_user.serialize()
+    if searched_user is None:  
+        return jsonify({"error": f"Usuario con email: {email} no encontrado"}), 404
+    
+    usuario_serializado = searched_user.serialize() 
     return jsonify(usuario_serializado), 200
 
 #ACTUALIZAR USUARIO
@@ -281,6 +285,8 @@ def update_user(email):
     body = request.json
     if not body:
         return jsonify({"error": "Los datos no fueron provistos"}), 400
+    if searched_user is None:
+        return jsonify({"error": f"El usuario con email: {email} no fue encontrado"}), 404
     
     new_name = body.get('name', None)
     new_username= body.get('username', None)
@@ -289,29 +295,26 @@ def update_user(email):
     new_more_info = body.get('more_info', None)
     new_profile_image_url = body.get('profile_image_url', None)
 
-    if searched_user!=None:
-        if new_name!=None:
-            searched_user.name=new_name
-        if new_username!=None:
-            searched_user.username=new_username
-        if new_email!=None:
-            searched_user.email=new_email
-        if new_password!=None:
-            bpassword = bytes(new_password, 'utf-8')
-            new_salt = bcrypt.gensalt(14)
-            new_hashed_password = bcrypt.hashpw(password=bpassword, salt=new_salt)
-            searched_user.password = new_hashed_password.decode('utf-8')
-            searched_user.salt = new_salt
-        if new_more_info!=None:
-            searched_user.more_info = new_more_info
-        if new_profile_image_url!=None:
-            searched_user.profile_image_url = new_profile_image_url
+    if new_name!=None:
+        searched_user.name=new_name
+    if new_username!=None:
+        searched_user.username=new_username
+    if new_email!=None:
+        searched_user.email=new_email
+    if new_password!=None:
+        bpassword = bytes(new_password, 'utf-8')
+        new_salt = bcrypt.gensalt(14)
+        new_hashed_password = bcrypt.hashpw(password=bpassword, salt=new_salt)
+        searched_user.password = new_hashed_password.decode('utf-8')
+        searched_user.salt = new_salt
+    if new_more_info!=None:
+        searched_user.more_info = new_more_info
+    if new_profile_image_url is not None and isinstance(new_profile_image_url, str):
+        searched_user.profile_image_url = new_profile_image_url
 
-        db.session.commit()
-
-        return jsonify(searched_user.serialize()), 202
-    else:
-        return jsonify({"error": f"El usuario con email: {email} no fue encontrado"})
+    db.session.commit()
+    token = create_access_token(identity=searched_user.email)
+    return jsonify({"user": searched_user.serialize(), "token": token}), 200
 
 #ELIMINAR A UN USUARIO
 @api.route('/user/<string:email>', methods=['DELETE'])
