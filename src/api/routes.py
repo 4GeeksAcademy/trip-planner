@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Viaje, Grupo, Actividad
+from api.models import db, User, Viaje, Grupo, Actividad, Comentarios
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from datetime import datetime
@@ -27,7 +27,29 @@ api = Blueprint('api', __name__)
 CORS(api)
 
 
-# AGREGAR ACTIVIDADES AL VIAJE
+# AGREGAR COMENTARIOS 
+@api.route('/add-comment/', methods= ['POST'])
+@jwt_required()
+def add_comment():
+    user_email = get_jwt_identity()
+    user = User.query.filter_by(email=user_email).first()
+    
+    if user is None:
+        return jsonify({"error": "User not found"}), 404
+
+    actividades_id = request.json.get("actividades_id", None)
+    comentario = request.json.get("comentario", None)
+
+    nuevo_comentario = Comentarios(
+        actividades_id=actividades_id,
+        user_id=user.id,
+        comentario=comentario
+    )
+
+    db.session.add(nuevo_comentario)
+    db.session.commit()
+
+    return jsonify(nuevo_comentario.serialize()), 201
 
 # AGREGAR LIKES DE LAS ACTIVIDADES
 @api.route('/add-likes/', methods= ['POST'])
