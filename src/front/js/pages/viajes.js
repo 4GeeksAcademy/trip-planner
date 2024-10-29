@@ -2,6 +2,7 @@ import '../../styles/viajes.css';
 import React, { useContext, useState, useEffect } from 'react';
 import { Context } from "../store/appContext.js"
 import { Link } from "react-router-dom";
+import "../../styles/index.css";
 
 
 const formatDate = (dateString) => {
@@ -56,7 +57,7 @@ const Viajes = () => {
     console.log(store.viajes)
 
     return (
-        <>
+        <div className="PaginaPrincipal">
             {/* User Banner */}
             {console.log(store.user)}
             <div className="d-flex flex-column flex-md-row align-items-center justify-content-center">
@@ -133,7 +134,7 @@ const Viajes = () => {
 
 
 
-        </>
+        </div>
     )
 }
 

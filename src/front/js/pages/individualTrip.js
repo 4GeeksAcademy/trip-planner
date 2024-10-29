@@ -6,6 +6,7 @@ import ShoppingCart from "../component/shoppingCart.js"
 import toast from "react-hot-toast";
 import AddActivity from "../component/AddActivity.js"
 import Recomendaciones from '../component/recomendaciones.js';
+import "../../styles/index.css";
 
 const IndividualTrip = () => {
     const location = {
@@ -78,7 +79,7 @@ const IndividualTrip = () => {
 
 
     return (
-        <>
+        <div className="PaginaPrincipal">
             <div className="container">
 
                 <div className=" rounded d-flex flex-column flex-md-row justify-content-between bg-light p-4 shadow">
@@ -214,7 +215,6 @@ const IndividualTrip = () => {
                                     <div className="card-body d-flex flex-column">
                                         <div className="d-flex justify-content-between align-items-center mb-2">
                                             <h5 className="card-title mb-0">{item.nombre_actividad}</h5>
-                                            <p className="mb-0 text-muted small"><i className="fa-solid fa-user me-2"></i>{item.author}</p>
                                         </div>
                                         <p className="card-text">{item.descripcion}</p>
                                             <div className="d-flex justify-content-end align-items-center border-black border-bottom border-3  my-2">
@@ -250,7 +250,7 @@ const IndividualTrip = () => {
                 </div>
                
             </div>
-        </>
+        </div>
     )
 }
 export default IndividualTrip

@@ -2,9 +2,10 @@ import React, {useContext} from 'react'
 import { Context } from "../store/appContext.js"
 import { Link } from 'react-router-dom';
 
+
 const Recomendaciones = (props)=> {
     const { store, actions } = useContext(Context);
-    return (<>
+    return (<div>
         <button type="button" className="btn w-auto" data-bs-toggle="modal" data-bs-target="#modalRecmendaciones" onClick={()=>{actions.loadRecommendations(props.location)}}>
         Explora nuevas actividades
         </button>
@@ -49,7 +50,7 @@ const Recomendaciones = (props)=> {
             </div>
         </div>
         
-    </>)
+    </div>)
 }
 
 export default Recomendaciones;

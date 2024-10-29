@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { Context } from "../store/appContext";
 
 
+
 const ShoppingCart = () => {
     
     const { store, actions } = useContext(Context);

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext.js";
 import { Link } from 'react-router-dom';
 import toast from "react-hot-toast";
+import "../../styles/index.css";
 
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -65,7 +66,7 @@ const Register = () => {
     }, [])
 
     return (
-        <>
+        <div className="PaginaPrincipal">
             <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
                 <div className="rounded shadow-lg p-4 bg-dark" style={{ width: '450px' }}>
                     <h1 className="text-center text-light">Crea una cuenta</h1>
@@ -180,7 +181,7 @@ const Register = () => {
                     </div>
                 </div>
             </div >
-        </>
+        </div>
     );
 };
 

@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext.js"
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import "../../styles/index.css";
 
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -32,10 +33,10 @@ const NewTrip = () => {
         destino: "",
         fecha_inicio: "",
         fecha_fin: "",
-        presupuesto_grupo: "",
+        presupuesto_grupo: 0,
         motivo: "",
         nota: "",
-        presupuesto_personal: "",
+        presupuesto_personal: 0,
     })
 
 
@@ -105,6 +106,7 @@ const NewTrip = () => {
 
 
     return (
+        <div className="PaginaPrincipal">
         <div className="container">
             <div className="p-4 bg-dark  rounded shadow-lg w-50 mx-auto">
 
@@ -267,6 +269,7 @@ const NewTrip = () => {
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     );
 

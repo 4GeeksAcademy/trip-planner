@@ -1,6 +1,7 @@
 import '../../styles/viajes.css';
 import React, { useState } from "react";
 import { useLocation } from 'react-router-dom';
+import "../../styles/index.css";
 
 
 
@@ -20,7 +21,7 @@ const TripDetail = () => {
     const [nuevoComentario, setNuevoComentario] = useState('')
 
     return (
-
+        <div className="PaginaPrincipal">
         <div className="container-fluid mx-auto p-2">
             <div className="d-flex justify-content-center mt-4 rounded">
                 <div className="rounded rounded-3 border shadow-sm" style={{ width: "80%" }}>
@@ -107,6 +108,7 @@ const TripDetail = () => {
             </div>
         </div>
         </div >
+        </div>
 
 
 

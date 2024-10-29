@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react"; // Importa useState
 import { useNavigate, Link } from "react-router-dom";
 import { Context } from "../store/appContext.js";
+import "../../styles/index.css";
 
 
 const Login = () => {
@@ -19,7 +20,7 @@ const Login = () => {
     }, [store.token])
 
     return (
-        <>
+        <div className="PaginaPrincipal">
             <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
                 <div className="rounded shadow-lg p-4 bg-dark" style={{ width: '450px' }}>
                     <h1 className="text-center text-light">Ingresar</h1>
@@ -66,7 +67,7 @@ const Login = () => {
                     </div>
                 </div>
             </div >
-        </>
+        </div>
     );
 };
 

@@ -4,12 +4,10 @@ import "../../styles/footer.css"
 import { Link } from 'react-router-dom';
 
 export const Footer = () => (
-<footer className="text-white pt-3 mt-5" style={{backgroundColor: '#111d4a'}}>
+<footer className="text-white pt-3 mt-5" style={{backgroundColor: '#111d4a', bottom: '0', width: '100%', display: 'block'}}>
     <div className="container d-flex justify-content-between p-0 mb-1 mt-2">
         <div>
         <p><Link to="/" style={{ color: 'white', textDecoration: 'none' }}>Explora destinos</Link></p>
-        <p><Link to="/login" style={{ color: 'white', textDecoration: 'none' }}>Iniciar sesión</Link></p>
-        <p><Link to="/register" style={{ color: 'white', textDecoration: 'none' }}>Registrate</Link></p>
         </div>
     <div className="d-flex justify-content-end">
         <img src={logo} alt="Logo" style={{ height: '60px' }} />
