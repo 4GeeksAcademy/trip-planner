@@ -119,7 +119,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return elm;
 				});
 				setStore({ activities: likeUpdate })
-
 			},
 
 			addActivity: async (activity) => {
