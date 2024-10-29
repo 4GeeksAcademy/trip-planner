@@ -63,6 +63,11 @@ const Profile = () => {
             return null;
         }
     }
+    const handleCancel = () => {
+        console.log("Botón de Cancelar presionado");
+        navigate("/profile", { replace: true });
+    };
+
 
     return (
         <>
@@ -206,12 +211,19 @@ const Profile = () => {
                                 </div>
                                 <div className="row gutters">
                                     <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                        <div className="d-flex justify-content-end mt-2">
-                                            <button className="btn btn-secondary me-2">Cancelar</button>
-                                            <button
-                                                className="btn btn-primary"
-                                                onClick={() => updateUser(user)}
-                                            >Actualizar</button>
+                                        <div className="d-flex justify-content-between mt-2">
+                                            <button className="btn btn-danger me-2">Eliminar cuenta</button>
+                                            <div>
+                                                <button
+                                                    className="btn btn-secondary me-2"
+                                                    onClick={handleCancel}
+                                                >Cancelar</button>
+                                                <button
+                                                    className="btn btn-primary"
+                                                    onClick={() => updateUser(user)}
+                                                >Actualizar</button>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
