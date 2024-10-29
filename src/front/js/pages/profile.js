@@ -43,7 +43,9 @@ const Profile = () => {
         const storageRef = ref(storage, `imagenes_perfil/${image.name}`);
         const currentImageUrl = store.user?.profile_image_url;
 
-        if (currentImageUrl && currentImageUrl === `https://firebasestorage.googleapis.com/v0/b/trippy-bucket.appspot.com/o/imagenes_perfil%2F${encodeURIComponent(image.name)}?alt=media`) {
+        const expectedUrl = `https://firebasestorage.googleapis.com/v0/b/trippy-bucket.appspot.com/o/imagenes_perfil%2F${encodeURIComponent(image.name)}?alt=media`
+        console.log(expectedUrl);
+        if (currentImageUrl && currentImageUrl.split('&token=')[0] === expectedUrl) {
             console.log("La imagen no ha cambiado, no se subirá nuevamente.");
             return currentImageUrl;
         }
@@ -72,7 +74,7 @@ const Profile = () => {
                                 <div className="account-settings">
                                     <div className="user-profile">
                                         <div className="user-avatar mt-3">
-                                            <img src={store.user?.profile_image_url || 'https://i.pinimg.com/550x/a8/0e/36/a80e3690318c08114011145fdcfa3ddb.jpg'}
+                                            <img src={user.image ? URL.createObjectURL(user.image) : user.profileImageUrl || store.user?.profile_image_url}
                                                 onClick={() => document.getElementById('imagenPerfil').click()}
                                             />
                                         </div>
