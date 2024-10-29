@@ -24,7 +24,7 @@ const ShoppingCart = () => {
                                 <li className="trip">
                                     <div className="new-trip d-flex flex">
                                         <div className="image d-flex flex">
-                                            <img src={item.imageUrl} className="img-viaje" alt="Imagen" />
+                                            <img src={item.imagenes} className="img-viaje" alt="Imagen" />
                                         </div>
                                         <div className="activity-text">
                                             <span className="activity-name item">{item.name}</span>
