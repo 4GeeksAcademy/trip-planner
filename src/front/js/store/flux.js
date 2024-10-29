@@ -134,7 +134,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			isLike: (index) => {
 				const store = getStore();
-				const result = store.activities.some(index)
+				const result = store.activities.some((activity, i) => i === index && activity.likes > 0)
 				return result
 			},
 

@@ -22,12 +22,11 @@ const IndividualTrip = () => {
     const [like, setLike] = useState(false);
 
     const handleClick = (index) => {
-        if (like) {
+        if (actions.isLike(index)) {
             actions.deleteLike(index)
         } else {
             actions.addLike(index)
         }
-        setLike(!like)
     };
 
     useEffect(() => {
@@ -233,16 +232,10 @@ const IndividualTrip = () => {
                                             <Link to="/details" state={item} className="detalles text-light btn-sm px-4">Ver más</Link>
                                             <div className="d-flex align-items-center">
                                                 <button className="bg-transparent border-0" onClick={() => handleClick(index)}>
-                                                { !like ? 
-                                                    <>
-                                                        <i className={`text-danger fa-regular fa-heart me-2`}></i>
-                                                    </>
-                                                    :
-                                                    <>
-                                                        <i className={`text-danger fa-solid fa-heart me-2`}></i>
-                                                    </>
+                                                { actions.isLike(index) ? 
+                                                    <i className={`text-danger fa-solid fa-heart me-2`}></i> :
+                                                    <i className={`text-danger fa-regular fa-heart me-2`}></i>
                                                 }
-                                                    {/* ${actions.addLike(index) ? "fa-solid" : "fa-regular"} */}
                                                     {item.likes}
                                                 </button>
                                             </div>
