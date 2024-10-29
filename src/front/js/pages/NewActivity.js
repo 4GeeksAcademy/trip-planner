@@ -34,18 +34,18 @@ const NewActivity = () => {
     })
 
     const upload = async () => {
-        const activityImageUrl = activity.imageURL ? await uploadImage(activity.imageURL) : null;
-        await actions.addActivity(activity, activityImageUrl);
+        const activityImageUrl = activity.imageFile ? await uploadImage(activity.imageFile) : null;
+        await actions.addActivity({...activity, imageURL: activityImageUrl});
         console.log(activity);
         setActivity({
             name: "",
             precio: 0,
             descripcion: "",
-            imageURL: "",
+            imageFile: null,
             likes: 0,
             comentarios: "",
             duracion: "",
-        })
+        });
         navigate(`/trip/${store.currentId}`); // Navega después de guardar
     };
 
@@ -67,7 +67,6 @@ const NewActivity = () => {
             toast.error("Error al cargar la imagen");
             return null;
         }
-
     }
 
     return (
