@@ -167,8 +167,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			// Recomendaciones por lugar
-			loadRecommendations: async (location) => {
+			geoLocation: async(city, token)=>{
+				
+				const response = await fetch(`https://test.api.amadeus.com/v1/reference-data/locations/cities?keyword=${city}&max=1`, {
+					method: 'GET',
+					headers: {
+						"authorization": "Bearer "+token
+					}
+				});
+				const data = await response.json();
+				console.log("esta es la ciudad", city)
+				console.log(data.data[0].geoCode)
+				return data.data[0].geoCode;
+			},
+			loadRecommendations: async (ciudad) => {
 				const apiToken = await getActions().setApiToken()
+				const location = await getActions().geoLocation(ciudad, apiToken)
 				console.log("recomendaciones activadas")
 				const response = await fetch(`https://test.api.amadeus.com/v1/shopping/activities?latitude=${location.latitude}&longitude=${location.longitude}&radius=20`, {
 					method: 'GET',
@@ -177,9 +191,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				});
 				const data = await response.json();
-				// console.log("recomendaciones "+data.data)
+			
 				setStore({ recomendacionPorLugar: data.data })
 			},
+			
 
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {

@@ -9,41 +9,29 @@ import Recomendaciones from '../component/recomendaciones.js';
 import "../../styles/index.css";
 
 const IndividualTrip = () => {
-    const location = {
-        latitude: 10.48801,
-        longitude: -66.87919
-    };
-
+    
     const { store, actions } = useContext(Context);
     const { id } = useParams();
     const [loading, setLoading] = useState(true);
     const [newMember, setNewMember] = useState({ email: "" });
     const [selectedMember, setSelectedMember] = useState("null");
-    const [like, setLike] = useState(false);
-
-    const handleClick = (index) => {
-        if (like) {
-            actions.deleteLike(index)
-        } else {
-            actions.addLike(index)
-        }
-        setLike(!like)
-    };
-
+    
+    
     useEffect(() => {
         actions.setCurrentId(parseInt(id));
         actions.getActivities(id);
     }, [id]);
-
+    
     
     useEffect(() => {
         if (store.viajes.length > 0) {
             setLoading(false);
         }
     }, [store.viajes]);
-
+    
     const viaje = store.viajes.find(v => v.id === parseInt(id));
     console.log("Este es el viaje", viaje)
+    // const location = actions.geoLocation(viaje.destino);
 
     if (loading) {
         return <div className="text-center">
@@ -203,7 +191,7 @@ const IndividualTrip = () => {
 
             <div className='container' style={{ width: "80%" }}>
                 <div className="d-flex flex-column flex-md-row justify-content-between p-0 m-0" >
-                    <Recomendaciones location={location} />
+                    <Recomendaciones location={viaje.destino} />
                     <ShoppingCart />
                 </div>
             </div>
