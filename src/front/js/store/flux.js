@@ -226,7 +226,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				toast("👋🏼 Hasta luego, esperamos verte pronto...");
 			},
-<<<<<<< HEAD
 
 			getUserData: async (userEmail) => {
 				const store = getStore();
@@ -298,9 +297,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			}
 			,
-=======
 			
->>>>>>> 841236b304f3e84c130b0d74d779a9d6c8173769
 			register: async (name, userName, email, password, more_info, profileImageUrl) => {
 				const resp = await fetch(process.env.BACKEND_URL + "/api/register", {
 					method: "POST",

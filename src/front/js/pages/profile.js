@@ -7,6 +7,7 @@ import "../../styles/profile.css"
 import "../../styles/index.css";
 
 
+
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
@@ -64,10 +65,6 @@ const Profile = () => {
             return null;
         }
     }
-    const handleCancel = () => {
-        console.log("Botón de Cancelar presionado");
-        navigate("/profile", { replace: true });
-    };
 
 
     return (
@@ -75,7 +72,7 @@ const Profile = () => {
             <div className="container">
                 <div className="row gutters">
                     <div className="col-4" style={{ height: '450px' }}>
-                        <div className="card h-100 w-100">
+                        <div className="card h-100 w-100" style={{ borderRadius: "30px" }}>
                             <div className="card-body">
                                 <div className="account-settings">
                                     <div className="user-profile">
@@ -102,7 +99,7 @@ const Profile = () => {
                                         <h6 className="user-email">{store.user.email}</h6>
                                     </div>
                                     <div className="about">
-                                        <h5 className="mb-2 text-primary">Acerca de ti</h5>
+                                        <h5 className="mb-2 colorNaranja">Acerca de ti</h5>
                                         <p className="text-white">{store.user.more_info}</p>
                                     </div>
                                 </div>
@@ -110,11 +107,11 @@ const Profile = () => {
                         </div>
                     </div>
                     <div className="col-8" style={{ height: '450px' }}>
-                        <div className="card h-100 w-100">
+                        <div className="card h-100 w-100" style={{ borderRadius: "30px" }}>
                             <div className="card-body">
                                 <div className="row gutters mb-2">
                                     <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                        <h6 className="mb-2 text-primary">Información personal</h6>
+                                        <h6 className="mb-2 colorNaranja">Información personal</h6>
                                     </div>
                                     <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mb-1">
                                         <div className="form-group">
@@ -213,16 +210,15 @@ const Profile = () => {
                                 <div className="row gutters">
                                     <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                         <div className="d-flex justify-content-between mt-2">
-                                            <button className="btn btn-danger me-2">Eliminar cuenta</button>
-                                            <div>
-                                                <button
-                                                    className="btn btn-secondary me-2"
-                                                    onClick={handleCancel}
-                                                >Cancelar</button>
-                                                <button
-                                                    className="btn btn-primary"
-                                                    onClick={() => updateUser(user)}
-                                                >Actualizar</button>
+                                            <button className="btn btn-danger me-2 rounded-pill">Eliminar cuenta</button>
+                                            <div className="d-flex">
+                                            <Link to="/viajes" className="btn btn-secondary d-flex align-items-center rounded-pill me-2">
+                                                Cancelar
+                                            </Link>
+                                            <button
+                                                className="btn btn-primary rounded-pill"
+                                                onClick={() => updateUser(user)}
+                                            >Actualizar</button>
                                             </div>
 
                                         </div>
