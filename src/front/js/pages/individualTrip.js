@@ -221,7 +221,7 @@ const IndividualTrip = () => {
                                             <Link to="/details" state={item} className="detalles text-light btn-sm px-4">Ver más</Link>
                                             <div className="d-flex align-items-center">
                                                 <button className="bg-transparent border-0" onClick={() => handleClick(index)}>
-                                                { !like ? 
+                                                {/* { !like ? 
                                                     <>
                                                         <i className={`text-danger fa-regular fa-heart me-2`}></i>
                                                     </>
@@ -229,9 +229,9 @@ const IndividualTrip = () => {
                                                     <>
                                                         <i className={`text-danger fa-solid fa-heart me-2`}></i>
                                                     </>
-                                                }
+                                                } */}
                                                     {/* ${actions.addLike(index) ? "fa-solid" : "fa-regular"} */}
-                                                    {item.likes}
+                                                    {/* {item.likes} */}
                                                 </button>
                                             </div>
                                         </div>
