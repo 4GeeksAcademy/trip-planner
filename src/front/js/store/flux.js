@@ -194,7 +194,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				const data = await resp.json();
 
-				if (resp.ok) {
+				if (resp.ok && data.token) {
 					localStorage.setItem("token", data.token);
 					setStore({ token: data.token, user: data.user }); //guarda el token y user
 					toast.success("Iniciando Sesión");
