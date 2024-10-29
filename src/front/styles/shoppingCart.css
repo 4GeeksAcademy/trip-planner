@@ -1,6 +1,6 @@
 .btn-group{
     display: flex;
-    width: 100px;
+    width: 150px;
     justify-content: end;
     align-items: end;
 }
@@ -93,6 +93,6 @@
 }
 
 
-.fondoNaranja {
-    background-color: rgb(228, 134, 12);
+.fondoAzul {
+    background-color: #111d4a;
 }

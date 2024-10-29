@@ -4,6 +4,7 @@ import { Context } from "../store/appContext.js";
 import { Link } from 'react-router-dom';
 import toast from "react-hot-toast";
 import "../../styles/profile.css"
+import "../../styles/index.css";
 
 
 import { initializeApp } from "firebase/app";
@@ -70,7 +71,7 @@ const Profile = () => {
 
 
     return (
-        <>
+        <div className="PaginaPrincipal">
             <div className="container">
                 <div className="row gutters">
                     <div className="col-4" style={{ height: '450px' }}>
@@ -232,7 +233,7 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

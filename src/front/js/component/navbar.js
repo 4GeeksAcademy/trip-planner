@@ -31,9 +31,9 @@ export const Navbar = ({ isLandingPage }) => {
 				<Link to="/">
 					<button className={`border border-0 bg-transparent mx-3 fw-bold ${textColorClass}`}>INICIO</button>
 				</Link>
-				<Link to="/viajes">
+				{store.token && <Link to="/viajes">
 					<button className={`border border-0 bg-transparent mx-3 fw-bold ${textColorClass}`}>VIAJES</button>
-				</Link>
+				</Link>}
 				{!store.token && <Link to="/login">
 					<button className={`border border-0 bg-transparent mx-3 fw-bold ${textColorClass}`}>INGRESAR</button>
 				</Link>}

@@ -4,18 +4,18 @@ import { useContext } from "react";
 import { Context } from "../store/appContext";
 
 
+
 const ShoppingCart = () => {
     
     const { store, actions } = useContext(Context);
 
     return (
-    <div className = "container d-flex flex  justify-content-end">
+    <div className = "container d-flex flex justify-content-end">
         <div className="btn-group">
-            <button type="button" className="fondoNaranja btn btn-sm dropdown-toggle me-2" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+            <button type="button" className="fondoAzul text-white btn dropdown-toggle fw-bold" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                 Tu viaje
             </button>
             <ul className="dropdown-menu dropdown-menu-end">
-                <li className="group-name"><span className="dropdown-item" href="#">Nombre del grupo</span></li>
                 {store.selected_trip.length == 0 ? (
                     <p className="d-flex flex justify-content-center text-secundary mx-3">Agrega una actividad a tu viaje</p>
                 ) : (
@@ -25,7 +25,7 @@ const ShoppingCart = () => {
                                 <li className="trip">
                                     <div className="new-trip d-flex flex">
                                         <div className="image d-flex flex">
-                                            <img src={item.imageUrl} className="img-viaje" alt="Cancún" />
+                                            <img src={item.imagenes} className="img-viaje" alt="Imagen" />
                                         </div>
                                         <div className="activity-text">
                                             <span className="activity-name item">{item.name}</span>

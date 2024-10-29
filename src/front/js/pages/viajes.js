@@ -2,6 +2,8 @@ import '../../styles/viajes.css';
 import React, { useContext, useState, useEffect } from 'react';
 import { Context } from "../store/appContext.js"
 import { Link } from "react-router-dom";
+import "../../styles/index.css";
+
 
 const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -55,14 +57,14 @@ const Viajes = () => {
     console.log(store.viajes)
 
     return (
-        <>
+        <div className="PaginaPrincipal">
             {/* User Banner */}
             {console.log(store.user)}
             <div className="d-flex flex-column flex-md-row align-items-center justify-content-center">
 
-                <div className="container rounded d-flex bg-light p-4 shadow ms-5 me-3 mb-3 mb-md-0" style={{ maxWidth: "80%", width: "100%", marginTop: "20px" }}>
+                <div className="container d-flex bg-light p-4 shadow ms-5 me-3 mb-3 mb-md-0" style={{ maxWidth: "80%", width: "100%", marginTop: "20px", borderRadius: "30px" }}>
                     <div className="d-flex flex-column align-items-start flex-grow-1 mx-3" >
-                        <h5>@{store.user.username}</h5>
+                        <h5 className='colorAzul'>@{store.user.username}</h5>
                         <p>{store.user.name}</p>
                     </div>
                     <div className="mx-4 text-end">
@@ -97,7 +99,7 @@ const Viajes = () => {
                         return (<div key={index} className="viaje container d-flex mb-3 my-5 rounded-pill p-2 bg-light " style={{ width: "100%", maxWidth: "65%" }}>
                             <img src={item.trip_image_url || "https://firebasestorage.googleapis.com/v0/b/trippy-proyecto.appspot.com/o/fondoDestino.png?alt=media&token=c65fa4ed-494d-410b-bd9a-68e74ef3e456"} className="ima rounded-circle shadow" style={{ objectFit: 'cover', width: "100px", height: "100px" }} />
                             <div className="mt-1 flex-grow-1">
-                                <h6 className="mb-2">{item.destino}</h6>
+                                <h6 className="mb-2">{item.destino}</h6> 
                                 <p className="mb-0 mt-3">{formatDate(item.fecha_inicio)} - {formatDate(item.fecha_fin)}</p>
                                 <p className="mb-0 mt-1">
                                     <i className="iconos fa-solid fa-clock me-2"></i>
@@ -122,7 +124,7 @@ const Viajes = () => {
 
             <div className="d-flex justify-content-evenly">
 
-                <Link to="/add-new-trip" className="btn bg-light mt-5 p-3 mx-3 shadow w-50">
+                <Link to="/add-new-trip" className="btn bg-light mt-5 p-3 mx-3 shadow w-50 rounded-pill border border-3">
                     <i className="fa-solid fa-circle-plus me-2 text-success"></i>
                     Añadir un nuevo viaje
                 </Link>
@@ -130,7 +132,9 @@ const Viajes = () => {
             </div>
 
 
-        </>
+
+
+        </div>
     )
 }
 

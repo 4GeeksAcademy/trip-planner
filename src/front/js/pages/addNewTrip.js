@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext.js"
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import "../../styles/index.css";
 
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -32,10 +33,10 @@ const NewTrip = () => {
         destino: "",
         fecha_inicio: "",
         fecha_fin: "",
-        presupuesto_grupo: "",
+        presupuesto_grupo: 0,
         motivo: "",
         nota: "",
-        presupuesto_personal: "",
+        presupuesto_personal: 0,
     })
 
 
@@ -81,7 +82,7 @@ const NewTrip = () => {
 
         const fechaInicio = new Date(viaje.fecha_inicio);
         const fechaFin = new Date(viaje.fecha_fin);
-        const fechaActual = new Date().toISOString().split('T')[0];
+        const fechaActual = new Date();
 
         // Validar que la fecha de inicio no sea anterior a la fecha actual
         if (fechaInicio <= fechaActual) {
@@ -105,8 +106,9 @@ const NewTrip = () => {
 
 
     return (
+        <div className="PaginaPrincipal">
         <div className="container">
-            <div className="p-4 bg-dark  rounded shadow-lg w-50 mx-auto">
+            <div className="p-4 bg-dark shadow-lg w-50 mx-auto" style={{borderRadius: "30px" }}>
 
                 <div className="mb-3">
                     <label htmlFor="destino" className="form-label text-light">Destino</label>
@@ -188,7 +190,7 @@ const NewTrip = () => {
                         type="number"
                         className="form-control opacity-50 bg-light  border-0 rounded-3"
                         id="presupuesto"
-                        placeholder="Ingresa el monto estimado para tu viaje (Opcional)"
+                        placeholder="Ingresa el monto estimado para tu viaje"
                         value={viaje.presupuesto_grupo}
                         onChange={
                             (event) => setViaje({
@@ -254,19 +256,20 @@ const NewTrip = () => {
 
                 <div className="mb-3">
                     <button
-                        className="btn btn-primary w-100 mb-5 rounded-3"
+                        className="btn btn-primary w-100 mb-5 rounded-pill"
                         onClick={upload} // Llama a la función upload
                         disabled={!isFormValid()} // Deshabilitar el botón si el formulario no es válido
                     >
                         ¡Listo!
                     </button>
                     <div className="d-flex justify-content-start">
-                        <Link to="/" className="btn btn-secondary mt-2 d-flex align-items-center rounded-3">
+                        <Link to="/" className="btn btn-secondary mt-2 d-flex align-items-center rounded-pill">
                             <i className="fa-solid fa-circle-chevron-left me-2"></i> Inicio
                         </Link>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     );
 

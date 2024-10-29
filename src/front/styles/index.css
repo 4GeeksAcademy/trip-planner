@@ -1,3 +1,17 @@
-/* 
-    General Styles used on every website (Don't Repeat Yourself)
-*/
+
+
+.PaginaPrincipal {
+    min-height: 800px;
+}
+
+.colorAzul {
+    color: #111d4a;
+}
+
+.colorNaranja {
+    color: #e4860c;
+}
+
+.fondoNaranja {
+    background-color: rgb(228, 134, 12);
+}

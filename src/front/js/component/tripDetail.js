@@ -1,6 +1,7 @@
 import '../../styles/viajes.css';
 import React, { useState } from "react";
-
+import { useLocation } from 'react-router-dom';
+import "../../styles/index.css";
 
 
 
@@ -14,18 +15,20 @@ const TripDetail = () => {
             mensaje: '¡Este post es muy interesante!'
         }]
     )
-
+    let { state } = useLocation();
+    const { nombre_actividad, descripcion, precio, imagenes } = state
+ 
     const [nuevoComentario, setNuevoComentario] = useState('')
 
     return (
-
+        <div className="PaginaPrincipal">
         <div className="container-fluid mx-auto p-2">
             <div className="d-flex justify-content-center mt-4 rounded">
                 <div className="rounded rounded-3 border shadow-sm" style={{ width: "80%" }}>
-                    <img src="https://images.unsplash.com/photo-1606574977100-456d9a074578?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8TW9udW1lbnRvcyUyMGN1bHR1cmFsZXN8ZW58MHx8MHx8fDA%3D"
+                    <img src={imagenes}
                         style={{ width: "100%", height: "450px", objectFit: "cover" }} alt="Paisaje" />
                     <div className="fondoNaranja rounded-bottom rounded-3 p-3 text-light">
-                        <h3 className="fw-semibold">Ciudad, País</h3>
+                        <h3 className="fw-semibold">{nombre_actividad}</h3>
                     </div>
                 </div>
             </div>
@@ -35,7 +38,7 @@ const TripDetail = () => {
                     <div className="me-3 border-black border-end border-3 border-dark">
                         <h5 className="mb-3">Descripción</h5>
                         <blockquote className="blockquote mb-0">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lobortis nisi sit amet eros pharetra, id lobortis lectus ultricies. Quisque lectus urna, lobortis in risus eget, rutrum sagittis magna. Aenean euismod sapien erat, non volutpat metus egestas et. Donec tempus ex nec imperdiet convallis. Vestibulum venenatis nisi elit, vitae porta tellus blandit ac. Nullam lobortis arcu eget tellus elementum rhoncus. Sed in elit ut velit accumsan hendrerit.</p>
+                            <p>{descripcion}</p>
                         </blockquote>
                     </div>
 
@@ -44,7 +47,7 @@ const TripDetail = () => {
                             Costo aproximado
                         </div>
                         <div className="card-body text-center p-2">
-                            <h2 className="card-text colorAzul">1000 $</h2>
+                            <h2 className="card-text colorAzul">${precio}</h2>
                         </div>
                     </div>
                 </div>
@@ -105,6 +108,7 @@ const TripDetail = () => {
             </div>
         </div>
         </div >
+        </div>
 
 
 

@@ -1,20 +1,8 @@
 """empty message
 
-<<<<<<<< HEAD:migrations/versions/609acce97dd4_.py
-<<<<<<<< HEAD:migrations/versions/de53d4277ee9_.py
-Revision ID: de53d4277ee9
+Revision ID: 6844ed14a7bb
 Revises: 
-Create Date: 2024-10-26 01:18:50.786942
-========
-Revision ID: 609acce97dd4
-Revises: 
-Create Date: 2024-10-26 00:34:24.972837
->>>>>>>> 1e581c35228a9d8b690b7c18fa7f6f569eec40d7:migrations/versions/609acce97dd4_.py
-========
-Revision ID: 10327527579d
-Revises: 
-Create Date: 2024-10-25 23:08:35.692245
->>>>>>>> 0320a05 (migraciones):migrations/versions/10327527579d_.py
+Create Date: 2024-10-29 02:09:12.973166
 
 """
 from alembic import op
@@ -22,15 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-<<<<<<<< HEAD:migrations/versions/609acce97dd4_.py
-<<<<<<<< HEAD:migrations/versions/de53d4277ee9_.py
-revision = 'de53d4277ee9'
-========
-revision = '609acce97dd4'
->>>>>>>> 1e581c35228a9d8b690b7c18fa7f6f569eec40d7:migrations/versions/609acce97dd4_.py
-========
-revision = '10327527579d'
->>>>>>>> 0320a05 (migraciones):migrations/versions/10327527579d_.py
+revision = '6844ed14a7bb'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -70,18 +50,15 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('nombre_actividad', sa.String(length=120), nullable=False),
     sa.Column('precio', sa.Float(), nullable=True),
-    sa.Column('moneda', sa.String(length=120), nullable=True),
     sa.Column('imagenes', sa.String(length=360), nullable=True),
     sa.Column('duracion', sa.Integer(), nullable=True),
     sa.Column('viaje_id', sa.Integer(), nullable=False),
     sa.Column('descripcion', sa.String(length=360), nullable=True),
     sa.ForeignKeyConstraint(['viaje_id'], ['viajes.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('nombre_actividad')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('grupos',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('group_name', sa.String(length=120), nullable=False),
     sa.Column('viaje_id', sa.Integer(), nullable=False),
     sa.Column('user_email', sa.String(length=120), nullable=False),
     sa.ForeignKeyConstraint(['user_email'], ['users.email'], ),

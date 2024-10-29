@@ -139,7 +139,6 @@ class Actividad(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre_actividad = db.Column(db.String(120), unique=False, nullable=False)
     precio = db.Column(db.Float, nullable=True)
-    moneda = db.Column(db.String(120), nullable=True)
     imagenes = db.Column(db.String(360), nullable=True)
     duracion = db.Column(db.Integer, nullable=True)
     viaje_id = db.Column(db.Integer, db.ForeignKey('viajes.id'), nullable=False)
@@ -148,10 +147,9 @@ class Actividad(db.Model):
     comentarios = db.relationship("Comentarios", back_populates='actividad', cascade="all, delete-orphan", lazy=True)  # Relación de Comentarios a Actividad
     likes = db.relationship('Likes', back_populates='actividad', cascade="all, delete-orphan", lazy=True)
 
-    def __init__(self, nombre_actividad, precio, moneda, imagenes, duracion, viaje_id, descripcion=None):
+    def __init__(self, nombre_actividad, precio, imagenes, duracion, viaje_id, descripcion=None):
         self.nombre_actividad = nombre_actividad
         self.precio = precio
-        self.moneda = moneda
         self.duracion = duracion
         self.imagenes = imagenes    #OJO VER DESPUES
         self.viaje_id = viaje_id
@@ -163,7 +161,6 @@ class Actividad(db.Model):
             "id": self.id,
             "nombre_actividad": self.nombre_actividad,
             "precio": self.precio,
-            "moneda": self.moneda,
             "imagenes": self.imagenes,
             "duracion": self.duracion,
             "viaje_id": self.viaje_id,
