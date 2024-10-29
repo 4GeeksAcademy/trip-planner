@@ -111,7 +111,6 @@ def add_trip():
 def add_activity():
     nombre_actividad = request.json.get("name", None)
     precio = request.json.get("precio", None)
-    moneda = request.json.get("moneda", None)
     imagenes = request.json.get("imagenes", None)
     duracion = request.json.get("duracion", None)
     viaje_id = request.json.get("viaje_id", None)
@@ -121,7 +120,6 @@ def add_activity():
     activity = Actividad(
         nombre_actividad = nombre_actividad,
         precio = precio,
-        moneda = moneda,
         imagenes = imagenes,
         duracion = duracion,
         viaje_id = viaje_id,
