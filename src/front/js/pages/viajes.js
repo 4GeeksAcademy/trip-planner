@@ -62,9 +62,9 @@ const Viajes = () => {
             {console.log(store.user)}
             <div className="d-flex flex-column flex-md-row align-items-center justify-content-center">
 
-                <div className="container rounded d-flex bg-light p-4 shadow ms-5 me-3 mb-3 mb-md-0" style={{ maxWidth: "80%", width: "100%", marginTop: "20px" }}>
+                <div className="container d-flex bg-light p-4 shadow ms-5 me-3 mb-3 mb-md-0" style={{ maxWidth: "80%", width: "100%", marginTop: "20px", borderRadius: "30px" }}>
                     <div className="d-flex flex-column align-items-start flex-grow-1 mx-3" >
-                        <h5>@{store.user.username}</h5>
+                        <h5 className='colorAzul'>@{store.user.username}</h5>
                         <p>{store.user.name}</p>
                     </div>
                     <div className="mx-4 text-end">
@@ -124,7 +124,7 @@ const Viajes = () => {
 
             <div className="d-flex justify-content-evenly">
 
-                <Link to="/add-new-trip" className="btn bg-light mt-5 p-3 mx-3 shadow w-50">
+                <Link to="/add-new-trip" className="btn bg-light mt-5 p-3 mx-3 shadow w-50 rounded-pill border border-3">
                     <i className="fa-solid fa-circle-plus me-2 text-success"></i>
                     Añadir un nuevo viaje
                 </Link>

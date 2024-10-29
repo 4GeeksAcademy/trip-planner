@@ -82,11 +82,11 @@ const IndividualTrip = () => {
         <div className="PaginaPrincipal">
             <div className="container">
 
-                <div className=" rounded d-flex flex-column flex-md-row justify-content-between bg-light p-4 shadow">
+                <div className=" d-flex flex-column flex-md-row justify-content-between bg-light shadow p-4" style={{ borderRadius: "30px" }}>
                     <div className="d-flex flex-column flex-md-row justify-content-between" style={{ width: "80%" }} >
-                        <h5 className="mb-1">Destino: {viaje.destino}</h5>
-                        <p className="mb-1">Fecha de salida: {formatDate(viaje.fecha_inicio)}</p>
-                        <p className="mb-1">Presupuesto: $ {viaje.presupuesto}</p>
+                        <h5 className="colorNaranja mb-1">Destino<h6 className="mb-1 colorAzul">{viaje.destino}</h6></h5>
+                        <p className="mb-1 colorAzul">Fecha de salida: {formatDate(viaje.fecha_inicio)}</p>
+                        <p className="mb-1 colorAzul">Presupuesto: $ {viaje.presupuesto}</p>
                     </div>
 
 

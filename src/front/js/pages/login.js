@@ -22,14 +22,14 @@ const Login = () => {
     return (
         <div className="PaginaPrincipal">
             <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-                <div className="rounded shadow-lg p-4 bg-dark" style={{ width: '450px' }}>
-                    <h1 className="text-center text-light">Ingresar</h1>
+                <div className="shadow-lg p-4 bg-dark" style={{ width: '450px', borderRadius: "30px"}}>
+                    <h2 className="text-center colorNaranja">Ingresar</h2>
                     <div className="mb-3">
                         <label className="form-label text-light">Correo electrónico</label>
                         <input
                             type="email"
                             placeholder="correo@ejemplo.co"
-                            className="form-control"
+                            className="form-control rounded"
                             onChange={(event) => setUser({
                                 ...user,
                                 email: event.target.value
@@ -42,7 +42,7 @@ const Login = () => {
                         <div className="d-flex">
                             <input
                                 type={showPassword ? "text" : "password"}
-                                className="form-control"
+                                className="form-control rounded"
                                 onChange={(event) => setUser({
                                     ...user,
                                     password: event.target.value
@@ -55,13 +55,13 @@ const Login = () => {
                     </div>
                     <button
                         onClick={() => actions.login(user.email, user.password)}
-                        className="btn btn-primary w-100 mt-1"
+                        className="btn btn-primary w-100 mt-1 rounded-pill mt-3"
                     >
                         Ingresar
                     </button>
                     <Link to="/register" className="btn btn-link">¿No tienes una cuenta aún? Registrate aquí</Link>
                     <div className="d-flex justify-content-start">
-                        <Link to="/" className="btn btn-secondary mt-2 d-flex align-items-center rounded-3">
+                        <Link to="/" className="btn btn-secondary mt-2 d-flex align-items-center rounded-pill">
                             <i className="fa-solid fa-circle-chevron-left me-2"></i> Inicio
                         </Link>
                     </div>

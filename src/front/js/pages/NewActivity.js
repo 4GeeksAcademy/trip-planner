@@ -114,6 +114,7 @@ const NewActivity = () => {
                                         imagenes: event.target.files[0],
                                     });
                                 }}
+                                />
                             
                     <div className="mb-3">
                                 <label htmlFor="Actividad" className="form-label text-light fs-3">Nombre de la actividad </label>
@@ -223,6 +224,7 @@ const NewActivity = () => {
                                     <i className="fa-solid fa-circle-chevron-left me-2"></i> Inicio
                                 </Link>
                             </div>
+                            
 
                         </div>
                     </div>

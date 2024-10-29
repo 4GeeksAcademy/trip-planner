@@ -67,9 +67,9 @@ const Register = () => {
 
     return (
         <div className="PaginaPrincipal">
-            <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-                <div className="rounded shadow-lg p-4 bg-dark" style={{ width: '450px' }}>
-                    <h1 className="text-center text-light">Crea una cuenta</h1>
+            <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh'}}>
+                <div className="shadow-lg p-4 bg-dark" style={{ width: '500px', borderRadius: "30px" }}>
+                    <h2 className="text-center colorNaranja mb-2">Crea una cuenta</h2>
                     <div className="mb-1 d-flex flex-column justify-content-center">
                         <label className="form-label text-light">Imagen de perfil</label>
                         <img
@@ -96,7 +96,7 @@ const Register = () => {
                     <div className="mb-3">
                         <label className="form-label text-light">Nombre completo</label>
                         <input
-                            className="form-control"
+                            className="form-control rounded"
                             onChange={(event) => setUser({
                                 ...user,
                                 name: event.target.value
@@ -106,7 +106,7 @@ const Register = () => {
                     <div className="mb-3">
                         <label className="form-label text-light">Nombre de usuario</label>
                         <input
-                            className="form-control"
+                            className="form-control rounded"
                             onChange={(event) => setUser({
                                 ...user,
                                 userName: event.target.value
@@ -118,7 +118,7 @@ const Register = () => {
                         <input
                             type="email"
                             placeholder="email@example.co"
-                            className="form-control"
+                            className="form-control rounded"
                             onChange={(event) => setUser({
                                 ...user,
                                 email: event.target.value
@@ -130,7 +130,7 @@ const Register = () => {
                         <div className="d-flex">
                             <input
                                 type={showPassword ? "text" : "password"}
-                                className="form-control"
+                                className="form-control rounded"
                                 onChange={(event) => setUser({
                                     ...user,
                                     password: event.target.value
@@ -146,7 +146,7 @@ const Register = () => {
                         <div className="d-flex">
                             <input
                                 type={showPassword ? "text" : "password"}
-                                className="form-control"
+                                className="form-control rounded"
                                 onChange={(event) => setUser({
                                     ...user,
                                     passwordConfirm: event.target.value
@@ -160,7 +160,7 @@ const Register = () => {
                     <label className="form-label text-light">Más información acerca de ti</label>
                     <div className="form-floating mb-3">
                         <textarea
-                            className="form-control"
+                            className="form-control rounded"
                             style={{ height: '100px' }}
                             onChange={(event) => setUser({
                                 ...user,
@@ -170,12 +170,12 @@ const Register = () => {
                     </div>
                     <button
                         onClick={() => registerUser(user)}
-                        className="btn btn-primary w-100 mt-2"
+                        className="btn btn-primary w-100 mt-2 rounded-pill"
                     >
                         Registrar
                     </button>
                     <div className="d-flex justify-content-start opacity-50 mt-2">
-                        <Link to="/" className="btn btn-secondary mt-2 d-flex align-items-center rounded-3">
+                        <Link to="/" className="btn btn-secondary mt-2 d-flex align-items-center rounded-pill">
                             <i className="fa-solid fa-circle-chevron-left me-2"></i> Inicio
                         </Link>
                     </div>

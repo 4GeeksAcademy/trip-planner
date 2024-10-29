@@ -108,7 +108,7 @@ const NewTrip = () => {
     return (
         <div className="PaginaPrincipal">
         <div className="container">
-            <div className="p-4 bg-dark  rounded shadow-lg w-50 mx-auto">
+            <div className="p-4 bg-dark shadow-lg w-50 mx-auto" style={{borderRadius: "30px" }}>
 
                 <div className="mb-3">
                     <label htmlFor="destino" className="form-label text-light">Destino</label>
@@ -256,14 +256,14 @@ const NewTrip = () => {
 
                 <div className="mb-3">
                     <button
-                        className="btn btn-primary w-100 mb-5 rounded-3"
+                        className="btn btn-primary w-100 mb-5 rounded-pill"
                         onClick={upload} // Llama a la función upload
                         disabled={!isFormValid()} // Deshabilitar el botón si el formulario no es válido
                     >
                         ¡Listo!
                     </button>
                     <div className="d-flex justify-content-start">
-                        <Link to="/" className="btn btn-secondary mt-2 d-flex align-items-center rounded-3">
+                        <Link to="/" className="btn btn-secondary mt-2 d-flex align-items-center rounded-pill">
                             <i className="fa-solid fa-circle-chevron-left me-2"></i> Inicio
                         </Link>
                     </div>
