@@ -229,8 +229,8 @@ const IndividualTrip = () => {
                                     </div>
                                         <div className="card-footer text-center bg-secondary text-light p-2">
                                             <button className={`btn btn btn-light btn-sm px-4 shadow ${actions.isViaje({name: item.name, id: item.id, type: "tripDetail"}) && "btn-danger"} `}
-                                            onClick={() => actions.addViaje( {name: item.nombre_actividad, id: item.id, type: "tripDetail", cost: item.precio, imageUrl: item.imagenes} )}>
-                                            {actions.isViaje( {name: item.nombre_actividad, id: item.id, type: "tripDetail", cost: item.precio, imageUrl: item.imagenes}) ? 
+                                            onClick={() => actions.addViaje( {name: item.nombre_actividad, id: item.id, type: "tripDetail", cost: item.precio, imagenes: item.imagenes} )}>
+                                            {actions.isViaje( {name: item.nombre_actividad, id: item.id, type: "tripDetail", cost: item.precio, imagenes: item.imagenes}) ? 
                                                 <>
                                                     <i className="text-danger delete-trip fa-solid fa-trash-can p-1"></i>
                                                     <span className="text-danger">Quitar</span>
