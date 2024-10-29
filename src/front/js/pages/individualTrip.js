@@ -21,7 +21,14 @@ const IndividualTrip = () => {
     const [selectedMember, setSelectedMember] = useState("null");
     const [like, setLike] = useState(false);
 
-    const meGusta = like ? "fa-solid" : "fa-regular";
+    const handleClick = (index) => {
+        if (like) {
+            actions.deleteLike(index)
+        } else {
+            actions.addLike(index)
+        }
+        setLike(!like)
+    };
 
     useEffect(() => {
         actions.setCurrentId(parseInt(id));
@@ -29,7 +36,15 @@ const IndividualTrip = () => {
     }, [id]);
 
     
-    useEffect(() => {git 
+    useEffect(() => {
+        if (store.viajes.length > 0) {
+            setLoading(false);
+        }
+    }, [store.viajes]);
+
+    const viaje = store.viajes.find(v => v.id === parseInt(id));
+    console.log("Este es el viaje", viaje)
+
     if (loading) {
         return <div className="text-center">
             <div className="spinner-border m-5" role="status">
@@ -217,7 +232,18 @@ const IndividualTrip = () => {
                                         <div className="d-flex justify-content-between align-items-center mt-auto">
                                             <Link to="/details" state={item} className="detalles text-light btn-sm px-4">Ver más</Link>
                                             <div className="d-flex align-items-center">
-                                                <button className="bg-transparent border-0" onClick={() => { actions.addLike(index) }}><i className={`text-danger ${actions.isViaje({name: item.name, id: item.id, type: "tripDetail"}) ? "fa-solid" : "fa-regular" } fa-heart me-2`}></i>{item.likes}</button>
+                                                <button className="bg-transparent border-0" onClick={() => handleClick(index)}>
+                                                { !like ? 
+                                                    <>
+                                                        <i className={`text-danger fa-regular fa-heart me-2`}></i>
+                                                    </>
+                                                    :
+                                                    <>
+                                                        <i className={`text-danger fa-solid fa-heart me-2`}></i>
+                                                    </>
+                                                }
+                                                    {item.likes}
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -247,7 +273,8 @@ const IndividualTrip = () => {
         </div>
     )
 }
-export default IndividualTrip
+
+export default IndividualTrip;
 
 
 

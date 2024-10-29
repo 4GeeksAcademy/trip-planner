@@ -29,6 +29,10 @@ CORS(api)
 
 # AGREGAR ACTIVIDADES AL VIAJE
 
+# AGREGAR LIKES DE LAS ACTIVIDADES
+@api.route('/add-likes/', methods= ['POST'])
+def add_like(actividad_id):
+    actrividad_id = request.json.get("actrividad_id", None)
 
 
 # AGREGAR MIEMBROS AL GRUPO
