@@ -1,13 +1,8 @@
 import '../../styles/viajes.css';
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext.js"
-<<<<<<< HEAD
-import React, {useState, useContext} from 'react';
-import toast from "react-hot-toast";
-=======
 import React, { useState, useContext } from 'react';
 import "../../styles/index.css";
->>>>>>> 191ea18 (Corregido Footer)
 
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -41,21 +36,14 @@ const NewActivity = () => {
 
     const upload = async () => {
         const activityImageUrl = activity.imagenes ? await uploadImage(activity.imagenes) : null;
-<<<<<<< HEAD
         await actions.addActivity({...activity, imagenes: activityImageUrl});
-=======
-        await actions.addActivity({ ...activity, imagenes: activityImageUrl });
->>>>>>> 191ea18 (Corregido Footer)
         console.log(activity);
         setActivity({
             name: "",
             precio: 0,
             descripcion: "",
-<<<<<<< HEAD
             imagenes: "",
-=======
             imagenes: null,
->>>>>>> 191ea18 (Corregido Footer)
             likes: 0,
             comentarios: "",
             duracion: "",
@@ -85,7 +73,6 @@ const NewActivity = () => {
             <div className="container">
                 <div className="p-4 bg-dark  rounded shadow-lg w-50 mx-auto">
 
-<<<<<<< HEAD
                 <div className="mb-3">
                     <label htmlFor="Actividad" className="form-label text-light fs-3">Nombre de la actividad </label>
                     <input
@@ -128,7 +115,6 @@ const NewActivity = () => {
                                 });
                             }}
                             
-=======
                     <div className="mb-3">
                         <label htmlFor="Actividad" className="form-label text-light fs-3">Nombre de la actividad </label>
                         <input
@@ -144,7 +130,6 @@ const NewActivity = () => {
                                     name: event.target.value
                                 })
                             }
->>>>>>> 191ea18 (Corregido Footer)
                         />
                     </div>
                     <div className="mb-3">
