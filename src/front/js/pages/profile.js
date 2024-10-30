@@ -37,7 +37,7 @@ const Profile = () => {
         const profileImageUrl = user.image ? await uploadImage(user.image) : null;
         await actions.updateUserProfile(user.name, user.userName, user.email, user.password, user.more_Info, profileImageUrl);
         actions.getUserData();
-        navigate("/profile")
+        navigate("/viajes")
     }
 
     const uploadImage = async (image) => {
