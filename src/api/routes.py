@@ -249,7 +249,7 @@ def login():
         return jsonify({"token": access_token,
                         "user": user.serialize()}), 200
     
-    return jsonify({"msg": "Contraseña inválida"})
+    return jsonify({"msg": "Contraseña inválida"}), 401
 
 @api.route("/register", methods =["POST"])
 def register():

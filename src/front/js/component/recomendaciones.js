@@ -6,6 +6,8 @@ import "../../styles/index.css";
 
 const Recomendaciones = (props) => {
     const { store, actions } = useContext(Context);
+
+    
     return (<>
         <div className="d-flex w-100">
             <button

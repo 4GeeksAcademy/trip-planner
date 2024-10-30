@@ -52,7 +52,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (response.ok) {
 					const data = await response.json();
 					console.log("Comentarios recibidos del servidor:", data);
-					setStore({ comentarios:[...store.comentarios, ...data] });
+					setStore({ comentarios: [...store.comentarios, ...data] });
 				} else {
 					const errorData = await response.json();
 					console.error("Error al obtener comentarios:", errorData);
@@ -311,25 +311,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			login: async (email, password) => {
-				const resp = await fetch(process.env.BACKEND_URL + "/api/login", {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json"
-					},
-					body: JSON.stringify({
-						email: email,
-						password: password
-					})
-				});
-				const data = await resp.json();
+					const resp = await fetch(process.env.BACKEND_URL + "/api/login", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify({
+							email: email,
+							password: password
+						})
+					});
+					const data = await resp.json();
 
-				if (resp.ok) {
-					localStorage.setItem("token", data.token);
-					setStore({ token: data.token, user: data.user }); //guarda el token y user
-					toast.success("Iniciando Sesión");
-				} else {
-					toast.error("Credenciales inválidas");
-				}
+					console.log("Estado de la respuesta:", resp.ok); // Debe ser false si las credenciales son incorrectas
+					console.log("Datos de la respuesta:", data); // Verifica el contenido
+
+					if (resp.ok) {
+						localStorage.setItem("token", data.token);
+						setStore({ token: data.token, user: data.user }); //guarda el token y user
+						toast.success("Iniciando sesión");
+					} else {
+						toast.error("Credenciales inválidas");
+					}
 			},
 
 			logout: () => {

@@ -199,7 +199,7 @@ const IndividualTrip = () => {
 
             <div className='container' style={{ width: "80%" }}>
                 <div className="d-flex flex-column flex-md-row p-0 m-0" >
-                    <Recomendaciones location={viaje.destino} />
+                    {/* v */}
                     <ShoppingCart />
                 </div>
             </div>
@@ -215,18 +215,18 @@ const IndividualTrip = () => {
                         return (
 
                             <div key={index} className="col-md-3">
-                                <div className="card rounded shadow h-100 bg-light text-black" style={{ width: '100%' }}>
-                                    <img src={item.imagenes} className="card-img-top" alt="..." style={{ height: '280px', objectFit: 'cover' }} />
-                                    <div className="card-body d-flex flex-column">
-                                        <div className="d-flex justify-content-between align-items-center mb-2">
-                                            <h5 className="card-title mb-0">{item.nombre_actividad}</h5>
+                                <div className="card shadow bg-light text-black" style={{ width: '100%', borderRadius: "30px", height:'430px' }}>
+                                    <img src={item.imagenes} className="card-img-top" alt="..." style={{ height: '230px', objectFit: 'cover' }} />
+                                    <div className="card-body d-flex flex-column p-1">
+                                        <div className="d-flex justify-content-between align-items-center ">
+                                            <div className="card-title mb-0 mx-1 mt-1" style={{fontSize: '25px', fontWeight: '500'}}>{item.nombre_actividad}</div>
                                         </div>
-                                        <p className="card-text">{item.descripcion}</p>
-                                            <div className="d-flex justify-content-end align-items-center border-black border-bottom border-3  my-2">
+                                        <p className="card-text mx-1">{item.descripcion}</p>
+                                            <div className="d-flex justify-content-end align-items-center border-black border-bottom border-3 my-1">
                                                 <p className="p-2 rounded">${item.precio}</p>
                                             </div>
-                                        <div className="d-flex justify-content-between align-items-center mt-auto">
-                                            <Link to="/details" state={item} className="detalles text-light btn-sm px-4">Ver más</Link>
+                                        <div className="d-flex justify-content-between align-items-center mt-1">
+                                            <Link to="/details" state={item} className="detalles fondoNaranja text-light btn-sm px-4 rounded-pill">Ver más</Link>
                                             <div className="d-flex align-items-center">
                                                 <button className="bg-transparent border-0" onClick={() => handleClick(index)}>
                                                 { actions.isLike(index) ? 
@@ -238,21 +238,21 @@ const IndividualTrip = () => {
                                             </div>
                                         </div>
                                     </div>
-                                        <div className="card-footer text-center bg-secondary text-light p-2">
-                                            <button className={`btn btn btn-light btn-sm px-4 shadow ${actions.isViaje({name: item.name, id: item.id, type: "tripDetail"}) && "btn-danger"} `}
+                                        <div className="d-flex flex-column justify-content-end align-items-center fondoAzul text-light">
+                                            <div className={`p-1  ${actions.isViaje({name: item.name, id: item.id, type: "tripDetail"}) && "btn-danger"} `}
                                             onClick={() => actions.addViaje( {name: item.nombre_actividad, id: item.id, type: "tripDetail", cost: item.precio, imagenes: item.imagenes} )}>
                                             {actions.isViaje( {name: item.nombre_actividad, id: item.id, type: "tripDetail", cost: item.precio, imagenes: item.imagenes}) ? 
                                                 <>
-                                                    <i className="text-danger delete-trip fa-solid fa-trash-can p-1"></i>
-                                                    <span className="text-danger">Quitar</span>
+                                                    <i className="colorNaranja delete-trip fa-solid fa-trash-can p-1" style={{ color: 'orange' }}></i>
+                                                    <span className="text-light">Quitar</span>
                                                 </>
                                                 :
                                                 <>
-                                                    <i className="text-success fa-solid fa-circle-plus p-1"></i>
-                                                    <span>Agregar</span>
+                                                    <i className="colorNaranja fa-solid fa-circle-plus p-1" style={{ color: 'orange' }}></i>
+                                                    <span className="text-light">Agregar</span>
                                                 </>
                                             }
-                                        </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

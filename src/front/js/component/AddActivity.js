@@ -1,12 +1,14 @@
-import React, {useState, useContext, useSyncExternalStore} from 'react';
+import React, { useState, useContext, useSyncExternalStore } from 'react';
 import "../../styles/addActivityCard.css"
 import { Context } from "../store/appContext.js"
 import { useNavigate } from "react-router-dom";
+import "../../styles/index.css";
 
-const AddActivity = ({viajeId}) => {
+const AddActivity = ({ viajeId }) => {
     const { actions } = useContext(Context);
     const [idViaje, setIdViaje] = useState(viajeId)
-    
+
+
     const navigate = useNavigate();
 
     const handleImageClick = () => {
@@ -14,58 +16,30 @@ const AddActivity = ({viajeId}) => {
         navigate("/add-activity")
     }
 
-    
+
+
     return (
         <div className="col-md-3">
-            <div className="card rounded shadow h-100" style={{ width: '100%' }}>
-                <img src="https://www.shutterstock.com/image-vector/add-icon-new-item-plus-600nw-1315566653.jpg" className="card-img-top" alt="..." style={{ height: '230px', objectFit: 'cover', cursor: 'pointer' }}
-                    onClick={handleImageClick} 
-                />
-                {/* <div className="card-body d-flex flex-column">
-                    <div className="d-flex justify-content-between align-items-center mb-2">
-                        <h5 className="card-title mb-0">
-                            <input type="text" className="form-control add-form" placeholder="Nombre de la Actividad" 
-                            onChange={(e) => {
-                                setActivity({...activity, name: e.target.value})
-                            }} />
-                        </h5>
-                        <p className="mb-0 text-muted small">
-                            <input type="text" className="form-control add-form" placeholder="Creador"
-                            onChange={(e) => {
-                                setActivity({...activity, author: e.target.value})
-                            }} />
-                        </p>
-                    </div>
-                    <p className="card-text">
-                        <input type="text" className="form-control add-form" placeholder="Descripccion"
-                        onChange={(e) => {
-                            setActivity({...activity, description: e.target.value})
-                        }} />
-                    </p>
-                    <input type="text" className="form-control add-form" placeholder="URL de imagen" 
-                            onChange={(e) => {
-                                setActivity({...activity, imageUrl: e.target.value})
-                            }} />
-                        <div className="input-group d-flex justify-content-end align-items-center border-black border-bottom border-3  my-2">
-                            <span className="p-2 rounded input-group-text">$</span>
-                            <input type="text" className="form-control add-form" placeholder="Costo"
-                            onChange={(e) => {
-                                setActivity({...activity, cost: parseInt(e.target.value)})
-                            }} />
-                        </div>
-                    <div className="d-flex justify-content-between align-items-center mt-auto text-center">
-                        <div className="d-flex align-items-center">
-                            <button className="detalles text-light btn-sm px-4"
-                            onClick={()=>{actions.addActivity(activity)}} >Agregar actividad</button>
-                        </div>
-                    </div>
-                </div>
-                    <div className="card-footer text-center bg-secondary text-light p-2">
-                    <p> A viajar! </p>                  
-                    </div> */}
+        <div className="card shadow fondoAzul border border-light border-3" style={{ width: '100%', borderRadius: "30px", position: 'relative', overflow: 'hidden', height:'430px' }}>
+            <img
+                src="https://firebasestorage.googleapis.com/v0/b/trippy-proyecto.appspot.com/o/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(15).png?alt=media&token=86c65a3f-2f74-49b0-81cf-944deda510f4"
+                className="card-img"
+                alt="..."
+                style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', top: 0, left: 0 }}
+                onClick={handleImageClick}
+            />
+
+            <div className="d-flex flex-column justify-content-end align-items-center" style={{ position: 'absolute', bottom: 0, width: '100%', padding: '10px' }}>
+                <button className="btn shadow w-100 m-1 p-2 py-3 text-dark bg-light rounded-pill fw-bold" onClick={handleImageClick}>
+                    <i className="fa-solid fa-circle-plus me-1 colorNaranja text-center fs-5" onClick={handleImageClick}></i> Agrega una aventura
+                </button>
+                <button className="btn shadow w-100 p-2 m-1 mb-3 py-3 text-dark bg-light rounded-pill fw-bold" onClick={() => {/* Acción 2 */ }}>
+                    <i className="fa-solid fa-circle-plus me-1 colorNaranja text-center fs-5" ></i> Explora nuevas actividades
+                </button>
             </div>
         </div>
-            
+    </div>
+
     )
 }
 

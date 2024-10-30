@@ -71,13 +71,13 @@ const NewActivity = () => {
     return (
         <div className="PaginaPrincipal">
             <div className="container">
-                <div className="p-4 bg-dark  rounded shadow-lg w-50 mx-auto">
+                <div className="p-4 bg-dark shadow-lg w-50 mx-auto" style={{borderRadius: "30px" }}>
 
                     <div className="mb-3">
                         <label htmlFor="Actividad" className="form-label text-light fs-3">Nombre de la actividad </label>
                         <input
                             type="text"
-                            className="form-control opacity-50 bg-light border-0 rounded-3"
+                            className="form-control rounded-3"
                             id="name"
                             placeholder="Heladería"
                             required
@@ -119,7 +119,7 @@ const NewActivity = () => {
                             <div className="mb-3">
                                 <label htmlFor="descripción" className="form-label text-light"> <i className="colorNaranja fa-solid fa-comment-dots me-2"></i>Descripción</label>
                                 <textarea
-                                    className="form-control opacity-50 bg-light border-0 rounded-3"
+                                    className="form-control opacity-25 bg-light border-0 rounded-3"
                                     id="descripcion"
                                     rows="2"
                                     placeholder="Describe la actividad, horarios, datos importantes, entre otros..."
@@ -173,13 +173,13 @@ const NewActivity = () => {
                             </div>
 
 
-                            <button onClick={upload} className="mb-3 btn btn-success w-100">Guardar</button>
+                            <button onClick={upload} className="mb-3 btn btn-success w-100 rounded-pill">Guardar</button>
 
                             <div className="d-flex justify-content-start">
                                 <Link to="/"
-                                    className="btn btn-secondary mt-2 d-flex align-items-center rounded-3"
+                                    className="btn btn-secondary mt-2 d-flex align-items-center rounded-pill"
                                 >
-                                    <i className="fa-solid fa-circle-chevron-left me-2"></i> Inicio
+                                    <i className="fa-solid fa-circle-chevron-left me-2 "></i> Inicio
                                 </Link>
                             </div>
                             
