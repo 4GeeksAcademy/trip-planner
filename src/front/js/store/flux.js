@@ -306,33 +306,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 				// setStore(activities)
 				setStore({ activities: data });
 			},
-
-
-
-
 			login: async (email, password) => {
-					const resp = await fetch(process.env.BACKEND_URL + "/api/login", {
-						method: "POST",
-						headers: {
-							"Content-Type": "application/json"
-						},
-						body: JSON.stringify({
-							email: email,
-							password: password
-						})
-					});
-					const data = await resp.json();
+				const resp = await fetch(process.env.BACKEND_URL + "/api/login", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						email: email,
+						password: password
+					})
+				});
+				const data = await resp.json();
 
-					console.log("Estado de la respuesta:", resp.ok); // Debe ser false si las credenciales son incorrectas
-					console.log("Datos de la respuesta:", data); // Verifica el contenido
+				console.log("Estado de la respuesta:", resp.ok); // Debe ser false si las credenciales son incorrectas
+				console.log("Datos de la respuesta:", data); // Verifica el contenido
 
-					if (resp.ok) {
-						localStorage.setItem("token", data.token);
-						setStore({ token: data.token, user: data.user }); //guarda el token y user
-						toast.success("Iniciando sesión");
-					} else {
-						toast.error("Credenciales inválidas");
-					}
+				if (resp.ok) {
+					localStorage.setItem("token", data.token);
+					setStore({ token: data.token, user: data.user }); //guarda el token y user
+					toast.success("Iniciando sesión");
+				} else {
+					toast.error("Credenciales inválidas");
+				}
 			},
 
 			logout: () => {
@@ -396,8 +392,95 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const data = await resp.json();
 				setStore({ user: data });
 			},
+			getUserData: async (userEmail) => {
+				const store = getStore();
+				const email = userEmail || store.user.email;
+				if (email) {
+					try {
+						const response = await fetch(`${process.env.BACKEND_URL}/api/user/${email}`);
+						if (!response.ok) {
+							const errorText = await response.text();
+							console.error("Error en la respuesta:", errorText);
+							console.error("Código de estado:", response.status);
+							throw new Error("Error al obtener los datos del usuario");
+						}
+						const data = await response.json();
+						if (data.email) {
+							setStore({ user: data });
+						} else {
+							console.warn("El email no se recibió en los datos del servidor");
+						}
+					} catch (error) {
+						console.error("Error al hacer la solicitud:", error);
+						toast.error("Error al obtener los datos del usuario");
+					}
+				} else {
+					console.warn("No se encontró el email del usuario en el store");
+				}
+			},
+			updateUserProfile: async (name, userName, email, password, more_info, profileImageUrl) => {
+				const actions = getActions();
+				const store = getStore();
+				const currentEmail = store.user.email;
+				const resp = await fetch(`${process.env.BACKEND_URL}/api/user/${currentEmail}`, {
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json",
+						"Authorization": `Bearer ${store.user.token}`
+					},
+					body: JSON.stringify({
+						name: name || store.user.name,
+						username: userName || store.user.username,
+						email: email || currentEmail,
+						password: password,
+						more_info: more_info || store.user.more_info,
+						profile_image_url: profileImageUrl || store.user.profile_image_url
+					})
+				});
+				const data = await resp.json()
+				if (resp.ok) {
+					toast.success("¡Tu usuario ha sido actualizado!");
+					setStore({
+						user: {
+							...store.user,
+							name: name || store.user.name,
+							username: userName || store.user.username,
+							email: email || currentEmail,
+							more_info: more_info || store.user.more_info,
+							profile_image_url: profileImageUrl || store.user.profile_image_url
+						}
+					});
+					console.log(store.user.email)
+					await actions.getUserData(email || currentEmail);
+					return data;
+				}
+				else {
+					toast.error("Error al actualizar el usuario");
+				}
+			},
+			deleteAccount: async (email) => {
+				const store = getStore();
+				const actions = getActions();
+				const currentEmail = store.user.email;
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}/api/user/${currentEmail}`, {
+						method: "DELETE",
+					});
+					if (!resp.ok) {
+						throw new Error('Error al eliminar la cuenta');
+					}
+					const data = await resp.json();
+					console.log('Cuenta eliminada:', data);
+					actions.logout()
+					toast.success("La cuenta fue eliminada exitosamente!");
 
-			addViaje: (viaje) => {
+				} catch (error) {
+					console.error('Error', error);
+				}
+
+			}
+
+			, addViaje: (viaje) => {
 				const store = getStore();
 				const actions = getActions();
 				const result = actions.isViaje(viaje)

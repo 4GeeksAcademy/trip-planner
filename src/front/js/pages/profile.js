@@ -39,6 +39,18 @@ const Profile = () => {
         actions.getUserData();
         navigate("/viajes")
     }
+    const deleteUser = async(user) => {
+        const confirmDelete = window.confirm("¿Estás seguro de que deseas eliminar tu cuenta?");
+        if (confirmDelete) {
+            try {
+                await actions.deleteAccount(user.email); 
+            } catch (error) {
+                console.error('Error al eliminar la cuenta:', error);
+                toast.error("No se pudo eliminar la cuenta. Intenta de nuevo más tarde.");
+            }
+        }
+        navigate("/")
+    }
 
     const uploadImage = async (image) => {
         const storage = getStorage();
@@ -210,7 +222,10 @@ const Profile = () => {
                                 <div className="row gutters">
                                     <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                         <div className="d-flex justify-content-between mt-2">
-                                            <button className="btn btn-danger me-2 rounded-pill">Eliminar cuenta</button>
+                                            <button 
+                                                className="btn btn-danger me-2 rounded-pill"
+                                                onClick={()=> deleteUser(user)}
+                                            >Eliminar cuenta</button>
                                             <div className="d-flex">
                                             <Link to="/viajes" className="btn btn-secondary d-flex align-items-center rounded-pill me-2">
                                                 Cancelar

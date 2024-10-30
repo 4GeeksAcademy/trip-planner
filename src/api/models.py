@@ -72,7 +72,7 @@ class Viaje(db.Model):
     # Relaciones
     user = db.relationship('User', back_populates='viajes')
     grupos = db.relationship('Grupo', back_populates='viaje', cascade="all, delete-orphan", lazy=True)
-    # actividades = db.relationship('Actividad', back_populates='viaje', cascade="all, delete-orphan", lazy=True)
+    actividades = db.relationship('Actividad', back_populates='viaje', cascade="all, delete-orphan", lazy=True)
 
     def __init__(self, destino, fecha_inicio, fecha_fin, presupuesto_grupo, motivo, nota, presupuesto_personal, user_id, trip_image_url):
         self.destino = destino
@@ -142,7 +142,7 @@ class Actividad(db.Model):
     imagenes = db.Column(db.String(360), nullable=True)
     duracion = db.Column(db.Integer, nullable=True)
     viaje_id = db.Column(db.Integer, db.ForeignKey('viajes.id'), nullable=False)
-    viaje = db.relationship("Viaje", backref='actividades', lazy=True, foreign_keys=[viaje_id])  # Relación de Viaje a Actividad
+    viaje = db.relationship("Viaje", back_populates='actividades', lazy=True)
     descripcion = db.Column(db.String(360), nullable=True)
     comentarios = db.relationship("Comentarios", back_populates='actividad', cascade="all, delete-orphan", lazy=True)  # Relación de Comentarios a Actividad
     likes = db.relationship('Likes', back_populates='actividad', cascade="all, delete-orphan", lazy=True)
