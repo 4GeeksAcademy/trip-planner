@@ -38,8 +38,8 @@ const IndividualTrip = () => {
     }, [store.viajes]);
     
     const viaje = store.viajes.find(v => v.id === parseInt(id));
-    console.log("Este es el viaje", viaje)
-    // const location = actions.geoLocation(viaje.destino);
+    
+  
 
     if (loading) {
         return <div className="text-center">
@@ -59,22 +59,24 @@ const IndividualTrip = () => {
     }
 
     const handleAddMemeber = () => {
-        console.log("Estos son los user" + store.miembros)
+        console.log(id)
+        console.log("Estos son los user", store.users)
         if (!newMember.email) {
             alert("Por favor, ingresa un correo electrónico válido.");
             return;
         }
-
-        const usuario = store.user.find(usuario => usuario.email === newMember.email)
+        
+        const usuario = store.users.find(usuario => usuario.email === newMember.email)
         if (usuario) {
-            actions.addMember(usuario);
+            actions.addMember(usuario, id);
             setNewMember({ email: "" });
             toast.success("Miembro agregado correctamente!")
         } else {
             alert("No se encontró un usuario con ese correo.")
         }
     }
-
+    // let membersByTrip = store.miembros.filter((miembro)=> {miembro.viaje_id === id})
+    // console.log("miembros por viaje",membersByTrip)
     //Formato de fecha sin horas
     const formatDate = (dateString) => {
         const date = new Date(dateString);
@@ -109,10 +111,10 @@ const IndividualTrip = () => {
                                     store.miembros.map((item, index) => (
                                         <React.Fragment key={index}>
                                             <li className="d-flex flex">
-                                                <p className="dropdown-item d-flex flex justify-content-between align-items-center" href="#">{item.name}</p>
+                                                <p className="dropdown-item d-flex flex justify-content-between align-items-center" href="#">{item.miembro.name}</p>
                                                 <i className="d-flex flex fa-solid justify-content-end fa-circle-info fs-5 m-1" type="button"
                                                     data-bs-toggle="popover"
-                                                    title={item.more_info}
+                                                    title={item.miembro.more_info}
                                                     data-bs-content="pedro"
                                                 ></i>
                                                 <i className="d-flex flex delete-trip align-item-center fa-solid fa-trash-can m-1 " role="button"

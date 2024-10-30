@@ -30,6 +30,7 @@ const injectContext = PassedComponent => {
 			 **/
 			state.actions.getMessage(); // <---- calling this function from the flux.js actions
 			state.actions.getUserLogged();
+			state.actions.getUsers();
 			// state.actions.get_users();
 		}, []);
 

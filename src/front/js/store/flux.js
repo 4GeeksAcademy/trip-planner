@@ -28,11 +28,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 			],
 			selected_trip: [],
 			activities: [],
+			users: [],
 			miembros: [],
 			comentarios: [],
 		},
 		actions: {
-
+			getUsers: async() => {
+				const response = await fetch(process.env.BACKEND_URL + "api/users", {
+					method: 'GET'
+				});
+				const data = await response.json()
+				console.log("usuarios:", data)
+				setStore({users: data})
+			},
 			get_comments: async (actividades_id) => {
 				const store = getStore();
 
@@ -512,16 +520,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return total;
 			},
 
-			addMember: (miembro) => {
+			addMember: async(miembro, viaje_id) => {
 				const store = getStore();
 				const actions = getActions();
-				const result = actions.isMember(miembro)
+				const result = actions.isMember(miembro)	
+				console.log(JSON.stringify(miembro.email))	
+				const response = await fetch(process.env.BACKEND_URL + "api/add-member/"+viaje_id, {
+					mode: 'no-cors',
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+						
+					},
+					body: JSON.stringify(miembro.email),
+				});
+				
 				if (result) {
 					actions.deleteMember();
+					// alertar que ya existe el usuario 
 				} else {
 					setStore({
-						miembros: [...store.miembros, miembro]
+						miembros: [...store.miembros, {miembro, viaje_id}]
 					})
+					console.log(store.miembros)
 				}
 			},
 
