@@ -15,8 +15,16 @@ const IndividualTrip = () => {
     const [loading, setLoading] = useState(true);
     const [newMember, setNewMember] = useState({ email: "" });
     const [selectedMember, setSelectedMember] = useState("null");
-    
-    
+    const [like, setLike] = useState(false);
+
+    const handleClick = (index) => {
+        if (actions.isLike(index)) {
+            actions.deleteLike(index)
+        } else {
+            actions.addLike(index)
+        }
+    };
+
     useEffect(() => {
         actions.setCurrentId(parseInt(id));
         actions.getActivities(id);
@@ -81,9 +89,9 @@ const IndividualTrip = () => {
 
                 <div className=" d-flex flex-column flex-md-row justify-content-between bg-light shadow p-4" style={{ borderRadius: "30px" }}>
                     <div className="d-flex flex-column flex-md-row justify-content-between" style={{ width: "80%" }} >
-                        <h5 className="colorNaranja mb-1">Destino<p className="mb-1 colorAzul fs-4">{viaje.destino}</p></h5>
-                        <p className="mb-1 colorAzul">Fecha de salida: {formatDate(viaje.fecha_inicio)}</p>
-                        <p className="mb-1 colorAzul">Presupuesto: $ {viaje.presupuesto}</p>
+                        <h5 className="colorNaranja mb-1">Destino<div className="colorAzul mb-1 fs-4">{viaje.destino}</div></h5>
+                        <div className="mb-1 colorAzul">Fecha de salida: {formatDate(viaje.fecha_inicio)}</div>
+                        <div className="mb-1 colorAzul">Presupuesto: $ {viaje.presupuesto}</div>
                     </div>
 
 
@@ -190,7 +198,7 @@ const IndividualTrip = () => {
             </div>
 
             <div className='container' style={{ width: "80%" }}>
-                <div className="d-flex flex-column flex-md-row justify-content-between p-0 m-0" >
+                <div className="d-flex flex-column flex-md-row p-0 m-0" >
                     <Recomendaciones location={viaje.destino} />
                     <ShoppingCart />
                 </div>
@@ -221,17 +229,11 @@ const IndividualTrip = () => {
                                             <Link to="/details" state={item} className="detalles text-light btn-sm px-4">Ver más</Link>
                                             <div className="d-flex align-items-center">
                                                 <button className="bg-transparent border-0" onClick={() => handleClick(index)}>
-                                                {/* { !like ? 
-                                                    <>
-                                                        <i className={`text-danger fa-regular fa-heart me-2`}></i>
-                                                    </>
-                                                    :
-                                                    <>
-                                                        <i className={`text-danger fa-solid fa-heart me-2`}></i>
-                                                    </>
-                                                } */}
-                                                    {/* ${actions.addLike(index) ? "fa-solid" : "fa-regular"} */}
-                                                    {/* {item.likes} */}
+                                                { actions.isLike(index) ? 
+                                                    <i className={`text-danger fa-solid fa-heart me-2`}></i> :
+                                                    <i className={`text-danger fa-regular fa-heart me-2`}></i>
+                                                }
+                                                    {item.likes}
                                                 </button>
                                             </div>
                                         </div>

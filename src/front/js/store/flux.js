@@ -275,13 +275,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			isLike: (index) => {
 				const store = getStore();
-				const result = store.activities.some(index)
+				const result = store.activities.some((activity, i) => i === index && activity.likes > 0)
 				return result
 			},
 
 			addActivity: async (activity) => {
 				const store = getStore()
-				const response = await fetch(process.env.BACKEND_URL + "/api/add-activity", {
+				const response = await fetch(process.env.BACKEND_URL + "api/add-activity", {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
