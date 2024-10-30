@@ -190,7 +190,7 @@ class Comentarios(db.Model):
             "id": self.id,
             "actividades_id": self.actividades_id,
             "user_id": self.user_id,
-            "usuario": self.user.email if self.user else None,
+            "usuario": self.user.username if self.user else None,
             "comentario": self.comentario
         }
 

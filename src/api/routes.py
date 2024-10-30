@@ -27,8 +27,23 @@ api = Blueprint('api', __name__)
 CORS(api)
 
 
+# OBTENER COMENTARIOS
+@api.route('/get-comments/<int:actividades_id>/', methods=['GET'])
+@jwt_required()
+def get_comments(actividades_id):
+    user_email = get_jwt_identity()
+    user = User.query.filter_by(email=user_email).first()
+
+    if user is None:
+        return jsonify({"error": "User not found"}), 404
+
+    comentarios = Comentarios.query.filter_by(actividades_id=actividades_id).all()
+
+    return jsonify([comentario.serialize() for comentario in comentarios]), 200
+
+
 # AGREGAR COMENTARIOS 
-@api.route('/add-comment/', methods= ['POST'])
+@api.route('/add-comment', methods= ['POST'])
 @jwt_required()
 def add_comment():
     user_email = get_jwt_identity()

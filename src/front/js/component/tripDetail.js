@@ -1,5 +1,5 @@
 import '../../styles/viajes.css';
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 import "../../styles/index.css";
 import { Context } from "../store/appContext.js"
@@ -11,32 +11,34 @@ import { Context } from "../store/appContext.js"
 const TripDetail = () => {
 
     const { store, actions } = useContext(Context);
-    
-
 
     const [nuevoComentario, setNuevoComentario] = useState('');
-    const [comentarios, setComentarios] = useState(
-        [{
-            id: 1,
-            usuario: '@maria',
-            mensaje: '¡Este post es muy interesante!'
-        }]
-    )
     let { state } = useLocation();
     const { id, nombre_actividad, descripcion, precio, imagenes } = state
 
+    useEffect(() => {
+        const loadComments = async () => {
+            await actions.get_comments(id);
+            console.log("Comentarios después de la carga:", store.comentarios);
+        };
+        
+        loadComments();
+    }, [id, actions]);
+
+
     // para subir el comentario
     const handleCommentSubmit = async () => {
-        console.log("ID de actividad:", id); 
         if (nuevoComentario.trim()) {
             const result = await actions.post_comment(id, nuevoComentario);
-
             if (result) {
-                setComentarios([...comentarios, { id: Date.now(), usuario: store.user.username, mensaje: nuevoComentario }]);
                 setNuevoComentario(''); // Limpiar el campo de entrada
+                await actions.get_comments(id);
             }
         }
     };
+
+    const comentariosActividad = store.comentarios.filter(comentario => comentario.actividades_id === id);
+
 
 
 
@@ -106,12 +108,12 @@ const TripDetail = () => {
                                     </div>
                                 </div>
 
-                                {comentarios.map(comentario => (
+                                 {comentariosActividad.map(comentario => (
                                     <div className="media mb-4" key={comentario.id}>
                                         <div className="rounded rounded-3 border shadow-sm bg-light m-2 p-2">
-                                            <h6 className="mt-0 colorNaranja">{comentario.usuario}</h6>
+                                            <h6 className="mt-0 colorNaranja">@{comentario.usuario}</h6>
                                             <div className="d-flex justify-content-between align-items-center">
-                                                <span>{comentario.mensaje}</span> <i className="fa-solid fa-trash-can d-flex justify-content-end mx-2 text-secondary"></i> {/*falta agregar para eliminar comentarios */}
+                                                <span>{comentario.comentario}</span>
                                             </div>
                                         </div>
                                     </div>
