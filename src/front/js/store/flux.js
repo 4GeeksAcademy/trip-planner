@@ -50,7 +50,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				console.log("Datos a enviar:", datosEnviar);
 
-				const response = await fetch(process.env.BACKEND_URL + "api/add-comment", {
+				const response = await fetch(process.env.BACKEND_URL + "/api/add-comment", {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
@@ -176,7 +176,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const datosEnviar = { ...viaje, user_id: store.user.id };
 				console.log("Datos a enviar:", datosEnviar);
 
-				const response = await fetch(process.env.BACKEND_URL + "api/add-trip", {
+				const response = await fetch(process.env.BACKEND_URL + "/api/add-trip", {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
@@ -184,7 +184,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify({ ...viaje, user_id: store.user.id })
 				});
 				const data = await response.json();
-				console.log(data);
+				console.log("pasamos el post", data);
 
 				if (response.ok) {
 					setStore({ viajes: data.trip });
@@ -199,7 +199,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			get_trips: async () => {
 				const store = getStore();
-				const response = await fetch(process.env.BACKEND_URL + "api/all-trip", {
+				const response = await fetch(process.env.BACKEND_URL + "/api/all-trip", {
 					method: 'GET',
 					headers: {
 						'Content-Type': 'application/json',
@@ -247,7 +247,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			addActivity: async (activity) => {
 				const store = getStore()
-				const response = await fetch(process.env.BACKEND_URL + "api/add-activity", {
+				const response = await fetch(process.env.BACKEND_URL + "/api/add-activity", {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
@@ -263,7 +263,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getActivities: async () => {
 				const store = getStore()
-				const response = await fetch(process.env.BACKEND_URL + "api/all-activities/" + store.currentId, {
+				const response = await fetch(process.env.BACKEND_URL + "/api/all-activities/" + store.currentId, {
 					method: 'GET'
 				})
 				const data = await response.json()
@@ -308,6 +308,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			register: async (name, userName, email, password, more_info, profileImageUrl) => {
+				console.log(userName)
 				const resp = await fetch(process.env.BACKEND_URL + "/api/register", {
 					method: "POST",
 					headers: {
