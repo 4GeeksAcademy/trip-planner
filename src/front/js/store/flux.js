@@ -33,6 +33,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 
+			get_comments: async (actividades_id) => {
+				const store = getStore();
+			
+				if (!actividades_id) {
+					toast.error("Falta el ID de la actividad");
+					return;
+				}
+			
+				const response = await fetch(process.env.BACKEND_URL + "api/get-comments" + actividades_id + "/", {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+						'Authorization': `Bearer ${store.token}`
+					}
+				});
+			
+				if (!response.ok) {
+					const errorData = await response.json();
+					console.error("Error", errorData);
+					toast.error(errorData.error || "Ocurrió un error inesperado.");
+					return;
+				}
+			
+				const data = await response.json();
+				console.log(data);
+				setStore({ comentarios: data }); 
+			},
+
 			post_comment: async (actividades_id, comentario) => {
 				const store = getStore();
 
