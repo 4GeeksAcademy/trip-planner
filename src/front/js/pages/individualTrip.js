@@ -81,9 +81,9 @@ const IndividualTrip = () => {
 
                 <div className=" d-flex flex-column flex-md-row justify-content-between bg-light shadow p-4" style={{ borderRadius: "30px" }}>
                     <div className="d-flex flex-column flex-md-row justify-content-between" style={{ width: "80%" }} >
-                        <h5 className="colorNaranja mb-1">Destino<p className="mb-1 colorAzul fs-4">{viaje.destino}</p></h5>
-                        <p className="mb-1 colorAzul">Fecha de salida: {formatDate(viaje.fecha_inicio)}</p>
-                        <p className="mb-1 colorAzul">Presupuesto: $ {viaje.presupuesto}</p>
+                        <h5 className="colorNaranja mb-1">Destino<div className="colorAzul mb-1 fs-4">{viaje.destino}</div></h5>
+                        <div className="mb-1 colorAzul">Fecha de salida: {formatDate(viaje.fecha_inicio)}</div>
+                        <div className="mb-1 colorAzul">Presupuesto: $ {viaje.presupuesto}</div>
                     </div>
 
 
@@ -190,7 +190,7 @@ const IndividualTrip = () => {
             </div>
 
             <div className='container' style={{ width: "80%" }}>
-                <div className="d-flex flex-column flex-md-row justify-content-between p-0 m-0" >
+                <div className="d-flex flex-column flex-md-row p-0 m-0" >
                     <Recomendaciones location={viaje.destino} />
                     <ShoppingCart />
                 </div>

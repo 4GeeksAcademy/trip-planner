@@ -73,7 +73,7 @@ const Profile = () => {
                 <div className="row gutters">
                     <div className="col-4" style={{ height: '450px' }}>
                         <div className="card h-100 w-100" style={{ borderRadius: "30px" }}>
-                            <div className="card-body">
+                            <div className="card-body bg-dark">
                                 <div className="account-settings">
                                     <div className="user-profile">
                                         <div className="user-avatar mt-3">
@@ -95,7 +95,7 @@ const Profile = () => {
                                             />
                                         </div>
                                         <h5 className="user-name mt-2">{store.user.name}</h5>
-                                        <h6 className="user-name">{store.user.username}</h6>
+                                        <h6 className="user-name">@{store.user.username}</h6>
                                         <h6 className="user-email">{store.user.email}</h6>
                                     </div>
                                     <div className="about">
@@ -108,7 +108,7 @@ const Profile = () => {
                     </div>
                     <div className="col-8" style={{ height: '450px' }}>
                         <div className="card h-100 w-100" style={{ borderRadius: "30px" }}>
-                            <div className="card-body">
+                            <div className="card-body bg-dark">
                                 <div className="row gutters mb-2">
                                     <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                         <h6 className="mb-2 colorNaranja">Información personal</h6>
@@ -117,7 +117,7 @@ const Profile = () => {
                                         <div className="form-group">
                                             <label>Nombre Completo</label>
                                             <input
-                                                className="form-control"
+                                                className="form-control rounded"
                                                 placeholder="Ingresa tu nombre completo"
                                                 onChange={(event) => setUser({
                                                     ...user,
@@ -130,7 +130,7 @@ const Profile = () => {
                                         <div className="form-group">
                                             <label>Nombre de Usuario</label>
                                             <input
-                                                className="form-control"
+                                                className="form-control rounded"
                                                 placeholder="Ingresa tu nombre de usuario"
                                                 onChange={(event) => setUser({
                                                     ...user,
@@ -143,7 +143,7 @@ const Profile = () => {
                                         <div className="form-group">
                                             <label>Correo Electrónico</label>
                                             <input
-                                                className="form-control"
+                                                className="form-control rounded"
                                                 placeholder="Ingresa tu correo electrónico"
                                                 onChange={(event) => setUser({
                                                     ...user,
@@ -156,7 +156,7 @@ const Profile = () => {
                                         <div className="form-group">
                                             <label>Más información acerca de ti</label>
                                             <textarea
-                                                className="form-control"
+                                                className="form-control rounded"
                                                 style={{ height: '80px' }}
                                                 onChange={(event) => setUser({
                                                     ...user,
@@ -176,7 +176,7 @@ const Profile = () => {
                                             <div className="d-flex">
                                                 <input
                                                     type={showPassword ? "text" : "password"}
-                                                    className="form-control"
+                                                    className="form-control rounded"
                                                     onChange={(event) => setUser({
                                                         ...user,
                                                         password: event.target.value
@@ -190,11 +190,11 @@ const Profile = () => {
                                     </div>
                                     <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-10 m-0 pe-2 ps-1">
                                         <div className="form-group">
-                                            <label>Confirma la Contraseña</label>
+                                            <label>Confirma la contraseña</label>
                                             <div className="d-flex">
                                                 <input
                                                     type={showPassword ? "text" : "password"}
-                                                    className="form-control"
+                                                    className="form-control rounded"
                                                     onChange={(event) => setUser({
                                                         ...user,
                                                         passwordConfirm: event.target.value

@@ -23,7 +23,7 @@ const Login = () => {
         <div className="PaginaPrincipal">
             <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
                 <div className="shadow-lg p-4 bg-dark" style={{ width: '450px', borderRadius: "30px"}}>
-                    <h2 className="text-center colorNaranja">Ingresar</h2>
+                    <h2 className="text-center text-white">Ingresar</h2>
                     <div className="mb-3">
                         <label className="form-label text-light">Correo electrónico</label>
                         <input

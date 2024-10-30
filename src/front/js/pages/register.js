@@ -69,7 +69,7 @@ const Register = () => {
         <div className="PaginaPrincipal">
             <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh'}}>
                 <div className="shadow-lg p-4 bg-dark" style={{ width: '500px', borderRadius: "30px" }}>
-                    <h2 className="text-center colorNaranja mb-2">Crea una cuenta</h2>
+                    <h2 className="text-center text-white mb-2">Crea una cuenta</h2>
                     <div className="mb-1 d-flex flex-column justify-content-center">
                         <label className="form-label text-light">Imagen de perfil</label>
                         <img
