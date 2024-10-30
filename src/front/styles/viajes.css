@@ -28,8 +28,21 @@
 }
 
 .detalles {
-    background-color: #111d4a;
     text-decoration: none;
+}
+
+.description {       
+    overflow: hidden;           
+    white-space: nowrap;      
+    display: block;         
+    height: 6em;              
+    line-height: 1.5em;       
+    text-overflow: ellipsis;      
+}
+
+.custom-rounded {
+    border-top-left-radius: 50px; /* Ajusta según el tamaño que desees */
+    border-bottom-left-radius: 50px; /* Ajusta según el tamaño que desees */
 }
 
 .colorAzul {

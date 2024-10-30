@@ -52,7 +52,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (response.ok) {
 					const data = await response.json();
 					console.log("Comentarios recibidos del servidor:", data);
-					setStore({ comentarios: [...store.comentarios, ...data] });
+					setStore({ ...store, comentarios: [...store.comentarios, ...data] });
 				} else {
 					const errorData = await response.json();
 					console.error("Error al obtener comentarios:", errorData);

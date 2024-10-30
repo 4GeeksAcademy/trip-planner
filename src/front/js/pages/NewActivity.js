@@ -71,13 +71,13 @@ const NewActivity = () => {
     return (
         <div className="PaginaPrincipal">
             <div className="container">
-                <div className="p-4 bg-dark shadow-lg w-50 mx-auto" style={{borderRadius: "30px" }}>
+                <div className="p-4 bg-dark shadow-lg w-50 mx-auto" style={{ borderRadius: "30px" }}>
 
                     <div className="mb-3">
                         <label htmlFor="Actividad" className="form-label text-light fs-3">Nombre de la actividad </label>
                         <input
                             type="text"
-                            className="form-control rounded-3"
+                            className="form-control opacity-50 bg-light border-0 rounded-3"
                             id="name"
                             placeholder="Heladería"
                             required
@@ -104,7 +104,7 @@ const NewActivity = () => {
                             <input
                                 id="imagenActividad"
                                 type="file"
-                                accept="image/*"
+                                accept="image/*" 
                                 className="form-control"
                                 style={{ display: 'none' }}
                                 onChange={(event) => {
@@ -114,12 +114,12 @@ const NewActivity = () => {
                                         imagenes: event.target.files[0],
                                     });
                                 }}
-                                />
-                            
+                            />
+
                             <div className="mb-3">
                                 <label htmlFor="descripción" className="form-label text-light"> <i className="colorNaranja fa-solid fa-comment-dots me-2"></i>Descripción</label>
                                 <textarea
-                                    className="form-control opacity-25 bg-light border-0 rounded-3"
+                                    className="form-control opacity-50 bg-light border-0 rounded-3"
                                     id="descripcion"
                                     rows="2"
                                     placeholder="Describe la actividad, horarios, datos importantes, entre otros..."
@@ -149,11 +149,12 @@ const NewActivity = () => {
                                         })
                                     }
                                 ></textarea>
+                                <small className="form-text text-light">Por favor, ingresa el monto en dólares -  USD $</small>
                             </div>
 
 
                             <div className="mb-3">
-                                <label htmlFor="duracion" className="form-label text-light"> <i className="colorNaranja fa-solid fa-clock me-2"></i>Duración de la actividad</label>
+                                <label htmlFor="duracion" className="form-label text-light"> <i className="colorNaranja fa-solid fa-clock me-2"></i>Duración de la actividad <span className="colorNaranja">(Horas)</span></label>
                                 <textarea
                                     className="form-control opacity-50 bg-light border-0 rounded-3"
                                     id="duracion"
@@ -170,6 +171,7 @@ const NewActivity = () => {
                                             }));
                                         }}
                                 ></textarea>
+                                
                             </div>
 
 
@@ -182,7 +184,7 @@ const NewActivity = () => {
                                     <i className="fa-solid fa-circle-chevron-left me-2 "></i> Inicio
                                 </Link>
                             </div>
-                            
+
 
                         </div>
                     </div>

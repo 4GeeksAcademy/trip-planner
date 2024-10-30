@@ -98,8 +98,8 @@ const IndividualTrip = () => {
                     {/* Dropdown de MIEMBROS */}
                     <div className="mx-4 mt-3 mt-md-0">
                         <div className="dropdown">
-                            <button className="btn btn-secondary dropdown-toggle shadow" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                                <i className="fa-solid fa-user-group me-2"></i>
+                            <button className="fondoAzul dropdown-toggle shadow rounded-pill px-5 py-2 text-light" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                                <i className="fa-solid fa-user-group me-2 text-white"></i>
                                 Miembros
                             </button>
                             <ul className="dropdown-menu dropdown-menu-dark p-1 " aria-labelledby="dropdownMenuButton2">
@@ -197,17 +197,15 @@ const IndividualTrip = () => {
                 </div>
             </div>
 
-            <div className='container' style={{ width: "80%" }}>
-                <div className="d-flex flex-column flex-md-row p-0 m-0" >
-                    {/* v */}
+            <div >
                     <ShoppingCart />
-                </div>
+                
             </div>
 
 
             <div className="container">
                 <div className="row justify-content-center g-4">
-                    <AddActivity viajeId={viaje.id} />
+                <AddActivity viajeId={viaje.id} viajeDestino={viaje.destino} />
 
                     {/* CARDS */}
                     
@@ -221,7 +219,7 @@ const IndividualTrip = () => {
                                         <div className="d-flex justify-content-between align-items-center ">
                                             <div className="card-title mb-0 mx-1 mt-1" style={{fontSize: '25px', fontWeight: '500'}}>{item.nombre_actividad}</div>
                                         </div>
-                                        <p className="card-text mx-1">{item.descripcion}</p>
+                                        <p className="card-text mx-1 p-1 description">{item.descripcion}</p>
                                             <div className="d-flex justify-content-end align-items-center border-black border-bottom border-3 my-1">
                                                 <p className="p-2 rounded">${item.precio}</p>
                                             </div>

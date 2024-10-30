@@ -6,6 +6,7 @@ import "../../styles/index.css";
 
 const Recomendaciones = (props) => {
     const { store, actions } = useContext(Context);
+    
 
     
     return (<>

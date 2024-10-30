@@ -10,12 +10,12 @@ const ShoppingCart = () => {
     const { store, actions } = useContext(Context);
 
     return (
-    <div className = "container d-flex flex justify-content-end">
+    <div className = "container-fluid d-flex justify-content-end p-0">
         <div className="btn-group">
-            <button type="button" className="fondoAzul text-white btn dropdown-toggle fw-bold" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+            <button type="button" className="fondoAzul text-white dropdown-toggle fw-bold custom-rounded px-5 py-4" style={{ margin: 0 }} data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                 Tu viaje
             </button>
-            <ul className="dropdown-menu dropdown-menu-end">
+            <ul className="dropdown-menu dropdown-menu-end rounded-3">
                 {store.selected_trip.length == 0 ? (
                     <p className="d-flex flex justify-content-center text-secundary mx-3">Agrega una actividad a tu viaje</p>
                 ) : (

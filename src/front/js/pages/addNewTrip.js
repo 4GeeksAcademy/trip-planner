@@ -116,7 +116,7 @@ const NewTrip = () => {
                         type="text"
                         className="form-control opacity-50 bg-light border-0 rounded-3"
                         id="destino"
-                        placeholder="Ciudad, País"
+                        placeholder="Ciudad"
                         required
                         value={viaje.destino}
                         onChange={
@@ -126,6 +126,7 @@ const NewTrip = () => {
                             })
                         }
                     />
+                    <small className="form-text text-light">Por favor, ingresa la Ciudad</small>
                 </div>
 
                 <div className="mb-3">

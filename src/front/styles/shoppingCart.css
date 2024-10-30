@@ -63,7 +63,7 @@
 
 .trip-cost {
     text-align: end;
-    background-color: rgb(34, 146, 164);
+    background-color: rgba(93, 93, 93, 0.436);
     border-radius: 5px;
     font-size: 13px;  
 }

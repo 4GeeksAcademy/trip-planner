@@ -23,7 +23,8 @@ const TripDetail = () => {
         };
         
         loadComments();
-    }, [id, actions]);
+    }, [id]);
+    
 
 
     // para subir el comentario
@@ -45,31 +46,33 @@ const TripDetail = () => {
     return (
         <div className="PaginaPrincipal">
             <div className="container-fluid mx-auto p-2">
-                <div className="d-flex justify-content-center mt-4 rounded">
-                    <div className="rounded rounded-3 border shadow-sm" style={{ width: "80%" }}>
+                <div className="d-flex justify-content-center mt-4">
+                    <div className="shadow-sm" style={{ width: "80%", borderRadius: "30px", overflow: "hidden"}}>
                         <img src={imagenes}
-                            style={{ width: "100%", height: "450px", objectFit: "cover" }} alt="Paisaje" />
-                        <div className="fondoNaranja rounded-bottom rounded-3 p-3 text-light">
-                            <h3 className="fw-semibold">{nombre_actividad}</h3>
+                            style={{ width: "100%", height: "400px", objectFit: "cover" }} alt="Paisaje" />
+                        <div className="fondoAzul rounded-bottom p-4 ">
+                            <h2 className="fw-semibold text-light">{nombre_actividad}</h2>
                         </div>
                     </div>
                 </div>
 
                 <div className="d-flex justify-content-center mt-5">
                     <div className="d-flex m-3" style={{ width: "80%" }}>
-                        <div className="me-3 border-black border-end border-3 border-dark">
+                        <div className="me-3 border-black border-end border-3 border-dark flex-grow-1">
                             <h5 className="mb-3">Descripción</h5>
+                            <div>
                             <blockquote className="blockquote mb-0">
                                 <p>{descripcion}</p>
                             </blockquote>
+                            </div>
                         </div>
 
-                        <div className="card bg-light " style={{ width: "60rem", height: "7rem" }}>
-                            <div className="card-header text-center">
+                        <div className="card bg-light" style={{ width: "350px", height: "100px", borderRadius: "30px"}}>
+                            <div className="card-header text-center colorAzul">
                                 Costo aproximado
                             </div>
                             <div className="card-body text-center p-2">
-                                <h2 className="card-text colorAzul">${precio}</h2>
+                                <h2 className="card-text colorNaranja">${precio}</h2>
                             </div>
                         </div>
                     </div>
@@ -79,17 +82,17 @@ const TripDetail = () => {
 
                 <div className="d-flex justify-content-center mt-5">
                     <div className="d-flex" style={{ width: "80%" }}>
-                        <h5 className="margin-left">Comentarios</h5>
+                        <h5 className="margin-left colorNaranja">Comentarios</h5>
 
                         <div className="container m-3 p-0">
                             <div className=" p-2">
 
                                 <div className="media mb-4">
-                                    <div className=" rounded rounded-3 border shadow-sm bg-light m-2 p-2">
-                                        <h6 className="mt-0 text-secondary">@{store.user.username}</h6>
+                                    <div className=" rounded-pill border shadow-sm bg-light m-2 p-2">
+                                        <h6 className="mt-0 text-secondary mx-3">@{store.user.username}</h6>
                                         <div className="d-flex justify-content-between align-items-center">
 
-                                            <textarea className="form-control mb-2" value={nuevoComentario} id="floatingTextarea" placeholder="Agrega un comentario" rows="1"
+                                            <textarea className="form-control rounded-pill mb-2 mx-2 bg-light" value={nuevoComentario} id="floatingTextarea" placeholder="Agrega un comentario" rows="1"
 
                                                 onChange={(event) => setNuevoComentario(event.target.value)}
                                                 onKeyUp={(event) => {
@@ -103,16 +106,16 @@ const TripDetail = () => {
 
 
                                             <button type="button" className="btn btn-transparent p-0 mx-2" onClick={handleCommentSubmit}
-                                            ><i className="fa-solid fa-circle-arrow-up fs-4 colorNaranja"></i></button>
+                                            ><i className="fa-solid fa-circle-arrow-up fs-4 colorNaranja me-2 mb-2"></i></button>
                                         </div>
                                     </div>
                                 </div>
 
                                  {comentariosActividad.map(comentario => (
-                                    <div className="media mb-4" key={comentario.id}>
-                                        <div className="rounded rounded-3 border shadow-sm bg-light m-2 p-2">
-                                            <h6 className="mt-0 colorNaranja">@{comentario.usuario}</h6>
-                                            <div className="d-flex justify-content-between align-items-center">
+                                    <div className="media mb-4 mx-4" key={comentario.id}>
+                                        <div className="rounded-pill mb-2 border shadow-sm bg-light p-2">
+                                            <h6 className="mt-0 colorNaranja mx-4">@{comentario.usuario}</h6>
+                                            <div className="d-flex justify-content-between align-items-center rounded-pill mx-4">
                                                 <span>{comentario.comentario}</span>
                                             </div>
                                         </div>
