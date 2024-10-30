@@ -9,11 +9,7 @@ import Recomendaciones from '../component/recomendaciones.js';
 import "../../styles/index.css";
 
 const IndividualTrip = () => {
-    const location = {
-        latitude: 10.48801,
-        longitude: -66.87919
-    };
-
+    
     const { store, actions } = useContext(Context);
     const { id } = useParams();
     const [loading, setLoading] = useState(true);
@@ -33,16 +29,17 @@ const IndividualTrip = () => {
         actions.setCurrentId(parseInt(id));
         actions.getActivities(id);
     }, [id]);
-
+    
     
     useEffect(() => {
         if (store.viajes.length > 0) {
             setLoading(false);
         }
     }, [store.viajes]);
-
+    
     const viaje = store.viajes.find(v => v.id === parseInt(id));
     console.log("Este es el viaje", viaje)
+    // const location = actions.geoLocation(viaje.destino);
 
     if (loading) {
         return <div className="text-center">
@@ -92,7 +89,7 @@ const IndividualTrip = () => {
 
                 <div className=" d-flex flex-column flex-md-row justify-content-between bg-light shadow p-4" style={{ borderRadius: "30px" }}>
                     <div className="d-flex flex-column flex-md-row justify-content-between" style={{ width: "80%" }} >
-                        <h5 className="colorNaranja mb-1">Destino<h6 className="mb-1 colorAzul">{viaje.destino}</h6></h5>
+                        <h5 className="colorNaranja mb-1">Destino<p className="mb-1 colorAzul fs-4">{viaje.destino}</p></h5>
                         <p className="mb-1 colorAzul">Fecha de salida: {formatDate(viaje.fecha_inicio)}</p>
                         <p className="mb-1 colorAzul">Presupuesto: $ {viaje.presupuesto}</p>
                     </div>
@@ -202,7 +199,7 @@ const IndividualTrip = () => {
 
             <div className='container' style={{ width: "80%" }}>
                 <div className="d-flex flex-column flex-md-row justify-content-between p-0 m-0" >
-                    <Recomendaciones location={location} />
+                    <Recomendaciones location={viaje.destino} />
                     <ShoppingCart />
                 </div>
             </div>

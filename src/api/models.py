@@ -47,7 +47,7 @@ class User(db.Model):
             "more_info": self.more_info,
             "is_active": self.is_active,
             "grupos" : [grupo.serialize() for grupo in self.grupos],
-            "comentarios" : [comentario.serialize() for comentario in self.comentarios],
+            # "comentarios" : [comentario.serialize() for comentario in self.comentarios],
             "likes" : [like.serialize() for like in self.likes],
             "profile_image_url": self.profile_image_url,
             "viajes" : [viaje.serialize() for viaje in self.viajes],
@@ -190,7 +190,7 @@ class Comentarios(db.Model):
             "id": self.id,
             "actividades_id": self.actividades_id,
             "user_id": self.user_id,
-            "usuario": self.user.serialize() if self.user else None, 
+            "usuario": self.user.email if self.user else None,
             "comentario": self.comentario
         }
 
