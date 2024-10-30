@@ -13,23 +13,16 @@ const TripDetail = () => {
     const { store, actions } = useContext(Context);
 
     const [nuevoComentario, setNuevoComentario] = useState('');
-    const [comentarios, setComentarios] = useState(
-        [{
-            id: 1,
-            usuario: '@maria',
-            mensaje: '¡Este post es muy interesante!'
-        }]
-    )
     let { state } = useLocation();
     const { id, nombre_actividad, descripcion, precio, imagenes } = state
 
-    // trae los comentarios
     useEffect(() => {
-        const comments = async () => {
+        const loadComments = async () => {
             await actions.get_comments(id);
+            console.log("Comentarios después de la carga:", store.comentarios);
         };
-
-        comments();
+        
+        loadComments();
     }, [id, actions]);
 
 
@@ -45,6 +38,7 @@ const TripDetail = () => {
     };
 
     const comentariosActividad = store.comentarios.filter(comentario => comentario.actividades_id === id);
+
 
 
 

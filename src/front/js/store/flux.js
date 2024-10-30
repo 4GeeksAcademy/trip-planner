@@ -35,12 +35,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			get_comments: async (actividades_id) => {
 				const store = getStore();
-			
+
 				if (!actividades_id) {
 					toast.error("Falta el ID de la actividad");
 					return;
 				}
-			
+
 				const response = await fetch(process.env.BACKEND_URL + "api/get-comments" + actividades_id + "/", {
 					method: 'GET',
 					headers: {
@@ -48,17 +48,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 						'Authorization': `Bearer ${store.token}`
 					}
 				});
-			
-				if (!response.ok) {
+
+				if (response.ok) {
+					const data = await response.json();
+					console.log("Comentarios recibidos del servidor:", data);
+					setStore({ comentarios:[...store.comentarios, ...data] });
+				} else {
 					const errorData = await response.json();
-					console.error("Error", errorData);
-					toast.error(errorData.error || "Ocurrió un error inesperado.");
-					return;
+					console.error("Error al obtener comentarios:", errorData);
 				}
-			
-				const data = await response.json();
-				console.log(data);
-				setStore({ comentarios: data }); 
 			},
 
 			post_comment: async (actividades_id, comentario) => {
@@ -90,7 +88,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(data);
 
 				if (response.ok) {
-					setStore({ comentarios: [...store.comentarios, data] });
+					// Asegúrate de que `data` incluye `usuario`
+					const comentarioConUsuario = {
+						id: data.id,
+						actividades_id,
+						usuario: store.user.username,
+						comentario: data.comentario
+					};
+
+					setStore({ comentarios: [...store.comentarios, comentarioConUsuario] });
 					return true;
 				} else {
 					toast.error(data.error || "Ocurrió un error inesperado.");
