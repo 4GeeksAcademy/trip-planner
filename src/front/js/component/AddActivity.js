@@ -2,11 +2,12 @@ import React, { useState, useContext, useSyncExternalStore } from 'react';
 import { Link } from 'react-router-dom';
 import "../../styles/addActivityCard.css"
 import { Context } from "../store/appContext.js"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "../../styles/index.css";
 
 const AddActivity = ({ viajeId, viajeDestino }) => {
     const { store, actions } = useContext(Context);
+    const {id} = useParams();
     const [idViaje, setIdViaje] = useState(viajeId);
     const [showModal, setShowModal] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -89,7 +90,19 @@ const AddActivity = ({ viajeId, viajeDestino }) => {
                                                             {/* Agregar función que se sume a la actividades */}
 
                                                             <div className="mt-auto fondoAzul rounded-3 p-1 text-center">
-                                                                <Link to="/" className="detalles text-light btn-sm px-4">Agregar</Link>
+                                                                <button className="detalles text-light btn-sm px-4" onClick={ async ()=>{
+                                                                        actions.addActivity({
+                                                                            "viaje_id": parseInt(id),
+                                                                            "name": item.name,
+                                                                            "imagenes": item.pictures[0],
+                                                                            "descripcion": item.shortDescription,
+                                                                            "precio": 0,
+                                                                            "likes": 0,
+                                                                            "comentarios": "",
+                                                                            "duracion": 0,
+                                                                        })
+
+                                                                }}>Agregar</button>
                                                             </div>
                                                         </div>
                                                     </div>
