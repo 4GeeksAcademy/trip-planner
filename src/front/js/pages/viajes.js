@@ -69,7 +69,6 @@ const Viajes = () => {
                     </div>
                     <div className="mx-4 text-end">
                         <p className="mb-1"><i className="iconos fa-solid fa-map-location-dot me-2"></i>Proximos viajes: <span className="colorAzul fw-bold">{longitudViaje}</span></p>
-                        <p className="mb-3"><i className="iconos fa-solid fa-user-group me-2"></i>Grupos: {countGroups}<span className="colorAzul fw-bold">{ }</span></p>
                     </div>
 
                 </div>
