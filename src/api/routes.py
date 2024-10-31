@@ -26,30 +26,39 @@ api = Blueprint('api', __name__)
 # Allow CORS requests to this API
 CORS(api)
 
-#AGREGAR LIKES DE ACTIVIDADES
-@api.route('/api/add-like', methods=['POST'])
-def add_like():
-    actividades_id = request.json.get('actividades_id', None)
-    user_id = request.json.get('user_id', None)
+# #AGREGAR LIKES DE ACTIVIDADES
+# @api.route('/api/add-like', methods=['POST'])
+# @jwt_required()
+# def add_like():
+#     user_email = get_jwt_identity()
+#     user = User.query.filter_by(email=user_email).first()
 
-    nuevo_like = Likes(actividades_id=actividades_id, user_id=user_id)
-    db.session.add(nuevo_like)
-    db.session.commit()
-    return jsonify({'msg' : 'Like agregado'})
+#     if user is None:
+#         return jsonify({"error": "User not found"}), 404
+
+#     actividades_id = request.json.get("actividades_id", None)
+
+#     nuevo_like = Likes(
+#         actividades_id=actividades_id, 
+#         user_id=user.id)
+    
+#     db.session.add(nuevo_like)
+#     db.session.commit()
+#     return jsonify({'msg' : 'Like agregado'}), 201
 
 
-#ELIMINAR LIKES DE ACTIVIDAD
-@api.route('/api/add-like', methods=['DELETE'])
-def delete_like():
-    actividades_id = request.json.get('actividades_id', None)
-    user_id = request.json.get('user_id', None)
+# #ELIMINAR LIKES DE ACTIVIDAD
+# @api.route('/api/add-like', methods=['DELETE'])
+# def delete_like():
+#     actividades_id = request.json.get('actividades_id', None)
+#     user_id = request.json.get('user_id', None)
 
-    like_existente = Likes.query.filter_by(actividades_id=actividades_id, user_id=user_id).first()
-    if like_existente:
-        db.session.delete(like_existente)
-        db.session.commit()
-        return jsonify({'msg' : 'Like eliminado'})
-    return jsonify({'msg': 'Like no encontrado'}), 404
+#     like_existente = Likes.query.filter_by(actividades_id=actividades_id, user_id=user_id).first()
+#     if like_existente:
+#         db.session.delete(like_existente)
+#         db.session.commit()
+#         return jsonify({'msg' : 'Like eliminado'})
+#     return jsonify({'msg': 'Like no encontrado'}), 404
 
 
 # OBTENER COMENTARIOS
