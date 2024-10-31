@@ -289,7 +289,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			addActivity: async (activity) => {
 				const store = getStore()
-				const response = await fetch(process.env.BACKEND_URL + "api/add-activity", {
+				const response = await fetch(process.env.BACKEND_URL + "/api/add-activity", {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
