@@ -31,6 +31,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			users: [],
 			miembros: [],
 			comentarios: [],
+			likes: [],
 		},
 		actions: {
 			getUsers: async() => {
@@ -259,33 +260,94 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ viajes: data });
 			},
 
-			addLike: (index) => {
-				const store = getStore()
-				let likesAdded = store.activities[index].likes;
-				likesAdded++;
-				const likeUpdate = store.activities.map((elm, i) => {
-					if (i === index) elm.likes = likesAdded;
-					return elm;
-				});
-				setStore({ activities: likeUpdate })
+			addLike: async (actividades_id, user_id) => {
+				try {
+					const response = await fetch (process.env.BACKEND_URL + "api/add-like", {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify({
+							actividades_id: actividades_id, 
+							user_id: user_id,
+						})
+					})
+
+					if (!response.ok) {
+						const errorData = await response.text(); // Lee la respuesta como texto
+						console.error("Error en la respuesta del servidor:", errorData);
+						throw new Error("Error en la solicitud: " + response.status);
+					}
+					
+					const data = await response.json();
+					
+					if (data.message === "Like agregado") {
+						const store = getStore();
+						const actividadActualizada = store.activities.map(activity => 
+							activity.id === actividades_id ? {...activity, likes: activity.likes + 1} : activity
+						);
+						setStore ({ activities: actividadActualizada })
+					}
+				} catch (error) {
+					console.error("Error al agregar el like", error);
+				}
 			},
 
-			deleteLike: (index) => {
-				const store = getStore()
-				let likesDeleted = store.activities[index].likes;
-				if (likesDeleted > 0) likesDeleted--;
-				const likeUpdate = store.activities.map((elm, i) => {
-					if (i === index) elm.likes = likesDeleted;
-					return elm;
-				});
-				setStore({ activities: likeUpdate })
+			deleteLike: async (actividades_id, user_id) => {
+				const response = await fetch (process.env.BACKEND_URL + "api/add-like", {
+					method: 'DELETE',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({
+						actividades_id: actividades_id, 
+						user_id: user_id,
+					})
+				})
+				const data = await response.json();
+				if (data.message === "Like eliminado") {
+					const store = getStore();
+					const actividadActualizada = store.activities.map(activity => 
+						activity.id === actividades_id ? {...activity, likes: activity.likes - 1} : activity
+					);
+				setStore ({ activities: actividadActualizada })
+				}
 			},
 
-			isLike: (index) => {
+			isLike: (actividades_id, user_id) => {
 				const store = getStore();
-				const result = store.activities.some((activity, i) => i === index && activity.likes > 0)
-				return result
+				// Encuentra la actividad correspondiente al actividades_id
+				const activity = store.activities.find(activity => activity.id === actividades_id);
+				
+				if(!activity) return false;
+ 				// Comprueba si el user_id está en la lista de likes de la actividad
+				const likeByUser = activity.likes.some(like => like.user_id === user_id);
+				return likeByUser;
 			},
+
+			// addLike: (index) => {
+			// 	const store = getStore()
+			// 	let likesAdded = store.activities[index].likes;
+			// 	likesAdded++;
+			// 	const likeUpdate = store.activities.map((elm, i) => {
+			// 		if (i === index) elm.likes = likesAdded;
+			// 		return elm;
+			// 	});
+			// 	setStore({ activities: likeUpdate })
+			// },
+
+			// deleteLike: (index) => {
+			// 	const store = getStore()
+			// 	let likesDeleted = store.activities[index].likes;
+			// 	if (likesDeleted > 0) likesDeleted--;
+			// 	const likeUpdate = store.activities.map((elm, i) => {
+			// 		if (i === index) elm.likes = likesDeleted;
+			// 		return elm;
+			// 	});
+			// 	setStore({ activities: likeUpdate })
+			// },
+
+			// isLike: (index) => {
+			// 	const store = getStore();
+			// 	const result = store.activities.some((activity, i) => i === index && activity.likes > 0)
+			// 	return result
+			// },
 
 			addActivity: async (activity) => {
 				const store = getStore()
@@ -314,6 +376,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				// setStore(activities)
 				setStore({ activities: data });
 			},
+
 			login: async (email, password) => {
 				const resp = await fetch(process.env.BACKEND_URL + "/api/login", {
 					method: "POST",
@@ -400,6 +463,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const data = await resp.json();
 				setStore({ user: data });
 			},
+			
 			getUserData: async (userEmail) => {
 				const store = getStore();
 				const email = userEmail || store.user.email;

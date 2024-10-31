@@ -17,13 +17,36 @@ const IndividualTrip = () => {
     const [selectedMember, setSelectedMember] = useState("null");
     const [like, setLike] = useState(false);
 
-    const handleClick = (index) => {
-        if (actions.isLike(index)) {
-            actions.deleteLike(index)
+    const handleClick = (actividades_id, user_id) => {
+        console.log("Este es el User_id", user_id)
+        if (!user_id) {
+            console.log("No proporcionado el user_id");
+            return;
+        }
+        if (actions.isLike(actividades_id, user_id)) {
+            actions.deleteLike(actividades_id, user_id)
+            console.log(`Like eliminado para actividad ID: ${actividades_id} por usuario ID: ${user_id}`)
         } else {
-            actions.addLike(index)
+            actions.addLike (actividades_id, user_id)
+            console.log(`Like agregado para actividad ID: ${actividades_id} por usuario ID: ${user_id}`)
         }
     };
+
+    // const handleClick = (index) => {
+    //     if (actions.isLike(index)) {
+    //         actions.deleteLike(index)
+    //     } else {
+    //         actions.addLike(index)
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     const loadLikes = async () => {
+    //         await actions.get_likes(id);
+    //         console.log("Likes de la actividad:", store.likes);
+    //     };
+    //     loadLikes();
+    // }, [id]);
 
     useEffect(() => {
         actions.setCurrentId(parseInt(id));
@@ -229,8 +252,8 @@ const IndividualTrip = () => {
                                         <div className="d-flex justify-content-between align-items-center mt-1">
                                             <Link to="/details" state={item} className="detalles fondoNaranja text-light btn-sm px-4 rounded-pill">Ver más</Link>
                                             <div className="d-flex align-items-center">
-                                                <button className="bg-transparent border-0" onClick={() => handleClick(index)}>
-                                                { actions.isLike(index) ? 
+                                                <button className="bg-transparent border-0" onClick={() => handleClick(item.id, store.user.id)}>
+                                                { actions.isLike(item.id) ?
                                                     <i className={`text-danger fa-solid fa-heart me-2`}></i> :
                                                     <i className={`text-danger fa-regular fa-heart me-2`}></i>
                                                 }

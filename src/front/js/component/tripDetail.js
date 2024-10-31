@@ -21,7 +21,6 @@ const TripDetail = () => {
             await actions.get_comments(id);
             console.log("Comentarios después de la carga:", store.comentarios);
         };
-        
         loadComments();
     }, [id]);
     

@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Viaje, Grupo, Actividad, Comentarios
+from api.models import db, User, Viaje, Grupo, Actividad, Comentarios, Likes
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from datetime import datetime
@@ -25,6 +25,31 @@ api = Blueprint('api', __name__)
 
 # Allow CORS requests to this API
 CORS(api)
+
+#AGREGAR LIKES DE ACTIVIDADES
+@api.route('/api/add-like', methods=['POST'])
+def add_like():
+    actividades_id = request.json.get('actividades_id', None)
+    user_id = request.json.get('user_id', None)
+
+    nuevo_like = Likes(actividades_id=actividades_id, user_id=user_id)
+    db.session.add(nuevo_like)
+    db.session.commit()
+    return jsonify({'msg' : 'Like agregado'})
+
+
+#ELIMINAR LIKES DE ACTIVIDAD
+@api.route('/api/add-like', methods=['DELETE'])
+def delete_like():
+    actividades_id = request.json.get('actividades_id', None)
+    user_id = request.json.get('user_id', None)
+
+    like_existente = Likes.query.filter_by(actividades_id=actividades_id, user_id=user_id).first()
+    if like_existente:
+        db.session.delete(like_existente)
+        db.session.commit()
+        return jsonify({'msg' : 'Like eliminado'})
+    return jsonify({'msg': 'Like no encontrado'}), 404
 
 
 # OBTENER COMENTARIOS
@@ -65,12 +90,6 @@ def add_comment():
     db.session.commit()
 
     return jsonify(nuevo_comentario.serialize()), 201
-
-# AGREGAR LIKES DE LAS ACTIVIDADES
-@api.route('/add-likes/', methods= ['POST'])
-def add_like(actividad_id):
-    actrividad_id = request.json.get("actrividad_id", None)
-
 
 # AGREGAR MIEMBROS AL GRUPO
 @api.route('/add-member/<int:id_viaje>', methods= ['POST'])
