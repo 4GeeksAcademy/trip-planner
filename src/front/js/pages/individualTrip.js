@@ -132,7 +132,7 @@ const IndividualTrip = () => {
                                 {store.miembros.length == 0 ? (
                                     <span className="d-flex flex justify-content-center text-secundary m-3">No tienes ningún miembro en tu grupo</span>
                                 ) : (
-                                    store.miembros.map((item, index) => (
+                                    store.miembros.filter(x=>x.viaje_id == id).map((item, index) => (
                                         <React.Fragment key={index}>
                                             <li className="d-flex flex">
                                                 <p className="dropdown-item d-flex flex justify-content-between align-items-center" href="#">{item.miembro.name}</p>
