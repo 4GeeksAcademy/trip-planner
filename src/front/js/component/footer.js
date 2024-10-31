@@ -9,9 +9,9 @@ export const Footer = () => (
         <div>
         <p><Link to="/" style={{ color: 'white', textDecoration: 'none' }}>Explora destinos</Link></p>
         <div className="mt-1 opacity-50">
-        <i class="fa-brands fa-facebook me-3"></i>
-        <i class="fa-brands fa-tiktok me-3"></i>
-        <i class="fa-brands fa-instagram me-3"></i>
+        <i className="fa-brands fa-facebook me-3"></i>
+        <i className="fa-brands fa-tiktok me-3"></i>
+        <i className="fa-brands fa-instagram me-3"></i>
         </div>
         </div>
     <div className="d-flex justify-content-end">
