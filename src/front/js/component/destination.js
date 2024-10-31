@@ -38,15 +38,14 @@ export default function Destination() {
                             <div className="image-container">
                                 <img src={item.pictures[0]} alt="img activity" className="rounded-top" />
                             </div>
-                            <div className="description p-4 d-flex flex-column">
+                            <div className="description p-4 d-flex flex-column" style={{maxWidth: "700px"}}>
                                 <h3>{item.name}</h3>
                                 <p>{item.shortDescription}</p>
                             </div>
 
                           
                                 <button className="btn fondoAzul shadow rounded-0 rounded-end" style={{ width: "7%" }} onClick={() => handleAddActivity({ name: 'Flyboard en Cancun' })}>
-                                    <Link to="/login" className="link" style={{ height: "100%" }}>
-                                    <i className="fa-solid fa-circle-plus me-2 fs-2 text-light"></i></Link>
+                                    <Link to="/login" className="link" style={{ height: "100%" }}></Link>
                                 </button>
                           
                         </div>

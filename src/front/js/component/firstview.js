@@ -15,8 +15,8 @@ export default function FirstView() {
 
             <div className="h-100 d-flex align-items-center pt-5">
                 <div className="ms-5 mt-2">
-                    <h2 className="text-white fw-bold mt-3">CREA RECUERDOS QUE TE ACOMPAÑEN PARA TODA LA VIDA...</h2>
-                    <p className="text-white fs-5 fw-semibold fst-italic ms-5">Tu viaje perfecto a un paso de ti</p>
+                    <h2 className="text-white fw-bold mt-3" style={{fontSize: '35px'}}>CREA RECUERDOS QUE TE ACOMPAÑEN PARA TODA LA VIDA...</h2>
+                    <h4 className="text-white fs-5 fw-semibold fst-italic ms-5">Tu viaje perfecto a un paso de ti</h4>
                 </div>
             </div>
             <div className="carousel-container">

@@ -11,16 +11,34 @@ import { Context } from "../store/appContext.js"
 const TripDetail = () => {
 
     const { store, actions } = useContext(Context);
+    const [comentarios, setComentarios] = useState([]);
 
     const [nuevoComentario, setNuevoComentario] = useState('');
     let { state } = useLocation();
     const { id, nombre_actividad, descripcion, precio, imagenes } = state
 
+<<<<<<< HEAD
     useEffect(() => {
         const loadComments = async () => {
             await actions.get_comments(id);
             console.log("Comentarios después de la carga:", store.comentarios);
         };
+=======
+    const loadComments = async () => {
+        const response = await fetch(process.env.BACKEND_URL + "api/get-comments/" + id + "/", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${store.token}`
+            }
+
+        });
+        const data = await response.json()
+        setComentarios(data)
+    };
+
+    useEffect(() => {    
+>>>>>>> 3f7b7b0 (funcion de comentar conectada al backend)
         loadComments();
     }, [id]);
     
@@ -32,12 +50,12 @@ const TripDetail = () => {
             const result = await actions.post_comment(id, nuevoComentario);
             if (result) {
                 setNuevoComentario(''); // Limpiar el campo de entrada
-                await actions.get_comments(id);
+                loadComments()
             }
         }
     };
 
-    const comentariosActividad = store.comentarios.filter(comentario => comentario.actividades_id === id);
+    // const comentariosActividad = store.comentarios.filter(comentario => comentario.actividades_id === id);
 
 
 
@@ -110,7 +128,7 @@ const TripDetail = () => {
                                     </div>
                                 </div>
 
-                                 {comentariosActividad.map(comentario => (
+                                 {comentarios.map(comentario => (
                                     <div className="media mb-4 mx-4" key={comentario.id}>
                                         <div className="rounded-pill mb-2 border shadow-sm bg-light p-2">
                                             <h6 className="mt-0 colorNaranja mx-4">@{comentario.usuario}</h6>
