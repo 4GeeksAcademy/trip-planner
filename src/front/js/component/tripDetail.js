@@ -17,13 +17,6 @@ const TripDetail = () => {
     let { state } = useLocation();
     const { id, nombre_actividad, descripcion, precio, imagenes } = state
 
-<<<<<<< HEAD
-    useEffect(() => {
-        const loadComments = async () => {
-            await actions.get_comments(id);
-            console.log("Comentarios después de la carga:", store.comentarios);
-        };
-=======
     const loadComments = async () => {
         const response = await fetch(process.env.BACKEND_URL + "api/get-comments/" + id + "/", {
             method: 'GET',
@@ -38,7 +31,6 @@ const TripDetail = () => {
     };
 
     useEffect(() => {    
->>>>>>> 3f7b7b0 (funcion de comentar conectada al backend)
         loadComments();
     }, [id]);
     
