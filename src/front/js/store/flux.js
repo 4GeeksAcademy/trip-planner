@@ -532,7 +532,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						'Content-Type': 'application/json'
 						
 					},
-					body: JSON.stringify(miembro.email),
+					body: JSON.stringify({ user_email: miembro.email }),
 				});
 				
 				if (result) {

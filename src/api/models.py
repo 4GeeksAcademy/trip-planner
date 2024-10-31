@@ -112,8 +112,8 @@ class Grupo(db.Model):
     user = db.relationship('User', back_populates='grupos')
     viaje = db.relationship('Viaje', back_populates='grupos')
     
-    def __init__(self, group_name, viaje_id, user_email):
-        self.group_name = group_name
+    def __init__(self, viaje_id, user_email):
+        # self.group_name = group_name
         self.viaje_id = viaje_id
         self.user_email = user_email
 

@@ -75,12 +75,12 @@ def add_like(actividad_id):
 # AGREGAR MIEMBROS AL GRUPO
 @api.route('/add-member/<int:id_viaje>', methods= ['POST'])
 def add_member(id_viaje):
-    group_name = request.json.get("group_name", None)
+    # group_name = request.json.get("group_name", None)
     viaje_id = Viaje.query.filter_by(id = id_viaje).one_or_none()
     user_email = request.json.get("user_email", None)
 
     member = Grupo(
-        group_name = group_name,
+        # group_name = group_name,
         viaje_id = viaje_id,
         user_email = user_email,
     )
