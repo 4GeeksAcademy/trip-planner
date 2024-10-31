@@ -210,9 +210,9 @@ class Likes(db.Model):
 
     def serialize(self):
         return {
-            "id": self.id,
+            # "id": self.id,
             "actividades_id": self.actividades_id,
             "user_id": self.user_id,
-            "actividad" : self.actividad.serialize() if self.actividad else None,
-            "usuario": self.user.serialize() if self.user else None
+            # "actividad" : self.actividad.serialize() if self.actividad else None,
+            # "usuario": self.user.serialize() if self.user else None
         }
