@@ -351,7 +351,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			addActivity: async (activity) => {
 				const store = getStore()
-				const response = await fetch(process.env.BACKEND_URL + "api/add-activity", {
+				const response = await fetch(process.env.BACKEND_URL + "/api/add-activity", {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
@@ -582,6 +582,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				const total = store.selected_trip.reduce((acc, viaje) => acc + viaje.cost, 0);
 				return total;
+			},
+
+			sumGastosPersonales: (actividades, numeroMiembros) => {
+				if (numeroMiembros === 0) return 0;
+				const totalCostos = actividades.reduce((acc, actividad) => acc + actividad.cost, 0);
+				return totalCostos / numeroMiembros;
 			},
 
 			addMember: async(miembro, viaje_id) => {

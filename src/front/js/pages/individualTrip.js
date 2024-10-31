@@ -239,17 +239,18 @@ const IndividualTrip = () => {
                         return (
 
                             <div key={index} className="col-md-3">
-                                <div className="card shadow bg-light text-black" style={{ width: '100%', borderRadius: "30px", height:'430px' }}>
-                                    <img src={item.imagenes} className="card-img-top" alt="..." style={{ height: '230px', objectFit: 'cover' }} />
+                                <div className="card shadow bg-light text-black" style={{ width: '100%', borderRadius: "30px", height:'440px' }}>
+                                    <img src={item.imagenes || 'https://firebasestorage.googleapis.com/v0/b/trippy-proyecto.appspot.com/o/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(14).png?alt=media&token=2703929a-4977-498e-91de-0ab70b68d609'} className="card-img-top" alt="..." style={{ minHeight: '230px', maxHeight: '230px', objectFit: 'cover' }} />
                                     <div className="card-body d-flex flex-column p-1">
                                         <div className="d-flex justify-content-between align-items-center ">
-                                            <div className="card-title mb-0 mx-1 mt-1" style={{fontSize: '25px', fontWeight: '500'}}>{item.nombre_actividad}</div>
+                                            <div className="card-title mb-0 mx-1 mt-1" style={{ fontSize: '20px', fontWeight: '500', overflow: 'hidden', display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 2 }}>
+                                                {item.nombre_actividad}</div>
                                         </div>
-                                        <p className="card-text mx-1 p-1 description">{item.descripcion}</p>
-                                            <div className="d-flex justify-content-end align-items-center border-black border-bottom border-3 my-1">
-                                                <p className="p-2 rounded">${item.precio}</p>
+                                        <p className="card-text mx-1 p-1 description"  style={{fontSize: '14px'}}>{item.descripcion}</p>
+                                            <div className="d-flex justify-content-end align-items-center border-black border-bottom border-2">
+                                                <p className="p-2 rounded" style={{fontSize: '13px'}}>${item.precio}</p>
                                             </div>
-                                        <div className="d-flex justify-content-between align-items-center mt-1">
+                                        <div className="d-flex justify-content-between align-items-center mt-2 mb-1">
                                             <Link to="/details" state={item} className="detalles fondoNaranja text-light btn-sm px-4 rounded-pill">Ver más</Link>
                                             <div className="d-flex align-items-center">
                                                 <button className="bg-transparent border-0" onClick={() => handleClick(item.id, store.user.id)}>

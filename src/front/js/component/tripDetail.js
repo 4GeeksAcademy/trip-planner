@@ -47,7 +47,7 @@ const TripDetail = () => {
             <div className="container-fluid mx-auto p-2">
                 <div className="d-flex justify-content-center mt-4">
                     <div className="shadow-sm" style={{ width: "80%", borderRadius: "30px", overflow: "hidden"}}>
-                        <img src={imagenes}
+                        <img src={imagenes || 'https://firebasestorage.googleapis.com/v0/b/trippy-proyecto.appspot.com/o/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(14).png?alt=media&token=2703929a-4977-498e-91de-0ab70b68d609'}
                             style={{ width: "100%", height: "400px", objectFit: "cover" }} alt="Paisaje" />
                         <div className="fondoAzul rounded-bottom p-4 ">
                             <h2 className="fw-semibold text-light">{nombre_actividad}</h2>
@@ -57,7 +57,7 @@ const TripDetail = () => {
 
                 <div className="d-flex justify-content-center mt-5">
                     <div className="d-flex m-3" style={{ width: "80%" }}>
-                        <div className="me-3 border-black border-end border-3 border-dark flex-grow-1">
+                        <div className="me-3 border-black border-end border-3 border-dark flex-grow-1" style={{ maxWidth: "900px", minHeight: "120px"}}>
                             <h5 className="mb-3">Descripción</h5>
                             <div>
                             <blockquote className="blockquote mb-0">
@@ -66,7 +66,7 @@ const TripDetail = () => {
                             </div>
                         </div>
 
-                        <div className="card bg-light" style={{ width: "350px", height: "100px", borderRadius: "30px"}}>
+                        <div className="card bg-light" style={{ maxWidth: "350px", maxHeight: "100px", borderRadius: "30px"}}>
                             <div className="card-header text-center colorAzul">
                                 Costo aproximado
                             </div>
