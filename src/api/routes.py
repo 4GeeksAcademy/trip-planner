@@ -80,7 +80,7 @@ def add_member(id_viaje):
     user_email = request.json.get("user_email", None)
 
     member = Grupo(
-        group_name = group_name,
+        # group_name = group_name,
         viaje_id = viaje_id,
         user_email = user_email,
     )
@@ -105,6 +105,20 @@ def all_trip():
     
     return jsonify([viaje.serialize() for viaje in viajes]), 200
 
+#ELIMINAR VIAJE
+@api.route('/all-trip/<int:viaje_id>', methods=['DELETE'])
+@jwt_required()
+def remove_trip(viaje_id):
+    current_user = get_jwt_identity()
+    user_email = current_user['email']
+    searched_viaje = Viaje.query.filter_by(id=viaje_id, user_id=current_user['id']).first()
+    if searched_viaje and searched_viaje.user.email == user_email :
+        viaje_data = searched_viaje.serialize()
+        db.session.delete(searched_viaje)
+        db.session.commit()
+        return jsonify(viaje_data), 202
+    else:
+        return jsonify({"error": "El viaje no fue enconrado o no esta asociado tu cuenta"}), 404
 
 
 # AGREGAR VIAJE
@@ -146,6 +160,9 @@ def add_trip():
     db.session.commit()
 
     return jsonify(viaje.serialize()), 201
+
+
+
 
 # AGREGAR ACTIVIDAD
 @api.route('/add-activity', methods=['POST'])
