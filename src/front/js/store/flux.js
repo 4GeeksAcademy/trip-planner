@@ -34,13 +34,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			likes: [],
 		},
 		actions: {
-			getUsers: async() => {
+			getUsers: async () => {
 				const response = await fetch(process.env.BACKEND_URL + "api/users", {
 					method: 'GET'
 				});
 				const data = await response.json()
 				console.log("usuarios:", data)
-				setStore({users: data})
+				setStore({ users: data })
 			},
 			get_comments: async (actividades_id) => {
 				const store = getStore();
@@ -50,7 +50,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return;
 				}
 
-				const response = await fetch(process.env.BACKEND_URL + "api/get-comments" + actividades_id + "/", {
+				console.log("Esto es el get comment", actividades_id)
+
+				const response = await fetch(process.env.BACKEND_URL + "api/get-comments/" + actividades_id + "/", {
 					method: 'GET',
 					headers: {
 						'Content-Type': 'application/json',
@@ -105,7 +107,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						comentario: data.comentario
 					};
 
-					setStore({ comentarios: [...store.comentarios, comentarioConUsuario] });
+					// setStore({ comentarios: [...store.comentarios, comentarioConUsuario] });
+					getActions().get_comments(actividades_id)
 					return true;
 				} else {
 					toast.error(data.error || "Ocurrió un error inesperado.");
@@ -593,27 +596,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return totalCostos / numeroMiembros;
 			},
 
-			addMember: async(miembro, viaje_id) => {
+			addMember: async (miembro, viaje_id) => {
 				const store = getStore();
 				const actions = getActions();
-				const result = actions.isMember(miembro)	
-				console.log(JSON.stringify(miembro.email))	
-				const response = await fetch(process.env.BACKEND_URL + "api/add-member/"+viaje_id, {
+				const result = actions.isMember(miembro)
+				console.log(JSON.stringify(miembro.email))
+				const response = await fetch(process.env.BACKEND_URL + "api/add-member/" + viaje_id, {
 					mode: 'no-cors',
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
-						
+
 					},
 					body: JSON.stringify({ user_email: miembro.email }),
 				});
-				
+
 				if (result) {
 					actions.deleteMember();
 					// alertar que ya existe el usuario 
 				} else {
 					setStore({
-						miembros: [...store.miembros, {miembro, viaje_id}]
+						miembros: [...store.miembros, { miembro, viaje_id }]
 					})
 					console.log(store.miembros)
 				}
