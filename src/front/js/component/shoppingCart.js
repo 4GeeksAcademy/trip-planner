@@ -9,6 +9,17 @@ const ShoppingCart = () => {
     
     const { store, actions } = useContext(Context);
 
+    const calculateTotalCost = () => {
+        return store.selected_trip.reduce((total, item) => total + item.cost, 0);
+    };
+
+    const calculateCostPerMember = () => {
+        const totalCost = calculateTotalCost();
+        const numberOfMembers = store.number_of_members || 1; // Asegurarse de que no se divida por cero
+        return totalCost / numberOfMembers;
+    };
+    
+
     return (
     <div className = "container-fluid d-flex justify-content-end p-0">
         <div className="btn-group">
@@ -53,7 +64,7 @@ const ShoppingCart = () => {
                     <li><hr className="dropdown-divider"/></li>
                     <li className="personal-costs d-flex flex">
                         <span className="personal-costs-text p-2">Gastos personales</span>
-                        <span className="personal-costs-price p-2">$ </span>
+                        <span className="personal-costs-price p-2">$ {calculateCostPerMember().toFixed(2)}</span>
                     </li>
             </ul>
         </div>

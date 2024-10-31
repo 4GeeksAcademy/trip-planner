@@ -520,6 +520,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return total;
 			},
 
+			sumGastosPersonales: (actividades, numeroMiembros) => {
+				if (numeroMiembros === 0) return 0;
+				const totalCostos = actividades.reduce((acc, actividad) => acc + actividad.cost, 0);
+				return totalCostos / numeroMiembros;
+			},
+
 			addMember: async(miembro, viaje_id) => {
 				const store = getStore();
 				const actions = getActions();
