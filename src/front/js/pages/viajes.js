@@ -108,7 +108,6 @@ const Viajes = () => {
                             <div className="d-flex flex-column justify-content-end ms-auto p-3">
                                 <p className="mb-0 fw-normal">Presupuesto: <span className="colorAzul fw-bold">$ {item.presupuesto || "0"}</span></p>
                                 <p className="mb-0 fw-normal">Presupuesto personal: <span className="colorAzul fw-bold">$ {item.presupuesto_personal}</span></p>
-                                <p className="mb-0 fw-normal">Número de personas: <span className="colorAzul fw-bold">0</span></p>
                             </div>
 
                             <div className="d-flex align-items-center ms-3 me-3 fs-3">

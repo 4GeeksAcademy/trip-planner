@@ -88,6 +88,7 @@ const AddActivity = ({ viajeId, viajeDestino }) => {
                                                         <div className="card-body d-flex flex-column flex-grow-1 p-1">
                                                             <div className="d-flex justify-content-between align-items-center mb-2">
                                                                 <p className="card-title mb-0" style={{ fontSize: '14px' }}>{item.name}</p>
+                                                                <p className="card-title mb-0" style={{ fontSize: '14px' }}>${item.price.amount}</p>
                                                             </div>
 
                                                             {/* Agregar función que se sume a la actividades */}
@@ -99,7 +100,7 @@ const AddActivity = ({ viajeId, viajeDestino }) => {
                                                                         "name": item.name,
                                                                         "imagenes": item.pictures[0] || 'https://firebasestorage.googleapis.com/v0/b/trippy-proyecto.appspot.com/o/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(14).png?alt=media&token=2703929a-4977-498e-91de-0ab70b68d609',
                                                                         "descripcion": item.shortDescription,
-                                                                        "precio": parseInt(item.price) || 0,
+                                                                        "precio": parseInt(item.price.amount) || 0,
                                                                         "likes": 0,
                                                                         "comentarios": "",
                                                                         "duracion": 0,
