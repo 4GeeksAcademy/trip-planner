@@ -32,6 +32,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			miembros: [],
 			comentarios: [],
 			likes: [],
+			viajesInvitados: []
 		},
 		actions: {
 			getUsers: async () => {
@@ -261,6 +262,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const data = await response.json();
 				console.log(data);
 				setStore({ viajes: data });
+			},
+			getGroups: async() => {
+				const store = getStore();
+				const response = await fetch(process.env.BACKEND_URL + "/api/get-group", {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+						'Authorization': `Bearer ${store.token}`
+					}
+				});
+
+				if (!response.ok) {
+					const errorData = await response.json();
+					console.error("Error", errorData);
+					return;
+				}
+				const data = await response.json();
+				console.log(data);
+				setStore({ viajesInvitados: data });
 			},
 
 
@@ -651,7 +671,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const result = actions.isMember(miembro)
 				console.log(JSON.stringify(miembro.email))
 				const response = await fetch(process.env.BACKEND_URL + "api/add-member/" + viaje_id, {
-					mode: 'no-cors',
+					// mode: 'no-cors',
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
@@ -669,6 +689,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					console.log(store.miembros)
 				}
+			},
+			getMembers: async()=>{
+				const store = getStore();
+				const response = await fetch(process.env.BACKEND_URL + "api/get-group/", {
+					// mode: 'no-cors',
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+		
+				});
+				const data = await response.json()
+				console.log(data)
+				// setStore({miembros : data})
 			},
 
 			isMember: (miembro) => {

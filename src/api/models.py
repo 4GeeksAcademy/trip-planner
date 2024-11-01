@@ -120,8 +120,8 @@ class Grupo(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "group_name": self.group_name,
-            "viaje_id": self.viaje_id,
+            # "group_name": self.group_name,
+            "viaje": self.viaje.serialize(),
             "user_email": self.user_email,
         }
 

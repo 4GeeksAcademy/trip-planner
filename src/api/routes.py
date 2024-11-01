@@ -104,19 +104,27 @@ def add_comment():
 @api.route('/add-member/<int:id_viaje>', methods= ['POST'])
 def add_member(id_viaje):
     # group_name = request.json.get("group_name", None)
-    viaje_id = Viaje.query.filter_by(id = id_viaje).one_or_none()
+    viaje = Viaje.query.filter_by(id = id_viaje).one_or_none()
     user_email = request.json.get("user_email", None)
-
+    print(viaje)
+    print(user_email)
     member = Grupo(
         # group_name = group_name,
-        viaje_id = viaje_id,
-        user_email = user_email,
+        viaje_id = viaje.id,
+        user_email = user_email
     )
     db.session.add(member)
     db.session.commit()
-
+    print(member.serialize())
     return jsonify(member.serialize()), 201
+# traer datos de grupos
+@api.route('/get-group', methods=['GET'])
+@jwt_required()
+def get_group():
+    user_email = get_jwt_identity()
+    grupos = Grupo.query.filter_by(user_email=user_email).all()
 
+    return jsonify([grupo.serialize() for grupo in grupos]), 200
 
 # TRAER DATOS DE FORM VIAJE
 @api.route('/all-trip', methods=['GET'])

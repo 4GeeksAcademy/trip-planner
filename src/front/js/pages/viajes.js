@@ -29,6 +29,7 @@ const Viajes = () => {
             setIsLoading(true)
             try {
                 const data = await actions.get_trips();
+                await actions.getGroups()
                 setLongitudViaje(store.viajes.length)
             } catch (error) {
                 console.error(error); // Handle any errors
@@ -40,7 +41,8 @@ const Viajes = () => {
     }, [store.upDate]);
 
     const trips = store.viajes || [];
-
+    const viajesInvitados = store.viajesInvitados || [];
+    console.log("viajes a los que me invitaron", viajesInvitados)
 
     const countGroups = () => {
         let groupNumber = 0;
@@ -66,7 +68,7 @@ const Viajes = () => {
     return (
         <div className="PaginaPrincipal">
             {/* User Banner */}
-            {console.log(store.user)}
+            {console.log(store.user)} 
             <div className="d-flex flex-column flex-md-row align-items-center justify-content-center">
 
                 <div className="container d-flex bg-light p-4 shadow ms-5 me-3 mb-3 mb-md-0" style={{ maxWidth: "80%", width: "100%", marginTop: "20px", borderRadius: "30px" }}>
@@ -93,8 +95,8 @@ const Viajes = () => {
                 </div>
             </div> :
 
-                <div>
-
+                <div >
+                    <h3 className="mt-5 text-center">Tus viajes</h3>
                     {trips.map((item, index) => {
 
                         // Para calcular los días transcurridos entre fecha y fecha en número entero
@@ -124,6 +126,40 @@ const Viajes = () => {
 
                             <div className="d-flex align-items-center ms-3 me-3 fs-3">
                                 <Link to={`/trip/${item.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                    <i className="fa-solid fa-chevron-right opacity-50"></i>
+                                </Link>
+                            </div>
+                        </div>)
+                    })}
+                    <h3 className="mt-5 text-center">Viajes a los que te invitaron:</h3>
+                    {viajesInvitados.map((item, index) => {
+                          // Para calcular los días transcurridos entre fecha y fecha en número entero
+                        const fechaInicio = new Date(item.viaje.fecha_inicio);
+                        const fechaFin = new Date(item.viaje.fecha_fin);
+                        const dias = parseInt((fechaFin - fechaInicio) / (1000 * 60 * 60 * 24), 10);
+
+                        return (<div key={index} className="viaje container d-flex mb-3 my-5 rounded-pill p-2 bg-light " style={{ width: "100%", maxWidth: "65%" }}>
+                            <img src={item.viaje.trip_image_url || "https://firebasestorage.googleapis.com/v0/b/trippy-proyecto.appspot.com/o/fondoDestino.png?alt=media&token=c65fa4ed-494d-410b-bd9a-68e74ef3e456"} className="ima rounded-circle shadow" style={{ objectFit: 'cover', width: "100px", height: "100px" }} />
+                            <div className="mt-1 flex-grow-1">
+                                <h6 className="mb-2">{item.viaje.destino}</h6> 
+                                <p className="mb-0 mt-3">{formatDate(item.viaje.fecha_inicio)} - {formatDate(item.viaje.fecha_fin)}</p>
+                                <p className="mb-0 mt-1">
+                                    <i className="iconos fa-solid fa-clock me-2"></i>
+                                    {dias >= 0 ? dias : 0} días
+                                </p>
+                                
+                            </div>
+                            <div className="d-flex flex-column justify-content-end ms-auto px-3 py-2 mb-1">
+                                <p className="mb-0 fw-normal">Presupuesto: <span className="colorAzul fw-bold">$ {item.viaje.presupuesto || "0"}</span></p>
+                                <p className="mb-0 fw-normal">Presupuesto personal: <span className="colorAzul fw-bold">$ {item.viaje.presupuesto_personal}</span></p>
+                                <button 
+                                className=" btn btn-sm fondoNaranja mt-1 text-center delete-button rounded-pill"
+                                onClick={() => handleDelete(item.viaje.id)}
+                                >Eliminar</button>
+                            </div>
+
+                            <div className="d-flex align-items-center ms-3 me-3 fs-3">
+                                <Link to={`/trip/${item.viaje.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                                     <i className="fa-solid fa-chevron-right opacity-50"></i>
                                 </Link>
                             </div>
