@@ -39,7 +39,7 @@ const ShoppingCart = (props) => {
                                 <li className="trip">
                                     <div className="new-trip d-flex flex">
                                         <div className="image d-flex flex">
-                                            <img src={item.imagenes} className="img-viaje" alt="Imagen" />
+                                            <img src={item.imagenes || 'https://firebasestorage.googleapis.com/v0/b/trippy-proyecto.appspot.com/o/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(14).png?alt=media&token=2703929a-4977-498e-91de-0ab70b68d609'} className="img-viaje" alt="Imagen" />
                                         </div>
                                         <div className="activity-text">
                                             <span className="activity-name item" style={{ fontSize: '16px', fontWeight: '300', overflow: 'hidden', display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 1}}>{item.name}</span>
