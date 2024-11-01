@@ -42,7 +42,7 @@ const ShoppingCart = (props) => {
                                             <img src={item.imagenes} className="img-viaje" alt="Imagen" />
                                         </div>
                                         <div className="activity-text">
-                                            <span className="activity-name item" style={{ fontSize: '16px', fontWeight: '300', overflow: 'hidden', display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 1 }}>{item.name}</span>
+                                            <span className="activity-name item" style={{ fontSize: '16px', fontWeight: '300', overflow: 'hidden', display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 1}}>{item.name}</span>
                                             <span className="trip-cost dropdown-item">Costo $ {item.cost}</span>
                                         </div>
                                         <div className="delete d-flex flex">

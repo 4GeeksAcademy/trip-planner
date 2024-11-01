@@ -34,6 +34,12 @@
     text-align: center;
 }
 
+.activity-text {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
 .activity-name {
     text-align: right;
     font-size: 13px;
