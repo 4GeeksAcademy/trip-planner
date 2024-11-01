@@ -26,14 +26,14 @@
   object-fit: cover;
   border-radius: 10px;
 }
-
+ 
 /* Descripción de la actividad
-.description {
+.description1 {
   flex: 1;
   font-size: 16px;
   color: #333;
   padding-left: 50px;
-} */
+} */ 
 
 
 .add-btn:hover {
