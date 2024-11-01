@@ -110,13 +110,14 @@ const Viajes = () => {
                                     <i className="iconos fa-solid fa-clock me-2"></i>
                                     {dias >= 0 ? dias : 0} días
                                 </p>
+                                
                             </div>
-                            <div className="d-flex flex-column justify-content-end ms-auto p-3">
+                            <div className="d-flex flex-column justify-content-end ms-auto px-3 py-2 mb-1">
                                 <p className="mb-0 fw-normal">Presupuesto: <span className="colorAzul fw-bold">$ {item.presupuesto || "0"}</span></p>
                                 <p className="mb-0 fw-normal">Presupuesto personal: <span className="colorAzul fw-bold">$ {item.presupuesto_personal}</span></p>
                                 <p className="mb-0 fw-normal">Número de personas: <span className="colorAzul fw-bold">0</span></p>
                                 <button 
-                                className="fondoNaranja mt-2 text-center delete-button rounded-pill"
+                                className=" btn btn-sm fondoNaranja mt-1 text-center delete-button rounded-pill"
                                 onClick={() => handleDelete(item.id)}
                                 >Eliminar</button>
                             </div>
