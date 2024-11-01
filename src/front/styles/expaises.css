@@ -27,13 +27,13 @@
   border-radius: 10px;
 }
 
-/* Descripción de la actividad */
+/* Descripción de la actividad
 .description {
   flex: 1;
   font-size: 16px;
   color: #333;
   padding-left: 50px;
-}
+} */
 
 
 .add-btn:hover {
