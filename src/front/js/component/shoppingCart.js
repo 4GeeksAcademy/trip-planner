@@ -5,17 +5,21 @@ import { Context } from "../store/appContext";
 
 
 
-const ShoppingCart = () => {
+const ShoppingCart = (props) => {
     
     const { store, actions } = useContext(Context);
+    
 
     const calculateTotalCost = () => {
-        return store.selected_trip.reduce((total, item) => total + item.cost, 0);
+        return store.selected_trip.filter(activity=>activity.viaje_id == props.viaje_id).reduce((total, item) => total + item.cost, 0);
+        
+        // return store.activities.filter(activity=>activity.viaje_id == props.viaje_id).reduce((total, item) => total + item.cost, 0);
     };
 
     const calculateCostPerMember = () => {
+        let tripMembersLength = store.miembros.filter(miembro=>miembro.viaje_id == props.viaje_id).length;
         const totalCost = calculateTotalCost();
-        const numberOfMembers = store.number_of_members || 1; // Asegurarse de que no se divida por cero
+        const numberOfMembers = tripMembersLength + 1 || 1; // Asegurarse de que no se divida por cero
         return totalCost / numberOfMembers;
     };
     
@@ -30,7 +34,7 @@ const ShoppingCart = () => {
                 {store.selected_trip.length == 0 ? (
                     <p className="d-flex flex justify-content-center text-secundary mx-3">Agrega una actividad a tu viaje</p>
                 ) : (
-                    store.selected_trip.map((item, index) => (
+                    store.selected_trip.filter(activity=>activity.viaje_id == props.viaje_id).map((item, index) => (
                         <React.Fragment key={index}>
                                 <li><hr className="dropdown-divider"/></li>
                                 <li className="trip">
@@ -59,7 +63,7 @@ const ShoppingCart = () => {
                     <li><hr className="dropdown-divider"/></li>
                     <li className="costs d-flex flex">
                         <p className="total-costs-text p-2">Total costos</p>
-                        <p className="total-costs-price p-2">$ {actions.sumCostosTotales()}</p>
+                        <p className="total-costs-price p-2">$ {actions.sumCostosTotales(props.viaje_id)}</p>
                     </li>
                     <li><hr className="dropdown-divider"/></li>
                     <li className="personal-costs d-flex flex">

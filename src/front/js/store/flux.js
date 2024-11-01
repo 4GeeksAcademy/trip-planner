@@ -584,9 +584,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return result
 			},
 
-			sumCostosTotales: () => {
+			sumCostosTotales: (id) => {
 				const store = getStore();
-				const total = store.selected_trip.reduce((acc, viaje) => acc + viaje.cost, 0);
+				const total = store.selected_trip.filter(activity=>activity.viaje_id == id).reduce((acc, viaje) => acc + viaje.cost, 0);
 				return total;
 			},
 

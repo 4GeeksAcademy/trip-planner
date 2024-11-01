@@ -224,7 +224,7 @@ const IndividualTrip = () => {
             </div>
 
             <div >
-                    <ShoppingCart />
+                    <ShoppingCart viaje_id={id} />
                 
             </div>
 
@@ -265,8 +265,8 @@ const IndividualTrip = () => {
                                     </div>
                                         <div className="d-flex flex-column justify-content-end align-items-center fondoAzul text-light">
                                             <div className={`p-1  ${actions.isViaje({name: item.name, id: item.id, type: "tripDetail"}) && "btn-danger"} `}
-                                            onClick={() => actions.addViaje( {name: item.nombre_actividad, id: item.id, type: "tripDetail", cost: item.precio, imagenes: item.imagenes} )}>
-                                            {actions.isViaje( {name: item.nombre_actividad, id: item.id, type: "tripDetail", cost: item.precio, imagenes: item.imagenes}) ? 
+                                            onClick={() => actions.addViaje( {name: item.nombre_actividad, id: item.id, type: "tripDetail", cost: item.precio, imagenes: item.imagenes, viaje_id: id} )}>
+                                            {actions.isViaje( {name: item.nombre_actividad, id: item.id, type: "tripDetail", cost: item.precio, imagenes: item.imagenes, viaje_id: id}) ? 
                                                 <>
                                                     <i className="colorNaranja delete-trip fa-solid fa-trash-can p-1" style={{ color: 'orange' }}></i>
                                                     <span className="text-light">Quitar</span>
