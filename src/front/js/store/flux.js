@@ -32,16 +32,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 			users: [],
 			miembros: [],
 			comentarios: [],
-			likes: [],
 		},
 		actions: {
-			getUsers: async () => {
+			getUsers: async() => {
 				const response = await fetch(process.env.BACKEND_URL + "api/users", {
 					method: 'GET'
 				});
 				const data = await response.json()
 				console.log("usuarios:", data)
-				setStore({ users: data })
+				setStore({users: data})
 			},
 			get_comments: async (actividades_id) => {
 				const store = getStore();
@@ -51,9 +50,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return;
 				}
 
-				console.log("Esto es el get comment", actividades_id)
-
-				const response = await fetch(process.env.BACKEND_URL + "api/get-comments/" + actividades_id + "/", {
+				const response = await fetch(process.env.BACKEND_URL + "api/get-comments" + actividades_id + "/", {
 					method: 'GET',
 					headers: {
 						'Content-Type': 'application/json',
@@ -108,8 +105,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						comentario: data.comentario
 					};
 
-					// setStore({ comentarios: [...store.comentarios, comentarioConUsuario] });
-					getActions().get_comments(actividades_id)
+					setStore({ comentarios: [...store.comentarios, comentarioConUsuario] });
 					return true;
 				} else {
 					toast.error(data.error || "Ocurrió un error inesperado.");
@@ -128,8 +124,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					body: new URLSearchParams({
 						'grant_type': 'client_credentials',
-						'client_id': process.env.AMADEUS_CLIENT_ID,
-						'client_secret': process.env.AMADEUS_CLIENT_SECRET
+						'client_id': 'cVGjE5EZm9Cg1kTlWttlrW2GkIoscIN6',
+						'client_secret': 'sORLAMKbmjvJWhsd'
 					})
 				});
 				const data = await response.json()
@@ -291,70 +287,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			},
 
-			// addLike: async (actividades_id, user_id) => {
-			// 	try {
-			// 		const store = getStore();
-			// 		const response = await fetch (process.env.BACKEND_URL + "api/add-like", {
-			// 			method: 'POST',
-			// 			headers: { 
-			// 				'Content-Type': 'application/json',
-			// 				'Authorization': `Bearer ${store.token}`
-			// 			},
-			// 			body: JSON.stringify({
-			// 				actividades_id: actividades_id, 
-			// 				user_id: user_id,
-			// 			})
-			// 		})
-
-			// 		if (!response.ok) {
-			// 			const errorData = await response.text(); // Lee la respuesta como texto
-			// 			console.error("Error en la respuesta del servidor:", errorData);
-			// 			throw new Error("Error en la solicitud: " + response.status);
-			// 		}
-					
-			// 		const data = await response.json();
-					
-			// 		if (data.message === "Like agregado") {
-			// 			const actividadActualizada = store.activities.map(activity => 
-			// 				activity.id === actividades_id ? {...activity, likes: activity.likes + 1} : activity
-			// 			);
-			// 			setStore ({ activities: actividadActualizada })
-			// 		}
-			// 	} catch (error) {
-			// 		console.error("Error al agregar el like", error);
-			// 	}
-			// },
-
-			// deleteLike: async (actividades_id, user_id) => {
-			// 	const response = await fetch (process.env.BACKEND_URL + "api/add-like", {
-			// 		method: 'DELETE',
-			// 		headers: { 'Content-Type': 'application/json' },
-			// 		body: JSON.stringify({
-			// 			actividades_id: actividades_id, 
-			// 			user_id: user_id,
-			// 		})
-			// 	})
-			// 	const data = await response.json();
-			// 	if (data.message === "Like eliminado") {
-			// 		const store = getStore();
-			// 		const actividadActualizada = store.activities.map(activity => 
-			// 			activity.id === actividades_id ? {...activity, likes: activity.likes - 1} : activity
-			// 		);
-			// 	setStore ({ activities: actividadActualizada })
-			// 	}
-			// },
-
-			// isLike: (actividades_id, user_id) => {
-			// 	const store = getStore();
-			// 	// Encuentra la actividad correspondiente al actividades_id
-			// 	const activity = store.activities.find(activity => activity.id === actividades_id);
-				
-			// 	if(!activity) return false;
- 			// 	// Comprueba si el user_id está en la lista de likes de la actividad
-			// 	const likeByUser = activity.likes.some(like => like.user_id === user_id);
-			// 	return likeByUser;
-			// },
-
 			addLike: (index) => {
 				const store = getStore()
 				let likesAdded = store.activities[index].likes;
@@ -469,7 +401,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const data = await resp.json();
 				setStore({ user: data });
 			},
-			
 			getUserData: async (userEmail) => {
 				const store = getStore();
 				const email = userEmail || store.user.email;
@@ -615,37 +546,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 			sumCostosTotales: (id) => {
 				const store = getStore();
-				const total = store.selected_trip.filter(activity=>activity.viaje_id == id).reduce((acc, viaje) => acc + viaje.cost, 0);
+				const total = store.selected_trip.reduce((acc, viaje) => acc + viaje.cost, 0);
 				return total;
 			},
 
-			sumGastosPersonales: (actividades, numeroMiembros) => {
-				if (numeroMiembros === 0) return 0;
-				const totalCostos = actividades.reduce((acc, actividad) => acc + actividad.cost, 0);
-				return totalCostos / numeroMiembros;
-			},
-
-			addMember: async (miembro, viaje_id) => {
+			addMember: async(miembro, viaje_id) => {
 				const store = getStore();
 				const actions = getActions();
-				const result = actions.isMember(miembro)
-				console.log(JSON.stringify(miembro.email))
-				const response = await fetch(process.env.BACKEND_URL + "api/add-member/" + viaje_id, {
+				const result = actions.isMember(miembro)	
+				console.log(JSON.stringify(miembro.email))	
+				const response = await fetch(process.env.BACKEND_URL + "api/add-member/"+viaje_id, {
 					mode: 'no-cors',
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
-
+						
 					},
-					body: JSON.stringify({ user_email: miembro.email }),
+					body: JSON.stringify(miembro.email),
 				});
-
+				
 				if (result) {
 					actions.deleteMember();
 					// alertar que ya existe el usuario 
 				} else {
 					setStore({
-						miembros: [...store.miembros, { miembro, viaje_id }]
+						miembros: [...store.miembros, {miembro, viaje_id}]
 					})
 					console.log(store.miembros)
 				}
@@ -669,3 +594,4 @@ const getState = ({ getStore, getActions, setStore }) => {
 };
 
 export default getState;
+
