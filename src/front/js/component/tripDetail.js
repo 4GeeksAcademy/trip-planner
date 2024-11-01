@@ -1,6 +1,6 @@
 import '../../styles/viajes.css';
 import React, { useState, useContext, useEffect } from "react";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import "../../styles/index.css";
 import { Context } from "../store/appContext.js"
 
@@ -12,10 +12,15 @@ const TripDetail = () => {
 
     const { store, actions } = useContext(Context);
     const [comentarios, setComentarios] = useState([]);
+    const navigate = useNavigate();
 
     const [nuevoComentario, setNuevoComentario] = useState('');
     let { state } = useLocation();
-    const { id, nombre_actividad, descripcion, precio, imagenes } = state
+    const { id, nombre_actividad, descripcion, precio, imagenes, } = state
+
+    const handeGoBack = () => {
+        navigate(-1);
+    }
 
     const loadComments = async () => {
         const response = await fetch(process.env.BACKEND_URL + "api/get-comments/" + id + "/", {
@@ -54,6 +59,9 @@ const TripDetail = () => {
 
     return (
         <div className="PaginaPrincipal">
+            <button onClick={handeGoBack}>
+                <i class="fa-solid fa-arrow-left fa-3x"></i>
+            </button>
             <div className="container-fluid mx-auto p-2">
                 <div className="d-flex justify-content-center mt-4">
                     <div className="shadow-sm" style={{ width: "80%", borderRadius: "30px", overflow: "hidden"}}>
