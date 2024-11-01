@@ -60,7 +60,7 @@ const TripDetail = () => {
     return (
         <div className="PaginaPrincipal">
             <button onClick={handeGoBack}>
-                <i class="fa-solid fa-arrow-left fa-3x"></i>
+                <i className="fa-solid fa-arrow-left fa-3x ms-5 fs-3"></i>
             </button>
             <div className="container-fluid mx-auto p-2">
                 <div className="d-flex justify-content-center mt-4">
@@ -123,7 +123,7 @@ const TripDetail = () => {
 
 
                                             <button type="button" className="btn btn-transparent p-0 mx-2" onClick={handleCommentSubmit}
-                                            ><i className="fa-solid fa-circle-arrow-up fs-4 colorNaranja me-2 mb-2"></i></button>
+                                            ><i className="fa-solid fa-circle-arrow-up fs-4 colorNaranja me-2 mb-2" ></i></button>
                                         </div>
                                     </div>
                                 </div>
