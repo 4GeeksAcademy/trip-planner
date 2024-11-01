@@ -28,6 +28,8 @@ const Profile = () => {
     const [user, setUser] = useState({});
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
+    const [showModal, setShowModal] = useState(false);
+
 
     const updateUser = async (user) => {
         if (user.password !== user.passwordConfirm) {
@@ -39,17 +41,19 @@ const Profile = () => {
         actions.getUserData();
         navigate("/viajes")
     }
-    const deleteUser = async(user) => {
-        const confirmDelete = window.confirm("¿Estás seguro de que deseas eliminar tu cuenta?");
-        if (confirmDelete) {
-            try {
-                await actions.deleteAccount(user.email); 
-            } catch (error) {
-                console.error('Error al eliminar la cuenta:', error);
-                toast.error("No se pudo eliminar la cuenta. Intenta de nuevo más tarde.");
-            }
+
+    const handleDeleteUser = () => {
+        setShowModal(true);
+    }
+
+    const deleteUser = async (user) => {
+        try {
+            await actions.deleteAccount(user.email);
+        } catch (error) {
+            console.error('Error al eliminar la cuenta:', error);
+            toast.error("No se pudo eliminar la cuenta. Intenta de nuevo más tarde.");
         }
-        navigate("/")
+        navigate("/");
     }
 
     const uploadImage = async (image) => {
@@ -89,7 +93,7 @@ const Profile = () => {
                                 <div className="account-settings">
                                     <div className="user-profile">
                                         <div className="user-avatar mt-3">
-                                            <img src={user.image ? URL.createObjectURL(user.image) : user.profileImageUrl || store.user?.profile_image_url}
+                                            <img src={user.image ? URL.createObjectURL(user.image) : user.profileImageUrl || store.user?.profile_image_url || 'https://i.pinimg.com/550x/a8/0e/36/a80e3690318c08114011145fdcfa3ddb.jpg'}
                                                 onClick={() => document.getElementById('imagenPerfil').click()}
                                             />
                                         </div>
@@ -222,18 +226,46 @@ const Profile = () => {
                                 <div className="row gutters">
                                     <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                         <div className="d-flex justify-content-between mt-2">
-                                            <button 
-                                                className="btn btn-danger me-2 rounded-pill"
-                                                onClick={()=> deleteUser(user)}
-                                            >Eliminar cuenta</button>
-                                            <div className="d-flex">
-                                            <Link to="/viajes" className="btn btn-secondary d-flex align-items-center rounded-pill me-2">
-                                                Cancelar
-                                            </Link>
                                             <button
-                                                className="btn btn-primary rounded-pill"
-                                                onClick={() => updateUser(user)}
-                                            >Actualizar</button>
+                                                className="btn btn-danger me-2 rounded-pill"
+                                                onClick={handleDeleteUser}
+                                            >Eliminar cuenta</button>
+
+                                            {/* Modal advertencia usuario */}
+                                            {showModal && (
+                                                <div className="modal show" style={{ display: 'block' }}>
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <p className="modal-title text-danger fs-5">Advertencia</p>
+                                                                <button type="button" className="close" onClick={() => setShowModal(false)}>
+                                                                    &times;
+                                                                </button>
+                                                            </div>
+                                                            <div className="modal-body" style={{fontSize: '15px'}}>
+                                                                <p>Todos tus datos personales, historial y contenido asociado a tu cuenta se eliminarán de forma permanente. No podrás recuperar esta información una vez completado el proceso.
+                                                                    <p className="mt-2">Si estás seguro de que deseas continuar, por favor confirma tu decisión.</p></p>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button className="btn btn-secondary" onClick={() => setShowModal(false)}>Cancelar</button>
+                                                                <button className="btn btn-danger" onClick={() => {
+                                                                    deleteUser(user);
+                                                                    setShowModal(false);
+                                                                }}>Confirmar Eliminación</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            <div className="d-flex">
+                                                <Link to="/viajes" className="btn btn-secondary d-flex align-items-center rounded-pill me-2">
+                                                    Cancelar
+                                                </Link>
+                                                <button
+                                                    className="btn btn-primary rounded-pill"
+                                                    onClick={() => updateUser(user)}
+                                                >Actualizar</button>
                                             </div>
 
                                         </div>
