@@ -75,6 +75,7 @@ const Viajes = () => {
                     </div>
                     <div className="mx-4 text-end">
                         <p className="mb-1"><i className="iconos fa-solid fa-map-location-dot me-2"></i>Proximos viajes: <span className="colorAzul fw-bold">{longitudViaje}</span></p>
+                        <p className="mb-3"><i className="iconos fa-solid fa-user-group me-2"></i>Grupos: <span className="colorAzul fw-bold">{ }</span></p>
                     </div>
 
                 </div>
@@ -104,7 +105,7 @@ const Viajes = () => {
                         return (<div key={index} className="viaje container d-flex mb-3 my-5 rounded-pill p-2 bg-light " style={{ width: "100%", maxWidth: "65%" }}>
                             <img src={item.trip_image_url || "https://firebasestorage.googleapis.com/v0/b/trippy-proyecto.appspot.com/o/fondoDestino.png?alt=media&token=c65fa4ed-494d-410b-bd9a-68e74ef3e456"} className="ima rounded-circle shadow" style={{ objectFit: 'cover', width: "100px", height: "100px" }} />
                             <div className="mt-1 flex-grow-1">
-                                <h6 className="mb-2">{item.destino}</h6> 
+                                <h6 className="mb-2">{item.destino}</h6>
                                 <p className="mb-0 mt-3">{formatDate(item.fecha_inicio)} - {formatDate(item.fecha_fin)}</p>
                                 <p className="mb-0 mt-1">
                                     <i className="iconos fa-solid fa-clock me-2"></i>
@@ -112,12 +113,12 @@ const Viajes = () => {
                                 </p>
                             </div>
                             <div className="d-flex flex-column justify-content-end ms-auto p-3">
-                                <p className="mb-0 fw-normal">Presupuesto: <span className="colorAzul fw-bold">$ {item.presupuesto || "0"}</span></p>
+                                <p className="mb-0 fw-normal">Presupuesto: <span className="colorAzul fw-bold">$ {item.presupuesto || "No disponible"}</span></p>
                                 <p className="mb-0 fw-normal">Presupuesto personal: <span className="colorAzul fw-bold">$ {item.presupuesto_personal}</span></p>
                                 <p className="mb-0 fw-normal">Número de personas: <span className="colorAzul fw-bold">0</span></p>
-                                <button 
-                                className="fondoNaranja mt-2 text-center delete-button rounded-pill"
-                                onClick={() => handleDelete(item.id)}
+                                <button
+                                    className="fondoNaranja mt-2 text-center delete-button rounded-pill"
+                                    onClick={() => handleDelete(item.id)}
                                 >Eliminar</button>
                             </div>
 
