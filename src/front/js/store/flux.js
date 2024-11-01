@@ -201,31 +201,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ demo: demo });
 			},
 
-			addActivity: (activity) => {
-				const store = getStore();
-				const actions = getActions();
-				const result = actions.isActivity(activity)
-				if (result) {
-					actions.deleteActivity(activity)
-				} else {
-					setStore({
-						selected_trip: [...store.selected_trip, activity]
-					});
-				}
-				console.log("Actividad en selected_trip", activity);
-			},
 
-			deleteActivity: (activity) => {
-				const store = getStore();
-				const updateActivity = store.selected_trip.filter(item => activity.name !== item.name);
-				setStore({ selected_trip: updateActivity });
-			},
-
-			isActivity: (activity) => {
-				const store = getStore();
-				const result = store.selected_trip.some(item => activity.id == item.id && activity.type == item.type && activity.cost == item.cost && activity.imagenes == item.imagenes)
-				return result
-			},
 
 
 			guardarId: (idViaje) => {
@@ -380,21 +356,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return result
 			},
 
-			// addActivity: async (activity) => {
-			// 	const store = getStore()
-			// 	const response = await fetch(process.env.BACKEND_URL + "/api/add-activity", {
-			// 		method: 'POST',
-			// 		headers: {
-			// 			'Content-Type': 'application/json',
-			// 			'Access-Control-Allow-Origin': process.env.BACKEND_URL
-			// 		},
-			// 		body: JSON.stringify(activity)
-			// 	});
-			// 	const data = await response.json();
-			// 	console.log("Una actividad más", data);
-			// 	setStore({ activities: [data, ...store.activities] });
-			// 	toast.success("Se ha creado tu actividad!");
-			// },
+			addActivity: async (activity) => {
+				const store = getStore()
+				const response = await fetch(process.env.BACKEND_URL + "/api/add-activity", {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'Access-Control-Allow-Origin': process.env.BACKEND_URL
+					},
+					body: JSON.stringify(activity)
+				});
+				const data = await response.json();
+				console.log("Una actividad más", data);
+				setStore({ activities: [data, ...store.activities] });
+				toast.success("Se ha creado tu actividad!");
+			},
 
 			getActivities: async () => {
 				const store = getStore()
