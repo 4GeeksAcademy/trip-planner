@@ -119,6 +119,9 @@ const Viajes = () => {
                                 <button
                                     className="fondoNaranja mt-2 text-center delete-button rounded-pill"
                                     onClick={() => handleDelete(item.id)}
+                                <button 
+                                className="fondoNaranja mt-2 text-center delete-button rounded-pill"
+                                onClick={() => handleDelete(item.id)}
                                 >Eliminar</button>
                             </div>
 
