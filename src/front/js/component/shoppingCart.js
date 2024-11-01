@@ -50,7 +50,7 @@ const ShoppingCart = (props) => {
                                                 onClick={(e) => {
                                                     e.stopPropagation()
                                                     console.log("Click on delete");
-                                                    actions.deleteViaje({name: item.name})
+                                                    actions.deleteActivity({name: item.name})
                                                 }}>
                                             </i>
                                         </div>
