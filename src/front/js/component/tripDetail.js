@@ -11,17 +11,26 @@ import { Context } from "../store/appContext.js"
 const TripDetail = () => {
 
     const { store, actions } = useContext(Context);
+    const [comentarios, setComentarios] = useState([]);
 
     const [nuevoComentario, setNuevoComentario] = useState('');
     let { state } = useLocation();
     const { id, nombre_actividad, descripcion, precio, imagenes } = state
 
-    useEffect(() => {
-        const loadComments = async () => {
-            await actions.get_comments(id);
-            console.log("Comentarios después de la carga:", store.comentarios);
-        };
-        
+    const loadComments = async () => {
+        const response = await fetch(process.env.BACKEND_URL + "api/get-comments/" + id + "/", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${store.token}`
+            }
+
+        });
+        const data = await response.json()
+        setComentarios(data)
+    };
+
+    useEffect(() => {    
         loadComments();
     }, [id]);
     
@@ -33,12 +42,12 @@ const TripDetail = () => {
             const result = await actions.post_comment(id, nuevoComentario);
             if (result) {
                 setNuevoComentario(''); // Limpiar el campo de entrada
-                await actions.get_comments(id);
+                loadComments()
             }
         }
     };
 
-    const comentariosActividad = store.comentarios.filter(comentario => comentario.actividades_id === id);
+    // const comentariosActividad = store.comentarios.filter(comentario => comentario.actividades_id === id);
 
 
 
@@ -48,7 +57,7 @@ const TripDetail = () => {
             <div className="container-fluid mx-auto p-2">
                 <div className="d-flex justify-content-center mt-4">
                     <div className="shadow-sm" style={{ width: "80%", borderRadius: "30px", overflow: "hidden"}}>
-                        <img src={imagenes}
+                        <img src={imagenes || 'https://firebasestorage.googleapis.com/v0/b/trippy-proyecto.appspot.com/o/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(14).png?alt=media&token=2703929a-4977-498e-91de-0ab70b68d609'}
                             style={{ width: "100%", height: "400px", objectFit: "cover" }} alt="Paisaje" />
                         <div className="fondoAzul rounded-bottom p-4 ">
                             <h2 className="fw-semibold text-light">{nombre_actividad}</h2>
@@ -58,7 +67,7 @@ const TripDetail = () => {
 
                 <div className="d-flex justify-content-center mt-5">
                     <div className="d-flex m-3" style={{ width: "80%" }}>
-                        <div className="me-3 border-black border-end border-3 border-dark flex-grow-1">
+                        <div className="me-3 border-black border-end border-3 border-dark flex-grow-1" style={{ maxWidth: "900px", minHeight: "120px"}}>
                             <h5 className="mb-3">Descripción</h5>
                             <div>
                             <blockquote className="blockquote mb-0">
@@ -67,7 +76,7 @@ const TripDetail = () => {
                             </div>
                         </div>
 
-                        <div className="card bg-light" style={{ width: "350px", height: "100px", borderRadius: "30px"}}>
+                        <div className="card bg-light" style={{ maxWidth: "350px", maxHeight: "100px", borderRadius: "30px"}}>
                             <div className="card-header text-center colorAzul">
                                 Costo aproximado
                             </div>
@@ -111,7 +120,7 @@ const TripDetail = () => {
                                     </div>
                                 </div>
 
-                                 {comentariosActividad.map(comentario => (
+                                 {comentarios.map(comentario => (
                                     <div className="media mb-4 mx-4" key={comentario.id}>
                                         <div className="rounded-pill mb-2 border shadow-sm bg-light p-2">
                                             <h6 className="mt-0 colorNaranja mx-4">@{comentario.usuario}</h6>
