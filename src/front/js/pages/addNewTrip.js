@@ -264,7 +264,7 @@ const NewTrip = () => {
                         ¡Listo!
                     </button>
                     <div className="d-flex justify-content-start">
-                        <Link to="/" className="btn btn-secondary mt-2 d-flex align-items-center rounded-pill">
+                        <Link to="/viajes" className="btn btn-secondary mt-2 d-flex align-items-center rounded-pill">
                             <i className="fa-solid fa-circle-chevron-left me-2"></i> Inicio
                         </Link>
                     </div>
