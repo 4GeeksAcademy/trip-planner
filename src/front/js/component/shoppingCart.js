@@ -46,11 +46,11 @@ const ShoppingCart = (props) => {
                                             <span className="trip-cost dropdown-item">Costo $ {item.cost}</span>
                                         </div>
                                         <div className="delete d-flex flex">
-                                            <i className="delete-trip fa-solid fa-trash-can" role="button"
+                                            <i className="delete-activity fa-solid fa-trash-can" role="button"
                                                 onClick={(e) => {
                                                     e.stopPropagation()
                                                     console.log("Click on delete");
-                                                    actions.deleteViaje({name: item.name})
+                                                    actions.deleteActivity({name: item.name})
                                                 }}>
                                             </i>
                                         </div>

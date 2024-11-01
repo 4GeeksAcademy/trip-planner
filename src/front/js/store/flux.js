@@ -1,5 +1,6 @@
 import { toast } from "react-hot-toast";
 import suggestions from "./suggestions"
+import AddActivity from "../component/AddActivity";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -263,6 +264,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ viajes: data });
 			},
 
+			deleteViaje: async (viaje_id) => {
+				const store = getStore();
+				const url = `${process.env.BACKEND_URL}/all-trip/${viaje_id}`;
+				console.log(`URL de eliminación: ${url}`);
+
+				try{
+					const resp = await fetch (`${process.env.BACKEND_URL}/api/all-trip/${viaje_id}`, {
+						method: 'DELETE', 
+						headers: {
+							'Content-Type': 'application/json',
+							'Authorization': `Bearer ${store.token}`
+						}
+					});
+					if (!resp.ok) {
+						throw new Error('Error al eliminar el viaje');
+					}
+					const data = await resp.json();
+					console.log('Viaje eliminado:', data);
+
+					const updatedViajes = store.viajes.filter(viaje => viaje.id !== viaje_id);
+        			setStore({ ...store, viajes: updatedViajes });
+				} catch (error) {
+					console.error('Error', error);
+				}
+
+			},
 
 			// addLike: async (actividades_id, user_id) => {
 			// 	try {
@@ -354,34 +381,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				const result = store.activities.some((activity, i) => i === index && activity.likes > 0)
 				return result
-			},
-
-			addActivity: async (activity) => {
-				const store = getStore()
-				const response = await fetch(process.env.BACKEND_URL + "/api/add-activity", {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						'Access-Control-Allow-Origin': process.env.BACKEND_URL
-					},
-					body: JSON.stringify(activity)
-				});
-				const data = await response.json();
-				console.log("Una actividad más", data);
-				setStore({ activities: [data, ...store.activities] });
-				toast.success("Se ha creado tu actividad!");
-			},
-
-			getActivities: async () => {
-				const store = getStore()
-				const response = await fetch(process.env.BACKEND_URL + "/api/all-activities/" + store.currentId, {
-					method: 'GET'
-				})
-				const data = await response.json()
-				console.log("Este es getActivities", data)
-				console.log("current Id:", store.currentId)
-				// setStore(activities)
-				setStore({ activities: data });
 			},
 
 			login: async (email, password) => {
@@ -556,56 +555,64 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.error('Error', error);
 				}
+			}, 
 
-			}
+			// addActivity: async (activity) => {
+			// 	const store = getStore()
+			// 	const response = await fetch(process.env.BACKEND_URL + "/api/add-activity", {
+			// 		method: 'POST',
+			// 		headers: {
+			// 			'Content-Type': 'application/json',
+			// 			'Access-Control-Allow-Origin': process.env.BACKEND_URL
+			// 		},
+			// 		body: JSON.stringify(activity)
+			// 	});
+			// 	const data = await response.json();
+			// 	console.log("Una actividad más", data);
+			// 	setStore({ activities: [data, ...store.activities] });
+			// 	toast.success("Se ha creado tu actividad!");
+			// },
 
-			, addViaje: (viaje) => {
+			addActivity: (activity) => {
 				const store = getStore();
 				const actions = getActions();
-				const result = actions.isViaje(viaje)
+				const result = actions.isActivity(activity)
 				if (result) {
-					actions.deleteViaje(viaje)
+					actions.deleteActivity(activity)
 				} else {
 					setStore({
-						selected_trip: [...store.selected_trip, viaje]
+						selected_trip: [...store.selected_trip, activity]
 					});
 				}
-				console.log("Actividad en selected_trip", viaje);
+				console.log("Actividad en selected_trip", activity);
 			},
 
-			deleteViaje: async (viaje_id) => {
+			deleteActivity: (activity) => {
 				const store = getStore();
-				const url = `${process.env.BACKEND_URL}/all-trip/${viaje_id}`;
-				console.log(`URL de eliminación: ${url}`);
-
-				try{
-					const resp = await fetch (`${process.env.BACKEND_URL}/api/all-trip/${viaje_id}`, {
-						method: 'DELETE', 
-						headers: {
-							'Content-Type': 'application/json',
-							'Authorization': `Bearer ${store.token}`
-						}
-					});
-					if (!resp.ok) {
-						throw new Error('Error al eliminar el viaje');
-					}
-					const data = await resp.json();
-					console.log('Viaje eliminado:', data);
-
-					const updatedViajes = store.viajes.filter(viaje => viaje.id !== viaje_id);
-        			setStore({ ...store, viajes: updatedViajes });
-				} catch (error) {
-					console.error('Error', error);
-				}
-
+				const updateActivity = store.selected_trip.filter(item => activity.name !== item.name);
+				setStore({ selected_trip: updateActivity });
 			},
 
-			isViaje: (viaje) => {
+			isActivity: (viaje) => {
 				const store = getStore();
 				const result = store.selected_trip.some(item => viaje.id == item.id && viaje.type == item.type && viaje.cost == item.cost && viaje.imageUrl == item.imageUrl)
 				return result
 			},
 
+			getActivities: async () => {
+				const store = getStore()
+				const response = await fetch(process.env.BACKEND_URL + "/api/all-activities/" + store.currentId, {
+					method: 'GET'
+				})
+				const data = await response.json()
+				console.log("Este es getActivities", data)
+				console.log("current Id:", store.currentId)
+				// setStore(activities)
+				setStore({ activities: data });
+			},
+		
+
+			
 			sumCostosTotales: (id) => {
 				const store = getStore();
 				const total = store.selected_trip.filter(activity=>activity.viaje_id == id).reduce((acc, viaje) => acc + viaje.cost, 0);
