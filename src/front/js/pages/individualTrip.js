@@ -246,7 +246,7 @@ const IndividualTrip = () => {
                                             <div className="card-title mb-0 mx-1 mt-1" style={{ fontSize: '20px', fontWeight: '500', overflow: 'hidden', display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 2 }}>
                                                 {item.nombre_actividad}</div>
                                         </div>
-                                        <p className="card-text mx-1 p-1 description"  style={{fontSize: '14px'}}>{item.descripcion}</p>
+                                        <p className="card-text mx-1 p-1 description"  style={{fontSize: '14px', maxHeight: '25px', minHeight: '25px'}}>{item.descripcion}</p>
                                             <div className="d-flex justify-content-end align-items-center border-black border-bottom border-2">
                                                 <p className="p-2 rounded" style={{fontSize: '13px'}}>${item.precio}</p>
                                             </div>
