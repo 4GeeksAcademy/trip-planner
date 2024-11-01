@@ -264,7 +264,7 @@ const IndividualTrip = () => {
                                         </div>
                                     </div>
                                         <div className="d-flex flex-column justify-content-end align-items-center fondoAzul text-light">
-                                            <div className={`p-1  ${actions.isViaje({name: item.name, id: item.id, type: "tripDetail"}) && "btn-danger"} `}
+                                            <div className={`p-1  ${actions.isViaje({name: item.name, id: item.id, type: "tripDetail"}) && "btn"} `}
                                             onClick={() => actions.addActivityToShopping( {name: item.nombre_actividad, id: item.id, type: "tripDetail", cost: item.precio, imagenes: item.imagenes, viaje_id: id} )}>
                                             {actions.isViaje( {name: item.nombre_actividad, id: item.id, type: "tripDetail", cost: item.precio, imagenes: item.imagenes, viaje_id: id}) ? 
                                                 <>
