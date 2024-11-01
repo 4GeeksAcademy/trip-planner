@@ -56,9 +56,10 @@ const Viajes = () => {
 
     console.log(store.viajes)
 
-    const handleDelete = (viaje_id) => {
+    const handleDelete = async (viaje_id) => {
         if (window.confirm("¿Estás seguro de que eliminar el viaje?")) {
-            actions.deleteViaje(viaje_id);
+            await actions.deleteViaje(viaje_id);
+            setLongitudViaje(store.viajes.length);
         }
     };
 

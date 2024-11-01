@@ -372,6 +372,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 				toast.success("Se ha creado tu actividad!");
 			},
 
+			addActivityToShopping: (activity) => {
+                const store = getStore();
+                const actions = getActions();
+                const result = actions.isActivity(activity)
+                if (result) {
+                    actions.deleteActivity(activity)
+                } else {
+                    setStore({
+                        selected_trip: [...store.selected_trip, activity]
+                    });
+                }
+                console.log("Actividad en selected_trip", activity);
+            },
+
+            isActivity: (activity) => {
+                const store = getStore();
+                const result = store.selected_trip.some(item => activity.id == item.id && activity.type == item.type && activity.cost == item.cost && activity.imagenes == item.imagenes)
+                return result
+            },
+
+			deleteActivity: (activity) => {
+                const store = getStore();
+                const updateActivity = store.selected_trip.filter(item => activity.name !== item.name);
+                setStore({ selected_trip: updateActivity });
+            },
+
+
 			getActivities: async () => {
 				const store = getStore()
 				const response = await fetch(process.env.BACKEND_URL + "/api/all-activities/" + store.currentId, {
