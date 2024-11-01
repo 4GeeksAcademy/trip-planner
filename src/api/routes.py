@@ -105,20 +105,29 @@ def all_trip():
     
     return jsonify([viaje.serialize() for viaje in viajes]), 200
 
-#ELIMINAR VIAJE
+# ELIMINAR VIAJE
 @api.route('/all-trip/<int:viaje_id>', methods=['DELETE'])
 @jwt_required()
 def remove_trip(viaje_id):
-    current_user = get_jwt_identity()
-    user_email = current_user['email']
-    searched_viaje = Viaje.query.filter_by(id=viaje_id, user_id=current_user['id']).first()
-    if searched_viaje and searched_viaje.user.email == user_email :
+    try:
+        current_user = get_jwt_identity()
+        user_email = current_user['email'] if isinstance(current_user, dict) else current_user
+        searched_viaje = Viaje.query.filter_by(id=viaje_id).first()
+
+        if searched_viaje is None:
+            return jsonify({"error": "El viaje no fue encontrado"}), 404
+        
+        if searched_viaje.user.email != user_email:
+            return jsonify({"error": "No tienes permiso para eliminar este viaje"}), 403
+        
         viaje_data = searched_viaje.serialize()
         db.session.delete(searched_viaje)
         db.session.commit()
         return jsonify(viaje_data), 202
-    else:
-        return jsonify({"error": "El viaje no fue enconrado o no esta asociado tu cuenta"}), 404
+
+    except Exception as e:
+        print(f"Error al eliminar el viaje: {str(e)}")  # Imprimir el error en la consola
+        return jsonify({"error": "Error interno del servidor"}), 500  # Retornar un error 500
 
 
 # AGREGAR VIAJE

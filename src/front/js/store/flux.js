@@ -259,6 +259,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ viajes: data });
 			},
 
+
 			addLike: (index) => {
 				const store = getStore()
 				let likesAdded = store.activities[index].likes;
@@ -502,10 +503,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log("Actividad en selected_trip", viaje);
 			},
 
-			deleteViaje: (viaje) => {
+			deleteViaje: async (viaje_id) => {
 				const store = getStore();
-				const updateViajes = store.selected_trip.filter(item => viaje.name !== item.name);
-				setStore({ selected_trip: updateViajes });
+				const url = `${process.env.BACKEND_URL}/all-trip/${viaje_id}`;
+				console.log(`URL de eliminación: ${url}`);
+
+				try{
+					const resp = await fetch (`${process.env.BACKEND_URL}/api/all-trip/${viaje_id}`, {
+						method: 'DELETE', 
+						headers: {
+							'Content-Type': 'application/json',
+							'Authorization': `Bearer ${store.token}`
+						}
+					});
+					if (!resp.ok) {
+						throw new Error('Error al eliminar el viaje');
+					}
+					const data = await resp.json();
+					console.log('Viaje eliminado:', data);
+
+					const updatedViajes = store.viajes.filter(viaje => viaje.id !== viaje_id);
+        			setStore({ ...store, viajes: updatedViajes });
+				} catch (error) {
+					console.error('Error', error);
+				}
+
 			},
 
 			isViaje: (viaje) => {

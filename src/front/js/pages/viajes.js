@@ -56,6 +56,12 @@ const Viajes = () => {
 
     console.log(store.viajes)
 
+    const handleDelete = (viaje_id) => {
+        if (window.confirm("¿Estás seguro de que eliminar el viaje?")) {
+            actions.deleteViaje(viaje_id);
+        }
+    };
+
     return (
         <div className="PaginaPrincipal">
             {/* User Banner */}
@@ -110,6 +116,10 @@ const Viajes = () => {
                                 <p className="mb-0 fw-normal">Presupuesto: <span className="colorAzul fw-bold">$ {item.presupuesto || "No disponible"}</span></p>
                                 <p className="mb-0 fw-normal">Presupuesto personal: <span className="colorAzul fw-bold">$ {item.presupuesto_personal}</span></p>
                                 <p className="mb-0 fw-normal">Número de personas: <span className="colorAzul fw-bold">0</span></p>
+                                <button 
+                                className="fondoNaranja mt-2 text-center delete-button rounded-pill"
+                                onClick={() => handleDelete(item.id)}
+                                >Eliminar</button>
                             </div>
 
                             <div className="d-flex align-items-center ms-3 me-3 fs-3">
