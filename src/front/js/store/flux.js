@@ -127,8 +127,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					body: new URLSearchParams({
 						'grant_type': 'client_credentials',
-						'client_id': 'cVGjE5EZm9Cg1kTlWttlrW2GkIoscIN6',
-						'client_secret': 'sORLAMKbmjvJWhsd'
+						'client_id': process.env.AMADEUS_CLIENT_ID,
+						'client_secret': process.env.AMADEUS_CLIENT_SECRET
 					})
 				});
 				const data = await response.json()

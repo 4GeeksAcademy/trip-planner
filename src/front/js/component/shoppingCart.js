@@ -13,7 +13,6 @@ const ShoppingCart = (props) => {
     const calculateTotalCost = () => {
         return store.selected_trip.filter(activity=>activity.viaje_id == props.viaje_id).reduce((total, item) => total + item.cost, 0);
         
-        // return store.activities.filter(activity=>activity.viaje_id == props.viaje_id).reduce((total, item) => total + item.cost, 0);
     };
 
     const calculateCostPerMember = () => {
