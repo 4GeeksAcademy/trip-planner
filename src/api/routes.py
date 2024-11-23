@@ -304,6 +304,11 @@ def login():
                         "user": user.serialize()}), 200
     
     return jsonify({"msg": "Contraseña inválida"}), 401
+@api.route("/test-api", methods= ["GET"] )
+def test():
+    return jsonify({
+        "msg": "funciono"
+    })
 
 @api.route("/register", methods =["POST"])
 def register():
