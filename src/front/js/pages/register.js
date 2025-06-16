@@ -67,7 +67,7 @@ const Register = () => {
 
     return (
         <div className="PaginaPrincipal">
-            <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh'}}>
+            <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
                 <div className="shadow-lg p-4 bg-dark" style={{ width: '500px', borderRadius: "30px" }}>
                     <h2 className="text-center text-white mb-2">Crea una cuenta</h2>
                     <div className="mb-1 d-flex flex-column justify-content-center">
@@ -76,7 +76,7 @@ const Register = () => {
                             src={user.image ? URL.createObjectURL(user.image) : user.profileImageUrl || 'https://i.pinimg.com/550x/a8/0e/36/a80e3690318c08114011145fdcfa3ddb.jpg'}
                             className="rounded-circle shadow mx-auto"
                             style={{ width: '150px', cursor: 'pointer' }}
-                            onClick={() => document.getElementById('imagenPerfil').click()} 
+                            onClick={() => document.getElementById('imagenPerfil').click()}
                         />
                     </div>
                     <div className="mb-3 d-flex flex-column">

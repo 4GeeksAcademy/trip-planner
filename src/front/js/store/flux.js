@@ -483,7 +483,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getUserLogged: async () => {
-				const resp = await fetch(process.env.BACKEND_URL + "/api/user", {
+				const resp = await fetch(process.env.BACKEND_URL + "api/user", {
 					headers: {
 						Authorization: "Bearer " + getStore().token
 					}
