@@ -10,7 +10,6 @@ from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_requir
 import bcrypt 
 
 import os
-
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
