@@ -66,6 +66,7 @@ const Register = () => {
     }, [])
 
     return (
+        
         <div className="PaginaPrincipal">
             <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
                 <div className="shadow-lg p-4 bg-dark" style={{ width: '500px', borderRadius: "30px" }}>
