@@ -36,10 +36,10 @@ export default function Destination() {
                     return (
                         <div className="activity-card" style={{ width: "80%", height: "170px" }}>
                             <div className="image-container">
-                                <img src={item.pictures[0] || 'https://firebasestorage.googleapis.com/v0/b/trippy-proyecto.appspot.com/o/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(14).png?alt=media&token=2703929a-4977-498e-91de-0ab70b68d609'} alt="img activity" className="rounded-top" 
+                                <img src={item.pictures[0] || 'https://placehold.co/400x170?text=Sin+imagen'} alt="img activity" className="rounded-top" 
                                 onError={(e) => { 
                                     e.target.onerror = null; // Evita bucles infinitos
-                                    e.target.src = 'https://firebasestorage.googleapis.com/v0/b/trippy-proyecto.appspot.com/o/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(14).png?alt=media&token=2703929a-4977-498e-91de-0ab70b68d609'; // Imagen por defecto
+                                    e.target.src = 'https://placehold.co/400x170?text=Sin+imagen'; // Imagen por defecto
                                 }} 
                                 />
                             </div>

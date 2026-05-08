@@ -5,20 +5,7 @@ import { Link } from 'react-router-dom';
 import toast from "react-hot-toast";
 import "../../styles/index.css";
 
-import { initializeApp } from "firebase/app";
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-
-//Your web app's Firebase configuration
-const firebaseConfig = {
-    apiKey: process.env.API_KEY,
-    authDomain: process.env.AUTH_DOMAIN,
-    projectId: process.env.PROJECT_ID,
-    storageBucket: process.env.STORAGE_BUCKET,
-    messagingSenderId: process.env.MESSAGING_SENDER_ID,
-    appId: process.env.APP_ID
-};
-
-const firebaseApp = initializeApp(firebaseConfig);
+import uploadToCloudinary from "../store/cloudinaryUpload";
 
 const Register = () => {
     const { store, actions } = useContext(Context);
@@ -40,23 +27,13 @@ const Register = () => {
     }
 
     const uploadImage = async (image) => {
-        const storage = getStorage();
-        const storageRef = ref(storage, `imagenes_perfil/${image.name}`);
-
-        const metadata = {
-            contentType: image.type
-        };
         try {
-            const fileData = await uploadBytesResumable(storageRef, image, metadata);
-            const downloadURL = await getDownloadURL(fileData.ref);
-            console.log("Disponible en: ", downloadURL);
-
-            return downloadURL;
+            const url = await uploadToCloudinary(image, "profiles");
+            return url;
         } catch (error) {
             toast.error("Error al cargar la imagen");
             return null;
         }
-
     }
 
     useEffect(() => {

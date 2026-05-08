@@ -8,20 +8,7 @@ import "../../styles/index.css";
 
 
 
-import { initializeApp } from "firebase/app";
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-
-//Your web app's Firebase configuration
-const firebaseConfig = {
-    apiKey: process.env.API_KEY,
-    authDomain: process.env.AUTH_DOMAIN,
-    projectId: process.env.PROJECT_ID,
-    storageBucket: process.env.STORAGE_BUCKET,
-    messagingSenderId: process.env.MESSAGING_SENDER_ID,
-    appId: process.env.APP_ID
-};
-
-const firebaseApp = initializeApp(firebaseConfig);
+import uploadToCloudinary from "../store/cloudinaryUpload";
 
 const Profile = () => {
     const { store, actions } = useContext(Context);
@@ -57,26 +44,10 @@ const Profile = () => {
     }
 
     const uploadImage = async (image) => {
-        const storage = getStorage();
-        const storageRef = ref(storage, `imagenes_perfil/${image.name}`);
-        const currentImageUrl = store.user?.profile_image_url;
-
-        const expectedUrl = `https://firebasestorage.googleapis.com/v0/b/trippy-bucket.appspot.com/o/imagenes_perfil%2F${encodeURIComponent(image.name)}?alt=media`
-        console.log(expectedUrl);
-        if (currentImageUrl && currentImageUrl.split('&token=')[0] === expectedUrl) {
-            console.log("La imagen no ha cambiado, no se subirá nuevamente.");
-            return currentImageUrl;
-        }
-        const metadata = {
-            contentType: image.type
-        };
         try {
-            const fileData = await uploadBytesResumable(storageRef, image, metadata);
-            const downloadURL = await getDownloadURL(fileData.ref);
-            console.log("Disponible en: ", downloadURL);
-            return downloadURL;
+            const url = await uploadToCloudinary(image, "profiles");
+            return url;
         } catch (error) {
-            toast.error("Error al cargar la imagen");
             toast.error("Error al cargar la imagen");
             return null;
         }

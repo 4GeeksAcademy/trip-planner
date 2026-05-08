@@ -54,8 +54,6 @@ const Viajes = () => {
 
     const sortedTrips = trips.sort((a, b) => new Date(a.fecha_inicio) - new Date(b.fecha_inicio));
 
-    console.log(store.viajes)
-
     const handleDelete = async (viaje_id) => {
         if (window.confirm("¿Estás seguro de que eliminar el viaje?")) {
             await actions.deleteViaje(viaje_id);
@@ -66,7 +64,6 @@ const Viajes = () => {
     return (
         <div className="PaginaPrincipal">
             {/* User Banner */}
-            {console.log(store.user)}
             <div className="d-flex flex-column flex-md-row align-items-center justify-content-center">
 
                 <div className="container d-flex bg-light p-4 shadow ms-5 me-3 mb-3 mb-md-0" style={{ maxWidth: "80%", width: "100%", marginTop: "20px", borderRadius: "30px" }}>
@@ -103,7 +100,7 @@ const Viajes = () => {
                         const dias = parseInt((fechaFin - fechaInicio) / (1000 * 60 * 60 * 24), 10);
 
                         return (<div key={index} className="viaje container d-flex mb-3 my-5 rounded-pill p-2 bg-light " style={{ width: "100%", maxWidth: "65%" }}>
-                            <img src={item.trip_image_url || "https://firebasestorage.googleapis.com/v0/b/trippy-proyecto.appspot.com/o/fondoDestino.png?alt=media&token=c65fa4ed-494d-410b-bd9a-68e74ef3e456"} className="ima rounded-circle shadow" style={{ objectFit: 'cover', width: "100px", height: "100px" }} />
+                            <img src={item.trip_image_url || "https://placehold.co/100x100?text=viaje"} className="ima rounded-circle shadow" style={{ objectFit: 'cover', width: "100px", height: "100px" }} />
                             <div className="mt-1 flex-grow-1">
                                 <h6 className="mb-2">{item.destino}</h6> 
                                 <p className="mb-0 mt-3">{formatDate(item.fecha_inicio)} - {formatDate(item.fecha_fin)}</p>

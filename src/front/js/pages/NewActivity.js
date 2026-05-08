@@ -3,28 +3,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext.js"
 import React, { useState, useContext } from 'react';
 import "../../styles/index.css";
-
-import { initializeApp } from "firebase/app";
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-
-const firebaseConfig = {
-    apiKey: process.env.API_KEY,
-    authDomain: process.env.AUTH_DOMAIN,
-    projectId: process.env.PROJECT_ID,
-    storageBucket: process.env.STORAGE_BUCKET,
-    messagingSenderId: process.env.MESSAGING_SENDER_ID,
-    appId: process.env.APP_ID
-};
-
-const firebaseApp = initializeApp(firebaseConfig);
+import { toast } from "react-hot-toast";
+import uploadToCloudinary from "../store/cloudinaryUpload";
 
 const NewActivity = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
 
     const [activity, setActivity] = useState({
         name: "",
-        // author: store.user.username,
         precio: 0,
         descripcion: "",
         imagenes: "",
@@ -35,38 +23,26 @@ const NewActivity = () => {
     })
 
     const upload = async () => {
-        const activityImageUrl = activity.imagenes ? await uploadImage(activity.imagenes) : null;
-        await actions.addActivity({ ...activity, imagenes: activityImageUrl });
-        console.log(activity);
-        setActivity({
-            name: "",
-            precio: 0,
-            descripcion: "",
-            imagenes: "",
-            imagenes: null,
-            likes: 0,
-            comentarios: "",
-            duracion: "",
-        });
-        navigate(`/trip/${store.currentId}`); // Navega después de guardar
-    };
-
-
-    const uploadImage = async (image) => {
-        const storage = getStorage();
-        const storageRef = ref(storage, `imagenes_actividades/${image.name}`);
-        const metadata = { contentType: image.type };
-
+        setIsLoading(true);
         try {
-            const fileData = await uploadBytesResumable(storageRef, image, metadata);
-            const downloadURL = await getDownloadURL(fileData.ref);
-            console.log("Disponible en: ", downloadURL);
-            return downloadURL;
+            const activityImageUrl = activity.imagenes ? await uploadToCloudinary(activity.imagenes, "activities") : null;
+            await actions.addActivity({ ...activity, imagenes: activityImageUrl });
+            setActivity({
+                name: "",
+                precio: 0,
+                descripcion: "",
+                imagenes: null,
+                likes: 0,
+                comentarios: "",
+                duracion: "",
+            });
+            navigate(`/trip/${store.currentId}`);
         } catch (error) {
-            toast.error("Error al cargar la imagen");
-            return null;
+            toast.error("Error al guardar la actividad");
+        } finally {
+            setIsLoading(false);
         }
-    }
+    };
 
     return (
         <div className="PaginaPrincipal">
@@ -104,11 +80,10 @@ const NewActivity = () => {
                             <input
                                 id="imagenActividad"
                                 type="file"
-                                accept="image/*" 
+                                accept="image/*"
                                 className="form-control"
                                 style={{ display: 'none' }}
                                 onChange={(event) => {
-                                    console.log("Ruta de las imagenes", event.target.files[0]);
                                     setActivity({
                                         ...activity,
                                         imagenes: event.target.files[0],
@@ -164,18 +139,20 @@ const NewActivity = () => {
                                     onChange={
                                         (event) => {
                                             const newDuration = event.target.value;
-                                            console.log("Duración actualizada", newDuration);
                                             setActivity(prevActivity => ({
                                                 ...prevActivity,
                                                 duracion: newDuration
                                             }));
                                         }}
                                 ></textarea>
-                                
+
                             </div>
 
 
-                            <button onClick={upload} className="mb-3 btn btn-success w-100 rounded-pill">Guardar</button>
+                            <button onClick={upload} disabled={isLoading} className="mb-3 btn btn-success w-100 rounded-pill">
+                                {isLoading ? <span className="spinner-border spinner-border-sm me-2" role="status" /> : null}
+                                {isLoading ? "Guardando..." : "Guardar"}
+                            </button>
 
                             <div className="d-flex justify-content-start">
                                 <Link to="/"
