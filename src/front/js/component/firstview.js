@@ -9,13 +9,13 @@ export default function FirstView() {
         <div id="view" className="container-fluid">
             <div className="video-container">
                 <video autoPlay loop muted playsInline className="video-background">
-                    <source src="https://firebasestorage.googleapis.com/v0/b/trippy-proyecto.appspot.com/o/videorpueba1.mp4?alt=media&token=20d4816e-6c25-4a6b-b960-0bdd4644586b" type="video/mp4" />
+                    <source src="https://res.cloudinary.com/ddnkfjboe/video/upload/v1778087134/videorpueba1_zukplz.mp4" type="video/mp4" />
                 </video>
             </div>
 
             <div className="h-100 d-flex align-items-center pt-5">
                 <div className="ms-5 mt-2">
-                    <h2 className="text-white fw-bold mt-3" style={{fontSize: '35px'}}>CREA RECUERDOS QUE TE ACOMPAÑEN PARA TODA LA VIDA...</h2>
+                    <h2 className="text-white fw-bold mt-3" style={{ fontSize: '35px' }}>CREA RECUERDOS QUE TE ACOMPAÑEN PARA TODA LA VIDA...</h2>
                     <h4 className="text-white fs-5 fw-semibold fst-italic ms-5">Tu viaje perfecto a un paso de ti</h4>
                 </div>
             </div>

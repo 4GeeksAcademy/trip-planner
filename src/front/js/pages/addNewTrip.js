@@ -4,20 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import "../../styles/index.css";
 
-import { initializeApp } from "firebase/app";
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-
-
-const firebaseConfig = {
-    apiKey: process.env.API_KEY,
-    authDomain: process.env.AUTH_DOMAIN,
-    projectId: process.env.PROJECT_ID,
-    storageBucket: process.env.STORAGE_BUCKET,
-    messagingSenderId: process.env.MESSAGING_SENDER_ID,
-    appId: process.env.APP_ID
-};
-
-const _firebaseApp = initializeApp(firebaseConfig);
+import uploadToCloudinary from "../store/cloudinaryUpload";
 
 
 const NewTrip = () => {
@@ -43,15 +30,9 @@ const NewTrip = () => {
     // Carga imagen de destino
 
     const uploadImage = async (image) => {
-        const storage = getStorage(_firebaseApp);
-        const storageRef = ref(storage, `trip_images/${image.name}`);
-        const metadata = { contentType: image.type };
-
         try {
-            const fileData = await uploadBytesResumable(storageRef, image, metadata);
-            const downloadURL = await getDownloadURL(fileData.ref);
-            console.log("Disponible en:", downloadURL);
-            return downloadURL;
+            const url = await uploadToCloudinary(image, "trips");
+            return url;
         } catch (error) {
             toast.error("Error al cargar la imagen");
             return null;
@@ -133,7 +114,7 @@ const NewTrip = () => {
                     <div className="mb-3 d-flex flex-column justify-content-center">
                         <label className="form-label text-light">Imagen referencial de tu viaje</label>
                         <img
-                            src={image ? URL.createObjectURL(image) : 'https://firebasestorage.googleapis.com/v0/b/trippy-proyecto.appspot.com/o/fondoDestino.png?alt=media&token=c65fa4ed-494d-410b-bd9a-68e74ef3e456'}
+                            src={image ? URL.createObjectURL(image) : 'https://placehold.co/150x150?text=Foto+viaje'}
                             className="rounded-3 mx-auto"
                             style={{ width: '150px', cursor: 'pointer' }}
                             onClick={() => document.getElementById('tripImage').click()}

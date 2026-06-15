@@ -35,11 +35,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			getUsers: async () => {
-				const response = await fetch(process.env.BACKEND_URL + "api/users", {
+				const response = await fetch(process.env.BACKEND_URL + "/api/users", {
 					method: 'GET'
 				});
 				const data = await response.json()
-				console.log("usuarios:", data)
 				setStore({ users: data })
 			},
 			get_comments: async (actividades_id) => {
@@ -50,9 +49,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return;
 				}
 
-				console.log("Esto es el get comment", actividades_id)
-
-				const response = await fetch(process.env.BACKEND_URL + "api/get-comments/" + actividades_id + "/", {
+				const response = await fetch(process.env.BACKEND_URL + "/api/get-comments/" + actividades_id + "/", {
 					method: 'GET',
 					headers: {
 						'Content-Type': 'application/json',
@@ -62,7 +59,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				if (response.ok) {
 					const data = await response.json();
-					console.log("Comentarios recibidos del servidor:", data);
 					setStore({ ...store, comentarios: [...store.comentarios, ...data] });
 				} else {
 					const errorData = await response.json();
@@ -85,8 +81,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					user_id: store.user.id
 				};
 
-				console.log("Datos a enviar:", datosEnviar);
-
 				const response = await fetch(process.env.BACKEND_URL + "/api/add-comment", {
 					method: 'POST',
 					headers: {
@@ -96,7 +90,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(datosEnviar),
 				});
 				const data = await response.json();
-				console.log(data);
 
 				if (response.ok) {
 					// Asegúrate de que `data` incluye `usuario`
@@ -147,15 +140,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				});
 				const data = await response.json();
-				console.log("esta es la ciudad", city)
-				console.log(data.data[0].geoCode)
 				return data.data[0].geoCode;
 			},
 
 			loadRecommendations: async (ciudad) => {
 				const apiToken = await getActions().setApiToken()
 				const location = await getActions().geoLocation(ciudad, apiToken)
-				console.log("recomendaciones activadas")
 				const response = await fetch(`https://test.api.amadeus.com/v1/shopping/activities?latitude=${location.latitude}&longitude=${location.longitude}&radius=20`, {
 					method: 'GET',
 					headers: {
@@ -219,9 +209,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false;
 				}
 
-				const datosEnviar = { ...viaje, user_id: store.user.id };
-				console.log("Datos a enviar:", datosEnviar);
-
 				const response = await fetch(process.env.BACKEND_URL + "/api/add-trip", {
 					method: 'POST',
 					headers: {
@@ -230,7 +217,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify({ ...viaje, user_id: store.user.id })
 				});
 				const data = await response.json();
-				console.log("pasamos el post", data);
 
 				if (response.ok) {
 					setStore({ viajes: data.trip });
@@ -259,7 +245,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return;
 				}
 				const data = await response.json();
-				console.log(data);
 				setStore({ viajes: data });
 			},
 
@@ -284,9 +269,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// 			console.error("Error en la respuesta del servidor:", errorData);
 			// 			throw new Error("Error en la solicitud: " + response.status);
 			// 		}
-					
+
 			// 		const data = await response.json();
-					
+
 			// 		if (data.message === "Like agregado") {
 			// 			const actividadActualizada = store.activities.map(activity => 
 			// 				activity.id === actividades_id ? {...activity, likes: activity.likes + 1} : activity
@@ -321,9 +306,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// 	const store = getStore();
 			// 	// Encuentra la actividad correspondiente al actividades_id
 			// 	const activity = store.activities.find(activity => activity.id === actividades_id);
-				
+
 			// 	if(!activity) return false;
- 			// 	// Comprueba si el user_id está en la lista de likes de la actividad
+			// 	// Comprueba si el user_id está en la lista de likes de la actividad
 			// 	const likeByUser = activity.likes.some(like => like.user_id === user_id);
 			// 	return likeByUser;
 			// },
@@ -361,42 +346,39 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const response = await fetch(process.env.BACKEND_URL + "/api/add-activity", {
 					method: 'POST',
 					headers: {
-						'Content-Type': 'application/json',
-						'Access-Control-Allow-Origin': process.env.BACKEND_URL
+						'Content-Type': 'application/json'
 					},
 					body: JSON.stringify(activity)
 				});
 				const data = await response.json();
-				console.log("Una actividad más", data);
 				setStore({ activities: [data, ...store.activities] });
 				toast.success("Se ha creado tu actividad!");
 			},
 
 			addActivityToShopping: (activity) => {
-                const store = getStore();
-                const actions = getActions();
-                const result = actions.isActivity(activity)
-                if (result) {
-                    actions.deleteActivity(activity)
-                } else {
-                    setStore({
-                        selected_trip: [...store.selected_trip, activity]
-                    });
-                }
-                console.log("Actividad en selected_trip", activity);
-            },
+				const store = getStore();
+				const actions = getActions();
+				const result = actions.isActivity(activity)
+				if (result) {
+					actions.deleteActivity(activity)
+				} else {
+					setStore({
+						selected_trip: [...store.selected_trip, activity]
+					});
+				}
+			},
 
-            isActivity: (activity) => {
-                const store = getStore();
-                const result = store.selected_trip.some(item => activity.id == item.id && activity.type == item.type && activity.cost == item.cost && activity.imagenes == item.imagenes)
-                return result
-            },
+			isActivity: (activity) => {
+				const store = getStore();
+				const result = store.selected_trip.some(item => activity.id == item.id && activity.type == item.type && activity.cost == item.cost && activity.imagenes == item.imagenes)
+				return result
+			},
 
 			deleteActivity: (activity) => {
-                const store = getStore();
-                const updateActivity = store.selected_trip.filter(item => activity.name !== item.name);
-                setStore({ selected_trip: updateActivity });
-            },
+				const store = getStore();
+				const updateActivity = store.selected_trip.filter(item => activity.name !== item.name);
+				setStore({ selected_trip: updateActivity });
+			},
 
 
 			getActivities: async () => {
@@ -405,8 +387,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: 'GET'
 				})
 				const data = await response.json()
-				console.log("Este es getActivities", data)
-				console.log("current Id:", store.currentId)
 				// setStore(activities)
 				setStore({ activities: data });
 			},
@@ -423,9 +403,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 				});
 				const data = await resp.json();
-
-				console.log("Estado de la respuesta:", resp.ok); // Debe ser false si las credenciales son incorrectas
-				console.log("Datos de la respuesta:", data); // Verifica el contenido
 
 				if (resp.ok) {
 					localStorage.setItem("token", data.token);
@@ -446,7 +423,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			register: async (name, userName, email, password, more_info, profileImageUrl) => {
-				console.log(userName)
 				const resp = await fetch(process.env.BACKEND_URL + "/api/register", {
 					method: "POST",
 					headers: {
@@ -483,21 +459,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getUserLogged: async () => {
-				const resp = await fetch(process.env.BACKEND_URL + "api/user", {
+				const store = getStore();
+				if (!store.token) return;
+				const resp = await fetch(process.env.BACKEND_URL + "/api/user", {
 					headers: {
-						Authorization: "Bearer " + getStore().token
+						Authorization: "Bearer " + store.token
 					}
 				});
 				if (resp.ok) {
-					toast.success("Usuario loggeado!");
+					const data = await resp.json();
+					setStore({ user: data });
 				} else {
 					localStorage.removeItem("token");
 					setStore({ token: null, user: {} });
 				}
-				const data = await resp.json();
-				setStore({ user: data });
 			},
-			
+
 			getUserData: async (userEmail) => {
 				const store = getStore();
 				const email = userEmail || store.user.email;
@@ -556,7 +533,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 							profile_image_url: profileImageUrl || store.user.profile_image_url
 						}
 					});
-					console.log(store.user.email)
 					await actions.getUserData(email || currentEmail);
 					return data;
 				}
@@ -575,8 +551,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (!resp.ok) {
 						throw new Error('Error al eliminar la cuenta');
 					}
-					const data = await resp.json();
-					console.log('Cuenta eliminada:', data);
+					await resp.json();
 					actions.logout()
 					toast.success("La cuenta fue eliminada exitosamente!");
 
@@ -597,17 +572,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 						selected_trip: [...store.selected_trip, viaje]
 					});
 				}
-				console.log("Actividad en selected_trip", viaje);
 			},
 
 			deleteViaje: async (viaje_id) => {
 				const store = getStore();
-				const url = `${process.env.BACKEND_URL}/all-trip/${viaje_id}`;
-				console.log(`URL de eliminación: ${url}`);
-
-				try{
-					const resp = await fetch (`${process.env.BACKEND_URL}/api/all-trip/${viaje_id}`, {
-						method: 'DELETE', 
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}/api/all-trip/${viaje_id}`, {
+						method: 'DELETE',
 						headers: {
 							'Content-Type': 'application/json',
 							'Authorization': `Bearer ${store.token}`
@@ -616,11 +587,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (!resp.ok) {
 						throw new Error('Error al eliminar el viaje');
 					}
-					const data = await resp.json();
-					console.log('Viaje eliminado:', data);
-
+					await resp.json();
 					const updatedViajes = store.viajes.filter(viaje => viaje.id !== viaje_id);
-        			setStore({ ...store, viajes: updatedViajes });
+					setStore({ ...store, viajes: updatedViajes });
 				} catch (error) {
 					console.error('Error', error);
 				}
@@ -635,7 +604,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			sumCostosTotales: (id) => {
 				const store = getStore();
-				const total = store.selected_trip.filter(activity=>activity.viaje_id == id).reduce((acc, viaje) => acc + viaje.cost, 0);
+				const total = store.selected_trip.filter(activity => activity.viaje_id == id).reduce((acc, viaje) => acc + viaje.cost, 0);
 				return total;
 			},
 
@@ -649,8 +618,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				const actions = getActions();
 				const result = actions.isMember(miembro)
-				console.log(JSON.stringify(miembro.email))
-				const response = await fetch(process.env.BACKEND_URL + "api/add-member/" + viaje_id, {
+				const response = await fetch(process.env.BACKEND_URL + "/api/add-member/" + viaje_id, {
 					mode: 'no-cors',
 					method: 'POST',
 					headers: {
@@ -667,7 +635,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({
 						miembros: [...store.miembros, { miembro, viaje_id }]
 					})
-					console.log(store.miembros)
 				}
 			},
 

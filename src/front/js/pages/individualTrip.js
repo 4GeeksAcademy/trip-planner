@@ -240,7 +240,7 @@ const IndividualTrip = () => {
 
                             <div key={index} className="col-md-3">
                                 <div className="card shadow bg-light text-black" style={{ width: '100%', borderRadius: "30px", height:'440px' }}>
-                                    <img src={item.imagenes || 'https://firebasestorage.googleapis.com/v0/b/trippy-proyecto.appspot.com/o/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(14).png?alt=media&token=2703929a-4977-498e-91de-0ab70b68d609'} className="card-img-top" alt="..." style={{ minHeight: '230px', maxHeight: '230px', objectFit: 'cover' }} />
+                                    <img src={item.imagenes || 'https://placehold.co/400x230?text=Sin+imagen'} className="card-img-top" alt="..." style={{ minHeight: '230px', maxHeight: '230px', objectFit: 'cover' }} />
                                     <div className="card-body d-flex flex-column p-1">
                                         <div className="d-flex justify-content-between align-items-center ">
                                             <div className="card-title mb-0 mx-1 mt-1" style={{ fontSize: '20px', fontWeight: '500', overflow: 'hidden', display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 2 }}>

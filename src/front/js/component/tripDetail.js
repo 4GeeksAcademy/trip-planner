@@ -23,7 +23,7 @@ const TripDetail = () => {
     }
 
     const loadComments = async () => {
-        const response = await fetch(process.env.BACKEND_URL + "api/get-comments/" + id + "/", {
+        const response = await fetch(process.env.BACKEND_URL + "/api/get-comments/" + id + "/", {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ const TripDetail = () => {
             <div className="container-fluid mx-auto p-2">
                 <div className="d-flex justify-content-center mt-4">
                     <div className="shadow-sm" style={{ width: "80%", borderRadius: "30px", overflow: "hidden"}}>
-                        <img src={imagenes || 'https://firebasestorage.googleapis.com/v0/b/trippy-proyecto.appspot.com/o/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(14).png?alt=media&token=2703929a-4977-498e-91de-0ab70b68d609'}
+                        <img src={imagenes || 'https://placehold.co/800x400?text=Sin+imagen'}
                             style={{ width: "100%", height: "400px", objectFit: "cover" }} alt="Paisaje" />
                         <div className="fondoAzul rounded-bottom p-4 ">
                             <h2 className="fw-semibold text-light">{nombre_actividad}</h2>

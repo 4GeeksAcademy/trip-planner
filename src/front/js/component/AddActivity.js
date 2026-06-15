@@ -43,7 +43,7 @@ const AddActivity = ({ viajeId, viajeDestino }) => {
         <div className="col-md-3">
             <div className="card shadow fondoAzul border border-light border-3" style={{ width: '100%', borderRadius: "30px", position: 'relative', overflow: 'hidden', height: '440px' }}>
                 <img
-                    src="https://firebasestorage.googleapis.com/v0/b/trippy-proyecto.appspot.com/o/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(15).png?alt=media&token=86c65a3f-2f74-49b0-81cf-944deda510f4"
+                    src="https://placehold.co/400x440?text=+"
                     className="card-img"
                     alt="..."
                     style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', top: 0, left: 0 }}
@@ -84,7 +84,7 @@ const AddActivity = ({ viajeId, viajeDestino }) => {
                                                 <div key={index} className="col-md-4 mb-4">
 
                                                     <div className="card border border-3 rounded rouded-3 h-100 bg-light text-black" style={{ maxWidth: '245px', height: 'auto' }}>
-                                                        <img src={item.pictures[0] || 'https://firebasestorage.googleapis.com/v0/b/trippy-proyecto.appspot.com/o/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(14).png?alt=media&token=2703929a-4977-498e-91de-0ab70b68d609'} className="card-img-top" alt="..." style={{ height: '120px', objectFit: 'cover' }} />
+                                                        <img src={item.pictures[0] || 'https://placehold.co/245x120?text=Sin+imagen'} className="card-img-top" alt="..." style={{ height: '120px', objectFit: 'cover' }} />
                                                         <div className="card-body d-flex flex-column flex-grow-1 p-1">
                                                             <div className="d-flex justify-content-between align-items-center mb-2">
                                                                 <p className="card-title mb-0" style={{ fontSize: '14px' }}>{item.name}</p>
@@ -98,7 +98,7 @@ const AddActivity = ({ viajeId, viajeDestino }) => {
                                                                     actions.addActivity({
                                                                         "viaje_id": parseInt(id),
                                                                         "name": item.name,
-                                                                        "imagenes": item.pictures[0] || 'https://firebasestorage.googleapis.com/v0/b/trippy-proyecto.appspot.com/o/Dise%C3%B1o%20sin%20t%C3%ADtulo%20(14).png?alt=media&token=2703929a-4977-498e-91de-0ab70b68d609',
+                                                                        "imagenes": item.pictures[0] || 'https://placehold.co/245x120?text=Sin+imagen',
                                                                         "descripcion": item.shortDescription,
                                                                         "precio": parseInt(item.price.amount) || 0,
                                                                         "likes": 0,

@@ -13,6 +13,15 @@ import os
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import cloudinary
+import cloudinary.uploader
+
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET"),
+    secure=True
+)
 
 sender_email = os.getenv("SMTP_USERNAME")
 sender_password = os.getenv("SMTP_PASSWORD")
@@ -171,8 +180,8 @@ def add_trip():
         return jsonify({"msg": "Faltan campos por completar."}), 400
     
     destino = request.json.get("destino", None)
-    fecha_inicio = request.json.get("fecha_inicio", None)
-    fecha_fin = request.json.get("fecha_fin", None)
+    fecha_inicio = datetime.strptime(request.json.get("fecha_inicio"), "%Y-%m-%d").date()
+    fecha_fin = datetime.strptime(request.json.get("fecha_fin"), "%Y-%m-%d").date()
     presupuesto_grupo = request.json.get("presupuesto_grupo", None)
     motivo = request.json.get("motivo", None)
     nota = request.json.get("nota", None)
@@ -435,3 +444,15 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
+
+@api.route('/upload-image', methods=['POST'])
+def upload_image():
+    if 'file' not in request.files:
+        return jsonify({"error": "No se envió ningún archivo"}), 400
+
+    file = request.files['file']
+    folder = request.form.get("folder", "trippy")
+
+    result = cloudinary.uploader.upload(file, folder=folder)
+    return jsonify({"url": result["secure_url"]}), 200
